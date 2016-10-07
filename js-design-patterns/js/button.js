@@ -12,8 +12,8 @@ function Button(canvas, x, y, label, onclick) {
     this.height = 22;
     this.state = "up";
     this.borderColor = "#999999";
-    this.upColor = "#cccccc";
-    this.overColor = "#dddddd";
+    this.upColor = "#dddddd";
+    this.overColor = "#ff0000";
     this.downColor = "#aaaaaa";
     this.draw();
 }
