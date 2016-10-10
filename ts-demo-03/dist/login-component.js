@@ -57,7 +57,7 @@ System.register(['jquery'], function(exports_1, context_1) {
                 }
                 LoginComponent.prototype.showCurrentUser = function () {
                     var user = this.loginController.getCurrentUser();
-                    this.messagesElement.html(user ? "Welcome " + user.getSalutation() + "." : "No user is logged in.");
+                    this.messagesElement.html(user ? "Welcome " + user.salutation + "." : "No user is logged in.");
                 };
                 LoginComponent.prototype.showError = function (error) {
                     this.messagesElement.html("ERROR: " + error + ".");

@@ -1,12 +1,15 @@
-export interface User {
+export interface Person {
     id: number;
     firstName: string;
     lastName: string;
     email: string;
-    password: string;
     contact?: Contact;
+}
+
+export interface User extends Person {
+    password: string;
     roles: Role[];
-    getSalutation(): string;
+    readonly salutation: string;
 }
 
 export interface Contact {
@@ -25,7 +28,7 @@ export class Customer implements User {
                 public password: string, public contacts?: Contact,
                 public roles: Array<Role> = [ Role.CUSTOMER ]) {
     }
-    public getSalutation() {
+    public get salutation() {
         return `${this.firstName} ${this.lastName} in role ${Role[this.roles[0]]}`;
     }
 }
@@ -36,9 +39,22 @@ export class Admin implements User {
                 public password: string, public contacts?: Contact,
                 public roles: Array<Role> = [ Role.ADMIN ]) {
     }
-    public getSalutation() {
+    public get salutation() {
         return `${this.firstName} ${this.lastName} in role ${Role[this.roles[0]]}`;
     }
 
 }
 
+export class PhysicalPerson {
+    public restNames: string[];
+    constructor(public firstName: string, ...restNames: string[]) {
+        this.restNames = restNames;
+    }
+    public get salutation() {
+        let salutation = this.firstName;
+        for (let name of this.restNames) {
+            salutation += ' ' + name;
+        }
+        return salutation;
+    }
+}

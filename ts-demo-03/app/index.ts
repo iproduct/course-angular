@@ -16,3 +16,5 @@ const loginController: LoginController = new DemoLoginController(userRepo);
 // document.getElementById('content').innerHTML = JSON.stringify( loginController.getCurrentUser() );
 
 const loginComponent = new LoginComponent('#content', loginController);
+
+// console.log(new PhysicalPerson('Ivan', 'Donchev', 'Petrov').salutation);

@@ -58,7 +58,7 @@ export class LoginComponent {
 
     public showCurrentUser(): void {
         let user = this.loginController.getCurrentUser();
-        this.messagesElement.html(user ? `Welcome ${user.getSalutation()}.` : `No user is logged in.`);
+        this.messagesElement.html(user ? `Welcome ${user.salutation}.` : `No user is logged in.`);
     }
 
     public showError(error: any): void {

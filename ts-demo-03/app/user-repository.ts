@@ -61,5 +61,4 @@ export class DemoUserRepository implements UserRepository {
         return maxId + 1;
     }
 
-
 }

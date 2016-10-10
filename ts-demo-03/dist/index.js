@@ -30,4 +30,5 @@ System.register(['./user-repository', './login-controller', './users', './login-
         }
     }
 });
+// console.log(new PhysicalPerson('Ivan', 'Donchev', 'Petrov').salutation);
 //# sourceMappingURL=index.js.map

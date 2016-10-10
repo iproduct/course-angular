@@ -13,7 +13,18 @@ export class DemoLoginController implements LoginController {
 
     constructor(private repository: UserRepository) {}
 
-    public login(email: string, password: string): Promise<User> {
+    public login(email: string, password: string): Promise<User>;
+    public login(user: User): Promise<User>;
+    public login(principal: User | string, credentials?: string): Promise<User> {
+        let email: string;
+        let password: string;
+        if (typeof principal === 'User') {
+            email = principal.email;
+            password = principal.password;
+        } else {
+            email = principal;
+            password = credentials;
+        }
         let promise = new Promise<User>( (resolve, reject) => {
             setTimeout( () => {
                 let user = this.repository.findUserByEmail(email);

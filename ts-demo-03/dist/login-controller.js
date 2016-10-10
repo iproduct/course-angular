@@ -14,8 +14,18 @@ System.register(['./utilities'], function(exports_1, context_1) {
                     this.repository = repository;
                     this.loggedUser = undefined;
                 }
-                DemoLoginController.prototype.login = function (email, password) {
+                DemoLoginController.prototype.login = function (principal, credentials) {
                     var _this = this;
+                    var email;
+                    var password;
+                    if (typeof principal === 'User') {
+                        email = principal.email;
+                        password = principal.password;
+                    }
+                    else {
+                        email = principal;
+                        password = credentials;
+                    }
                     var promise = new Promise(function (resolve, reject) {
                         setTimeout(function () {
                             var user = _this.repository.findUserByEmail(email);
