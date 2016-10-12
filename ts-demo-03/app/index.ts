@@ -18,3 +18,19 @@ const loginController: LoginController = new DemoLoginController(userRepo);
 const loginComponent = new LoginComponent('#content', loginController);
 
 // console.log(new PhysicalPerson('Ivan', 'Donchev', 'Petrov').salutation);
+
+// interface Repository<T> {
+//     findById: (id: number) => T;
+//     findAll(): Array<T>;
+// }
+// export class RepositoryImpl<T> implements Repository<T> {
+//     private data = new Map<number, T>();
+//     public findById(id: number): T {
+//         return this.data.get(id);
+//     }
+//     public findAll(): T[] {
+//         let results: T[] = [];
+//         this.data.forEach(item => results.push(item));
+//         return results;
+//     }
+// }
