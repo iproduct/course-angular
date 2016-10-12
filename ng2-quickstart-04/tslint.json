@@ -1,0 +1,12 @@
+{
+    "extends": "tslint:latest",
+    "rules": {
+        "curly": false,
+        "interface-name": [false],
+        "quotemark": [true, "single", "avoid-escape"],
+        "no-console": [true, "log", "warn"],
+        "object-literal-sort-keys": false,
+        "ordered-imports": false,
+        "trailing-comma": false
+    }
+}
