@@ -1,4 +1,4 @@
-import greeter from './greeter';
+import {Customer} from './users';
 
-let user = 'TypeScript User';
-document.body.innerHTML = greeter(user);
+let user = new Customer('John', 'Smith', 'john@abv.bg', 'john', {});
+document.body.innerHTML = user.getSalutation();

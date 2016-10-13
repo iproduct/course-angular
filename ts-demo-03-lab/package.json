@@ -4,7 +4,8 @@
   "description": "TS demo lab",
   "main": "index.js",
   "scripts": {
-    "start": "lite-server",
+    "lite": "lite-server",
+    "start": "concurrently \"tsc -w\" \"lite-server\" ",
     "test": "test"
   },
   "repository": {
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@types/jquery": "^2.0.33",
-    "lite-server": "^2.2.2"
+    "lite-server": "^2.2.2",
+    "concurrently": "^3.1.0"
   }
 }

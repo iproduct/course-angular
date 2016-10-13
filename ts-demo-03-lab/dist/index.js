@@ -1,16 +1,16 @@
-System.register(['./greeter'], function(exports_1, context_1) {
+System.register(['./users'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var greeter_1;
+    var users_1;
     var user;
     return {
         setters:[
-            function (greeter_1_1) {
-                greeter_1 = greeter_1_1;
+            function (users_1_1) {
+                users_1 = users_1_1;
             }],
         execute: function() {
-            user = 'TypeScript User';
-            document.body.innerHTML = greeter_1.default(user);
+            user = new users_1.Customer('John', 'Smith', 'john@abv.bg', 'john', {});
+            document.body.innerHTML = user.getSalutation();
         }
     }
 });
