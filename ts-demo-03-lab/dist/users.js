@@ -25,13 +25,17 @@ System.register([], function(exports_1, context_1) {
                     this.contact = contact;
                     this.roles = roles;
                 }
-                UserImpl.prototype.getSalutation = function () {
-                    var roleStr = this.roles.map(function (role) { return Role[role]; }).join(', ');
-                    // for (let role of this.roles) {
-                    //     roleStr += Role[role] + ' ';
-                    // }
-                    return this.firstName + " " + this.lastName + " in roles: " + roleStr;
-                };
+                Object.defineProperty(UserImpl.prototype, "salutation", {
+                    get: function () {
+                        var roleStr = this.roles.map(function (role) { return Role[role]; }).join(', ');
+                        // for (let role of this.roles) {
+                        //     roleStr += Role[role] + ' ';
+                        // }
+                        return this.firstName + " " + this.lastName + " in roles: " + roleStr;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
                 return UserImpl;
             }());
             Customer = (function (_super) {

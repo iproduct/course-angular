@@ -1,13 +1,28 @@
-export interface User {
+
+export interface Person {
     id: number;
     firstName: string;
     lastName: string;
     email: string;
-    password: string;
     contact?: Contact;
-    roles: Array<Role>; // or Role[]
-    getSalutation(): string;
 }
+
+export interface User extends Person{
+    password: string;
+    roles: Array<Role>; // or Role[]
+    readonly salutation: string;
+}
+
+// export interface User {
+//     id: number;
+//     firstName: string;
+//     lastName: string;
+//     email: string;
+//     password: string;
+//     contact?: Contact;
+//     roles: Array<Role>; // or Role[]
+//     readonly salutation: string;
+// }
 
 export interface Contact {
     city?: String;
@@ -19,13 +34,13 @@ export enum Role {
     ADMIN = 1, CUSTOMER
 }
 
-abstract class UserImpl implements User {
+abstract class UserImpl implements User, Person {
     public id: number;
     constructor( public firstName: string,  public lastName: string,
                  public email: string, public password: string,
                  public contact?: Contact,
                  public roles: Array<Role> = [Role.CUSTOMER]) {}
-    public getSalutation() {
+    public get salutation() {
         let roleStr = this.roles.map(role => Role[role]).join(', ');
         // for (let role of this.roles) {
         //     roleStr += Role[role] + ' ';
@@ -40,9 +55,10 @@ export class Customer extends UserImpl {
                 contact?: Contact) {
         super(firstName, lastName, email, password, contact);
     }
+    //  public customerMethod(): void { }
 }
 
-export class Admin extends UserImpl {
+export class Admin extends UserImpl implements Customer  {
     constructor(firstName: string,  lastName: string,
                 email: string, password: string,
                 contact?: Contact, roles: Array<Role> = [Role.ADMIN]) {
