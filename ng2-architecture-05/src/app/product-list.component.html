@@ -1,0 +1,13 @@
+<div class="product-list row">
+  <h2>Product List</h2>
+
+  <p><i>Pick a product from the list</i></p>
+  <ul class="items" >
+    <li *ngFor="let product of products" class="product" [class.selected]="product === selectedProduct"  (click)="selectProduct(product)"
+      [title]="product.description">
+          <span class="badge">{{product.id}}</span> {{product.name}} - {{product.price | currency:'USD':true:'1.2-2' }}
+    </li>
+  </ul>
+
+  <product-detail *ngIf="selectedProduct" [product]="selectedProduct"></product-detail>
+</div>
