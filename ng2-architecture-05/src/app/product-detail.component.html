@@ -1,20 +1,20 @@
 <hr>
 <h3>{{product.name}} Details</h3>
-<div class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4">
+<form class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4">
 	<div class="form-group">
 		<label class="control-label col-sm-2 text-left" for="id">ID:</label>
-		<input [ngModel]="product.id" class="col-sm-10" id="id" disabled>
+		<input [ngModel]="product.id" class="col-sm-10" id="id" name="id" disabled>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-2 text-left" for="name">Name:</label>
-		<input [(ngModel)]="product.name" class="col-sm-10" id="name">
+		<input [(ngModel)]="product.name" class="col-sm-10" id="name" name="name">
 	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-2 text-left" for="description">Description:</label>
-		<input [(ngModel)]="product.description" class="col-sm-10" id="description">
+		<input [(ngModel)]="product.description" class="col-sm-10" id="description" name="description">
 	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-2 text-left" for="power">Power:</label>
-		<input [(ngModel)]="product.price" class="col-sm-10" id="power">
+		<input [(ngModel)]="product.price" class="col-sm-10" id="power" name="power">
 	</div>
-</div>
+</form>
