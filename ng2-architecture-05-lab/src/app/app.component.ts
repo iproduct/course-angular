@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
   selector: 'my-app',
   template: `
     <prod-list></prod-list>
+    <sales-tax></sales-tax>
   `
 })
 export class AppComponent {
-  public product: string = 'DELL Laptop';
 }

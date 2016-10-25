@@ -9,16 +9,14 @@ const PRODUCTS = [
 
 @Component({
   selector: 'prod-list',
-  template: `
-    <h2>Product Catalog</h2>
-    <p><i>Choose a product</i></p>
-    <ul>
-      <li *ngFor='let product of products'>
-      {{product.name}} - {{product.price}}
-      </li>
-    </ul>
-  `
+  templateUrl: './product-list.component.html'
 })
 export class ProductListComponent {
   public products = PRODUCTS;
+  public selectedProduct: Product;
+
+  public selectProduct(product: Product): void {
+    this.selectedProduct = product;
+    console.log(`Product selected: ${JSON.stringify(product)}`);
+  }
 }
