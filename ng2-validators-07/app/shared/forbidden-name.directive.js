@@ -19,6 +19,22 @@ function forbiddenNameValidator(nameRe) {
     };
 }
 exports.forbiddenNameValidator = forbiddenNameValidator;
+function usernameTakenValidator() {
+    return function (control) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                if (control.value === 'John') {
+                    resolve({ 'usernameTaken': true });
+                }
+                else {
+                    resolve(null);
+                }
+                ;
+            }, 2000);
+        });
+    };
+}
+exports.usernameTakenValidator = usernameTakenValidator;
 var ForbiddenValidatorDirective = (function () {
     function ForbiddenValidatorDirective() {
         this.valFn = forms_1.Validators.nullValidator;
@@ -55,5 +71,5 @@ exports.ForbiddenValidatorDirective = ForbiddenValidatorDirective;
 Copyright 2016 Google Inc. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at http://angular.io/license
-*/ 
+*/
 //# sourceMappingURL=forbidden-name.directive.js.map

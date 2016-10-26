@@ -33,7 +33,8 @@ var HeroFormReactiveComponent = (function () {
                 'required': 'Name is required.',
                 'minlength': 'Name must be at least 4 characters long.',
                 'maxlength': 'Name cannot be more than 24 characters long.',
-                'forbiddenName': 'Someone named "Bob" cannot be a hero.'
+                'forbiddenName': 'Someone named "Bob" cannot be a hero.',
+                'usernameTaken': 'Username is alrady taken.'
             },
             'power': {
                 'required': 'Power is required.'
@@ -62,16 +63,19 @@ var HeroFormReactiveComponent = (function () {
                     forms_1.Validators.minLength(4),
                     forms_1.Validators.maxLength(24),
                     forbidden_name_directive_1.forbiddenNameValidator(/bob/i)
-                ]
+                ], [forbidden_name_directive_1.usernameTakenValidator()]
             ],
             'alterEgo': [this.hero.alterEgo],
             'power': [this.hero.power, forms_1.Validators.required]
         });
-        this.heroForm.valueChanges
-            .subscribe(function (data) { return _this.onValueChanged(data); });
-        this.onValueChanged(); // (re)set validation messages now
+        this.heroForm.statusChanges
+            .subscribe(function (data) { return _this.onStatusChanged(data); });
+        this.onStatusChanged(); // (re)set validation messages now
     };
-    HeroFormReactiveComponent.prototype.onValueChanged = function (data) {
+    // ngDoCheck() {
+    //   this.onStatusChanged();
+    // }
+    HeroFormReactiveComponent.prototype.onStatusChanged = function (data) {
         if (!this.heroForm) {
             return;
         }

@@ -1,31 +1,31 @@
 <h3>{{product.name}} Details</h3>
-	<div class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4" >
+	<form class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4" >
     <div class="form-group">
       <label class="control-label hidden-xs col-sm-3" for="id">ID:</label>
       <div class="col-xs-12 col-sm-9">
-		    <input class="form-control" [(ngModel)]="product.id" id="ID" placeholder="ID" disabled>
+		    <input class="form-control" [(ngModel)]="product.id" id="ID" name="ID" placeholder="ID" disabled>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label hidden-xs col-sm-3" for="name">Name:</label>
       <div class="col-xs-12 col-sm-9">
-		    <input class="form-control" [(ngModel)]="product.name" id="name" 
-          placeholder="Product name" required>
+		    <input class="form-control" [(ngModel)]="product.name" id="name" name="name" 
+          placeholder="Product name" required minlength="2">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label hidden-xs col-sm-3" for="description">Description:</label>
       <div class="col-xs-12 col-sm-9">
-		    <input class="form-control" [(ngModel)]="product.description" id="description" 
+		    <input class="form-control" [(ngModel)]="product.description" id="description" name="description" 
           placeholder="Description">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label hidden-xs col-sm-3" for="price">Price:</label>
       <div class="col-xs-12 col-sm-9">
-		    <input class="form-control" type="number" [(ngModel)]="product.price" id="price" 
-          placeholder="Price" required #price>
+		    <input class="form-control" type="number" [(ngModel)]="product.price" id="price" name="price" 
+          placeholder="Price" pattern="^[0-9]+\.?[0-9]*$" required #price>
       </div>
       <p>{{price.className}}</p>
     </div>
-	</div>
+	</form>

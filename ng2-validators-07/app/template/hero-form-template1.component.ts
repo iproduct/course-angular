@@ -3,6 +3,10 @@ import { Component, ViewChild  } from '@angular/core';
 
 
 import { Hero }      from '../shared/hero';
+import { MySubmitted } from '../shared/submitted.component';
+import { NgForm } from '@angular/forms';
+
+
 
 @Component({
   moduleId:  module.id,
@@ -34,6 +38,11 @@ export class HeroFormTemplate1Component {
 
     // this.active = false;
     // setTimeout(() => this.active = true, 0);
+  }
+
+  onSubmittedChange(event: MySubmitted) {
+    console.log(JSON.stringify(event));
+    this.submitted = event.submitted;
   }
 }
 

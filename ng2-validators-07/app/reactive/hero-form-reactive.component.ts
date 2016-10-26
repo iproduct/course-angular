@@ -3,7 +3,7 @@ import { Component, OnInit }                  from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Hero }                   from '../shared/hero';
-import { forbiddenNameValidator } from '../shared/forbidden-name.directive';
+import { forbiddenNameValidator, usernameTakenValidator } from '../shared/forbidden-name.directive';
 
 @Component({
   moduleId:  module.id,
@@ -50,20 +50,23 @@ export class HeroFormReactiveComponent implements OnInit {
           Validators.minLength(4),
           Validators.maxLength(24),
           forbiddenNameValidator(/bob/i)
-        ]
+        ], [usernameTakenValidator()]
       ],
       'alterEgo': [this.hero.alterEgo],
       'power':    [this.hero.power, Validators.required]
     });
 
-    this.heroForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+    this.heroForm.statusChanges
+      .subscribe(data => this.onStatusChanged(data));
 
-    this.onValueChanged(); // (re)set validation messages now
+    this.onStatusChanged(); // (re)set validation messages now
   }
 
+  // ngDoCheck() {
+  //   this.onStatusChanged();
+  // }
 
-  onValueChanged(data?: any) {
+  onStatusChanged(data?: any) {
     if (!this.heroForm) { return; }
     const form = this.heroForm;
 
@@ -91,7 +94,8 @@ export class HeroFormReactiveComponent implements OnInit {
       'required':      'Name is required.',
       'minlength':     'Name must be at least 4 characters long.',
       'maxlength':     'Name cannot be more than 24 characters long.',
-      'forbiddenName': 'Someone named "Bob" cannot be a hero.'
+      'forbiddenName': 'Someone named "Bob" cannot be a hero.',
+      'usernameTaken': 'Username is alrady taken.'
     },
     'power': {
       'required': 'Power is required.'

@@ -1,5 +1,6 @@
 import { Directive, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AbstractControl, NG_VALIDATORS, Validator, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, NG_VALIDATORS, Validator, ValidatorFn,
+  AsyncValidatorFn, Validators } from '@angular/forms';
 
 /** A hero's name can't match the given regular expression */
 export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
@@ -7,6 +8,20 @@ export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
     const name = control.value;
     const no = nameRe.test(name);
     return no ? {forbiddenName: {name}} : null;
+  };
+}
+
+export function usernameTakenValidator(): AsyncValidatorFn {
+  return (control: AbstractControl): Promise<ValidationResult> =>    {
+    return new Promise((resolve, reject) => {
+         setTimeout(() => {
+             if (control.value === 'John') {
+                 resolve({ 'usernameTaken': true });
+             } else {
+                 resolve(null);
+             };
+         }, 2000);
+     });
   };
 }
 

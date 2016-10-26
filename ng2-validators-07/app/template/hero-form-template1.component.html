@@ -52,7 +52,8 @@
     </form>
   </div>
 
-  <hero-submitted [hero]="hero" [(submitted)]="submitted"></hero-submitted>
+  <hero-submitted [hero]="hero" [submitted]="submitted" (submittedChange)="onSubmittedChange($event)">
+  </hero-submitted>
 </div>
 
 

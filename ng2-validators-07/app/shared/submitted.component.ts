@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Hero } from './hero';
+export interface MySubmitted {
+  submitted: boolean;
+}
 
 @Component({
   selector: 'hero-submitted',
@@ -26,8 +29,10 @@ import { Hero } from './hero';
 export class SubmittedComponent {
   @Input()  hero: Hero;
   @Input()  submitted = false;
-  @Output() submittedChange = new EventEmitter<boolean>();
-  onClick() { this.submittedChange.emit(false); }
+  @Output() submittedChange = new EventEmitter<MySubmitted>();
+  onClick() {
+    this.submittedChange.emit({submitted: false});
+  }
 }
 
 

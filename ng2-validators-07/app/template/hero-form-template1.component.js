@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 /* tslint:disable: member-ordering */
 var core_1 = require('@angular/core');
 var hero_1 = require('../shared/hero');
+var forms_1 = require('@angular/forms');
 var HeroFormTemplate1Component = (function () {
     function HeroFormTemplate1Component() {
         this.powers = ['Really Smart', 'Super Flexible', 'Weather Changer'];
@@ -31,9 +32,13 @@ var HeroFormTemplate1Component = (function () {
         // this.active = false;
         // setTimeout(() => this.active = true, 0);
     };
+    HeroFormTemplate1Component.prototype.onSubmittedChange = function (event) {
+        console.log(JSON.stringify(event));
+        this.submitted = event.submitted;
+    };
     __decorate([
         core_1.ViewChild('heroForm'), 
-        __metadata('design:type', Object)
+        __metadata('design:type', forms_1.NgForm)
     ], HeroFormTemplate1Component.prototype, "currentForm", void 0);
     HeroFormTemplate1Component = __decorate([
         core_1.Component({

@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from './product.model';
-
-const PRODUCTS = [
-  new Product('Logitech Mouse', 12.99, 'Super mouse'),
-  new Product('Wirelesss Keyboard', 23.85, 'Type wherever you are!'),
-  new Product('Whiteboard Marker', 0.32, 'Drawing is fun!')
-];
+import { ProductService } from './product.service';
 
 @Component({
   selector: 'prod-list',
   templateUrl: './product-list.component.html'
 })
-export class ProductListComponent {
-  public products = PRODUCTS;
+export class ProductListComponent implements OnInit {
+  public products: Product[];
   public selectedProduct: Product;
+
+  constructor(private service: ProductService) {}
+
+  public ngOnInit() {
+    this.products = this.service.getProducts();
+  }
 
   public selectProduct(product: Product): void {
     this.selectedProduct = product;

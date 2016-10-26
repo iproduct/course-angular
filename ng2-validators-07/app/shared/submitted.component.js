@@ -15,7 +15,9 @@ var SubmittedComponent = (function () {
         this.submitted = false;
         this.submittedChange = new core_1.EventEmitter();
     }
-    SubmittedComponent.prototype.onClick = function () { this.submittedChange.emit(false); };
+    SubmittedComponent.prototype.onClick = function () {
+        this.submittedChange.emit({ submitted: false });
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', hero_1.Hero)
@@ -42,5 +44,5 @@ exports.SubmittedComponent = SubmittedComponent;
 Copyright 2016 Google Inc. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at http://angular.io/license
-*/ 
+*/
 //# sourceMappingURL=submitted.component.js.map
