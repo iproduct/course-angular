@@ -20,7 +20,15 @@ export class ProductListComponent implements OnInit {
     private router: Router) { }
 
   public ngOnInit() {
-    this.route.params.forEach((params: Params) => {
+    this.route.params.do(params => console.log(JSON.stringify(params)))
+      .forEach((params: Params) => {
+      this.selectedId = +params['selectedId'];
+      this.service.getProducts().then(
+        products => this.products = products
+      );
+    });
+    this.route.queryParams.do(params => console.log(JSON.stringify(params)))
+    .forEach((params: Params) => {
       this.selectedId = +params['selectedId'];
       this.service.getProducts().then(
         products => this.products = products

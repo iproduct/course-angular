@@ -13,12 +13,12 @@ const PRODUCTS: Identifiable[] = [
 ];
 
 const USERS: Identifiable[] = [
-  new Customer('John', 'Smith', Gender.MALE, 'john@abv.bg', 'john'),
-  new Customer('Sara', 'Smith', Gender.FEMALE, 'sara@abv.bg', 'sara'),
-  new Operator('Veronica', 'Simpson', Gender.FEMALE, 'vera@yahoo.com', 'vera'),
-  new Operator('Simon', 'Stars', Gender.MALE, 'simon@yahoo.com', 'simon'),
-  new Admin('Brian', 'Harisson', Gender.MALE, 'brian@gmail.com', 'brian'),
-  new Admin('Svetlana', 'Borisova', Gender.FEMALE, 'sveta@gmail.com', 'sveta')
+  new Customer(1, 'John', 'Smith', Gender.MALE, 'john@abv.bg', 'john'),
+  new Customer(2, 'Sara', 'Smith', Gender.FEMALE, 'sara@abv.bg', 'sara'),
+  new Operator(3, 'Veronica', 'Simpson', Gender.FEMALE, 'vera@yahoo.com', 'vera'),
+  new Operator(4, 'Simon', 'Stars', Gender.MALE, 'simon@yahoo.com', 'simon'),
+  new Admin(5, 'Brian', 'Harisson', Gender.MALE, 'brian@gmail.com', 'brian'),
+  new Admin(6, 'Svetlana', 'Borisova', Gender.FEMALE, 'sveta@gmail.com', 'sveta')
 ];
 
 @Injectable()
@@ -52,8 +52,8 @@ export class BackendService {
         PRODUCTS.push(item);
         return Promise.resolve(item);
       case User.name:
-        item.id = this.getNextId(PRODUCTS);
-        PRODUCTS.push(item);
+        item.id = this.getNextId(USERS);
+        USERS.push(item);
         return Promise.resolve(item);
       default:
         let err = new Error(`Cannot recognize entity type: ${type.name}`);
@@ -101,7 +101,7 @@ export class BackendService {
   private mergeItem(collection: Identifiable[], item: Identifiable): boolean {
     for (let i = 0; i < collection.length; i++) {
       if (collection[i].id === item.id) {
-        collection[i] = item;
+        Object.assign(collection[i], item);
         return true;
       }
     }

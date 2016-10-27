@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { User, Role, Gender } from './user.model';
 import { UserService } from './user.service';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 const customerMaleImage = require('../../assets/img/customer_m.png');
 const customerFemaleImage = require('../../assets/img/customer_f.png');
@@ -32,6 +33,7 @@ const adminFemaleImage = require('../../assets/img/admin_f.png');
 })
 export class UserListComponent implements OnInit {
   public users: User[] = [];
+  public selectedId: number = undefined;
   public selectedUser: User;
 
   public CUSTOMER_MALE = Role.CUSTOMER + Gender.MALE;
@@ -48,13 +50,32 @@ export class UserListComponent implements OnInit {
   public adminMaleImage = adminMaleImage;
   public adminFemaleImage = adminFemaleImage;
 
-  constructor(private service: UserService) { }
+  constructor(
+    private service: UserService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   public ngOnInit() {
-    this.service.getUsers().then(
-       users => this.users = users
-     );
+    this.route.params.do(params => console.log(JSON.stringify(params)))
+      .forEach((params: Params) => {
+        this.selectedId = +params['selectedId'];
+        this.fetchUsers();
+      });
+    this.fetchUsers();
   }
 
-  public selectItem(user: User) { this.selectedUser = user; }
+  public selectItem(user: User) {
+    this.selectedUser = user;
+    this.selectedId = user.id;
+    this.router.navigate(['/user', user.id]);
+  }
+
+  private fetchUsers() {
+    this.service.getUsers().then( users => {
+      console.log(JSON.stringify(users));
+      this.users = users;
+    });
+  }
+
+
 }

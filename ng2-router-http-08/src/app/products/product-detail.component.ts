@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChange } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 import { Product } from './product.model';
 import { ProductService } from './product.service';
 
@@ -43,6 +43,7 @@ export class ProductDetailComponent implements OnInit, OnChanges {
     this.buildForm();
     this.route.params.forEach((params: Params) => {
       let id = +params['id']; // (+) converts string 'id' to a number
+      this.isNewProduct = true; // new
       if (id) {
         this.isNewProduct = false; // has Id => not new
         this.service.getProduct(id).then(
@@ -52,6 +53,8 @@ export class ProductDetailComponent implements OnInit, OnChanges {
           });
       }
     });
+    this.route.data.do(data => console.log(JSON.stringify(data)))
+      .forEach((params: Params) => {});
   }
 
   public ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
@@ -99,7 +102,11 @@ export class ProductDetailComponent implements OnInit, OnChanges {
   }
 
   public gotoProducts() {
-    this.router.navigate(['/products', {selectedId: this.product.id}]);
+    let navigationExtras: NavigationExtras = {
+      queryParams: { selectedId: this.product.id },
+      fragment: 'anchor'
+    };
+    this.router.navigate(['/products', {foo: 'bar'}], navigationExtras);
   }
 
   public resetForm() {

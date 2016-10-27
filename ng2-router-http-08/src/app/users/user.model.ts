@@ -29,16 +29,13 @@ export enum Role {
     CUSTOMER = 2, OPERATOR= 4, ADMIN = 6
 }
 
-let nextId = 1; // Autoincrement ids
-
-abstract class UserImpl implements User {
-    public id: number;
+export class UserImpl implements User {
     constructor(
-        public firstName: string, public lastName: string, public gender: Gender,
-        public email: string, public password: string,
+        public id: number = undefined,
+        public firstName: string = '', public lastName: string = '', public gender: Gender = Gender.FEMALE,
+        public email: string = '', public password: string = '',
         public contact?: Contact,
         public role: Role = Role.CUSTOMER) {
-        this.id = nextId++;
     }
 
     public get name() {
@@ -60,27 +57,30 @@ abstract class UserImpl implements User {
 
 export class Customer extends UserImpl {
     constructor(
+        id: number,
         firstName: string, lastName: string, gender: Gender,
         email: string, password: string,
         contact?: Contact) {
-        super(firstName, lastName, gender, email, password, contact);
+        super(id, firstName, lastName, gender, email, password, contact);
     }
 }
 
 export class Operator extends UserImpl {
     constructor(
+        id: number,
         firstName: string, lastName: string, gender: Gender,
         email: string, password: string,
         contact?: Contact, role: Role = Role.OPERATOR) {
-        super(firstName, lastName, gender, email, password, contact, role);
+        super(id, firstName, lastName, gender, email, password, contact, role);
     }
 }
 
 export class Admin extends UserImpl {
     constructor(
+        id: number,
         firstName: string, lastName: string, gender: Gender,
         email: string, password: string,
         contact?: Contact, role: Role = Role.ADMIN) {
-        super(firstName, lastName, gender, email, password, contact, role);
+        super(id, firstName, lastName, gender, email, password, contact, role);
     }
 }

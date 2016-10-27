@@ -7,6 +7,13 @@ import { ProductDetailComponent } from './product-detail.component';
   imports: [
     RouterModule.forChild([
       { path: 'products',  component: ProductListComponent },
+       {
+        path: 'product/:id',
+        component: ProductDetailComponent,
+        data: {
+          title: 'Edit Product'
+        }
+      },
       {
         path: 'product',
         pathMatch: 'full',
@@ -14,14 +21,7 @@ import { ProductDetailComponent } from './product-detail.component';
         data: {
           title: 'Add New Product'
         }
-      },
-      {
-        path: 'product/:id',
-        component: ProductDetailComponent,
-        data: {
-          title: 'Edit Product'
-        }
-       }
+      }
     ])
   ],
   exports: [

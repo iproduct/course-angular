@@ -18,4 +18,20 @@ export class UserService {
         return users;
       });
   }
+
+  public getUser(id: number): Promise<User> {
+    return this.backend.find(User, id);
+  }
+
+  public addUser(product: User): Promise<User> {
+    return this.backend.add(User, product);
+  }
+
+  public editUser(product: User): Promise<User> {
+    return this.backend.edit(User, product);
+  }
+
+  public deleteUser(productId: number): Promise<User> {
+    return this.backend.delete(User, productId);
+  }
 }
