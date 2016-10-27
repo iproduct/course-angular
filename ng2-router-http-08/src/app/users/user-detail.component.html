@@ -1,0 +1,32 @@
+<hr>
+<h3>{{user.name}} Details</h3>
+<form class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4">
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="id">ID:</label>
+		<div class="col-xs-12 col-sm-9">
+			<input [ngModel]="user.id" id="id" name="id" disabled class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="firstName">First Name:</label>
+		<div class="col-xs-12 col-sm-9">
+			<input [(ngModel)]="user.firstName" class="col-xs-12 col-sm-9" id="firstName" name="firstName" placeholder="First Name"
+				required class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="lastName">Last Name:</label>
+		<div class="col-xs-12 col-sm-9">
+			<input [(ngModel)]="user.lastName" class="col-xs-12 col-sm-9" id="lastName" name="lastName" placeholder="Last Name"
+				required class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="email">Email:</label>
+		<div class="col-xs-12 col-sm-9">
+			<input [(ngModel)]="user.email" class="col-xs-12 col-sm-9" id="email" name="email"  placeholder="Email"
+				required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" #email class="form-control">
+		</div>
+		<p>{{email.className}}</p>
+	</div>
+</form>

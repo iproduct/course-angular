@@ -1,0 +1,22 @@
+<div class="user-list row">
+	<h2>User List</h2>
+
+	<p><i>Pick a user from the list</i></p>
+	<ul class="items users">
+		<li *ngFor="let user of users" class="user" [class.selected]="user === selectedUser" (click)="selectItem(user)" [title]="user.description">
+			<span class="item-badge">{{user.id}}</span> {{user.name}} in role: {{user.roleAsString }}
+
+			<span class="user-icon" [ngSwitch]="user.role + user.gender">
+        <span *ngSwitchCase="CUSTOMER_MALE"><img [src]="customerMaleImage"></span>
+        <span *ngSwitchCase="CUSTOMER_FEMALE"><img [src]="customerFemaleImage"></span>
+        <span *ngSwitchCase="OPERATOR_MALE"><img [src]="operatorMaleImage"></span>
+        <span *ngSwitchCase="OPERATOR_FEMALE"><img [src]="operatorFemaleImage"></span>
+        <span *ngSwitchCase="ADMIN_MALE"><img [src]="adminMaleImage"></span>
+        <span *ngSwitchCase="ADMIN_FEMALE"><img [src]="adminFemaleImage"></span>
+        <span *ngSwitchDefault>Other</span>
+			</span>
+		</li>
+	</ul>
+
+	<user-detail *ngIf="selectedUser" [user]="selectedUser"></user-detail>
+</div>
