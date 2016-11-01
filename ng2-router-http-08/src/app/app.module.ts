@@ -11,7 +11,6 @@ import { SmallDemosModule } from './small-demos/small-demos.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppNavComponent } from './app-nav.component';
 
-
 @NgModule({
   imports: [
     BrowserModule,

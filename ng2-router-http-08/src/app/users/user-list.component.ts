@@ -15,20 +15,7 @@ const adminFemaleImage = require('../../assets/img/admin_f.png');
   // moduleId: module.id,
   selector: 'user-list',
   templateUrl: './user-list.component.html',
-  styles: [`
-    .user {
-      height: 45px;
-      width: 350px;
-    }
-    .users .item-badge {
-      height: 45px;
-      font-size: 1.3em;
-    }
-    .user-icon {
-      display: block;
-      float: right;
-    }
-  `],
+  styleUrls: ['./user-list.component.css'],
   providers: [UserService]
 })
 export class UserListComponent implements OnInit {
@@ -61,18 +48,31 @@ export class UserListComponent implements OnInit {
         this.selectedId = +params['selectedId'];
         this.fetchUsers();
       });
-    this.fetchUsers();
+  }
+
+  public getRoleAsString(role: Role) {
+    return Role[role];
   }
 
   public selectItem(user: User) {
     this.selectedUser = user;
     this.selectedId = user.id;
-    this.router.navigate(['/user', user.id]);
+    this.router.navigate(['.', { selectedId: user.id }], { replaceUrl: true })
+      .then(isSucces => this.router.navigate(['/user', user.id]));
+  }
+
+  public addUser() {
+    this.router.navigate(['/user']);
+  }
+
+  public deleteItem(itemId: number) {
+    this.service.deleteUser(itemId).then(deleted => {
+      this.fetchUsers();
+    });
   }
 
   private fetchUsers() {
-    this.service.getUsers().then( users => {
-      console.log(JSON.stringify(users));
+    this.service.getUsers().then(users => {
       this.users = users;
     });
   }

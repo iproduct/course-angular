@@ -2,6 +2,7 @@ import { NgModule }     from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ProductListComponent } from './product-list.component';
 import { ProductDetailComponent } from './product-detail.component';
+import { ProductResolver } from './product-resolver';
 
 @NgModule({
   imports: [
@@ -12,6 +13,9 @@ import { ProductDetailComponent } from './product-detail.component';
         component: ProductDetailComponent,
         data: {
           title: 'Edit Product'
+        },
+        resolve: {
+          product: ProductResolver
         }
       },
       {
@@ -26,6 +30,9 @@ import { ProductDetailComponent } from './product-detail.component';
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    ProductResolver
   ]
 })
 export class ProductRoutingModule {}

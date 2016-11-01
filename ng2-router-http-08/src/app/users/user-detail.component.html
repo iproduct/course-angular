@@ -1,7 +1,7 @@
 <hr>
 <h3>{{title}}</h3>
 <form #userForm="ngForm"  (ngSubmit)="onSubmit()" class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4">
-	<div class="form-group">
+	<div *ngIf="user.id"class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="id">ID:</label>
 		<div class="col-xs-12 col-sm-9">
 			<input [ngModel]="user.id" id="id" name="id" disabled class="form-control">

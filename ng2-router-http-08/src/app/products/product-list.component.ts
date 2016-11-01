@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Product } from './product.model';
 import { ProductService } from './product.service';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Subscription } from 'rxjs/Rx';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   // moduleId: module.id,
@@ -10,45 +12,66 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
   templateUrl: './product-list.component.html',
   providers: [ProductService]
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   public products: Product[] = [];
   public selectedId: number;
+  public errorMessage: string;
+  private subscription: Subscription;
 
   constructor(
     private service: ProductService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private location: Location) { }
 
   public ngOnInit() {
-    this.route.params.do(params => console.log(JSON.stringify(params)))
+    // subscribe for product changes
+    this.subscription  = this.service.getProductsObservable().do((ev: Product[]) => console.log(ev)).subscribe(
+      products => this.products = products,
+      error => this.errorMessage = <any> error);
+
+    // refresh products
+    this.fetchProducts();
+
+    // highlight previously selected product
+    this.route.params
+      // .do(params => console.log(JSON.stringify(params)))
       .forEach((params: Params) => {
-      this.selectedId = +params['selectedId'];
-      this.service.getProducts().then(
-        products => this.products = products
-      );
-    });
-    this.route.queryParams.do(params => console.log(JSON.stringify(params)))
-    .forEach((params: Params) => {
-      this.selectedId = +params['selectedId'];
-      this.service.getProducts().then(
-        products => this.products = products
-      );
-    });
+        this.selectedId = +params['selectedId'];
+      });
+    // this.route.queryParams.do(params => console.log(JSON.stringify(params)))
+    // .forEach((params: Params) => {
+    //   this.selectedId = +params['selectedId'];
+    //   this.service.getProducts().then(
+    //     products => this.products = products
+    //   );
+    // });
+  }
+
+  public ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   public selectItem(product: Product) {
     this.selectedId = product.id;
-    this.router.navigate(['/product', product.id]);
+    this.router.navigate(['.', { selectedId: product.id }], { replaceUrl: true })
+      .then(isSucces => this.router.navigate(['/product', product.id]));
   }
 
   public deleteItem(itemId: number) {
+    this.service.deleteProduct(itemId);
     // // remove deleted user
     // let newUsers = this.state.users.filter((user) => {
     //   return (user.id !== deletedUserId);
     // });
     // this.setState({ users: newUsers });
-    this.service.deleteProduct(itemId).then(deleted => {
-      this.ngOnInit();
-    });
+    // this.service.deleteProduct(itemId).then(deleted => {
+    //   this.fetchProducts();
+    // });
   }
+
+  private fetchProducts() {
+    this.service.refreshProducts();
+  }
+
 }
