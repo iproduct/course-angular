@@ -47,7 +47,7 @@ export class ProductListComponent implements OnInit {
     //   return (user.id !== deletedUserId);
     // });
     // this.setState({ users: newUsers });
-    this.service.deleteProduct(itemId).then(deleted => {
+    this.service.deleteProduct(itemId).then(() => {
       this.fetchProducts();
     });
   }

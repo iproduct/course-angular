@@ -31,7 +31,7 @@ export class ProductService {
     return this.backend.edit(Product, product);
   }
 
-  public deleteProduct(productId: number): Promise<Product> {
+  public deleteProduct(productId: number): Promise<void> {
     return this.backend.delete(Product, productId);
   }
 }

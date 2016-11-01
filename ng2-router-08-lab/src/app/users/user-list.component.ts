@@ -55,7 +55,7 @@ export class UserListComponent implements OnInit {
     this.selectedUser = user;
     this.selectedId = user.id;
     this.router.navigate(['.', { selectedId: user.id }], { replaceUrl: true })
-      .then( isSucces => this.router.navigate(['/user', user.id]) );
+      .then(isSucces => this.router.navigate(['/user', user.id]));
   }
 
   public addUser() {
@@ -63,16 +63,19 @@ export class UserListComponent implements OnInit {
   }
 
   public deleteItem(itemId: number) {
-    this.service.deleteUser(itemId).then(deleted => {
+    this.service.deleteUser(itemId).then(() => {
       this.fetchUsers();
     });
   }
 
+  public getRoleAsString(role: Role) {
+    return Role[role];
+  }
+
   private fetchUsers() {
-    this.service.getUsers().then( users => {
+    this.service.getUsers().then(users => {
       this.users = users;
     });
   }
-
 
 }
