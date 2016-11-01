@@ -1,8 +1,6 @@
 import { NgModule }     from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-import { ProductListComponent }  from './products/product-list.component';
-import { UserListComponent }    from './users/user-list.component';
+import { WikiComponent } from './wiki/wiki.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -10,8 +8,9 @@ import { HomeComponent } from './home/home.component';
     RouterModule.forRoot([
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'products', component: ProductListComponent },
-      { path: 'users', component: UserListComponent }
+      { path: 'wiki', component: WikiComponent },
+      // { path: 'products', component: ProductListComponent },
+      // { path: 'users', component: UserListComponent }
     ])
   ],
   exports: [

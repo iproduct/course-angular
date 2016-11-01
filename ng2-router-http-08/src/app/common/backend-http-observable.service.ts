@@ -58,7 +58,9 @@ class ObservableCache {
             this.data[type.name] = new CacheItem<T>(
                 new BehaviorSubject<Operation<T>>(new Operation('replace', undefined, []))
             );
-            // this.data[type.name].values.subscribe(v => console.log('collectionOobserver: ' + v));
+            this.data[type.name].values.subscribe(
+                v => console.log(`Observable collection: ${v.length} ${type.name}s observed.`)
+            );
         }
         return this.data[type.name] as CacheItem<T>;
     }
@@ -229,7 +231,7 @@ export class BackendHttpObservableService implements BackendObservableService {
             .forEach(() => {
                 this.logger.log(`Deleted ${type.name} with ID: ${itemId}`);
                 this.cache.deleteCollectionItem(type, itemId); // apply changes immediately
-                // this.refreshCollection(type); // schedule async collection refresh
+                this.refreshCollection(type); // schedule async collection refresh
             });
     }
 

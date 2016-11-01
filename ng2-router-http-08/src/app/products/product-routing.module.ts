@@ -14,9 +14,9 @@ import { ProductResolver } from './product-resolver';
         data: {
           title: 'Edit Product'
         },
-        resolve: {
-          product: ProductResolver
-        }
+        // resolve: {
+        //   product: ProductResolver
+        // }
       },
       {
         path: 'product',

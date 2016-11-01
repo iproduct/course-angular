@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 import { Product } from './product.model';
 import { ProductService } from './product.service';
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
   // moduleId: module.id,
@@ -11,11 +12,11 @@ import { ProductService } from './product.service';
   templateUrl: './product-detail.component.html'
 })
 export class ProductDetailComponent implements OnInit, OnChanges {
-  @Input()
   public product: Product = { id: undefined };
   public productForm: FormGroup;
   public isNewProduct: boolean = true; // new product by default
-
+  public errorMessage: string;
+  private subscription: Subscription;
 
   private formErrors = {
     'name': '',
@@ -42,25 +43,40 @@ export class ProductDetailComponent implements OnInit, OnChanges {
     private service: ProductService) { }
 
   public ngOnInit() {
+    this.service.refreshProducts();
     this.buildForm();
-    // this.route.params.forEach((params: Params) => {
-    //   let id = +params['id']; // (+) converts string 'id' to a number
-    //   if (id) {
-    //     this.isNewProduct = false; // has Id => not new
-    //     this.service.getProduct(id).then(
-    //       product => {
-    //         this.product = product;
-    //         this.resetForm();
-    //       });
-    //   }
-    // });
-    this.route.data.forEach(data => {
-      console.log('Data:', data);
-      this.product = data['product'] || this.product; // resolved product using ProductResolver
-      this.isNewProduct = !this.product.id;
-      this.resetForm();
+    this.route.params.forEach((params: Params) => {
+      let id = +params['id']; // (+) converts string 'id' to a number
+      if (id) {
+        this.isNewProduct = false; // has Id => not new
+        this.unsubscribe();
+        this.subscription = this.service.getProductObservable(id).subscribe(
+          product => {
+            this.product = product;
+            this.resetForm();
+          },
+          error => this.errorMessage = <any> error
+        );
+        //     this.service.getProduct(id).then(
+        //       product => {
+        //         this.product = product;
+        //         this.resetForm();
+        // });
+      }
     });
+    // this.route.data.forEach(data => {
+    //   console.log('Data:', data);
+    //   this.product = data['product'] || this.product; // resolved product using ProductResolver
+    //   this.isNewProduct = !this.product.id;
+    //   this.resetForm();
+    // });
   }
+
+  public ngOnDestroy() {
+    this.unsubscribe();
+  }
+
+
 
   public ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
     let chng = changes['product'];
@@ -70,7 +86,6 @@ export class ProductDetailComponent implements OnInit, OnChanges {
   }
 
   public buildForm(): void {
-    this.isNewProduct = !this.product.id; // if product doesn't have ID => it is a new product 
     this.productForm = this.fb.group({
       'id': [{ value: this.product.id, disabled: true }],
       'name': [this.product.name, [
@@ -121,6 +136,10 @@ export class ProductDetailComponent implements OnInit, OnChanges {
 
   public resetForm() {
     this.productForm.reset(this.product);
+  }
+
+  private unsubscribe() {
+    if (this.subscription) this.subscription.unsubscribe();
   }
 
   private onStatusChanged(data?: any) {

@@ -1,8 +1,8 @@
 <h3 *ngIf="isNewProduct">Add New Product</h3>
-<h3 *ngIf="!isNewProduct">Edit Product: {{product.name}} </h3>
+<h3 *ngIf="!isNewProduct">Edit Product: {{product?.name}} </h3>
 
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4">
-	<div *ngIf="product.id" class="form-group">
+	<div *ngIf="product?.id" class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="id">ID:</label>
 		<div class="col-xs-12 col-sm-9">
 			<input class="form-control col-xs-12 col-sm-9" id="id" name="id" formControlName="id">
