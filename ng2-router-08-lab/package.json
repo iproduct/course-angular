@@ -1,0 +1,82 @@
+{
+  "name": "ng2-architecture-05",
+  "version": "1.0.0",
+  "description": "Angular 2 architecture components demo project",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --inline --progress --port 8080",
+    "stats": "webpack --json > stats.json",
+    "test": "karma start",
+    "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/angular/angular.io/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iproduct/course-angular2.git"
+  },
+  "keywords": [
+    "angular2",
+    "quickstart",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iproduct/course-angular2/issues"
+  },
+  "homepage": "https://github.com/iproduct/course-angular2#readme",
+  "dependencies": {
+    "@angular/common": "~2.0.2",
+    "@angular/compiler": "~2.0.2",
+    "@angular/core": "~2.0.2",
+    "@angular/forms": "~2.0.2",
+    "@angular/http": "~2.0.2",
+    "@angular/platform-browser": "~2.0.2",
+    "@angular/platform-browser-dynamic": "~2.0.2",
+    "@angular/router": "~3.0.2",
+    "@angular/upgrade": "~2.0.2",
+    "angular-in-memory-web-api": "~0.1.5",
+    "bootstrap": "^3.3.7",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "5.0.0-beta.12",
+    "zone.js": "^0.6.25"
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.34",
+    "@types/jasmine": "^2.5.35",
+    "@types/node": "^6.0.45",
+    "angular2-template-loader": "^0.5.0",
+    "awesome-typescript-loader": "^2.2.4",
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.22.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-htmlfile-reporter": "^0.3.4",
+    "karma-intl-shim": "^1.0.3",
+    "karma-jasmine": "^1.0.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.8.0",
+    "null-loader": "^0.1.1",
+    "phantomjs-prebuilt": "^2.1.13",
+    "raw-loader": "^0.5.1",
+    "rimraf": "^2.5.4",
+    "style-loader": "^0.13.1",
+    "typescript": "^2.0.3",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2",
+    "webpack-merge": "^0.14.1",
+    "webpack-validator": "^2.2.9"
+  }
+}
