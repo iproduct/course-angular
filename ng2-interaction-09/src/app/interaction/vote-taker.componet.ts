@@ -1,22 +1,21 @@
-﻿import {Component}      from 'angular2/core';
-import {VoterComponent} from './voter.component';
+﻿import {Component}      from '@angular/core';
+
 @Component({
     selector: 'vote-taker',
     template: `
     <h2>Should mankind colonize the Universe?</h2>
     <h3>Agree: {{agreed}}, Disagree: {{disagreed}}</h3>
-    <my-voter *ngFor="#voter of voters"
+    <my-voter *ngFor="let voter of voters"
       [name]="voter"
       (onVoted)="onVoted($event)">
     </my-voter>
-  `,
-    directives: [VoterComponent]
+  `
 })
 export class VoteTakerComponent {
-    agreed = 0;
-    disagreed = 0;
-    voters = ['Mr. IQ', 'Ms. Universe', 'Bombasto']
-    onVoted(agreed: boolean) {
+    public agreed = 0;
+    public disagreed = 0;
+    public voters = ['Mr. IQ', 'Ms. Universe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaal', 'Bombasto'];
+    public onVoted(agreed: boolean) {
         agreed ? this.agreed++ : this.disagreed++;
     }
 }

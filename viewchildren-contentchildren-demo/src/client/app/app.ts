@@ -77,7 +77,7 @@ export class FooterComponent {
 
 @Component({
   selector: 'todo-app',
-  viewProviders: [TodoList],
+  providers: [TodoList],
   template: `
     <section>
       Add todo:

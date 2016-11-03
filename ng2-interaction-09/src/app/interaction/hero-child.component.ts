@@ -1,5 +1,4 @@
-﻿import {Component, Input} from 'angular2/core';
-import {Hero} from '../hero';
+﻿import {Component, Input} from '@angular/core';
 @Component({
     selector: 'hero-child',
     template: `
@@ -8,8 +7,8 @@ import {Hero} from '../hero';
   `
 })
 export class HeroChildComponent {
-    private _name: string;
-    @Input() master: string;
+     @Input() public master: string;
+     private _name: string;
 
     @Input()
     set name(name: string) {

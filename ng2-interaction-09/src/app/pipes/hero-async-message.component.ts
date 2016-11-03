@@ -1,4 +1,4 @@
-﻿import {Component} from 'angular2/core';
+﻿import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 // Initial view: "Message: "
 // After 500ms: Message: You are my Hero!"
@@ -11,15 +11,16 @@ import {Observable} from 'rxjs/Rx';
 })
 export class HeroAsyncMessageComponent {
     message$: Observable<string>;
-    constructor() { this.resend(); }
-    resend() {
-        this.message$ = Observable.interval(500)
-            .map(i => this.messages[i])
-            .take(this.messages.length);
-    }
-    private messages = [
+     private messages = [
         'You are my hero!',
         'You are the best hero!',
         'Will you be my hero?'
     ];
+    constructor() { this.resend(); }
+    resend() {
+        this.message$ = Observable.interval(1000)
+            .map(i => this.messages[i])
+            .take(this.messages.length);
+    }
+   
 }

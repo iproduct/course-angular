@@ -1,5 +1,4 @@
-﻿import {Component} from 'angular2/core';
-import {VersionChildComponent} from './version-child.component';
+﻿import {Component} from '@angular/core';
 @Component({
     selector: 'version-parent',
     template: `
@@ -7,16 +6,15 @@ import {VersionChildComponent} from './version-child.component';
     <button (click)="newMinor()">New minor version</button>
     <button (click)="newMajor()">New major version</button>
     <version-child [major]="major" [minor]="minor"></version-child>
-  `,
-    directives: [VersionChildComponent]
+  `
 })
 export class VersionParentComponent {
-    major: number = 1;
-    minor: number = 23;
-    newMinor() {
+    public major: number = 1;
+    public minor: number = 23;
+    public newMinor() {
         this.minor++;
     }
-    newMajor() {
+    public newMajor() {
         this.major++;
         this.minor = 0;
     }

@@ -1,34 +1,32 @@
-﻿import {Component}          from 'angular2/core';
-import {AstronautComponent} from './astronaut.component';
+﻿import {Component}          from '@angular/core';
 import {MissionService}     from './mission.service';
 @Component({
     selector: 'mission-control',
     template: `
     <h2>Mission Control</h2>
     <button (click)="announce()">Announce mission</button>
-    <my-astronaut *ngFor="#astronaut of astronauts"
+    <my-astronaut *ngFor="let astronaut of astronauts"
       [astronaut]="astronaut">
     </my-astronaut>
     <h3>History</h3>
     <ul>
-      <li *ngFor="#event of history">{{event}}</li>
+      <li *ngFor="let event of history">{{event}}</li>
     </ul>
   `,
-    directives: [AstronautComponent],
     providers: [MissionService]
 })
 export class MissionControlComponent {
-    astronauts = ['Lovell', 'Swigert', 'Haise']
+    astronauts = ['Lovell', 'Swigert', 'Haise'];
     history: string[] = [];
     missions = ['Fly to the moon!',
         'Fly to mars!',
         'Fly to Vegas!'];
     nextMission = 0;
     constructor(private missionService: MissionService) {
-        missionService.missionConfirmed$.map(message => message.toUpperCase()).subscribe(
+        missionService.missionConfirmed.map(message => message.toUpperCase()).subscribe(
             astronaut => {
                 this.history.push(`${astronaut} confirmed the mission`);
-            })
+            });
     }
     announce() {
         let mission = this.missions[this.nextMission++];

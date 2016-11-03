@@ -26,11 +26,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     // subscribe for product changes
-    this.subscription  = this.service.getProductsObservable()
+    this.subscription = this.service.getProductsObservable()
       // .do((ev: Product[]) => console.log(ev))
       .subscribe(
-        products => this.products = products,
-        error => this.errorMessage = <any> error
+      products => this.products = products,
+      error => this.errorMessage = <any>error
       );
 
     // refresh products
@@ -51,8 +51,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
     // });
   }
 
-  public ngOnDestroy(){
-    this.subscription.unsubscribe();
+  public ngOnDestroy() {
+    this.unsubscribe();
   }
 
   public selectItem(product: Product) {
@@ -75,6 +75,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   private fetchProducts() {
     this.service.refreshProducts();
+  }
+
+  private unsubscribe() {
+    if (this.subscription) this.subscription.unsubscribe();
   }
 
 }
