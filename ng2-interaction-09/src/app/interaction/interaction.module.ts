@@ -13,6 +13,7 @@ import { CountdownVarParentComponent } from './countdown-var.component';
 import { CountdownViewChildParentComponent } from './countdown-viewchild.component';
 import { MissionControlComponent } from './mission-control.component';
 import { AstronautComponent } from './astronaut.component';
+import { TimerNameComponent } from './timer-name.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { AstronautComponent } from './astronaut.component';
   ],
   declarations: [HeroMasterComponent, HeroChildComponent, VersionParentComponent, 
     VersionChildComponent, VoteTakerComponent, VoterComponent, CountdownTimerComponent, CountdownVarParentComponent,
-    CountdownViewChildParentComponent, MissionControlComponent, AstronautComponent ],
+    CountdownViewChildParentComponent, MissionControlComponent, AstronautComponent, TimerNameComponent ],
   exports: [HeroMasterComponent, VersionParentComponent, VoteTakerComponent, CountdownVarParentComponent,
     CountdownViewChildParentComponent, MissionControlComponent ]
 })

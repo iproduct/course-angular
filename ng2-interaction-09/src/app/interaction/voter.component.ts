@@ -2,7 +2,7 @@
 @Component({
     selector: 'my-voter',
     template: `
-    <h4>{{name  | truncate:8: '...'}}</h4>
+    <h4>{{name  | truncate:nameLength: '+++'}}</h4>
     <button (click)="vote(true)"  [disabled]="voted">Agree</button>
     <button (click)="vote(false)" [disabled]="voted">Disagree</button>
   `
@@ -14,6 +14,6 @@ export class VoterComponent {
     public voted = false;
     public vote(agreed: boolean) {
         this.onVoted.emit(agreed);
-        this.voted = true;
+        // this.voted = true;
     }
 }

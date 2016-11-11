@@ -59,6 +59,7 @@ build
 /libpeerconnection.log
 npm-debug.log
 testem.log
+/_test-output/*
 /typings
 
 # e2e

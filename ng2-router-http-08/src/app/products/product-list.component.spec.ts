@@ -56,7 +56,7 @@ export class ProductServiceStub extends ProductService {
 }
 
 
-describe('App', () => {
+describe('products-list', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, RouterTestingModule, HttpModule],
@@ -110,5 +110,7 @@ describe('App', () => {
     fixture.detectChanges(); // update view with quote
     expect(de.children.length).toBe(1, 'should be shown one product');
     expect(de.children[0].nativeElement.textContent).toContain('Test Product', 'should contain "Test Product"');
-  }));
+    expect(spy1.calls.any()).toBe(true, 'getProductsObservable called');
+    expect(spy2.calls.any()).toBe(true, 'refreshProducts called');
+}));
 });

@@ -4,14 +4,21 @@ import {Subject}    from 'rxjs/Subject';
 export class MissionService {
 
     // Observable string sources
-    missionAnnounced = new Subject<string>();
-    missionConfirmed = new Subject<string>();
+    private _missionAnnounced = new Subject<string>();
+    private _missionConfirmed = new Subject<string>();
+
+    public get missionAnnounced() {
+        return this._missionAnnounced.asObservable();
+    }
+    public get missionConfirmed() {
+        return this._missionConfirmed.asObservable();
+    }
 
     // Service message commands
     announceMission(mission: string) {
-        this.missionAnnounced.next(mission);
+        this._missionAnnounced.next(mission);
     }
     confirmMission(astronaut: string) {
-        this.missionConfirmed.next(astronaut);
+        this._missionConfirmed.next(astronaut);
     }
 }

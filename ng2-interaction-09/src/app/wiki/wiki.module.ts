@@ -13,7 +13,6 @@ import { HttpModule, JsonpModule } from '@angular/http';
     JsonpModule
   ],
   declarations: [WikiComponent],
-  exports: [WikiComponent],
-  providers: [ WikipediaService ]
+  exports: [WikiComponent]
 })
 export class WikiModule { }
