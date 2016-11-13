@@ -1,0 +1,29 @@
+{
+  "name": "es6-demo-02-lab-03",
+  "version": "1.0.0",
+  "description": "ECMAScript 6 demo with baabel and webpack",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iproduct/course-angular2.git"
+  },
+  "keywords": [
+    "es6",
+    "js",
+    "demo",
+    "webpack",
+    "babel",
+    "simple"
+  ],
+  "author": "Trayan Iliev",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/iproduct/course-angular2/issues"
+  },
+  "homepage": "https://github.com/iproduct/course-angular2#readme"
+}

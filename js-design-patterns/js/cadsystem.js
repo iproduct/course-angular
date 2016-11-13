@@ -67,17 +67,18 @@ function start(ctx) {
     var r1_decorated =
         new AreaShapeDecorator(
              new ShadowShapeDecorator(
-                new NamedShapeDecorator(
-                    r1, "Rectangle 1", null, "15px Arial"
-                ), 15, 15, 7, "brown"
+                // new NamedShapeDecorator(
+                    r1//, "Rectangle 1", null, "15px Arial"
+                // )
+                , 15, 15, 7, "brown"
              )
         );
 
-    // r1_decorated.draw(ctx);
-    // r1.on("translate", function (e) {
-    //     alert('Object translated: ' + e.payload);
-    // });
-    // r1.translate(-100, 100);
+    r1_decorated.draw(ctx);
+    r1.on("translate", function (e) {
+        alert('Object translated: ' + e.payload);
+    });
+    r1.translate(-100, 100);
 
 
     /**
