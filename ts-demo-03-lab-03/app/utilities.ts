@@ -3,3 +3,7 @@ export function resolvePromiseAfterTimeout <T> (result: T, timeout: number) {
         setTimeout(() => resolve(result), timeout);
     });
 }
+
+export const a = 5;
+
+export default 15;

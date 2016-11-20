@@ -1,6 +1,7 @@
 System.register([], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
+    var a;
     function resolvePromiseAfterTimeout(result, timeout) {
         return new Promise(function (resolve, reject) {
             setTimeout(function () { return resolve(result); }, timeout);
@@ -10,6 +11,7 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
+            exports_1("a", a = 5);
         }
     }
 });
