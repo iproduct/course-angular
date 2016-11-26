@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+export interface Message {
+  message: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,15 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'Hello from Angular 2!';
-  todo = 'From Parent TODO.';
+  todo: Message = {message: 'From Parent TODO.'};
 
   ngOnInit() {
     setTimeout(() => {
-      this.todo = 'Do something Other - TODO Changed!';
+      this.todo.message = 'Do something Other - TODO Changed!';
     }, 3000);
   }
   updateTodo(event) {
-    this.todo = event;
+    this.todo.message = event;
   }
 }
 

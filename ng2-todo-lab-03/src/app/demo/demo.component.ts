@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { element } from 'protractor';
+import { Message } from '../app.component';
 
 @Component({
   selector: 'app-demo',
@@ -7,7 +7,7 @@ import { element } from 'protractor';
   styleUrls: ['./demo.component.css']
 })
 export class DemoComponent implements OnInit {
-  @Input() public message = 'Default TODO.';
+  @Input() public message: Message = { message: 'Default TODO.'};
   @Output() values = new EventEmitter<string>();
 
   constructor() { }
