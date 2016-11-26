@@ -7,7 +7,7 @@ import { Todo } from './todo.model';
     <input type="checkbox" [(ngModel)]="todo.completed" (change)="completionChanged()">
     {{todo.title}}
   `,
-  styles: []
+  styles: [``]
 })
 export class TodoItemComponent {
   @Input() todo: Todo;

@@ -1,6 +1,8 @@
+import {Injectable} from '@angular/core';
 import { Todo } from './todo.model';
 
-export class Todos {
+@Injectable()
+export class TodoService {
   private todos: Todo[] = [];
 
   add(todo: Todo) {
