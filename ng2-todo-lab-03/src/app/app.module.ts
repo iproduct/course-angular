@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { DemoComponent } from './demo/demo.component';
-import { TodoComponent } from './todo/todo.component';
 import { TodoInputComponent } from './todo/todo-input.component';
 import { TodoListComponent } from './todo/todo-list.component';
 import { TodoItemComponent } from './todo/todo-item.component';
