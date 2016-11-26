@@ -1,7 +1,7 @@
 import { Todo } from './todo.model';
 
 export class Todos {
-  private todos: Todo[];
+  private todos: Todo[] = [];
 
   add(todo: Todo) {
     this.todos.push(todo);

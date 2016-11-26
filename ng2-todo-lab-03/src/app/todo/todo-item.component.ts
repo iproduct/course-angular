@@ -4,7 +4,7 @@ import { Todo } from './todo.model';
 @Component({
   selector: 'todo-item',
   template: `
-    <input type="checkbox" [(ngModel)]="todo?.completed" (change)="completionChanged()">
+    <input type="checkbox" [(ngModel)]="todo.completed" (change)="completionChanged()">
     {{todo.title}}
   `,
   styles: []

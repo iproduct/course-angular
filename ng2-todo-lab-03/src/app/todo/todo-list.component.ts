@@ -15,7 +15,7 @@ import { Todo } from './todo.model';
   `,
 })
 export class TodoListComponent implements OnInit {
-  private todos: Todos;
+  private todos: Todos = new Todos();
 
   constructor() { }
 
