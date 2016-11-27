@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 
 import { Hero } from '../shared/hero';
 import { forbiddenNameValidator, nameTakenValidator } from '../shared/forbidden-name.directive';
+import { MySubmitted } from '../shared/submitted.component';
 
 @Component({
   moduleId: module.id,
@@ -17,10 +18,15 @@ export class HeroFormReactiveComponent implements OnInit {
   hero = new Hero(18, 'Dr. WhatIsHisName', this.powers[0], 'Dr. What');
 
   submitted = false;
+  pendingSubmit = false;
 
   onSubmit() {
-    this.submitted = true;
-    this.hero = this.heroForm.value;
+    if (this.heroForm && this.heroForm.valid && !this.heroForm.pending) {
+      this.submitted = true;
+      this.hero = this.heroForm.value;
+    } else {
+      this.pendingSubmit = true;
+    }
   }
 
   // Reset the form with a new hero AND restore 'pristine' class state
@@ -46,7 +52,7 @@ export class HeroFormReactiveComponent implements OnInit {
   onBlur(event: Event) {
     let fieldName = (event.target as HTMLInputElement).id;
     let control: AbstractControl = this.heroForm.get(fieldName);
-    control.asyncValidator(control);
+    control.updateValueAndValidity({ emitEvent: true });
   }
 
   buildForm(): void {
@@ -58,7 +64,7 @@ export class HeroFormReactiveComponent implements OnInit {
         forbiddenNameValidator(/bob/i)
       ], [nameTakenValidator('john')]
       ],
-      'alterEgo': [this.hero.alterEgo, [], [nameTakenValidator('superman')]],
+      'alterEgo': [this.hero.alterEgo, [], [nameTakenValidator('doctor')]],
       'power': [this.hero.power, Validators.required]
     });
 
@@ -69,11 +75,18 @@ export class HeroFormReactiveComponent implements OnInit {
   }
 
   // ngDoCheck() {
-  //   this.onStatusChanged();
   // }
 
   onStatusChanged(data?: any) {
     if (!this.heroForm) { return; }
+    if (this.pendingSubmit && !this.heroForm.pending) {
+      if (this.heroForm.valid) {
+        this.submitted = true;
+        this.hero = this.heroForm.value;
+      }
+      this.pendingSubmit = false;
+    }
+
     const form = this.heroForm;
 
     for (const field in this.formErrors) {
@@ -81,7 +94,7 @@ export class HeroFormReactiveComponent implements OnInit {
       this.formErrors[field] = '';
       const control = form.get(field);
 
-      if (control && control.dirty && !control.valid) {
+      if (control && !control.valid) {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
           let error = control.errors[key];
@@ -98,7 +111,7 @@ export class HeroFormReactiveComponent implements OnInit {
 
   formErrors = {
     'name': '',
-     'alterEgo': '',
+    'alterEgo': '',
     'power': ''
   };
 

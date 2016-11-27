@@ -31,9 +31,8 @@ export function nameTakenValidator(name: string): AsyncValidatorFn {
           };
         }, 500);
       }).then((validationResult: ValidationResult) => {
-        control.setErrors(validationResult);
-        control.markAsUntouched({ onlySelf: true });
-        return validationResult;
+          control.markAsUntouched({onlySelf: true});
+          return validationResult;
       });
     } else {
       return Promise.resolve(null);

@@ -19,6 +19,7 @@ var HeroFormReactiveComponent = (function () {
         this.powers = ['Really Smart', 'Super Flexible', 'Weather Changer'];
         this.hero = new hero_1.Hero(18, 'Dr. WhatIsHisName', this.powers[0], 'Dr. What');
         this.submitted = false;
+        this.pendingSubmit = false;
         // Reset the form with a new hero AND restore 'pristine' class state
         // by toggling 'active' flag which causes the form
         // to be removed/re-added in a tick via NgIf
@@ -46,8 +47,13 @@ var HeroFormReactiveComponent = (function () {
         };
     }
     HeroFormReactiveComponent.prototype.onSubmit = function () {
-        this.submitted = true;
-        this.hero = this.heroForm.value;
+        if (this.heroForm && this.heroForm.valid && !this.heroForm.pending) {
+            this.submitted = true;
+            this.hero = this.heroForm.value;
+        }
+        else {
+            this.pendingSubmit = true;
+        }
     };
     HeroFormReactiveComponent.prototype.addHero = function () {
         var _this = this;
@@ -62,7 +68,7 @@ var HeroFormReactiveComponent = (function () {
     HeroFormReactiveComponent.prototype.onBlur = function (event) {
         var fieldName = event.target.id;
         var control = this.heroForm.get(fieldName);
-        control.asyncValidator(control);
+        control.updateValueAndValidity({ emitEvent: true });
     };
     HeroFormReactiveComponent.prototype.buildForm = function () {
         var _this = this;
@@ -74,7 +80,7 @@ var HeroFormReactiveComponent = (function () {
                     forbidden_name_directive_1.forbiddenNameValidator(/bob/i)
                 ], [forbidden_name_directive_1.nameTakenValidator('john')]
             ],
-            'alterEgo': [this.hero.alterEgo, [], [forbidden_name_directive_1.nameTakenValidator('superman')]],
+            'alterEgo': [this.hero.alterEgo, [], [forbidden_name_directive_1.nameTakenValidator('doctor')]],
             'power': [this.hero.power, forms_1.Validators.required]
         });
         this.heroForm.statusChanges
@@ -82,18 +88,24 @@ var HeroFormReactiveComponent = (function () {
         this.onStatusChanged(); // (re)set validation messages now
     };
     // ngDoCheck() {
-    //   this.onStatusChanged();
     // }
     HeroFormReactiveComponent.prototype.onStatusChanged = function (data) {
         if (!this.heroForm) {
             return;
+        }
+        if (this.pendingSubmit && !this.heroForm.pending) {
+            if (this.heroForm.valid) {
+                this.submitted = true;
+                this.hero = this.heroForm.value;
+            }
+            this.pendingSubmit = false;
         }
         var form = this.heroForm;
         for (var field in this.formErrors) {
             // clear previous error message (if any)
             this.formErrors[field] = '';
             var control = form.get(field);
-            if (control && control.dirty && !control.valid) {
+            if (control && !control.valid) {
                 var messages = this.validationMessages[field];
                 for (var key in control.errors) {
                     var error = control.errors[key];
@@ -123,5 +135,5 @@ exports.HeroFormReactiveComponent = HeroFormReactiveComponent;
 Copyright 2016 Google Inc. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at http://angular.io/license
-*/ 
+*/
 //# sourceMappingURL=hero-form-reactive.component.js.map

@@ -16,7 +16,7 @@ var SubmittedComponent = (function () {
         this.submittedChange = new core_1.EventEmitter();
     }
     SubmittedComponent.prototype.onClick = function () {
-        this.submittedChange.emit({ submitted: false });
+        this.submittedChange.emit(false);
     };
     __decorate([
         core_1.Input(), 

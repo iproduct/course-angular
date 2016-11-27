@@ -29,9 +29,9 @@ export interface MySubmitted {
 export class SubmittedComponent {
   @Input()  hero: Hero;
   @Input()  submitted = false;
-  @Output() submittedChange = new EventEmitter<MySubmitted>();
+  @Output() submittedChange = new EventEmitter<boolean>();
   onClick() {
-    this.submittedChange.emit({submitted: false});
+    this.submittedChange.emit(false);
   }
 }
 

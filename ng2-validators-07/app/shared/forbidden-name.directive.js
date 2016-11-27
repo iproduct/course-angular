@@ -34,7 +34,6 @@ function nameTakenValidator(name) {
                     ;
                 }, 500);
             }).then(function (validationResult) {
-                control.setErrors(validationResult);
                 control.markAsUntouched({ onlySelf: true });
                 return validationResult;
             });
