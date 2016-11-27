@@ -1,33 +1,49 @@
 import { Directive, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AbstractControl, NG_VALIDATORS, Validator, ValidatorFn,
-  AsyncValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl, NG_VALIDATORS, Validator, ValidatorFn,
+  AsyncValidatorFn, Validators
+} from '@angular/forms';
+
+interface ValidationResult {
+  [key: string]: any;
+}
+
 
 /** A hero's name can't match the given regular expression */
 export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
-  return (control: AbstractControl): {[key: string]: any} => {
+  return (control: AbstractControl): { [key: string]: any } => {
     const name = control.value;
     const no = nameRe.test(name);
-    return no ? {forbiddenName: {name}} : null;
+    return no ? { forbiddenName: { name } } : null;
   };
 }
 
-export function usernameTakenValidator(): AsyncValidatorFn {
-  return (control: AbstractControl): Promise<ValidationResult> =>    {
-    return new Promise((resolve, reject) => {
-         setTimeout(() => {
-             if (control.value === 'John') {
-                 resolve({ 'usernameTaken': true });
-             } else {
-                 resolve(null);
-             };
-         }, 2000);
-     });
+export function nameTakenValidator(name: string): AsyncValidatorFn {
+  return (control: AbstractControl): Promise<ValidationResult> => {
+    // let pending: number;
+    if (control.touched) {
+      return new Promise<ValidationResult>((resolve, reject) => {
+        setTimeout(() => {
+          if (name && control.value && control.value.toLowerCase() === name.toLowerCase()) {
+            resolve({ 'nameTaken': {invalidValue: control.value} });
+          } else {
+            resolve(null);
+          };
+        }, 500);
+      }).then((validationResult: ValidationResult) => {
+        control.setErrors(validationResult);
+        control.markAsUntouched({ onlySelf: true });
+        return validationResult;
+      });
+    } else {
+      return Promise.resolve(null);
+    }
   };
 }
 
 @Directive({
   selector: '[forbiddenName]',
-  providers: [{provide: NG_VALIDATORS, useExisting: ForbiddenValidatorDirective, multi: true}]
+  providers: [{ provide: NG_VALIDATORS, useExisting: ForbiddenValidatorDirective, multi: true }]
 })
 export class ForbiddenValidatorDirective implements Validator, OnChanges {
   @Input() private forbiddenName: string;
@@ -44,7 +60,7 @@ export class ForbiddenValidatorDirective implements Validator, OnChanges {
     }
   }
 
-  public validate(control: AbstractControl): {[key: string]: any} {
+  public validate(control: AbstractControl): { [key: string]: any } {
     return this.valFn(control);
   }
 }

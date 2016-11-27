@@ -1,12 +1,11 @@
 <div class="container">
   <div [hidden]="submitted">
     <h1>Hero Form 3 (Reactive)</h1>
-    <form [formGroup]="heroForm"  *ngIf="active"  (ngSubmit)="onSubmit()">
+    <form [formGroup]="heroForm" *ngIf="active" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="name">Name</label>
 
-        <input type="text" id="name" class="form-control"
-               formControlName="name" required >
+        <input type="text" id="name" class="form-control" formControlName="name" required (blur)="onBlur($event)">
 
         <div *ngIf="formErrors.name" class="alert alert-danger">
           {{ formErrors.name }}
@@ -15,14 +14,15 @@
 
       <div class="form-group">
         <label for="alterEgo">Alter Ego</label>
-        <input type="text" id="alterEgo" class="form-control"
-            formControlName="alterEgo"  >
+        <input type="text" id="alterEgo" class="form-control" formControlName="alterEgo" (blur)="onBlur($event)">
+        <div *ngIf="formErrors.alterEgo" class="alert alert-danger">
+          {{ formErrors.alterEgo }}
+        </div>
       </div>
 
       <div class="form-group">
         <label for="power">Hero Power</label>
-        <select id="power" class="form-control"
-            formControlName="power" required >
+        <select id="power" class="form-control" formControlName="power" required>
           <option *ngFor="let p of powers" [value]="p">{{p}}</option>
         </select>
 
@@ -31,10 +31,8 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-default"
-             [disabled]="!heroForm.valid">Submit</button>
-      <button type="button" class="btn btn-default"
-             (click)="addHero()">New Hero</button>
+      <button type="submit" class="btn btn-default" [disabled]="!heroForm.valid">Submit</button>
+      <button type="button" class="btn btn-default" (click)="addHero()">New Hero</button>
     </form>
   </div>
 

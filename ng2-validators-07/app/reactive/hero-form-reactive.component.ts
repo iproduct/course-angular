@@ -1,12 +1,12 @@
 /* tslint:disable: member-ordering forin */
-import { Component, OnInit }                  from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
-import { Hero }                   from '../shared/hero';
-import { forbiddenNameValidator, usernameTakenValidator } from '../shared/forbidden-name.directive';
+import { Hero } from '../shared/hero';
+import { forbiddenNameValidator, nameTakenValidator } from '../shared/forbidden-name.directive';
 
 @Component({
-  moduleId:  module.id,
+  moduleId: module.id,
   selector: 'hero-form-reactive3',
   templateUrl: 'hero-form-reactive.component.html'
 })
@@ -43,17 +43,23 @@ export class HeroFormReactiveComponent implements OnInit {
     this.buildForm();
   }
 
+  onBlur(event: Event) {
+    let fieldName = (event.target as HTMLInputElement).id;
+    let control: AbstractControl = this.heroForm.get(fieldName);
+    control.asyncValidator(control);
+  }
+
   buildForm(): void {
     this.heroForm = this.fb.group({
       'name': [this.hero.name, [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(24),
-          forbiddenNameValidator(/bob/i)
-        ], [usernameTakenValidator()]
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(24),
+        forbiddenNameValidator(/bob/i)
+      ], [nameTakenValidator('john')]
       ],
-      'alterEgo': [this.hero.alterEgo],
-      'power':    [this.hero.power, Validators.required]
+      'alterEgo': [this.hero.alterEgo, [], [nameTakenValidator('superman')]],
+      'power': [this.hero.power, Validators.required]
     });
 
     this.heroForm.statusChanges
@@ -78,7 +84,13 @@ export class HeroFormReactiveComponent implements OnInit {
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
-          this.formErrors[field] += messages[key] + ' ';
+          let error = control.errors[key];
+          if (key === 'nameTaken') {
+            let message = (messages[key] as string).replace('$', error.invalidValue);
+            this.formErrors[field] += message + ' ';
+          } else {
+            this.formErrors[field] += messages[key] + ' ';
+          }
         }
       }
     }
@@ -86,16 +98,20 @@ export class HeroFormReactiveComponent implements OnInit {
 
   formErrors = {
     'name': '',
+     'alterEgo': '',
     'power': ''
   };
 
   validationMessages = {
     'name': {
-      'required':      'Name is required.',
-      'minlength':     'Name must be at least 4 characters long.',
-      'maxlength':     'Name cannot be more than 24 characters long.',
+      'required': 'Name is required.',
+      'minlength': 'Name must be at least 4 characters long.',
+      'maxlength': 'Name cannot be more than 24 characters long.',
       'forbiddenName': 'Someone named "Bob" cannot be a hero.',
-      'usernameTaken': 'Username is alrady taken.'
+      'nameTaken': "Username '$' is alrady taken."
+    },
+    'alterEgo': {
+      'nameTaken': "Alter ego '$' is alrady taken."
     },
     'power': {
       'required': 'Power is required.'

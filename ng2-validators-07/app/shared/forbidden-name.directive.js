@@ -19,22 +19,32 @@ function forbiddenNameValidator(nameRe) {
     };
 }
 exports.forbiddenNameValidator = forbiddenNameValidator;
-function usernameTakenValidator() {
+function nameTakenValidator(name) {
     return function (control) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                if (control.value === 'John') {
-                    resolve({ 'usernameTaken': true });
-                }
-                else {
-                    resolve(null);
-                }
-                ;
-            }, 2000);
-        });
+        // let pending: number;
+        if (control.touched) {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    if (name && control.value && control.value.toLowerCase() === name.toLowerCase()) {
+                        resolve({ 'nameTaken': { invalidValue: control.value } });
+                    }
+                    else {
+                        resolve(null);
+                    }
+                    ;
+                }, 500);
+            }).then(function (validationResult) {
+                control.setErrors(validationResult);
+                control.markAsUntouched({ onlySelf: true });
+                return validationResult;
+            });
+        }
+        else {
+            return Promise.resolve(null);
+        }
     };
 }
-exports.usernameTakenValidator = usernameTakenValidator;
+exports.nameTakenValidator = nameTakenValidator;
 var ForbiddenValidatorDirective = (function () {
     function ForbiddenValidatorDirective() {
         this.valFn = forms_1.Validators.nullValidator;

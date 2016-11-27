@@ -26,6 +26,7 @@ var HeroFormReactiveComponent = (function () {
         this.active = true;
         this.formErrors = {
             'name': '',
+            'alterEgo': '',
             'power': ''
         };
         this.validationMessages = {
@@ -34,7 +35,10 @@ var HeroFormReactiveComponent = (function () {
                 'minlength': 'Name must be at least 4 characters long.',
                 'maxlength': 'Name cannot be more than 24 characters long.',
                 'forbiddenName': 'Someone named "Bob" cannot be a hero.',
-                'usernameTaken': 'Username is alrady taken.'
+                'nameTaken': "Username '$' is alrady taken."
+            },
+            'alterEgo': {
+                'nameTaken': "Alter ego '$' is alrady taken."
             },
             'power': {
                 'required': 'Power is required.'
@@ -55,6 +59,11 @@ var HeroFormReactiveComponent = (function () {
     HeroFormReactiveComponent.prototype.ngOnInit = function () {
         this.buildForm();
     };
+    HeroFormReactiveComponent.prototype.onBlur = function (event) {
+        var fieldName = event.target.id;
+        var control = this.heroForm.get(fieldName);
+        control.asyncValidator(control);
+    };
     HeroFormReactiveComponent.prototype.buildForm = function () {
         var _this = this;
         this.heroForm = this.fb.group({
@@ -63,9 +72,9 @@ var HeroFormReactiveComponent = (function () {
                     forms_1.Validators.minLength(4),
                     forms_1.Validators.maxLength(24),
                     forbidden_name_directive_1.forbiddenNameValidator(/bob/i)
-                ], [forbidden_name_directive_1.usernameTakenValidator()]
+                ], [forbidden_name_directive_1.nameTakenValidator('john')]
             ],
-            'alterEgo': [this.hero.alterEgo],
+            'alterEgo': [this.hero.alterEgo, [], [forbidden_name_directive_1.nameTakenValidator('superman')]],
             'power': [this.hero.power, forms_1.Validators.required]
         });
         this.heroForm.statusChanges
@@ -87,7 +96,14 @@ var HeroFormReactiveComponent = (function () {
             if (control && control.dirty && !control.valid) {
                 var messages = this.validationMessages[field];
                 for (var key in control.errors) {
-                    this.formErrors[field] += messages[key] + ' ';
+                    var error = control.errors[key];
+                    if (key === 'nameTaken') {
+                        var message = messages[key].replace('$', error.invalidValue);
+                        this.formErrors[field] += message + ' ';
+                    }
+                    else {
+                        this.formErrors[field] += messages[key] + ' ';
+                    }
                 }
             }
         }
