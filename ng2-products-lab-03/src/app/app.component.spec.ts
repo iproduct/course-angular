@@ -2,12 +2,24 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { FormDemoComponent } from './form-demo.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { ProductModule } from './product/product.module';
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        FormDemoComponent
+      ],
+      imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        ProductModule
       ],
     });
   });
