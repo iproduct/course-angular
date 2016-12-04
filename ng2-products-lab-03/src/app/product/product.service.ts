@@ -5,11 +5,12 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ProductService {
-  private products: Product[] = [];
+  private products: Product[];
 
   constructor(private backend: BackendService, private logger: Logger){}
 
   public getProducts() {
+    this.products = [];
     this.backend.getAll(Product).then((products: Product[]) => {
       this.logger.log(`Fetched ${products.length} products.`);
       this.products.push(...products);
