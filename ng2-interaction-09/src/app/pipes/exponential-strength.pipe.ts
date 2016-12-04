@@ -10,8 +10,9 @@
 */
 @Pipe({ name: 'exponentialStrength' })
 export class ExponentialStrengthPipe implements PipeTransform {
-    transform(value: number, [exponent]: string[]): number {
+    transform(value: number, exponent: string): number {
         let exp = parseFloat(exponent);
+        debugger;
         return Math.pow(value, isNaN(exp) ? 1 : exp);
     }
 }

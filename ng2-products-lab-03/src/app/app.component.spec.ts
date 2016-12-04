@@ -12,8 +12,7 @@ describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent,
-        FormDemoComponent
+        AppComponent
       ],
       imports: [
         BrowserModule,

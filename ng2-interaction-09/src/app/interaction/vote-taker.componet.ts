@@ -7,7 +7,7 @@ import { HEROES } from './mock-heroes';
     <h2>Should mankind colonize the Universe?</h2>
     <h3>Agree: {{agreed}}, Disagree: {{disagreed}}</h3>
     <my-voter *ngFor="let voter of heroes"
-       length=5
+       length=7
       [name]="voter.name"
       (onVoted)="onVoted($event)">
     </my-voter>

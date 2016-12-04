@@ -11,6 +11,6 @@ import { HeroAsyncMessageComponent } from './hero-async-message.component';
     FormsModule
   ],
   declarations: [ExponentialStrengthPipe, TruncatePipe, HeroAsyncMessageComponent],
-  exports: [ExponentialStrengthPipe, TruncatePipe]
+  exports: [ExponentialStrengthPipe, TruncatePipe, HeroAsyncMessageComponent]
 })
 export class PipesModule { }

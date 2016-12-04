@@ -7,7 +7,9 @@ import {Observable} from 'rxjs/Rx';
     template: `
     <h2>Async Hero Message and AsyncPipe</h2>
     <p>Message: {{ message$ | async }}</p>
-    <button (click)="resend()">Resend</button>`,
+    <button (click)="resend()">Resend</button>
+    <p>Exponential strength pipe demo - Super power boost: {{2 | exponentialStrength: 10}}</p>
+    `,
 })
 export class HeroAsyncMessageComponent {
     message$: Observable<string>;

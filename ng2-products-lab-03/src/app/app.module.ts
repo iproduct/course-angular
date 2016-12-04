@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { FormDemoComponent } from './form-demo.component';
-import { ProductModule } from './product/product.module';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeModule } from './home/home.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ProductModule } from './product/product.module';
     BrowserModule,
     FormsModule,
     HttpModule,
-    ProductModule
+    // HomeModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,14 +8,6 @@ import { HttpModule } from '@angular/http';
 
 describe('Depenedency Injection Tests', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-      ],
-      imports: [
-        BrowserModule,
-        FormsModule,
-      ],
-    });
   });
 
   it('useExisting injection should work', () => {
