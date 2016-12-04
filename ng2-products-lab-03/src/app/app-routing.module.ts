@@ -13,7 +13,8 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   { path: 'home', component: HomeComponent },
-  { path: 'products', component: ProductListComponent }
+  { path: 'products', component: ProductListComponent },
+  { path: '**',  redirectTo: '/home' }
 ];
 
 @NgModule({
