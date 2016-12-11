@@ -1,12 +1,10 @@
-let nextId = 1; // autoincrement ids
+import { Identifiable } from '../shared/common.interfaces';
 
-export class Product {
-  public id: number;
+export class Product implements Identifiable {
   constructor(
-    public name: string,
-    public price: number,
-    public description?: string
-    ) {
-      this.id = nextId++;
-    }
+    public id: number | undefined,
+    public name?: string,
+    public price?: number,
+    public description?: string) {}
 }
+

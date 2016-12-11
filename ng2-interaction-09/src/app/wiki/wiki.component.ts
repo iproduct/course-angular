@@ -1,6 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { Observable, Subject } from 'rxjs/Rx';
 import { WikipediaService } from './wikipedia.service';
+import { URLSearchParams } from '@angular/http';
 
 @Component({
   selector: 'my-wiki',
@@ -24,8 +25,9 @@ import { WikipediaService } from './wikipedia.service';
 export class WikiComponent {
   private searchTermStream = new Subject<string>();
   public items: Observable<string[]> = this.searchTermStream
-    // .debounceTime(300)
-    // .distinctUntilChanged()
+    .debounceTime(500)
+    .map(search => search.trim())
+    .distinctUntilChanged()
     .switchMap((term: string) => this.wikipediaService.search(term));
 
   constructor(private wikipediaService: WikipediaService) { }

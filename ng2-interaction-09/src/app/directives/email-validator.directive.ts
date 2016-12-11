@@ -1,11 +1,11 @@
-﻿import {provide, Directive, forwardRef} from 'angular2/core';
-import { Control, NG_VALIDATORS } from 'angular2/common';
+﻿import { Directive} from '@angular/core';
+import { AbstractControl, NG_VALIDATORS, ValidatorFn, Validators} from '@angular/forms';
 
-interface Validator<T extends Control> {
+interface Validator<T extends AbstractControl> {
     (c: T): { [error: string]: any };
 }
 
-function validateEmail(c: Control) {
+function validateEmail(c: AbstractControl) {
     let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
     return EMAIL_REGEXP.test(c.value) ? null : {
@@ -17,12 +17,7 @@ function validateEmail(c: Control) {
 
 @Directive({
     selector: '[validateEmail][ngControl],[validateEmail][ngModel],[validateEmail][ngFormControl]',
-    providers: [
-        provide(NG_VALIDATORS, {
-            useExisting: forwardRef(() => EmailValidator),
-            multi: true
-        })
-    ]
+    providers: [{ provide: NG_VALIDATORS, useExisting: EmailValidator, multi: true }]
 })
 export class EmailValidator {
 
@@ -32,7 +27,7 @@ export class EmailValidator {
         this.validator = validateEmail;
     }
 
-    validate(c: Control) {
+    validate(c: AbstractControl) {
         return this.validator(c);
     }
 }

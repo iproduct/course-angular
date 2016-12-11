@@ -55,6 +55,7 @@ System.register(['rxjs/add/operator/switchMap', '@angular/core', '@angular/route
                 HeroDetailComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this.route.params
+                        .distinctUntilChanged()
                         .switchMap(function (params) { return _this.service.getHero(+params['id']); })
                         .subscribe(function (hero) { return _this.hero = hero; });
                 };
@@ -87,15 +88,14 @@ System.register(['rxjs/add/operator/switchMap', '@angular/core', '@angular/route
                                 })),
                                 core_1.transition(':enter', [
                                     core_1.style({
-                                        opacity: 0,
-                                        transform: 'translateX(-100%)'
+                                        opacity: 0
                                     }),
-                                    core_1.animate('0.2s ease-in')
+                                    core_1.animate('2s ease-in')
                                 ]),
                                 core_1.transition(':leave', [
-                                    core_1.animate('0.5s ease-out', core_1.style({
+                                    core_1.animate('2s ease-out', core_1.style({
                                         opacity: 0,
-                                        transform: 'translateY(100%)'
+                                        transform: 'translateY(-100%)'
                                     }))
                                 ])
                             ])

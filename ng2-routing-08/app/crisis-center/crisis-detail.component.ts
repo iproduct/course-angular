@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Crisis }         from './crisis.service';
 import { DialogService }  from '../dialog.service';
+import { CanComponentDeactivate } from '../can-deactivate-guard.service';
 
 @Component({
   template: `
@@ -47,7 +48,7 @@ import { DialogService }  from '../dialog.service';
     ])
   ]
 })
-export class CrisisDetailComponent implements OnInit {
+export class CrisisDetailComponent implements OnInit, CanComponentDeactivate {
   @HostBinding('@routeAnimation') get routeAnimation() {
     return true;
   }

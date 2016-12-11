@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HomeComponent } from './home/home.component';
 import { HomeModule } from './home/home.module';
 import { ProductModule } from './product/product.module';
+import { UserListComponent } from './users/user-list.component';
+import { UserModule } from './users/users.module';
 
 const appRoutes: Routes = [
   {
@@ -14,6 +16,7 @@ const appRoutes: Routes = [
   },
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductListComponent },
+  { path: 'useers', component: UserListComponent },
   { path: '**',  redirectTo: '/home' }
 ];
 
@@ -22,6 +25,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HomeModule,
     ProductModule,
+    UserModule,
     RouterModule.forRoot(appRoutes)
   ],
   exports: [

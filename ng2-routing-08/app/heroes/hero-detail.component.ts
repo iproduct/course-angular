@@ -32,15 +32,15 @@ import { Hero, HeroService }  from './hero.service';
       ),
       transition(':enter', [
         style({
-          opacity: 0,
-          transform: 'translateX(-100%)'
+          opacity: 0
+          // transform: 'translateX(-100%)'
         }),
-        animate('0.2s ease-in')
+        animate('2s ease-in')
       ]),
       transition(':leave', [
-        animate('0.5s ease-out', style({
+        animate('2s ease-out', style({
           opacity: 0,
-          transform: 'translateY(100%)'
+          transform: 'translateY(-100%)'
         }))
       ])
     ])
@@ -70,6 +70,7 @@ export class HeroDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params
       // (+) converts string 'id' to a number
+      .distinctUntilChanged()
       .switchMap((params: Params) => this.service.getHero(+params['id']))
       .subscribe((hero: Hero) => this.hero = hero);
   }

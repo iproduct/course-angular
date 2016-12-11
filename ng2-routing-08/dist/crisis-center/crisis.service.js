@@ -38,8 +38,12 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                 }
                 CrisisService.prototype.getCrises = function () { return crisesPromise; };
                 CrisisService.prototype.getCrisis = function (id) {
-                    return crisesPromise
-                        .then(function (crises) { return crises.find(function (crisis) { return crisis.id === +id; }); });
+                    return new Promise(function (resolve, reject) {
+                        crisesPromise
+                            .then(function (crises) {
+                            setTimeout(function () { resolve(crises.find(function (crisis) { return crisis.id === +id; })); }, 2000);
+                        });
+                    });
                 };
                 CrisisService.prototype.addCrisis = function (name) {
                     name = name.trim();

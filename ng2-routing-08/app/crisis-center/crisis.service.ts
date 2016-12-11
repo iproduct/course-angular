@@ -21,8 +21,12 @@ export class CrisisService {
   getCrises() { return crisesPromise; }
 
   getCrisis(id: number | string) {
-    return crisesPromise
-      .then(crises => crises.find(crisis => crisis.id === +id));
+    return new Promise<Crisis>( (resolve, reject) => { crisesPromise
+      .then(crises => { setTimeout(
+        () => { resolve(crises.find( (crisis: Crisis) => crisis.id === +id)); },
+        2000);
+      });
+    });
   }
 
 
