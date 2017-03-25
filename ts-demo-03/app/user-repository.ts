@@ -29,7 +29,7 @@ export class DemoUserRepository implements UserRepository {
     }
 
     public deleteUserById(id: number): void {
-        delete this.users.get(id);
+        this.users.delete(id);
     }
 
     public findUserById(id: number): User {

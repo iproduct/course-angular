@@ -18,12 +18,12 @@ export class DemoLoginController implements LoginController {
     public login(principal: User | string, credentials?: string): Promise<User> {
         let email: string;
         let password: string;
-        if (typeof principal === 'User') {
-            email = principal.email;
-            password = principal.password;
-        } else {
+        if (typeof principal === 'string') {
             email = principal;
             password = credentials;
+        } else {
+            email = principal.email;
+            password = principal.password;
         }
         let promise = new Promise<User>( (resolve, reject) => {
             setTimeout( () => {
