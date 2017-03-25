@@ -4,7 +4,8 @@
   "description": "TypeScript demo 01",
   "main": "index.js",
   "scripts": {
-    "start": "lite-server",
+    "lite": "lite-server",
+    "start": "concurrently \"tsc -w\" \"lite-server\" ",
     "test": "test"
   },
   "repository": {
@@ -23,12 +24,13 @@
   },
   "homepage": "https://github.com/iproduct/course-angular2#readme",
   "dependencies": {
-    "core-js": "^2.4.1",
-    "jquery": "^3.1.1",
-    "systemjs": "^0.19.39"
+    "core-js": "2.4.1",
+    "jquery": "^3.2.1",
+    "systemjs": "^0.19.47"
   },
   "devDependencies": {
-    "@types/jquery": "^2.0.33",
-    "lite-server": "^2.2.2"
+    "@types/jquery": "^2.0.41",
+    "lite-server": "^2.3.0",
+    "concurrently": "^3.4.0"
   }
 }
