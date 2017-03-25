@@ -14,12 +14,14 @@ import { CountdownViewChildParentComponent } from './countdown-viewchild.compone
 import { MissionControlComponent } from './mission-control.component';
 import { AstronautComponent } from './astronaut.component';
 import { TimerNameComponent } from './timer-name.component';
+import { DirectivesModule } from '../directives/directives.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    PipesModule
+    PipesModule,
+    DirectivesModule
   ],
   declarations: [HeroMasterComponent, HeroChildComponent, VersionParentComponent, 
     VersionChildComponent, VoteTakerComponent, VoterComponent, CountdownTimerComponent, CountdownVarParentComponent,

@@ -7,7 +7,7 @@ import { LogOnClickDirective } from './click.directive';
   imports: [
     BrowserModule
   ],
-  declarations: [HomeComponent, LogOnClickDirective],
+  declarations: [HomeComponent],
   exports: [HomeComponent]
 })
 export class HomeModule { }

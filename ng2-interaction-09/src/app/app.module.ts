@@ -8,6 +8,7 @@ import { AppNavComponent } from './app-nav.component';
 import { WikiModule } from './wiki/wiki.module';
 import { HomeModule } from './home/home.module';
 import { PipesModule } from './pipes/pipes.module';
+import { DirectivesModule } from './directives/directives.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { PipesModule } from './pipes/pipes.module';
     HomeModule,
     WikiModule,
     InteractionModule,
-    PipesModule
+    PipesModule,
+    DirectivesModule
   ],
   declarations: [AppComponent, AppNavComponent],
   exports: [AppComponent],

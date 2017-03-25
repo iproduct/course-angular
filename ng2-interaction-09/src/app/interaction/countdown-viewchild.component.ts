@@ -1,14 +1,14 @@
-import { AfterViewInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Component }                from '@angular/core';
 import { CountdownTimerComponent }  from './countdown-timer.component';
 @Component({
   selector: 'countdown-parent-vc',
   template: `
-  <h3>Countdown to Liftoff (via ViewChild)</h3>
+  <h3 myLogOnClick>Countdown to Liftoff (via ViewChild)</h3>
   <button (click)="start()">Start</button>
   <button (click)="stop()">Stop</button>
   <div class="seconds">{{ seconds() }}</div>
-  <countdown-timer #timer> 
+  <countdown-timer #timer > 
     <header>Countdown Timer Header</header>
     <timer-name></timer-name>
     <div class="footer"> Countdown Timer Footer </div>
@@ -25,9 +25,11 @@ import { CountdownTimerComponent }  from './countdown-timer.component';
       text-align: center;
       vertical-align:middle;
     }
-  `]})
+  `],
+  encapsulation: ViewEncapsulation.Native
+})
 export class CountdownViewChildParentComponent implements AfterViewInit {
-  @ViewChild('timer')
+  @ViewChild(CountdownTimerComponent)
   private timerComponent: CountdownTimerComponent;
   seconds() { return 0; }
   ngAfterViewInit() {

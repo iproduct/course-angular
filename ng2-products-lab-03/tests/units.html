@@ -13,15 +13,15 @@
         <td colspan="3" title="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36">Browser: Chrome 54.0.2840 (Windows 7 0.0.0)</td>
       </tr>
       <tr class="overview">
-        <td colspan="3">Timestamp: 12/4/2016, 10:25:10 AM</td>
+        <td colspan="3">Timestamp: 12/11/2016, 12:41:02 PM</td>
       </tr>
       <tr>
         <td colspan="3">
           5 tests / 
           0 errors / 
-          0 failures / 
+          3 failures / 
           0 skipped / 
-          runtime: 4.134s
+          runtime: 0.766s
         </td>
       </tr>
       <tr class="header">
@@ -29,37 +29,93 @@
         <td>Spec</td>
         <td>Suite / Results</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 1.127s</td>
+      <tr class="fail">
+        <td>Failed</td>
         <td>should create the app</td>
-        <td>AppComponent</td>
+        <td>
+          AppComponent
+          <br />'router-outlet' is not a known element:
+1. If 'router-outlet' is an Angular component, then verify that it is part of this module.
+2. If 'router-outlet' is a Web Component then add "CUSTOM_ELEMENTS_SCHEMA" to the '@NgModule.schemas' of this component to suppress this message. ("
+      &lt;a routerLink="/users" routerLinkActive="active"&gt;Users&lt;/a&gt;
+&lt;/nav&gt;
+[ERROR -&gt;]&lt;router-outlet&gt;&lt;/router-outlet&gt;
+"): AppComponent@9:0
+Error: Template parse errors:
+    at TemplateParser.parse (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/template_parser/template_parser.js:97:0 &lt;- src/test.ts:15367:19)
+    at RuntimeCompiler._compileTemplate (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:255:0 &lt;- src/test.ts:35235:51)
+    at webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:175:47 &lt;- src/test.ts:35155:62
+    at Set.forEach (native)
+    at RuntimeCompiler._compileComponents (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:175:0 &lt;- src/test.ts:35155:19)
+    at createResult (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:86:0 &lt;- src/test.ts:35066:19)
+    at RuntimeCompiler._compileModuleAndAllComponents (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:90:0 &lt;- src/test.ts:35070:88)
+    at RuntimeCompiler.compileModuleAndAllComponentsSync (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:62:0 &lt;- src/test.ts:35042:21)
+    at TestingCompilerImpl.compileModuleAndAllComponentsSync (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/bundles/compiler-testing.umd.js:482:0 &lt;- src/test.ts:51215:35)
+    at TestBed._initIfNeeded (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/core/bundles/core-testing.umd.js:758:0 &lt;- src/test.ts:7991:40)
+
+        </td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.999s</td>
+      <tr class="fail">
+        <td>Failed</td>
         <td>should have as title 'app works!'</td>
-        <td>AppComponent</td>
+        <td>
+          AppComponent
+          <br />'router-outlet' is not a known element:
+1. If 'router-outlet' is an Angular component, then verify that it is part of this module.
+2. If 'router-outlet' is a Web Component then add "CUSTOM_ELEMENTS_SCHEMA" to the '@NgModule.schemas' of this component to suppress this message. ("
+      &lt;a routerLink="/users" routerLinkActive="active"&gt;Users&lt;/a&gt;
+&lt;/nav&gt;
+[ERROR -&gt;]&lt;router-outlet&gt;&lt;/router-outlet&gt;
+"): AppComponent@9:0
+Error: Template parse errors:
+    at TemplateParser.parse (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/template_parser/template_parser.js:97:0 &lt;- src/test.ts:15367:19)
+    at RuntimeCompiler._compileTemplate (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:255:0 &lt;- src/test.ts:35235:51)
+    at webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:175:47 &lt;- src/test.ts:35155:62
+    at Set.forEach (native)
+    at RuntimeCompiler._compileComponents (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:175:0 &lt;- src/test.ts:35155:19)
+    at createResult (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:86:0 &lt;- src/test.ts:35066:19)
+    at RuntimeCompiler._compileModuleAndAllComponents (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:90:0 &lt;- src/test.ts:35070:88)
+    at RuntimeCompiler.compileModuleAndAllComponentsSync (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:62:0 &lt;- src/test.ts:35042:21)
+    at TestingCompilerImpl.compileModuleAndAllComponentsSync (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/bundles/compiler-testing.umd.js:482:0 &lt;- src/test.ts:51215:35)
+    at TestBed._initIfNeeded (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/core/bundles/core-testing.umd.js:758:0 &lt;- src/test.ts:7991:40)
+
+        </td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 1s</td>
+      <tr class="fail">
+        <td>Failed</td>
         <td>should render title in a h1 tag</td>
-        <td>AppComponent</td>
+        <td>
+          AppComponent
+          <br />'router-outlet' is not a known element:
+1. If 'router-outlet' is an Angular component, then verify that it is part of this module.
+2. If 'router-outlet' is a Web Component then add "CUSTOM_ELEMENTS_SCHEMA" to the '@NgModule.schemas' of this component to suppress this message. ("
+      &lt;a routerLink="/users" routerLinkActive="active"&gt;Users&lt;/a&gt;
+&lt;/nav&gt;
+[ERROR -&gt;]&lt;router-outlet&gt;&lt;/router-outlet&gt;
+"): AppComponent@9:0
+Error: Template parse errors:
+    at TemplateParser.parse (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/template_parser/template_parser.js:97:0 &lt;- src/test.ts:15367:19)
+    at RuntimeCompiler._compileTemplate (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:255:0 &lt;- src/test.ts:35235:51)
+    at webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:175:47 &lt;- src/test.ts:35155:62
+    at Set.forEach (native)
+    at RuntimeCompiler._compileComponents (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:175:0 &lt;- src/test.ts:35155:19)
+    at createResult (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:86:0 &lt;- src/test.ts:35066:19)
+    at RuntimeCompiler._compileModuleAndAllComponents (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:90:0 &lt;- src/test.ts:35070:88)
+    at RuntimeCompiler.compileModuleAndAllComponentsSync (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/src/runtime_compiler.js:62:0 &lt;- src/test.ts:35042:21)
+    at TestingCompilerImpl.compileModuleAndAllComponentsSync (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/compiler/bundles/compiler-testing.umd.js:482:0 &lt;- src/test.ts:51215:35)
+    at TestBed._initIfNeeded (webpack:///C:/CourseAngular2/git/course-angular2/ng2-products-lab-03/~/@angular/core/bundles/core-testing.umd.js:758:0 &lt;- src/test.ts:7991:40)
+
+        </td>
       </tr>
       <tr class="pass">
-        <td>Passed in 1.006s</td>
-        <td>should create</td>
-        <td>ProductListComponent</td>
-      </tr>
-      <tr class="pass">
-        <td>Passed in 0.002s</td>
+        <td>Passed in 0.003s</td>
         <td>useExisting injection should work</td>
         <td>Depenedency Injection Tests</td>
       </tr>
-      <tr class="system-out">
-        <td colspan="3"><strong>System output:</strong><br />Chrome 54.0.2840 (Windows 7 0.0.0) LOG: 'Backed service called for products'
-<br />Chrome 54.0.2840 (Windows 7 0.0.0) LOG: 'Fetched 3 products.'
-<br />Chrome 54.0.2840 (Windows 7 0.0.0) LOG: 'Backed service called for products'
-<br />Chrome 54.0.2840 (Windows 7 0.0.0) LOG: 'Fetched 3 products.'
-</td>
+      <tr class="pass">
+        <td>Passed in 0s</td>
+        <td>addition should work</td>
+        <td>Testing math</td>
       </tr>
     </table>
     <hr/>
