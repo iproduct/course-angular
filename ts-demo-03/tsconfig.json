@@ -10,7 +10,7 @@
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "outDir": "dist",
-    "lib": ["dom", "es5", "es2015.collection", "es2015.promise"]
+    "lib": ["dom", "es5", "scripthost", "es2015.collection", "es2015.promise"]
   },
    "include": [
         "app/**/*"

@@ -1,13 +1,13 @@
 import $ from 'jquery';
 
 export class AbstractService {
-    constructor(serviceUrl){
-        this._url = serviceUrl;
-    }
+  constructor(serviceUrl){
+    this._url = serviceUrl;
+  }
 
-    search(data) {
-        return getJsonAsPromise(this._url, data);
-    }
+  search(data) {
+    return getJsonAsPromise(this._url, data);
+  }
     
 }
 
