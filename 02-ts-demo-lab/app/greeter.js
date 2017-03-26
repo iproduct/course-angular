@@ -1,8 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
 function greeter(person) {
-    return 'Hello, ' + person + ' from Typescript!';
+    return 'Hello, ' + person + ' from Typescript and Angular!';
 }
-exports.default = greeter;
 var user = 'TypeScript User';
 document.body.innerHTML = greeter(user);

@@ -1,3 +1,4 @@
+'use strict';
 function greeter(person: string) {
     return 'Hello, ' + person + ' from Typescript and Angular!';
 }
