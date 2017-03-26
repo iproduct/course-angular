@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lite": "lite-server",
+    "start":  "concurrently \"tsc -w\" \"lite-server\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
