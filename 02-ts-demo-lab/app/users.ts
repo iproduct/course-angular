@@ -16,14 +16,14 @@ export enum Role {
   CUSTOMER = 1, ADMIN
 }
 
-export class Customer implements User {
+class UserImpl {
+  public roles: Array<Role>;
   constructor(
     public id: number,
     public firstName: string,
     public lastName: string,
     public email: string,
     public password: string,
-    public roles: Array<Role> = [Role.CUSTOMER],
     public contact: string = '') { }
 
   public get salutation() {
@@ -34,4 +34,12 @@ export class Customer implements User {
   toString() {
     return `${this.id} - ${this.firstName} ${this.lastName}, ${this.email}, ${this.contact}`;
   }
+}
+
+export class Customer extends UserImpl implements User {
+  public roles: Array<Role> = [Role.CUSTOMER];
+}
+
+export class Admin extends UserImpl implements User {
+  public roles: Array<Role> = [Role.ADMIN];
 }
