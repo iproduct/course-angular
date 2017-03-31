@@ -4,7 +4,7 @@
         "curly": false,
         "interface-name": [false],
         "quotemark": [true, "single", "avoid-escape"],
-        "no-console": [true, "log", "warn"],
+        "no-console": [false, "log", "warn"],
         "object-literal-sort-keys": false,
         "ordered-imports": [false],
         "trailing-comma": [false]

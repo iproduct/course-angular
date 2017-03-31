@@ -9,6 +9,10 @@ userRepo.addUser(new Customer('John', 'Smith', 'john@abv.bg', 'john'));
 userRepo.addUser(new Customer('Sara', 'Smith', 'sara@abv.bg', 'sara'));
 userRepo.addUser(new Admin('Brian', 'Harisson', 'brian@gmail.com', 'brian'));
 
+for (let val of userRepo.findAllUsers()) {
+  console.log(val);
+}
+
 const loginController: LoginController = new DemoLoginController(userRepo);
 // loginController.login('john@abv.bg', 'john');
 

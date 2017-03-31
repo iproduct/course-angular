@@ -6,7 +6,7 @@ export interface UserRepository {
     deleteUserById(id: number): void;
     findUserById(id: number): User;
     findUserByEmail(email: string): User;
-    findAllUsers(): User[];
+    findAllUsers(): Array<User>;
 }
 
 export class DemoUserRepository implements UserRepository {
@@ -48,9 +48,9 @@ export class DemoUserRepository implements UserRepository {
     }
 
     public findAllUsers(): User[] {
-        let results: User[] = [];
-        this.users.forEach(user => results.push(user));
-        return results;
+        // let results: User[] = [];
+        // this.users.forEach(user => results.push(user));
+        return Array.from(this.users.values());
     }
 
     private getNextId(): number {
