@@ -16,30 +16,42 @@ export enum Role {
   CUSTOMER = 1, ADMIN
 }
 
-class UserImpl {
+abstract class UserImpl implements User {
+  static count: number = 0;
+  public id: number;
   public roles: Array<Role>;
   constructor(
-    public id: number,
     public firstName: string,
     public lastName: string,
     public email: string,
     public password: string,
-    public contact: string = '') { }
+    public contact: string = '') {
+      this.id = ++ UserImpl.count;
+  }
 
   public get salutation() {
-    return `Hello ${this.firstName} ${this.lastName}, in roles: 
+    return `${this.getPrefix()} [${this.id}]: Hello ${this.firstName} ${this.lastName}, in roles: 
       ${this.roles.map(r => Role[r]).join(', ')}`;
   }
+
+  abstract getPrefix(): string;
 
   toString() {
     return `${this.id} - ${this.firstName} ${this.lastName}, ${this.email}, ${this.contact}`;
   }
 }
 
-export class Customer extends UserImpl implements User {
+export class Customer extends UserImpl {
   public roles: Array<Role> = [Role.CUSTOMER];
+  getPrefix(): string {
+    return 'Customer';
+  }
 }
 
 export class Admin extends UserImpl implements User {
   public roles: Array<Role> = [Role.ADMIN];
+  getPrefix(): string {
+    return 'Admin';
+  }
+
 }

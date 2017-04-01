@@ -1,0 +1,29 @@
+{
+    "extends": "tslint:latest",
+    "rules": {
+        "curly": false,
+        "interface-name": [
+            false
+        ],
+        "quotemark": [
+            true,
+            "single",
+            "avoid-escape"
+        ],
+                "member-access": false,
+        "member-ordering": [
+            true,
+            "static-before-instance",
+            "variables-before-functions"
+        ],
+        "no-console": [
+            true,
+            "log",
+            "warn"
+        ],
+        "no-empty": false,
+        "object-literal-sort-keys": false,
+        "ordered-imports": [false],
+        "trailing-comma": [false]
+    }
+}

@@ -8,7 +8,7 @@ export interface Person {
 
 export interface User extends Person {
     password: string;
-    roles: Role[];
+    roles: Array<Role>;
     readonly salutation: string;
 }
 
