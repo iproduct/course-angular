@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [
     BrowserModule
   ],
-  declarations: [TodoComponent]
+  declarations: [TodoComponent],
+  exports: [TodoComponent]
 })
 export class TodoModule { }
