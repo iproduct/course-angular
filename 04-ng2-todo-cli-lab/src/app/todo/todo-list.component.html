@@ -1,0 +1,8 @@
+<h3>Todo List</h3>
+<todo-input (onTodoAdded)="addTodo($event)"></todo-input>
+<ul>
+  <li *ngFor="let todo of todos" class="todo-item">
+    <todo-item [todo]="todo" (onCompletionChange)="removeTodo($event)"></todo-item>
+  </li>
+</ul>
+
