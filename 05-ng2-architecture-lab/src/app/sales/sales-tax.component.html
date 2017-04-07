@@ -1,19 +1,20 @@
 <h2>Calculate Tax</h2>
-	<div class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4" >
-    <div class="form-group">
-      <label class="control-label hidden-xs col-sm-3" for="name">Amount:</label>
-      <div class="col-xs-12 col-sm-9">
-		    <input #amount class="form-control" id="amount" type="number"
-          placeholder="Amount" required 
-          (keyup.enter)="calcTax(amount.value); amount.value=''"
-          (blur)="calcTax(amount.value)">
-      </div>
+<div class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4">
+  <div class="form-group">
+    <label class="control-label hidden-xs col-sm-3" for="name">Amount:</label>
+    <div class="col-xs-12 col-sm-9">
+      <input #amount class="form-control" id="amount" type="number" placeholder="Amount" required 
+        (keyup.enter)="calcTax(amount.value); amount.value=''" (keyup)="onKeyup($event)"
+        (blur)="calcTax(amount.value)">
     </div>
-    <button class="btn btn-primary col-sm-offset-3" (click)="calcTax(amount.value)">
-      Calculate Tax
-    </button>
-	</div>
-  <p>{{amount.value}}</p>
-  <div *ngIf="calculatedTax" class="calculated-tax">
-    {{calculatedTax | currency:'USD':true:'1.2-2'}}
   </div>
+  <button class="btn btn-primary col-sm-offset-3" (click)="calcTax(amount.value)">
+    Calculate Tax
+  </button>
+</div>
+
+<div *ngIf="calculatedTax" class="calculated-tax">
+  Tax: {{calculatedTax | currency:'USD':true:'1.2-2'}}
+</div>
+<!--<p>#amount.value: {{amount.value}}</p>-->
+<!--<p>{{chars}}</p>-->

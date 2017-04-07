@@ -52,7 +52,7 @@ describe('App', () => {
   it('should call getAll() products', () => {
     expect(de.children.length).toBe(0, 'should be no products yet');
     fixture.detectChanges();
-    // getAll service is async => still has not returned with productss
+    // getAll service is async => still has not returned with products
     expect(de.children.length).toBe(0, 'no products yet');
     expect(spy.calls.any()).toBe(true, 'getAll called');
   });
