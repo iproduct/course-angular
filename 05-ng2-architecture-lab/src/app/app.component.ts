@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-app',
   template: `
-  <main class="container">
+  <main class="container-fluid">
   <section class="row">
     <prod-list></prod-list>
   </section>
