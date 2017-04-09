@@ -3,7 +3,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Customer, Admin, Operator } from '../users/user.model';
 import { Gender } from './../users/user.model';
 import { Identifiable } from './common.interfaces';
-import { Product } from '../product/product.model';
+import { Product } from '../products/product.model';
 
 const PRODUCTS: Identifiable[] = [
   new Product(1, 'Logitech Mouse', 12.99, 'Super mouse'),

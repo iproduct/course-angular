@@ -1,12 +1,11 @@
 import { Injectable, Type } from '@angular/core';
-
 import { Logger } from './logger.service';
-import { Product } from '../product/product.model';
+import { Product } from '../products/product.model';
 
 const PRODUCTS: Product[] = [
-  new Product('Logitech Mouse', 12.99, 'Super mouse'),
-  new Product('Wirelesss Keyboard', 23.85, 'Type wherever you are!'),
-  new Product('Whiteboard Marker', 0.32, 'Drawing is fun!')
+  new Product(1,'Logitech Mouse', 12.99, 'Super mouse'),
+  new Product(2,'Wirelesss Keyboard', 23.85, 'Type wherever you are!'),
+  new Product(3,'Whiteboard Marker', 0.32, 'Drawing is fun!')
 ];
 
 @Injectable()

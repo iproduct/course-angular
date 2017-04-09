@@ -6,7 +6,7 @@ import { Logger } from './logger.service';
 import { User } from '../users/user.model';
 import { Identifiable } from './common.interfaces';
 import { BackendService } from './backend.service';
-import { Product } from '../product/product.model';
+import { Product } from '../products/product.model';
 
 @Injectable()
 export class BackendHttpService implements BackendService {

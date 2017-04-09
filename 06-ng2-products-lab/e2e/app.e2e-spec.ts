@@ -1,10 +1,10 @@
-import { Ng2ProductsLab03Page } from './app.po';
+import { ReactiveFormPage } from './app.po';
 
-describe('ng2-products-lab-03 App', function() {
-  let page: Ng2ProductsLab03Page;
+describe('reactive-form App', () => {
+  let page: ReactiveFormPage;
 
   beforeEach(() => {
-    page = new Ng2ProductsLab03Page();
+    page = new ReactiveFormPage();
   });
 
   it('should display message saying app works', () => {
