@@ -1,5 +1,6 @@
 <h3>{{product.name}} Details</h3>
-<form #f="ngForm" class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4">
+<form #f="ngForm" (ngSubmit)="onSubmit()"
+  class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4">
   <div class="form-group">
     <label class="control-label hidden-xs col-sm-3" for="id">ID:</label>
     <div class="col-xs-12 col-sm-9">
@@ -33,6 +34,10 @@
       Price is required.
     </div>
     </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+    <button type="button" class="btn btn-danger" (click)="onReset()">Reset</button>
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancel</button>
+     
   </div>
   <p>Name valid: {{name.valid}}</p>
   <p>Price valid: {{price.valid}}</p>

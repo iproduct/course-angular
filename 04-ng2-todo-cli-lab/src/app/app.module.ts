@@ -5,13 +5,16 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { TodoModule } from './todo/todo.module';
+import { FormDemoComponent } from './form-demo.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FormDemoComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     TodoModule
   ],
   providers: [],

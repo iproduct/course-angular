@@ -25,4 +25,14 @@ export class ProductListComponent implements OnInit {
     this.selectedProduct = product;
   }
 
+  productChanged(product: Product) {
+    const pInd = this.products.findIndex(prod => prod.id === product.id);
+    this.products[pInd] = product;
+    this.selectedProduct = undefined;
+  }
+
+  productCanceled() {
+    this.selectedProduct = undefined;
+  }
+
 }

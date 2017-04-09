@@ -4,5 +4,5 @@ import {Component} from '@angular/core';
   templateUrl: './home.component.html'
 })
 export class HomeComponent { 
-  public imageBox = require('../../assets/img/ipt-box.png');
+  public imageBox = '../../assets/img/ipt-box.png';
 }

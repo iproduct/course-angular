@@ -7,6 +7,7 @@
     {{product.name}} - {{product.price | currency:'USD':1.2-2}}
   </li>
 </ul>
-<tc-product-detail *ngIf="selectedProduct" [product]="selectedProduct">
+<tc-product-detail *ngIf="selectedProduct" [product]="selectedProduct" 
+(onProductChange)="productChanged($event)" (onProductCancel)="productCanceled()">
 </tc-product-detail>
 

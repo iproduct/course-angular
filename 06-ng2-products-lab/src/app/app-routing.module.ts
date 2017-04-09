@@ -7,6 +7,7 @@ import { HomeModule } from './home/home.module';
 import { ProductModule } from './product/product.module';
 import { UserListComponent } from './users/user-list.component';
 import { UserModule } from './users/users.module';
+import { FormDemoComponent } from './form-demo.component';
 
 const appRoutes: Routes = [
   {
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'useers', component: UserListComponent },
+  { path: 'form-demo', component: FormDemoComponent},
   { path: '**',  redirectTo: '/home' }
 ];
 
