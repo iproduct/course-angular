@@ -4,10 +4,12 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Logger } from './logger.service';
 import { Product } from '../products/product.model';
 import { User } from '../users/user.model';
-import { Identifiable } from './common.interfaces';
+import { Identifiable, API_BASE_URL } from './common.interfaces';
 import { BackendObservableService } from './backend-observable.service';
-import { API_BASE_URL } from './common.module';
 import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
+import { APP_BASE_HREF } from '@angular/common';
+
+console.log('API_BASE_URL', API_BASE_URL);
 
 export const DEFAULT_MIN_FRESH = 10000; // Minimal freshness of chached data acceptable in mills
 
@@ -115,14 +117,14 @@ class ObservableCache {
 
 @Injectable()
 export class BackendHttpObservableService implements BackendObservableService {
-    private apiBaseUrl: string;
     private cache = new ObservableCache();
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ headers: this.headers });
 
-    constructor( @Inject('API_BASE_URL') apiBaseUrl: string, private http: Http, private logger: Logger) {
-        this.apiBaseUrl = apiBaseUrl;
-    }
+    constructor(
+        @Inject(API_BASE_URL) private apiBaseUrl: string,
+        private http: Http,
+        private logger: Logger) { }
 
     public getCollectionObservable<T extends Identifiable>(type: Type<T>, reloadCache?: boolean): Observable<T[]> {
         return this.cache.getCollectionObservable(type);

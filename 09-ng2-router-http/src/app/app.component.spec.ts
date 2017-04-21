@@ -5,14 +5,14 @@ import { BackendService } from './common/backend.service';
 import { AppNavComponent } from './app-nav.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterOutletStubComponent, RouterLinkStubDirective } from '../testing/router-stubs';
-import { CommonModule } from './common/common.module';
+import { SharedModule } from './common/common.module';
 import { HomeModule } from './home/home.module';
 import { ProductModule } from './products/product.module';
 import { UserModule } from './users/users.module';
 import {APP_BASE_HREF} from '@angular/common';
 describe('App', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({ imports: [FormsModule, AppRoutingModule, CommonModule,
+    TestBed.configureTestingModule({ imports: [FormsModule, AppRoutingModule, SharedModule,
     HomeModule,
     ProductModule,
     UserModule],

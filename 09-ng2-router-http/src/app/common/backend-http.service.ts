@@ -1,11 +1,11 @@
-import { Injectable, Inject, Type } from '@angular/core';
+import { Injectable, Inject, Type, InjectionToken, Injector } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { Logger } from './logger.service';
 import { Product } from '../products/product.model';
 import { User } from '../users/user.model';
-import { Identifiable } from './common.interfaces';
+import { Identifiable, API_BASE_URL } from './common.interfaces';
 import { BackendService } from './backend.service';
 
 @Injectable()
@@ -14,9 +14,9 @@ export class BackendHttpService implements BackendService {
   private options = new RequestOptions({ headers: this.headers });
 
   constructor(
-    @Inject('API_BASE_URL') private baseUrl: string,
+    @Inject(API_BASE_URL) private baseUrl: string,
     private http: Http,
-    private logger: Logger) { }
+    private logger: Logger) {}
 
   public findAll<T extends Identifiable>(type: Type<T>): Promise<T[]> {
     let collection = type.name.toLowerCase() + 's';
