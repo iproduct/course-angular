@@ -1,6 +1,6 @@
-import {Repository} from './user-repository';
-import {User} from './user.model';
-import {resolvePromiseAfterTimeout} from './utilities';
+import { Repository } from './user-repository';
+import { User } from './user.model';
+import { resolvePromiseAfterTimeout } from './utilities';
 
 export interface LoginController {
     login(email: string, password: string): Promise<User>;
@@ -11,22 +11,23 @@ export interface LoginController {
 export class DemoLoginController implements LoginController {
     private loggedUser: User = undefined;
 
-    constructor(private repository: Repository<User>) {}
+    constructor(private repository: Repository<User>) { }
 
     public login(email: string, password: string): Promise<User>;
     public login(user: User): Promise<User>;
     public login(principal: User | string, credentials?: string): Promise<User> {
         let email: string;
         let password: string;
-        if (typeof principal === 'User') {
-            email = principal.email;
-            password = principal.password;
-        } else {
+        if (typeof principal === 'string') {
             email = principal;
             password = credentials;
+        } else {
+            email = principal.email;
+            password = principal.password;
+
         }
-        let promise = new Promise<User>( (resolve, reject) => {
-            setTimeout( () => {
+        let promise = new Promise<User>((resolve, reject) => {
+            setTimeout(() => {
                 let user = this.repository.findUserByEmail(email);
                 if (!user || user.password !== password) {
                     reject(`Invalid username or password`);

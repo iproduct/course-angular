@@ -18,7 +18,7 @@ class Operation<T> {
 class CacheItem<T extends Identifiable> {
     public values: Observable<T[]>;
     constructor(public ops: Subject<Operation<T>>) {
-        this.values = ops.scan((oldState: T[], nextOp: Operation<T>, index: number) => {
+        this.values = ops.scan((oldState: Array<T>, nextOp: Operation<T>, index: number) => {
             let itemIndex: number;
             switch (nextOp.name) {
                 case 'replace':

@@ -4,7 +4,7 @@ import { BackendService }      from './backend.service';
 import { Logger }              from './logger.service';
 import { BackendHttpService } from './backend-http.service';
 import { HttpModule }    from '@angular/http';
-import { OpaqueToken } from '@angular/core';
+import { OpaqueToken, InjectionToken } from '@angular/core';
 
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -12,7 +12,7 @@ import { InMemoryDataModel }  from './in-memory-data.model';
 import { BackendObservableService } from './backend-observable.service';
 import { BackendHttpObservableService } from './backend-http-observable.service';
 
-export const API_BASE_URL = new OpaqueToken('api.base.url');
+export const API_BASE_URL = new InjectionToken('api.base.url');
 
 @NgModule({
   imports: [

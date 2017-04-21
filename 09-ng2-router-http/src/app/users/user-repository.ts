@@ -33,7 +33,7 @@ export class DemoUserRepository implements Repository<User> {
     }
 
     public deleteUserById(id: number): void {
-        delete this.users.get(id);
+        this.users.delete(id);
     }
 
     public findUserById(id: number): User {

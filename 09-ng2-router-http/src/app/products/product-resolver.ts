@@ -8,7 +8,7 @@ import { ProductService } from './product.service';
 export class ProductResolver implements Resolve<Product> {
   constructor(private service: ProductService, private router: Router) { }
 
-  public resolve(route: ActivatedRouteSnapshot): Promise<Product> | boolean {
+  public resolve(route: ActivatedRouteSnapshot): Promise<Product> {
     let id = +route.params['id'];
     return this.service.refreshProducts()
       .then(() => this.service.getProductObservable(id).take(1).toPromise());

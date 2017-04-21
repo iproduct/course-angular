@@ -26,7 +26,7 @@ export class BackendHttpService implements BackendService {
     }
     return this.http.get(this.baseUrl + '/' + collection)
       .map(response => response.json().data as T[])
-      .do((items: User[]) => this.logger.log(`Fetched ${items.length} ${collection}.`))
+      .do((items: T[]) => this.logger.log(`Fetched ${items.length} ${collection}.`))
       .catch(this.handleErrorObservable)
       .toPromise();
   }
