@@ -11,7 +11,6 @@ import { HomeComponent } from './home/home.component';
       { path: 'home', component: HomeComponent, pathMatch: 'prefix'  },
       { path: 'products', loadChildren: './products/product.module#ProductModule'},
       { path: 'users', component: UserListComponent },
-      { path: '**', component: HomeComponent  },
     ])
   ],
   exports: [

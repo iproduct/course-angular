@@ -58,11 +58,11 @@ export class UserListComponent implements OnInit {
     this.selectedUser = user;
     this.selectedId = user.id;
     this.router.navigate(['.', { selectedId: user.id }], { replaceUrl: true })
-      .then(isSucces => this.router.navigate(['/user', user.id]));
+      .then(isSucces => this.router.navigate(['/users', user.id]));
   }
 
   public addUser() {
-    this.router.navigate(['/user']);
+    this.router.navigate(['/users/new']);
   }
 
   public deleteItem(itemId: number) {
