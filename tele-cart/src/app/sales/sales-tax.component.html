@@ -13,5 +13,5 @@
 </div>
 <!--<div>{{amount}}</div>-->
 <div *ngIf="calculatedTax" class="calculated-tax">
-  Tax: {{calculatedTax | currency:'USD':1.2-2}}
+  Tax: {{calculatedTax | currency:'USD':true:'1.2-2'}}
 </div>

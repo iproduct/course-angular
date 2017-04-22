@@ -65,7 +65,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   public selectItem(product: Product) {
     this.selectedId = product.id;
     this.router.navigate(['.', { selectedId: product.id }], { replaceUrl: true })
-      .then(isSucces => this.router.navigate(['/product', product.id]));
+      .then(isSucces => this.router.navigate(['/products', product.id]));
   }
 
   public deleteItem(itemId: number) {

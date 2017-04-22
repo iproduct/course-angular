@@ -2,7 +2,7 @@ import { Injectable, Inject, Type } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
 import { Logger } from './logger.service';
-import { Product } from '../products/product.model';
+import { Product } from './product.model';
 import { User } from '../users/user.model';
 import { Identifiable, API_BASE_URL } from './common.interfaces';
 import { BackendObservableService } from './backend-observable.service';

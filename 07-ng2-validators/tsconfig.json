@@ -9,6 +9,7 @@
     "removeComments": false,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
+    "lib": ["dom", "es5", "es2015"],
     "types": []
   },
   "exclude": [

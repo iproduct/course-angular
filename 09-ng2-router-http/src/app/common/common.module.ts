@@ -29,4 +29,4 @@ import { CanDeactivateGuard } from './can-deactivate-guard.service';
     { provide: BackendObservableService, useClass: BackendHttpObservableService }
   ]
 })
-export class SharedModule { }
+export class CommonModule { }

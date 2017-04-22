@@ -1,6 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
-import { Product } from '../products/product.model';
+import { Product } from './product.model';
 import { Customer, Admin, Operator } from '../users/user.model';
 import { Gender } from './../users/user.model';
 import { Identifiable } from './common.interfaces';

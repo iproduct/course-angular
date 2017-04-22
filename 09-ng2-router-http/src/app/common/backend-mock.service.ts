@@ -1,7 +1,7 @@
 import { Injectable, Type } from '@angular/core';
 
 import { Logger } from './logger.service';
-import { Product } from '../products/product.model';
+import { Product } from './product.model';
 import { User, Customer, Admin, Operator } from '../users/user.model';
 import { Gender } from './../users/user.model';
 import { Identifiable } from './common.interfaces';

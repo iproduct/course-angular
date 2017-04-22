@@ -54,6 +54,7 @@
     "@types/jasmine": "^2.5.47",
     "@types/node": "^7.0.13",
     "angular2-template-loader": "^0.6.2",
+    "angular-router-loader": "^0.6.0",
     "awesome-typescript-loader": "^3.1.2",
     "css-loader": "^0.28.0",
     "css-to-string-loader": "^0.1.2",

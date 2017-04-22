@@ -1,9 +1,9 @@
 import { NgModule }     from '@angular/core';
 import { AppComponent } from './app.component';
 import { SalesModule } from './sales/sales.module';
-import { SharedModule } from './common/common.module';
+import { CommonModule } from './common/common.module';
 import { HomeModule } from './home/home.module';
-import { ProductModule } from './products/product.module';
+// import { ProductModule } from './products/product.module';
 import { UserModule } from './users/users.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -18,9 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
-    SharedModule,
+    CommonModule,
     HomeModule,
-    ProductModule,
+    // ProductModule,
     UserModule,
     SalesModule,
     SmallDemosModule

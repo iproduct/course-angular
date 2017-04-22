@@ -7,7 +7,7 @@ import { forbiddenNameValidator, nameTakenValidator } from '../shared/forbidden-
 import { MySubmitted } from '../shared/submitted.component';
 
 @Component({
-  moduleId: module.id,
+  // moduleId: module.id,
   selector: 'hero-form-reactive3',
   templateUrl: 'hero-form-reactive.component.html'
 })

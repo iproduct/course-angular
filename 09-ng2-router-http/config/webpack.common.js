@@ -20,7 +20,7 @@ module.exports = {
       // TypeScript files
       {
         test: /\.ts$/,
-        loaders: ['awesome-typescript-loader', 'angular2-template-loader']
+        loaders: ['awesome-typescript-loader', 'angular-router-loader', 'angular2-template-loader']
       },
       {
         test: /\.html$/,
