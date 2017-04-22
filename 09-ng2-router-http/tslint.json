@@ -5,6 +5,7 @@
         "forin": false,
         "interface-name": [false],
         "quotemark": [true, "single", "avoid-escape"],
+        "member-access": false,
         "no-bitwise": false,
         "no-console": [false, "log", "warn"],
         "no-string-literal": false,

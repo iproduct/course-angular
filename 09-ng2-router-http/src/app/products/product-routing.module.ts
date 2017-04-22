@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { ProductListComponent } from './product-list.component';
 import { ProductDetailComponent } from './product-detail.component';
 import { ProductResolver } from './product-resolver';
+import { CanDeactivateGuard } from '../common/can-deactivate-guard.service';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { ProductResolver } from './product-resolver';
        {
         path: 'product/:id',
         component: ProductDetailComponent,
+        canDeactivate: [CanDeactivateGuard],
         data: {
           title: 'Edit Product'
         },

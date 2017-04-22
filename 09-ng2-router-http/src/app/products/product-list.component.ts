@@ -1,18 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Product } from './product.model';
 import { ProductService } from './product.service';
 import { Subscription } from 'rxjs/Rx';
-import { OnDestroy } from '@angular/core';
+import { slideInDownAnimation } from '../common/animations';
+
 
 @Component({
   // moduleId: module.id,
   selector: 'product-list',
   templateUrl: './product-list.component.html',
-  providers: [ProductService]
+  providers: [ProductService],
+  animations: [ slideInDownAnimation ]
 })
 export class ProductListComponent implements OnInit, OnDestroy {
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display')   display = 'block';
+  @HostBinding('style.width')   width = '100%';
+  @HostBinding('style.position')  position = 'absolute';
+
   public products: Product[] = [];
   public selectedId: number;
   public errorMessage: string;

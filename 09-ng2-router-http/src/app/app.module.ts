@@ -10,10 +10,12 @@ import { FormsModule } from '@angular/forms';
 import { SmallDemosModule } from './small-demos/small-demos.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppNavComponent } from './app-nav.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
     SharedModule,

@@ -11,6 +11,8 @@ import { InMemoryDataModel }  from './in-memory-data.model';
 import { BackendObservableService } from './backend-observable.service';
 import { BackendHttpObservableService } from './backend-http-observable.service';
 import { API_BASE_URL } from './common.interfaces';
+import { DialogService } from './dialog.service';
+import { CanDeactivateGuard } from './can-deactivate-guard.service';
 
 @NgModule({
   imports: [
@@ -20,6 +22,8 @@ import { API_BASE_URL } from './common.interfaces';
   ],
   providers: [
     Logger,
+    DialogService,
+    CanDeactivateGuard,
     { provide: API_BASE_URL, useValue: '/api' },
     { provide: BackendService, useClass: BackendHttpService },
     { provide: BackendObservableService, useClass: BackendHttpObservableService }

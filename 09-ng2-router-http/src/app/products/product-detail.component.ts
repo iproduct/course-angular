@@ -1,17 +1,27 @@
-import { Component, Input, OnInit, OnChanges, SimpleChange } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChange, HostBinding } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 import { Product } from './product.model';
 import { ProductService } from './product.service';
 import { Subscription } from 'rxjs/Rx';
+import { slideInDownAnimation } from '../common/animations';
+import { CanComponentDeactivate } from '../common/can-deactivate-guard.service';
+import { DialogService } from '../common/dialog.service';
+import { shallowEquals } from '../common/utils';
 
 @Component({
   // moduleId: module.id,
   selector: 'product-detail',
-  templateUrl: './product-detail.component.html'
+  templateUrl: './product-detail.component.html',
+  animations: [ slideInDownAnimation ]
 })
-export class ProductDetailComponent implements OnInit, OnChanges {
+export class ProductDetailComponent implements OnInit, OnChanges, CanComponentDeactivate {
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display')   display = 'block';
+  @HostBinding('style.width')   width = '100%';
+  @HostBinding('style.position')  position = 'absolute';
+
   public product: Product = { id: undefined };
   public productForm: FormGroup;
   public isNewProduct: boolean = true; // new product by default
@@ -40,7 +50,8 @@ export class ProductDetailComponent implements OnInit, OnChanges {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private service: ProductService) { }
+    private service: ProductService,
+    private dialogService: DialogService) { }
 
   public ngOnInit() {
     this.service.refreshProducts();
@@ -76,13 +87,21 @@ export class ProductDetailComponent implements OnInit, OnChanges {
     this.unsubscribe();
   }
 
-
-
   public ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
     let chng = changes['product'];
     if (chng.currentValue !== chng.previousValue) {
       this.resetForm();
     }
+  }
+
+  canDeactivate(): Promise<boolean> | boolean {
+    // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+    if ( shallowEquals(this.product, this.productForm.getRawValue() as Product) ) {
+      return true;
+    }
+    // Otherwise ask the user with the dialog service and return its
+    // promise which resolves to true or false when the user decides
+    return this.dialogService.confirm('Discard changes?');
   }
 
   public buildForm(): void {
