@@ -10,10 +10,8 @@ import { HomeComponent } from './home/home.component';
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent, pathMatch: 'prefix'  },
       { path: 'products', loadChildren: './products/product.module#ProductModule'},
-      // () => System.import('./products/product.module').then(m => m['ProductModule'])},
-      // { path: 'product', component: ProductDetailComponent },
       { path: 'users', component: UserListComponent },
-      // { path: '**', component: HomeComponent  },
+      { path: '**', component: HomeComponent  },
     ])
   ],
   exports: [
