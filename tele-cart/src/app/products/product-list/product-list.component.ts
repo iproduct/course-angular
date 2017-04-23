@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
-import { Product } from './product.model';
+import { Product } from '../product.model';
 
 @Component({
   selector: 'tc-product-list',
@@ -14,7 +14,7 @@ export class ProductListComponent implements OnInit {
   constructor(private service: ProductsService) { }
 
   ngOnInit() {
-    this.products = this.service.getProducts();
+    this.service.getProducts().then(products => this.products = products);
   }
 
   trackById(product) {

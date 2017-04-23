@@ -1,0 +1,14 @@
+.main-nav li {
+  display: inline-block;
+  color: #4292f4;
+  padding: 3px 5px;
+}
+.main-nav li.active {
+  display: inline-block;
+  background-color: #e6ebf2;
+  border: none;
+  padding: 3px 5px;
+}
+.main-nav li:hover {
+  text-decoration: underline;
+}

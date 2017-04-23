@@ -1,4 +1,4 @@
-import { Identifiable } from '../../shared/common-interfaces';
+import { Identifiable } from '../shared/common-interfaces';
 
 export class Product implements Identifiable {
   constructor(

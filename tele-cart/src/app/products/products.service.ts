@@ -1,25 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Product } from './product-list/product.model';
-import { BackendMockupService } from '../shared/backend-mockup.service';
+
+import { Product } from './product.model';
+import { BackendService } from '../shared/backend.service';
+import { Logger } from '../shared/logger.service';
 
 @Injectable()
 export class ProductsService {
-  private products: Product[] = [];
 
-  constructor(private backend: BackendMockupService) { }
+  constructor(
+    private backend: BackendService,
+    private logger: Logger) { }
 
-  getProducts(): Product[] {
-    this.backend.findAll(Product)
-      .then(products => {
-        console.log(products);
-        this.products.splice(0, this.products.length);
-        this.products.push(...products);
-      })
-      .catch(err => {
-        console.error(`ProductService error: ${err}`);
+  public getProducts(): Promise<Product[]> {
+    return this.backend.findAll(Product).then(
+      products => {
+        this.logger.log(`Fetched ${products.length} products.`);
+        return products;
       });
-      return this.products;
   }
 
+  public getProduct(id: number): Promise<Product> {
+    return this.backend.find(Product, id);
+  }
 
+  public addProduct(product: Product): Promise<Product> {
+    return this.backend.add(Product, product);
+  }
+
+  public editProduct(product: Product): Promise<Product> {
+    return this.backend.edit(Product, product);
+  }
+
+  public deleteProduct(productId: number): Promise<Product> {
+    return this.backend.delete(Product, productId);
+  }
 }

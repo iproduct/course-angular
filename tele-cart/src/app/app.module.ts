@@ -5,21 +5,28 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { SalesModule } from './sales/sales.module';
-import { ProductListComponent } from './src/app/product/product-list/product-list.component';
 import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
+import { UsersModule } from './users/users.module';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    RouterModule,
+    AppRoutingModule,
     HttpModule,
     SharedModule,
     SalesModule,
-    ProductsModule
+    ProductsModule,
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]

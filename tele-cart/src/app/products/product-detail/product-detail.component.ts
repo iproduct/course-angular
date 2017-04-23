@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { Product } from '../product-list/product.model';
+import { Product } from '../product.model';
 
 @Component({
   selector: 'tc-product-detail',

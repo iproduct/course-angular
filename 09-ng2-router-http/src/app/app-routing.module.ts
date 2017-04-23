@@ -9,8 +9,7 @@ import { HomeComponent } from './home/home.component';
     RouterModule.forRoot([
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent, pathMatch: 'prefix'  },
-      { path: 'products', loadChildren: './products/product.module#ProductModule'},
-      { path: 'users', component: UserListComponent },
+      { path: 'products', loadChildren: './products/product.module#ProductModule'}
     ])
   ],
   exports: [

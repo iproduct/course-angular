@@ -9,7 +9,8 @@ import { CanDeactivateGuard } from '../common/can-deactivate-guard.service';
   imports: [
     RouterModule.forChild([
       {
-        path: '', component: ProductListComponent,
+        path: '',
+        component: ProductListComponent,
         children: [
           {
             path: 'new',

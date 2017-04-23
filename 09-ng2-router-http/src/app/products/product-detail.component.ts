@@ -75,12 +75,12 @@ export class ProductDetailComponent implements OnInit, OnChanges, CanComponentDe
         // });
       }
     });
-    // this.route.data.forEach(data => {
-    //   console.log('Data:', data);
-    //   this.product = data['product'] || this.product; // resolved product using ProductResolver
-    //   this.isNewProduct = !this.product.id;
-    //   this.resetForm();
-    // });
+    this.route.data.forEach(data => {
+      console.log('Data:', data);
+      this.product = data['product'] || this.product; // resolved product using ProductResolver
+      this.isNewProduct = !this.product.id;
+      this.resetForm();
+    });
   }
 
   public ngOnDestroy() {
