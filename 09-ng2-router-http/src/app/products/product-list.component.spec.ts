@@ -1,3 +1,5 @@
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {API_BASE_URL} from '../common/common.interfaces';
 import { TestBed, ComponentFixture, async, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
@@ -13,7 +15,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { BackendObservableService } from '../common/backend-observable.service';
 import { BackendHttpObservableService } from '../common/backend-http-observable.service';
-import { APP_BASE_HREF } from '@angular/common';
 import { Http, HttpModule } from '@angular/http';
 
 let comp: ProductListComponent;
@@ -24,7 +25,7 @@ let de: DebugElement;
 let el: HTMLElement;
 let productService: ProductService;
 
-const testProducts = [new Product(1, 'Test Product', 10.50, 'Test product description')];
+const testProducts = [new Product('11111111111111111111111', 'Test Product', 10.50, 'Test product description')];
 
 export class ProductServiceStub extends ProductService {
    constructor() {
@@ -34,7 +35,7 @@ export class ProductServiceStub extends ProductService {
     return new BehaviorSubject(testProducts);
   }
 
-  public getProductObservable(id: number): Observable<Product> {
+  public getProductObservable(id: string): Observable<Product> {
     return Observable.from(testProducts);
   }
 
@@ -50,7 +51,7 @@ export class ProductServiceStub extends ProductService {
     return Promise.resolve();
   }
 
-  public deleteProduct(productId: number): Promise<void> {
+  public deleteProduct(productId: string): Promise<void> {
     return Promise.resolve();
   }
 }
@@ -59,12 +60,12 @@ export class ProductServiceStub extends ProductService {
 describe('products-list', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, RouterTestingModule, HttpModule],
+      imports: [ReactiveFormsModule, RouterTestingModule, HttpModule, NoopAnimationsModule],
       providers: [ Logger,
         { provide: BackendObservableService, useClass: BackendHttpObservableService},
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: ProductService, useClass: ProductServiceStub },
-        { provide: 'API_BASE_URL', useValue: '/api' }
+        { provide: API_BASE_URL, useValue: '/api' }
       ],
       declarations: [ProductListComponent]
     });
@@ -79,7 +80,7 @@ describe('products-list', () => {
     // Setup spy on the `getQuote` method
     spy1 = spyOn(productService, 'getProductsObservable')
       .and.returnValue(new BehaviorSubject(testProducts));
-    
+
     spy2 = spyOn(productService, 'refreshProducts')
       .and.returnValue(Promise.resolve());
 
@@ -90,7 +91,7 @@ describe('products-list', () => {
   });
 
   it('should be ProductListComponent', () => {
-    expect(fixture.componentInstance instanceof ProductListComponent).toBe(true, 'should create AppComponent');
+    expect(fixture.componentInstance instanceof ProductListComponent).toBe(true, 'should create ProductListComponent');
     fixture.detectChanges();
   });
 

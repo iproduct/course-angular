@@ -1,4 +1,4 @@
- // export for convenience.
+// export for convenience.
 export { ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 
 import { Component, Directive, Injectable, Input } from '@angular/core';
@@ -27,7 +27,6 @@ export class RouterStub {
   navigate(commands: any[], extras?: NavigationExtras) { }
 }
 
-
 // Only implements params and part of snapshot.params
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -51,7 +50,6 @@ export class ActivatedRouteStub {
     return { params: this.testParams };
   }
 }
-
 
 /*
 Copyright 2016 Google Inc. All Rights Reserved.

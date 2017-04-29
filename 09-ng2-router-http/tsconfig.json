@@ -12,7 +12,7 @@
     "outDir": "dist",
     "skipLibCheck": true,
     "lib": ["dom", "es5", "es2015"],
-    "types": ["node"]
+    "types": ["node", "jasmine"]
   },
 //    "include": [
 //         "src/**/*"
@@ -22,7 +22,7 @@
 //     ]
  "files": [
     "src/app/app.module.ts",
-    "src/app/products/products.module.ts",
+    "src/app/products/product.module.ts",
     "src/main.ts"
   ],
   "awesomeTypescriptLoaderOptions": {

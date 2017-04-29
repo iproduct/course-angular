@@ -38,7 +38,7 @@ export class BackendMockService implements BackendService {
     }
   }
 
-  public find<T extends Identifiable>(type: Type<T>, id: number): Promise<T> {
+  public find<T extends Identifiable>(type: Type<T>, id: string): Promise<T> {
     return this.findAll<T>(type).then(
       items => items.filter(item => item.id === id)[0]
     ).catch(err => {
@@ -78,7 +78,7 @@ export class BackendMockService implements BackendService {
     return isSuccessful ? Promise.resolve(item) : Promise.reject<T>(err);
   }
 
- public delete<T extends Identifiable>(type: Type<T>, itemId: number): Promise<T> {
+ public delete<T extends Identifiable>(type: Type<T>, itemId: string): Promise<T> {
     let deleted: T | undefined = undefined;
     let err = new Error(`${type.name} with ID:${itemId} does not exist.`);
     switch (type.name) {
@@ -94,9 +94,9 @@ export class BackendMockService implements BackendService {
     return deleted ? Promise.resolve(deleted) : Promise.reject<T>(err);
   }
 
-  private getNextId(collection: Identifiable[]): number {
-    return collection.reduce((prevMaxId, next) =>
-      next.id > prevMaxId ? next.id : prevMaxId, 0) + 1;
+  private getNextId(collection: Identifiable[]): string {
+    return '' + collection.reduce((prevMaxId, next) =>
+      +next.id > prevMaxId ? +next.id : prevMaxId, 0) + 1;
   }
 
   private mergeItem(collection: Identifiable[], item: Identifiable): boolean {
@@ -109,7 +109,7 @@ export class BackendMockService implements BackendService {
     return false;
   }
 
-  private deleteItem <T extends Identifiable> (collection: T[], id: number): T | undefined {
+  private deleteItem <T extends Identifiable> (collection: T[], id: string): T | undefined {
     for (let i = 0; i < collection.length; i++) {
       if (collection[i].id === id) {
         return collection.splice(i, 1)[0]; // delete the current element and return deleted

@@ -8,11 +8,12 @@
         "member-access": false,
         "no-bitwise": false,
         "no-console": [false, "log", "warn"],
+        "no-empty": false,
         "no-string-literal": false,
         "no-var-requires": false,
-        "object-literal-key-quotes": false,
+        "object-literal-key-quotes": [false],
         "object-literal-sort-keys": false,
-        "ordered-imports": false,
-        "trailing-comma": false
+        "ordered-imports": [false],
+        "trailing-comma": [false]
     }
 }

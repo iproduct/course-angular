@@ -21,9 +21,9 @@ let de: DebugElement;
 // let el: HTMLElement;
 let backendService: BackendService;
 
-const testUsers = [new Admin(1, 'Brian', 'Harisson', Gender.MALE, 'brian@gmail.com', 'brian')];
+const testUsers = [new Admin('11111111111111111111111', 'Brian', 'Harisson', Gender.MALE, 'brian@gmail.com', 'brian')];
 
-describe('App', () => {
+describe('user-list.component', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, RouterTestingModule],
