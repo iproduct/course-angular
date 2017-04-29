@@ -26,7 +26,7 @@ export class UserDetailComponent implements OnInit {
    public ngOnInit() {
     this.resetForm();
     this.route.params.forEach((params: Params) => {
-      let id = +params['id']; // (+) converts string 'id' to a number
+      let id = params['id']; // (+) converts string 'id' to a number
       this.isNewUser = true; // new
       if (id) {
         this.isNewUser = false; // has Id => not new

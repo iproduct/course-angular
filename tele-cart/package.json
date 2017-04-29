@@ -4,11 +4,16 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start-ng": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "services": "nodemon -w ./webstore-api ./webstore-api/server.js",
+    "mongo": "mongod --dbpath=c:/mongo-data --port 27017",
+    "servers": "concurrently --kill-others \"npm run mongo\" \"npm run services\"",
+    "start": "concurrently --kill-others \"npm run mongo\" \"npm run services\" \"npm run start-ng\""
+
   },
   "private": true,
   "dependencies": {
@@ -20,10 +25,19 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "angular-in-memory-web-api": "^0.3.1",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "indicative": "^2.2.1",
+    "mongodb": "^2.2.26",
+    "monk": "^4.0.0",
+    "morgan": "^1.8.1",
+    "remarkable": "^1.7.1"
   },
   "devDependencies": {
     "@angular/cli": "1.0.0",
@@ -31,8 +45,10 @@
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
+    "concurrently": "^3.4.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
+    "nodemon": "^1.11.0",
     "karma": "~1.4.1",
     "karma-chrome-launcher": "~2.0.0",
     "karma-cli": "~1.0.1",

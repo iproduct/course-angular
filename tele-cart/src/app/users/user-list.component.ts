@@ -20,7 +20,7 @@ const adminFemaleImage = '../../assets/img/admin_f.png';
 })
 export class UserListComponent implements OnInit {
   public users: User[] = [];
-  public selectedId: number = undefined;
+  public selectedId: string = undefined;
   public selectedUser: User;
 
   public CUSTOMER_MALE = Role.CUSTOMER + Gender.MALE;
@@ -45,7 +45,7 @@ export class UserListComponent implements OnInit {
   public ngOnInit() {
     this.route.params.do(params => console.log(JSON.stringify(params)))
       .forEach((params: Params) => {
-        this.selectedId = +params['selectedId'];
+        this.selectedId = params['selectedId'];
         this.fetchUsers();
       });
   }
@@ -65,7 +65,7 @@ export class UserListComponent implements OnInit {
     this.router.navigate(['/users/new']);
   }
 
-  public deleteItem(itemId: number) {
+  public deleteItem(itemId: string) {
     this.service.deleteUser(itemId).then(deleted => {
       this.fetchUsers();
     });

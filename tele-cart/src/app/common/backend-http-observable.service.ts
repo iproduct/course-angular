@@ -2,7 +2,7 @@ import { Injectable, Inject, Type } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
 import { Logger } from './logger.service';
-import { Product } from './product.model';
+import { Product } from '../products/product.model';
 import { User } from '../users/user.model';
 import { Identifiable, API_BASE_URL } from './common.interfaces';
 import { BackendObservableService } from './backend-observable.service';
@@ -74,7 +74,7 @@ class ObservableCache {
         return this.getCollection<T>(type).values;
     }
 
-    public getIndividualObservable<T extends Identifiable>(type: Type<T>, id: number): Observable<T> {
+    public getIndividualObservable<T extends Identifiable>(type: Type<T>, id: string): Observable<T> {
         return this.getCollectionObservable<T>(type)
             .map((items: T[]) => items.find(item => item.id === id));
     }
@@ -92,7 +92,7 @@ class ObservableCache {
         this.getOperationsSubject<T>(type).next(new Operation('edit', itemData));
     }
 
-    public deleteCollectionItem<T extends Identifiable>(type: Type<T>, itemId: number): void {
+    public deleteCollectionItem<T extends Identifiable>(type: Type<T>, itemId: string): void {
         this.getOperationsSubject<T>(type).next(new Operation('delete', { id: itemId } as T));
     }
 
@@ -129,7 +129,7 @@ export class BackendHttpObservableService implements BackendObservableService {
         return this.cache.getCollectionObservable(type);
     }
 
-    public getIndividualObservable<T extends Identifiable>(type: Type<T>, id: number): Observable<T> {
+    public getIndividualObservable<T extends Identifiable>(type: Type<T>, id: string): Observable<T> {
         return this.cache.getIndividualObservable(type, id);
     }
 
@@ -212,7 +212,7 @@ export class BackendHttpObservableService implements BackendObservableService {
             });
     }
 
-    public deleteItem<T extends Identifiable>(type: Type<T>, itemId: number): Promise<void> {
+    public deleteItem<T extends Identifiable>(type: Type<T>, itemId: string): Promise<void> {
         let resource: string;
         switch (type.name) {
             case Product.name:

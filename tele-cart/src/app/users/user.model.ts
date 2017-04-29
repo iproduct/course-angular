@@ -1,5 +1,5 @@
 export class Person {
-    public id: number;
+    public id: string;
     public firstName: string;
     public lastName: string;
     public gender: Gender;
@@ -31,7 +31,7 @@ export enum Role {
 
 export class UserImpl implements User {
     constructor(
-        public id: number = undefined,
+        public id: string = undefined,
         public firstName: string = '', public lastName: string = '', public gender: Gender = Gender.FEMALE,
         public email: string = '', public password: string = '',
         public contact?: Contact,
@@ -57,7 +57,7 @@ export class UserImpl implements User {
 
 export class Customer extends UserImpl {
     constructor(
-        id: number,
+        id: string,
         firstName: string, lastName: string, gender: Gender,
         email: string, password: string,
         contact?: Contact) {
@@ -67,7 +67,7 @@ export class Customer extends UserImpl {
 
 export class Operator extends UserImpl {
     constructor(
-        id: number,
+        id: string,
         firstName: string, lastName: string, gender: Gender,
         email: string, password: string,
         contact?: Contact, role: Role = Role.OPERATOR) {
@@ -77,7 +77,7 @@ export class Operator extends UserImpl {
 
 export class Admin extends UserImpl {
     constructor(
-        id: number,
+        id: string,
         firstName: string, lastName: string, gender: Gender,
         email: string, password: string,
         contact?: Contact, role: Role = Role.ADMIN) {

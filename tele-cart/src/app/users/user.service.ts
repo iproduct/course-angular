@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { User } from './user.model';
-import { BackendService } from '../shared/backend.service';
-import { Logger } from '../shared/logger.service';
+import { BackendService } from '../common/backend.service';
+import { Logger } from '../common/logger.service';
 
 @Injectable()
 export class UserService {
@@ -19,19 +19,19 @@ export class UserService {
       });
   }
 
-  public getUser(id: number): Promise<User> {
+  public getUser(id: string): Promise<User> {
     return this.backend.find(User, id);
   }
 
-  public addUser(product: User): Promise<User> {
-    return this.backend.add(User, product);
+  public addUser(user: User): Promise<User> {
+    return this.backend.add(User, user);
   }
 
-  public editUser(product: User): Promise<User> {
-    return this.backend.edit(User, product);
+  public editUser(user: User): Promise<User> {
+    return this.backend.edit(User, user);
   }
 
-  public deleteUser(productId: number): Promise<User> {
-    return this.backend.delete(User, productId);
+  public deleteUser(userId: string): Promise<User> {
+    return this.backend.delete(User, userId);
   }
 }

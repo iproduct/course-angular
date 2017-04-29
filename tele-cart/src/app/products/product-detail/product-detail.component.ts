@@ -11,7 +11,7 @@ export class ProductDetailComponent implements OnInit, OnChanges {
   @Output() onProductChange = new EventEmitter<Product>();
   @Output() onProductCancel = new EventEmitter<void>();
 
-  public product: Product = new Product(0, '', 0, '');
+  public product: Product = new Product('0', '', 0, '');
 
   constructor() { }
 

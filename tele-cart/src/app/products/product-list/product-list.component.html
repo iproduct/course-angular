@@ -1,9 +1,9 @@
 <h2>Product Catalog</h2>
 <div>Choose a product:</div>
 <ul class="items">
-  <li *ngFor="let product of products; trackBy: trackById" 
+  <li *ngFor="let product of products; let i = index; trackBy: trackById" 
     [class.selected]="product===selectedProduct" (click)="selectProduct(product)">
-    <span class="item-badge">{{product.id}}</span>
+    <span class="item-badge">{{i + 1}}</span>
     {{product.name}} - {{product.price | currency:'USD':1.2-2}}
   </li>
 </ul>
