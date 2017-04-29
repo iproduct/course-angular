@@ -59,7 +59,7 @@ describe('user-list.component', () => {
     fixture.detectChanges();
     // findAll service is async => still has not returned with userss
     expect(de.children.length).toBe(0, 'no users yet');
-    // expect(spy.calls.any()).toBe(true, 'findAll called');
+    expect(spy.calls.any()).toBe(true, 'findAll called');
   });
 
   it('should show one user after findAll promise (fakeAsync)', fakeAsync(() => {

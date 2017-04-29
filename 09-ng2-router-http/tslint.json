@@ -6,6 +6,7 @@
         "interface-name": [false],
         "quotemark": [true, "single", "avoid-escape"],
         "member-access": false,
+        "member-ordering": [false],
         "no-bitwise": false,
         "no-console": [false, "log", "warn"],
         "no-empty": false,

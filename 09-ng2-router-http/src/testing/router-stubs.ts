@@ -38,6 +38,7 @@ export class ActivatedRouteStub {
   params = this.subject;
 
   // Test parameters
+  // tslint:disable-next-line:variable-name
   private _testParams: {selectedId: number} = {selectedId: 1};
   get testParams() { return this._testParams; }
   set testParams(params: {selectedId: number}) {

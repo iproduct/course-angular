@@ -77,5 +77,4 @@ export class UserListComponent implements OnInit {
     }).catch(err => console.error(err) );
   }
 
-
 }

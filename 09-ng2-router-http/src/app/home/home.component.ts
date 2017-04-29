@@ -6,7 +6,7 @@ import { slideInDownAnimation } from '../common/animations';
   templateUrl: './home.component.html',
   animations: [ slideInDownAnimation ]
 })
-export class HomeComponent { 
+export class HomeComponent {
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display')   display = 'block';
   @HostBinding('style.width')   width = '100%';
