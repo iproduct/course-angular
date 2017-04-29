@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, /*ContentChild, */ViewChild} from '@angular/core';
+import { Component, Input, Output, EventEmitter, /*ContentChild, */ViewChild } from '@angular/core';
 
 interface Todo {
   title: string;
@@ -33,9 +33,7 @@ export class TodoList {
   ],
   template: `
     <div [class.completed]="todo.completed">
-      <input type="checkbox"
-        [(ngModel)]="todo.completed"
-        (change)="completionChanged(todo)">
+      <input type="checkbox" [(ngModel)]="todo.completed" (change)="completionChanged(todo)">
       {{todo.title}}
     </div>
   `
@@ -72,7 +70,7 @@ export class TodoInputComponent {
   template: '<ng-content></ng-content>'
 })
 export class FooterComponent {
-  constructor(private todos: TodoList) {}
+  constructor(private todos: TodoList) { }
 }
 
 @Component({
@@ -95,7 +93,7 @@ export class TodoAppComponent {
   @ViewChild(TodoInputComponent)
   input: TodoInputComponent;
 
-  constructor(private todos: TodoList) {}
+  constructor(private todos: TodoList) { }
   addTodo(todo: Todo) {
     this.todos.add(todo);
   }
@@ -119,5 +117,5 @@ export class TodoAppComponent {
     </content>
   `
 })
-export class AppComponent {}
+export class AppComponent { }
 
