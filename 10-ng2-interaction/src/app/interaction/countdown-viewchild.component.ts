@@ -11,7 +11,7 @@ import { CountdownTimerComponent }  from './countdown-timer.component';
   <countdown-timer #timer > 
     <header>Countdown Timer Header</header>
     <timer-name></timer-name>
-    <div class="footer"> Countdown Timer Footer </div>
+    <div class="footer"> Countdown @ViewChild Timer Footer </div>
   </countdown-timer>
   `,
   styles: [`

@@ -6,7 +6,11 @@ import { Component } from '@angular/core';
   <button (click)="timer.start()">Start</button>
   <button (click)="timer.stop()">Stop</button>
   <div class="seconds">{{timer.seconds}}</div>
-  <countdown-timer #timer></countdown-timer>
+  <countdown-timer #timer>
+    <header>Countdown Timer Header</header>
+    <timer-name></timer-name>
+    <div class="footer"> Countdown Template Variable Timer Footer </div>
+  </countdown-timer>
   `,
   styles: [`
     .seconds {

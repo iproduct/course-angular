@@ -9,6 +9,7 @@ import { WikiModule } from './wiki/wiki.module';
 import { HomeModule } from './home/home.module';
 import { PipesModule } from './pipes/pipes.module';
 import { DirectivesModule } from './directives/directives.module';
+import { NgZoneModule } from './zones/ng-zone.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { DirectivesModule } from './directives/directives.module';
     WikiModule,
     InteractionModule,
     PipesModule,
-    DirectivesModule
+    DirectivesModule,
+    NgZoneModule
   ],
   declarations: [AppComponent, AppNavComponent],
   exports: [AppComponent],

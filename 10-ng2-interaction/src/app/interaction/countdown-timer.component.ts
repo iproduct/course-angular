@@ -22,10 +22,7 @@ export class CountdownTimerComponent implements OnInit, OnDestroy, AfterContentC
   ngOnInit()    { this.start(); }
   ngOnDestroy() { this.clearTimer(); }
   ngAfterContentChecked() {
-    // Redefine `seconds()` to get from the `CountdownTimerComponent.seconds` ...
-    // but wait a tick first to avoid one-time devMode
-    // unidirectional-data-flow-violation error
-   this.name = this.timerNameComponent.name;
+    this.name = this.timerNameComponent.name;
   }
   start() { this.countDown(); }
   stop()  {
