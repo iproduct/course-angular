@@ -1,12 +1,11 @@
-import { bootstrap } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
-import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
-import { CdDemosAppComponent, environment } from './app/';
-import { ToggleStateService } from './app/toggle-state.service';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
 }
 
-bootstrap(CdDemosAppComponent, [ROUTER_PROVIDERS, ToggleStateService]);
-
+platformBrowserDynamic().bootstrapModule(AppModule);

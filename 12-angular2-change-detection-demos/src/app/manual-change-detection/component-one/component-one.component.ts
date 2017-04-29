@@ -13,12 +13,11 @@ import {toggleClass} from '../../toggle-class.service';
       <li><cmp-two [notifier]="notifier"></cmp-two></li>
       <li><cmp-three></cmp-three></li>
     </ul>
-  `,
-  directives: [ComponentTwo, ComponentThree]
+  `
 })
 export class ComponentOne {
 
-  @Input() notifier:Subject<any>;
+  @Input() notifier: Subject<any>;
 
   constructor(private zone: NgZone, private el: ElementRef) {}
 

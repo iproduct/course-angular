@@ -12,8 +12,7 @@ import {toggleClass} from '../../toggle-class.service';
       <li><cmp-six></cmp-six></li>
       <li><cmp-seven></cmp-seven></li>
     </ul>
-  `,
-  directives: [ComponentSix, ComponentSeven]
+  `
 })
 export class ComponentThree {
 

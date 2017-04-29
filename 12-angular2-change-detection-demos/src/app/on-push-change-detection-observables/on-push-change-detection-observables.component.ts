@@ -27,8 +27,7 @@ import {ComponentOne} from './component-one';
       </ul>
     </div>
     <div style="margin-bottom: 5em; clear: both;"></div>
-  `,
-  directives: [ComponentOne]
+  `
 })
 export class OnPushChangeDetectionObservablesComponent {
 

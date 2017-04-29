@@ -30,13 +30,12 @@ import {ComponentOne} from './component-one';
       </ul>
     </div>
     <div style="margin-bottom: 5em; clear: both;"></div>
-  `,
-  directives: [ComponentOne]
+  `
 })
 export class ManualChangeDetectionComponent {
 
-  attach:boolean = false;
-  attachOrDetachNotifier:Subject<any> = new Subject();
+  attach = false;
+  attachOrDetachNotifier: Subject<any> = new Subject();
   notifier: Subject<any>;
 
   attachOrDetachChangeDetector(attach) {

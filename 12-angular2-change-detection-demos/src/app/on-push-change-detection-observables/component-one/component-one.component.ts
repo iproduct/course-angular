@@ -1,4 +1,4 @@
-import {Input, Component, NgZone, ElementRef, ChangeDetectionStrategy} from '@angular/core';
+import { Input, Component, NgZone, ElementRef, ChangeDetectionStrategy, AfterViewChecked } from '@angular/core';
 import {Subject} from 'rxjs/Rx';
 import {ComponentTwo} from '../component-two';
 import {ComponentThree} from '../component-three';
@@ -14,12 +14,11 @@ import {toggleClass} from '../../toggle-class.service';
       <li><cmp-three [model]="model"></cmp-three></li>
     </ul>
   `,
-  directives: [ComponentTwo, ComponentThree],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComponentOne {
+export class ComponentOne implements AfterViewChecked {
 
-  @Input() model:Subject<any>;
+  @Input() model: Subject<any>;
 
   constructor(private zone: NgZone, private el: ElementRef) {}
 

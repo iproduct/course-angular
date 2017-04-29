@@ -1,4 +1,4 @@
-import {Component, NgZone, ElementRef, ChangeDetectionStrategy} from '@angular/core';
+import { Component, NgZone, ElementRef, ChangeDetectionStrategy, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import {ComponentSixteen} from '../component-sixteen';
 import {toggleClass} from '../../toggle-class.service';
 
@@ -6,16 +6,22 @@ import {toggleClass} from '../../toggle-class.service';
   selector: 'cmp-eight',
   template: `
     <a>Cmp8</a>
-
+    {{numberOfTicks}}
     <ul>
       <li><cmp-sixteen></cmp-sixteen></li>
     </ul>
-  `,
-  directives: [ComponentSixteen]
+  `
 })
-export class ComponentEight {
+export class ComponentEight implements AfterViewChecked{
+  numberOfTicks = 0;
 
-  constructor(private zone: NgZone, private el: ElementRef) {}
+  constructor(private ref: ChangeDetectorRef, private zone: NgZone, private el: ElementRef) {
+     setInterval(() => {
+      this.numberOfTicks ++
+      // this.ref.markForCheck();
+      // this.ref.detectChanges();
+    }, 2000);
+  }
 
   ngAfterViewChecked() {
     toggleClass(this.el, this.zone);

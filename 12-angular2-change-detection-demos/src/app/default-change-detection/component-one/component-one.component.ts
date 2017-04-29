@@ -12,8 +12,7 @@ import { ComponentThree } from '../component-three';
       <li><cmp-two></cmp-two></li>
       <li><cmp-three></cmp-three></li>
     </ul>
-  `,
-  directives: [ComponentTwo, ComponentThree]
+  `
 })
 export class ComponentOne {
 

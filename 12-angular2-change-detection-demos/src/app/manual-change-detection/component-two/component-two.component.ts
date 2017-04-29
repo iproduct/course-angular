@@ -14,12 +14,11 @@ import {toggleClass} from '../../toggle-class.service';
       <li><cmp-five></cmp-five></li>
     </ul>
   `,
-  directives: [ComponentFour, ComponentFive],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComponentTwo {
 
-  @Input() notifier:Subject<any>;
+  @Input() notifier: Subject<any>;
   attached = false;
 
   constructor(private zone: NgZone, private el: ElementRef, private cd: ChangeDetectorRef) {

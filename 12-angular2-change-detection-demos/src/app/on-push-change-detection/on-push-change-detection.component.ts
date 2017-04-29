@@ -30,8 +30,7 @@ import { ToggleStateService } from '../toggle-state.service';
       </ul>
     </div>
     <div style="margin-bottom: 5em; clear: both;"></div>
-  `,
-  directives: [ComponentOne]
+  `
 })
 export class OnPushChangeDetectionComponent {
 

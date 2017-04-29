@@ -6,13 +6,14 @@ import {toggleClass} from '../../toggle-class.service';
   selector: 'cmp-seventeen',
   template: `
     <a class="on-push subscriber">Cmp17</a>
+    {{counter}}
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComponentSeventeen {
 
-  @Input() model:Subject<any>;
-  counter:number = 0;
+  @Input() model: Subject<any>;
+  counter: number = 0;
 
   constructor(private zone: NgZone, private el: ElementRef, private cd: ChangeDetectorRef) {}
 
@@ -20,6 +21,7 @@ export class ComponentSeventeen {
     this.model.subscribe(() => {
       this.cd.markForCheck();
       toggleClass(this.el, this.zone, 'checked-observable');
+      this.counter ++;
     })
   }
 

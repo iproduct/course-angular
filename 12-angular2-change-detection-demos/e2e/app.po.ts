@@ -1,9 +1,11 @@
-export class CdDemosPage {
+import { browser, element, by } from 'protractor';
+
+export class ReactiveFormPage {
   navigateTo() {
     return browser.get('/');
   }
 
   getParagraphText() {
-    return element(by.css('cd-demos-app h1')).getText();
+    return element(by.css('app-root h1')).getText();
   }
 }

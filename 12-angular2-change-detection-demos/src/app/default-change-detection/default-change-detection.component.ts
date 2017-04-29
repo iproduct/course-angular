@@ -4,11 +4,9 @@ import { ToggleStateService } from '../toggle-state.service';
 import { ComponentOne } from './component-one';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-default-change-detection',
   templateUrl: 'default-change-detection.component.html',
-  styleUrls: ['default-change-detection.component.css'],
-  directives: [ComponentOne]
+  styleUrls: ['default-change-detection.component.css']
 })
 export class DefaultChangeDetectionComponent {
 
