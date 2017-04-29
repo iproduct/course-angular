@@ -3,7 +3,7 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { Logger } from './logger.service';
-import { Product } from './product.model';
+import { Product } from '../products/product.model';
 import { User } from '../users/user.model';
 import { Identifiable, API_BASE_URL } from './common.interfaces';
 import { BackendService } from './backend.service';
@@ -26,12 +26,12 @@ export class BackendHttpService implements BackendService {
     }
     return this.http.get(this.baseUrl + '/' + collection)
       .map(response => response.json().data as T[])
-      .do((items: T[]) => this.logger.log(`Fetched ${items.length} ${collection}.`))
+      .do((items: T[]) => this.logger.log(`Fetched ${items ? items.length : 0} ${collection}.`))
       .catch(this.handleErrorObservable)
       .toPromise();
   }
 
-  public find<T extends Identifiable>(type: Type<T>, id: number): Promise<T> {
+  public find<T extends Identifiable>(type: Type<T>, id: string): Promise<T> {
     return this.findAll<T>(type).then(
       items => items.filter(item => item.id === id)[0]
     ).catch(err => {
@@ -68,7 +68,7 @@ export class BackendHttpService implements BackendService {
       }).catch(this.handleErrorPromise);
   }
 
-  public delete<T extends Identifiable>(type: Type<T>, itemId: number): Promise<void> {
+  public delete<T extends Identifiable>(type: Type<T>, itemId: string): Promise<void> {
     let collection = type.name.toLowerCase() + 's';
     if (type.name !== Product.name && type.name !== User.name) {
       let err = new Error(`Cannot recognize entity type: ${type.name}`);

@@ -4,9 +4,9 @@
 
   <p><i>Pick a product from the list</i></p>
   <ul class="items">
-    <li *ngFor="let product of products" class="product" [class.selected]="product.id === selectedId" (click)="selectItem(product)"
+    <li *ngFor="let product of products; let i = index" class="product" [class.selected]="product.id === selectedId" (click)="selectItem(product)"
       [title]="product.description">
-      <span class="item-badge">{{product.id}}</span> {{product.name}} - {{product.price | currency:'USD':true:'1.2-2' }}
+      <span class="item-badge">{{i + 1}}</span> {{product.name}} - {{product.price | currency:'USD':true:'1.2-2' }}
       <span class="remove-item glyphicon glyphicon-remove-circle danger pull-right" (click)="deleteItem(product.id); $event.stopPropagation()"
         aria-hidden="true" title="Click to delete this product.">
       </span>

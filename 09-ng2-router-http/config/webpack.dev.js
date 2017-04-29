@@ -23,7 +23,6 @@ module.exports = webpackMerge(commonConfig, {
   devServer: {
     contentBase: helpers.root('dist'), // match the output path
     publicPath: '/', // match the output `publicPath`
-    port: 3000,
     historyApiFallback: true, // HTML 5 History API support
     stats: 'minimal', // Minimal statistics
     proxy: {

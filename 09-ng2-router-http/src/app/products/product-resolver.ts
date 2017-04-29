@@ -9,7 +9,7 @@ export class ProductResolver implements Resolve<Product> {
   constructor(private service: ProductService, private router: Router) { }
 
   public resolve(route: ActivatedRouteSnapshot): Promise<Product> {
-    let id = +route.params['id'];
+    let id = route.params['id'];
     return this.service.refreshProducts()
       .then(() => this.service.getProductObservable(id).take(1).toPromise());
   }

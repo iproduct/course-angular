@@ -1,27 +1,8 @@
-.user-list-caption {
-  margin-bottom: 20px;
-}
-.user {
-  height: 45px;
-  width: 400px;
-}
-.users .item-badge {
-  height: 45px;
-  font-size: 1.3em;
-}
 .user-icon {
   display: block;
   float: right;
 }
-.users .user-info {
-  display: inline-block;
-  width: 250px;
-  height: 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.users .remove-item {
-  height: 45px;
-  font-size: 1em;
-  color: #ff4442;
+
+.user-info {
+  padding: 12px;
 }

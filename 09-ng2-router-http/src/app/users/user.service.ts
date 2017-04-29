@@ -14,24 +14,24 @@ export class UserService {
   public getUsers() {
     return this.backend.findAll(User).then(
       users => {
-        this.logger.log(`Fetched ${users.length} users.`);
+        this.logger.log(`Fetched ${users ? users.length : 0} users.`);
         return users;
       });
   }
 
-  public getUser(id: number): Promise<User> {
+  public getUser(id: string): Promise<User> {
     return this.backend.find(User, id);
   }
 
-  public addUser(product: User): Promise<User> {
-    return this.backend.add(User, product);
+  public addUser(user: User): Promise<User> {
+    return this.backend.add(User, user);
   }
 
-  public editUser(product: User): Promise<User> {
-    return this.backend.edit(User, product);
+  public editUser(user: User): Promise<User> {
+    return this.backend.edit(User, user);
   }
 
-  public deleteUser(productId: number): Promise<User> {
-    return this.backend.delete(User, productId);
+  public deleteUser(userId: string): Promise<User> {
+    return this.backend.delete(User, userId);
   }
 }

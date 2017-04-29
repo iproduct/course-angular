@@ -16,7 +16,7 @@ export class ProductService {
     return this.backend.getCollectionObservable(Product);
   }
 
-  public getProductObservable(id: number): Observable<Product> {
+  public getProductObservable(id: string): Observable<Product> {
     return this.backend.getIndividualObservable(Product, id);
   }
 
@@ -32,7 +32,7 @@ export class ProductService {
     return this.backend.editItem(Product, product);
   }
 
-  public deleteProduct(productId: number): Promise<void> {
+  public deleteProduct(productId: string): Promise<void> {
     return this.backend.deleteItem(Product, productId);
   }
 

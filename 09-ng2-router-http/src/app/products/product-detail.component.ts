@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChange, HostBinding } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Product } from './product.model';
 import { ProductService } from './product.service';
 import { Subscription } from 'rxjs/Rx';
@@ -57,7 +57,7 @@ export class ProductDetailComponent implements OnInit, OnChanges, CanComponentDe
     this.service.refreshProducts();
     this.buildForm();
     this.route.params.forEach((params: Params) => {
-      let id = +params['id']; // (+) converts string 'id' to a number
+      let id = params['id']; // (+) converts string 'id' to a number
       if (id) {
         this.isNewProduct = false; // has Id => not new
         this.unsubscribe();

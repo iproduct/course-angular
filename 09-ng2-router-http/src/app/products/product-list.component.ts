@@ -21,7 +21,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   @HostBinding('style.position')  position = 'absolute';
 
   public products: Product[] = [];
-  public selectedId: number;
+  public selectedId: string;
   public errorMessage: string;
   private subscription: Subscription;
 
@@ -47,7 +47,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.route.params
       // .do(params => console.log(JSON.stringify(params)))
       .forEach((params: Params) => {
-        this.selectedId = +params['selectedId'];
+        this.selectedId = params['selectedId'];
       });
     // this.route.queryParams.do(params => console.log(JSON.stringify(params)))
     // .forEach((params: Params) => {
@@ -68,7 +68,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       .then(isSucces => this.router.navigate(['products', product.id]));
   }
 
-  public deleteItem(itemId: number) {
+  public deleteItem(itemId: string) {
     this.service.deleteProduct(itemId);
     // // remove deleted user
     // let newUsers = this.state.users.filter((user) => {

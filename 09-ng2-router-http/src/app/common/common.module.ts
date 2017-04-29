@@ -18,7 +18,7 @@ import { CanDeactivateGuard } from './can-deactivate-guard.service';
   imports: [
     BrowserModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataModel, {delay: 200}),
+    // InMemoryWebApiModule.forRoot(InMemoryDataModel, {delay: 200}),
   ],
   providers: [
     Logger,

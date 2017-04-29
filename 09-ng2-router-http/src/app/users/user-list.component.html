@@ -7,9 +7,9 @@
 <div class="user-list row">
 	<p><i>Pick a user from the list:</i></p>
 	<ul class="items users">
-		<li *ngFor="let user of users" class="user" (click)="selectItem(user)" [title]="user.name"
+		<li *ngFor="let user of users; let i = index" class="user" (click)="selectItem(user)" [title]="user.name"
 			[class.selected]="user.id === selectedId">
-			<span class="item-badge">{{user.id}}</span> <span class="user-info">{{user.firstName}} {{user.lastName}} in role: {{getRoleAsString(user.role)}}</span>
+			<span class="item-badge">{{i + 1}}</span> <span class="user-info">{{user.firstName}} {{user.lastName}} in role: {{getRoleAsString(user.role)}}</span>
 
       <span class="remove-item glyphicon glyphicon-remove-circle danger pull-right" (click)="deleteItem(user.id); $event.stopPropagation()" 
         aria-hidden="true" title="Click to delete this product.">

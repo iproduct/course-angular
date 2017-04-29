@@ -19,7 +19,7 @@ export class ProductService {
       });
   }
 
-  public getProduct(id: number): Promise<Product> {
+  public getProduct(id: string): Promise<Product> {
     return this.backend.find(Product, id);
   }
 
@@ -31,7 +31,7 @@ export class ProductService {
     return this.backend.edit(Product, product);
   }
 
-  public deleteProduct(productId: number): Promise<Product> {
+  public deleteProduct(productId: string): Promise<Product> {
     return this.backend.delete(Product, productId);
   }
 }
