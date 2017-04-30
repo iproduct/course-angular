@@ -1,4 +1,5 @@
 ﻿import {Injectable} from '@angular/core';
+import { Observable } from 'rxjs';
 import {Jsonp, Response, URLSearchParams} from '@angular/http';
 @Injectable()
 export class WikipediaService {
@@ -13,6 +14,12 @@ export class WikipediaService {
         // TODO: Add error handling
         return this.jsonp
             .get(wikiUrl, { search: params })
-            .map((response: Response) => <string[]> response.json()[1]);
+            .flatMap((response: Response) => {
+               const resp = response.json();
+               return Observable.from(<string[]> resp[1] || [])
+                .zip(Observable.from(<string[]> resp[2] || []))
+                .map(([t, desc], index) => `${t} - ${desc}`)
+                .toArray();
+            });
     }
 }

@@ -18,7 +18,7 @@ export class ComponentEight implements AfterViewChecked{
   constructor(private ref: ChangeDetectorRef, private zone: NgZone, private el: ElementRef) {
      setInterval(() => {
       this.numberOfTicks ++
-      // this.ref.markForCheck();
+      this.ref.markForCheck();
       // this.ref.detectChanges();
     }, 2000);
   }

@@ -14,17 +14,17 @@
     "lib": ["dom", "es5", "es2015"],
     "types": ["node", "jasmine"]
   },
-//    "include": [
-//         "src/**/*"
-//     ],
-//     "exclude": [
-//         "node_modules"
-//     ]
- "files": [
-    "src/app/app.module.ts",
-    "src/app/products/product.module.ts",
-    "src/main.ts"
+  "include": [
+      "src/**/*"
   ],
+  "exclude": [
+      "node_modules"
+  ],
+//  "files": [
+//     "src/app/app.module.ts",
+//     "src/app/products/product.module.ts",
+//     "src/main.ts"
+//   ],
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true
   }

@@ -5,11 +5,16 @@ import { HEROES } from './mock-heroes';
     selector: 'hero-parent',
     template: `
     <h2>{{master}} controls {{heroes.length}} heroes</h2>
+    <p>Hero info</p>
     <hero-child *ngFor="let hero of heroes"
       [name]="hero.name"
       [master]="master">
     </hero-child>
-  `
+  `, styles: [`
+  p {
+      color: red;
+  }
+  `]
 })
 export class HeroMasterComponent {
     public heroes = HEROES;

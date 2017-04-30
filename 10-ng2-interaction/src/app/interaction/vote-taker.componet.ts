@@ -16,7 +16,7 @@ import { HEROES } from './mock-heroes';
 export class VoteTakerComponent {
     public agreed = 0;
     public disagreed = 0;
-    // public voters = ['Mr. IQ', 'Ms. Universe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaal', 'Bombasto'];
+    // public voters = ['Mr. IQ', 'Ms. Universel', 'Bombasto'];
     public heroes = HEROES;
     public onVoted(agreed: boolean) {
         agreed ? this.agreed++ : this.disagreed++;

@@ -3,7 +3,7 @@ import { TimerNameComponent } from './timer-name.component';
 @Component({
   selector: 'countdown-timer',
   template: `
-  <h3>{{name}}</h3>
+  <h3>Name: {{name}}</h3>
   <p>{{message}}</p>
   <ng-content select="timer-name"></ng-content>
   <div [style.color]="'red'" >
