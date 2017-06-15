@@ -1,0 +1,46 @@
+<div class="user-list-conatainer">
+	<div class="user-list-header ui-g-12">
+		<h2 *ngIf="isNewUser">Add New User</h2>
+		<h2 *ngIf="!isNewUser">Edit User: {{user?.fname}} {{user?.lname}}</h2>
+	</div>
+
+	<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="ui-g-12 ui-md-8 ui-lg-6">
+		<div *ngIf="user?.id">
+			<md-input-container class="ui-g-10">
+				<input mdInput type="text" id="id" name="id" formControlName="id" placeholder="ID" />
+			</md-input-container>
+		</div>
+
+		<md-input-container class="ui-g-10">
+			<input mdInput type="text" id="fname" name="fname" formControlName="fname" placeholder="First name" required>
+			<md-error *ngIf="formErrors.fname">{{ formErrors.fname }}</md-error>
+		</md-input-container>
+
+		<md-input-container class="ui-g-10">
+			<input mdInput type="text" id="lname" name="lname" formControlName="lname" placeholder="Last name" required>
+			<md-error *ngIf="formErrors.lname">{{ formErrors.lname }}</md-error>
+		</md-input-container>
+
+		<md-input-container class="ui-g-10">
+			<input mdInput type="email" id="email" name="email" formControlName="email" placeholder="E-mail" required>
+			<md-error *ngIf="formErrors.email">{{ formErrors.email }}</md-error>
+		</md-input-container>
+
+		<md-input-container class="ui-g-10">
+			<input mdInput type="password" id="password" name="password" formControlName="password" placeholder="Password" required>
+			<md-error *ngIf="formErrors.password">{{ formErrors.password }}</md-error>
+		</md-input-container>
+
+		<md-select mdInput placeholder="Role" id="role" name="role" formControlName="role" required class="ui-g-10">
+			<md-option *ngFor="let role of roles" [value]="role.key">{{ role.value }}</md-option>
+			<md-error *ngIf="formErrors.role">{{ formErrors.role }}</md-error>
+		</md-select>
+
+
+		<div class="buttons ui-g-10">
+			<button type="submit"  md-raised-button color="primary" [disabled]="userForm.pristine || !userForm.valid">Submit</button>
+			<button type="button"  md-raised-button color="warn" (click)="resetForm()">Reset</button>
+			<button type="button"  md-raised-button (click)="goBack()">Cancel</button>
+		</div>
+	</form>
+</div>

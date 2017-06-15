@@ -1,0 +1,17 @@
+.test-item {
+  padding: 7px 16px;
+}
+.test-item:hover {
+  background: #cce0ff;
+  color: #000000;
+}
+.test-item.selected {
+  background: #ffca44;
+}
+.remove-item {
+  color: #ee0000;
+}
+
+.test-list {
+ padding-bottom: 25px;
+}

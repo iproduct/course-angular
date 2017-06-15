@@ -1,0 +1,26 @@
+<div class="test-list-conatainer ui-g-12 ui-md-8 ui-lg-6">
+  <div class="test-list-header ui-g-12">
+    <h2>Test List</h2>
+  </div>
+  <p class="test-list-header ui-g-8">Pick a test from the list to edit:</p>
+  <button class="ui-g-4" type="button" md-raised-button color="primary" (click)="addNewTest()">Add New Test</button>
+
+  <p-dataList [value]="tests$ | async" [paginator]="true" [rows]="10" class="test-list ui-g-12" (onPage)="paginate($event)">
+    <ng-template let-test let-i="index" pTemplate="item">
+      <div class="test-item" [class.selected]="test.id === (selectedId$ | async)" (click)="selectTest(test)">
+        <span class="item-badge">
+          {{firstRecord + i + 1}}</span>. {{test.title}} [{{getDifficulty(test)}}] - {{test.questions.length}} questions
+        <i class="remove-item fa fa-times-circle pull-right" aria-hidden="true" (click)="deleteTest(test.id); $event.stopPropagation()"
+          title="Click to delete this test."></i>
+      </div>
+    </ng-template>
+  </p-dataList>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+</div>
+
+<div class="ui-g-12 ui-md-8 ui-lg-6">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- <hr>
+  <ipt-test-detail *ngIf="selectedTest" [test]="selectedTest"></test-detail> -->

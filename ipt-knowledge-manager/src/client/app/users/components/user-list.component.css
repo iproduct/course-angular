@@ -1,0 +1,17 @@
+.user-item {
+  padding: 7px 16px;
+}
+.user-item:hover {
+  background: #cce0ff;
+  color: #000000;
+}
+.user-item.selected {
+  background: #ffca44;
+}
+.remove-item {
+  color: #ee0000;
+}
+
+.user-list {
+ padding-bottom: 25px;
+}

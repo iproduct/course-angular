@@ -1,0 +1,30 @@
+<div class="user-list-conatainer ui-g-12 ui-md-8 ui-lg-6">
+  <div class="user-list-header ui-g-12">
+    <h2>User List</h2>
+  </div>
+  <p class="user-list-header ui-g-8">Pick a user from the list to edit:</p>
+  <button class="ui-g-4" type="button" md-raised-button color="primary" (click)="addNewUser()">Add New User</button>
+
+  <p-dataList [value]="users$ | async" [paginator]="true" [rows]="10" class="user-list ui-g-12" (onPage)="paginate($event)">
+    <ng-template let-user let-i="index" pTemplate="item">
+      <div class="user-item" [class.selected]="user.id === (selectedId$ | async)" (click)="selectUser(user)">
+        <span class="item-badge">{{firstRecord + i + 1}}</span>. {{user.fname}} {{user.lname}}
+        <i class="remove-item fa fa-times-circle pull-right" aria-hidden="true" (click)="deleteUser(user.id); $event.stopPropagation()"
+          title="Click to delete this user."></i>
+      </div>
+    </ng-template>
+    <!--<md-list-item *ngFor="let user of users; let i = index" class="user" [class.selected]="user.id === selectedId" (click)="selectItem(user)"
+      [title]="user.fname">
+      <span class="item-badge">{{i + 1}}</span> {{user.fname}} {{user.lname}}
+    </md-list-item>
+  </md-list>-->
+  </p-dataList>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+</div>
+
+<div class="ui-g-12 ui-md-8 ui-lg-6">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- <hr>
+  <ipt-user-detail *ngIf="selectedUser" [user]="selectedUser"></user-detail> -->
