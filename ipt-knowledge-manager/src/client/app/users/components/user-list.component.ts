@@ -34,44 +34,19 @@ export class UserListComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(
-    private store: Store<fromRoot.State>,
+    private store$: Store<fromRoot.State>,
     private userActions: UserActions) {
-    this.users$ = store.select(fromRoot.getUsers);
-    this.loading$ = store.select(fromRoot.getUsersLoading);
-    this.selectedId$ = store.select(fromRoot.getSelectedUserId);
+    this.users$ = store$.select(fromRoot.getUsers);
+    this.loading$ = store$.select(fromRoot.getUsersLoading);
+    this.selectedId$ = store$.select(fromRoot.getSelectedUserId);
   }
 
   public ngOnInit() {
-    this.store.dispatch(this.userActions.loadUsers());
+    this.store$.dispatch(this.userActions.loadUsers());
     this.subscription = this.selectedId$
       .filter(id => !!id)
-      // .distinctUntilChanged()
-      .subscribe(id => this.store.dispatch(go(['users', id])));
-    // this.router.navigate(['users', { selectedId: user.id }, user.id], { query: 'string' });)
-    // subscribe for user changes
-    // this.subscription = this.service.findAllUsers()
-    //   // .do((ev: User[]) => console.log(ev))
-    //   .subscribe(
-    //   users => {
-    //     this.users = users;
-    //     this.changeDetector.detectChanges();
-    //   },
-    //   error => this.errorMessage = <any>error
-    //   );
-
-    // // highlight previously selected user
-    // this.route.params
-    //   // .do(params => console.log(JSON.stringify(params)))
-    //   .forEach((params: Params) => {
-    //     this.selectedId = params['selectedId'];
-    //   });
-    // this.route.queryParams.do(params => console.log(JSON.stringify(params)))
-    // .forEach((params: Params) => {
-    //   this.selectedId = +params['selectedId'];
-    //   this.service.getUsers().then(
-    //     users => this.users = users
-    //   );
-    // });
+      .distinctUntilChanged()
+      .subscribe(id => this.store$.dispatch(go(['users', id])));
   }
 
   public ngOnDestroy() {
@@ -79,32 +54,17 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   public selectUser(user: User) {
-    this.store.dispatch(this.userActions.selectUser(user.id));
+    this.store$.dispatch(this.userActions.selectUser(user.id));
   }
 
   public deleteUser(userId: string) {
     console.log('Deleting user ID: ', userId);
-    this.store.dispatch(this.userActions.deleteUser(userId));
-    // this.service.deleteUser(itemId).take(1).subscribe(
-    //   deleted => {
-    //     // this.users = this.users.filter(user => user.id !== deleted.id);
-    //     this.changeDetector.detectChanges();
-    //   },
-    //   err => console.log('Error: ' + err)
-    // );
-    // // remove deleted user
-    // let newUsers = this.state.users.filter((user) => {
-    //   return (user.id !== deletedUserId);
-    // });
-    // this.setState({ users: newUsers });
-    // this.service.deleteUser(itemId).then(deleted => {
-    //   this.fetchUsers();
-    // });
+    this.store$.dispatch(this.userActions.deleteUser(userId));
   }
 
   public addNewUser() {
-    this.store.dispatch(this.userActions.selectUser(null));
-    this.store.dispatch(go(['users', 'new']));
+    this.store$.dispatch(this.userActions.selectUser(null));
+    this.store$.dispatch(go(['users', 'new']));
   }
 
   public paginate(event) {

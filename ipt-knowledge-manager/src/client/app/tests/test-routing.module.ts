@@ -23,7 +23,7 @@ import { CanDeactivateGuard } from '../common/can-deactivate-guard.service';
           {
             path: ':id',
             component: TestDetailComponent,
-            canDeactivate: [CanDeactivateGuard],
+            // canDeactivate: [CanDeactivateGuard],
             data: {
               title: 'Edit Test'
             },

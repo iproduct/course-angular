@@ -18,7 +18,6 @@ export const initialState: State = {
   entities: {},
   selectedUserId: null,
   loading: false
-
 };
 
 export function usersReducer(state = initialState, action: Action): State {

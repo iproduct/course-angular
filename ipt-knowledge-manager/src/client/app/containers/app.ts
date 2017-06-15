@@ -27,7 +27,7 @@ import * as layout from '../actions/layout';
         </ipt-nav-item>
       </ipt-sidenav>
       <ipt-toolbar (openMenu)="openSidenav()">
-        IPT Knowledge Manager
+        Personal Knowledge Manager
       </ipt-toolbar>
 
       <router-outlet></router-outlet>
