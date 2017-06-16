@@ -13,13 +13,13 @@ import { compose } from '@ngrx/core';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../../environments/environment';
 
-export interface ReducersHash {
+export interface ReducersMap {
   [key: string]: ActionReducer<any>;
 }
 
-export function makeRootReducer<S>(reducersHash: ReducersHash): ActionReducer<S> {
-  const developmentReducer: ActionReducer<S> = compose(storeFreeze, combineReducers)(reducersHash);
-  const productionReducer: ActionReducer<S> = combineReducers(reducersHash);
+export function makeRootReducer<S>(reducersMap: ReducersMap): ActionReducer<S> {
+  const developmentReducer: ActionReducer<S> = compose(storeFreeze, combineReducers)(reducersMap);
+  const productionReducer: ActionReducer<S> = combineReducers(reducersMap);
   return function reducer(state: any, action: any) {
     if (environment.production) {
       return productionReducer(state, action);
