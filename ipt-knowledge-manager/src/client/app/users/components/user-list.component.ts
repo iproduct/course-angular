@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2015-2017 IPT-Intellectual Products & Technologies (IPT).
+ * All rights reserved.
+ *
+ * This file is licensed under terms of GNU GENERAL PUBLIC LICENSE Version 3
+ * (GPL v3). The full text of GPL v3 license is providded in file named LICENSE,
+ * residing in the root folder of this project.
+ *
+ */
+
 import { Component, OnInit, OnDestroy, HostBinding, NgZone, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -12,7 +22,6 @@ import * as fromUsers from '../user.module';
 import { UserActions } from '../user.actions';
 import { RootState } from '../user.module';
 import { getUsers, getUsersLoading, getSelectedUserId } from '../user.selectors';
-
 
 @Component({
   // moduleId: module.id,

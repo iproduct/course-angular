@@ -1,19 +1,33 @@
+/*
+ * Copyright (c) 2015-2017 IPT-Intellectual Products & Technologies (IPT).
+ * All rights reserved.
+ *
+ * This file is licensed under terms of GNU GENERAL PUBLIC LICENSE Version 3
+ * (GPL v3). The full text of GPL v3 license is providded in file named LICENSE,
+ * residing in the root folder of this project.
+ *
+ */
+
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
 import { User } from './user.model';
 import { UserService } from './user.service';
 import { Store } from '@ngrx/store';
-import { State } from '../reducers';
 import * as fromUsers from './user.module';
 import { Observable } from 'rxjs/Rx';
 import { UserActions } from './user.actions';
 import { ApplicationError } from '../shared/shared-types';
 import { getUsersState } from './user.selectors';
+import { RootState } from './user.module';
 
 @Injectable()
 export class UserResolver implements Resolve<User> {
-  constructor(private store: Store<State>, private userService: UserService, private userActions: UserActions, private router: Router) { }
+  constructor(
+    private store: Store<RootState>,
+    private userService: UserService,
+    private userActions: UserActions,
+    private router: Router) { }
 
   public resolve(route: ActivatedRouteSnapshot): Observable<User> {
     const userId = route.params['id'];

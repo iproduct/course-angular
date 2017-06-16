@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2015-2017 IPT-Intellectual Products & Technologies (IPT).
+ * All rights reserved.
+ *
+ * This file is licensed under terms of GNU GENERAL PUBLIC LICENSE Version 3
+ * (GPL v3). The full text of GPL v3 license is providded in file named LICENSE,
+ * residing in the root folder of this project.
+ *
+ */
+
 import { NgModule, } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
@@ -32,32 +42,29 @@ import { reducer } from './root.reducer';
     UiModule,
 
     /**
-     * StoreModule.provideStore is imported once in the root module, accepting a reducer
-     * function or object map of reducer functions. If passed an object of
-     * reducers, combineReducers will be run creating your application
-     * meta-reducer. This returns all providers for an @ngrx/store
-     * based application.
+     * StoreModule.provideStore is imported only once in the root module
+     * accepting as param a reducer function or map of reducers.
      */
     StoreModule.provideStore(reducer),
 
     /**
-     * @ngrx/router-store keeps router state up-to-date in the store and uses
-     * the store as the single source of truth for the router's state.
+     * @ngrx/router-store keeps router state in the store and uses
+     * it as the single source of truth.
      */
     RouterStoreModule.connectRouter(),
 
     /**
-     * Store devtools instrument the store retaining past versions of state
-     * and recalculating new states. This enables powerful time-travel
-     * debugging.
-     *
-     * To use the debugger, install the Redux Devtools extension for either
-     * Chrome or Firefox
-     *
-     * See: https://github.com/zalmoxisus/redux-devtools-extension
+     * Store devtools instrument the store by aggregating state changes,
+     * enabling oditing and 'time-travel' debugging.
+     * To use it, please install Redux Devtools Chrome or Firefox extension
+     * from appropriate browser store. For details see:
+     * https://github.com/zalmoxisus/redux-devtools-extension
      */
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
 
+    /**
+     * @ngrx - IndexedDB integeation - configure it with db schema
+     */
     // DBModule.provideDB(schema),
   ],
   declarations: [

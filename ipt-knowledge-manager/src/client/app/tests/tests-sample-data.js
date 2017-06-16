@@ -1,14 +1,11 @@
-/**
- * This file provided by IPT-Intellectual Products & Technologies (IPT)
- * is for non-commercial testing and evaluation purposes only. 
- * IPT reserves all rights not expressly granted.
+/*
+ * Copyright (c) 2015-2017 IPT-Intellectual Products & Technologies (IPT).
+ * All rights reserved.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
- * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
- * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * This file is licensed under terms of GNU GENERAL PUBLIC LICENSE Version 3
+ * (GPL v3). The full text of GPL v3 license is providded in file named LICENSE,
+ * residing in the root folder of this project.
+ *
  */
 
 'use strict';

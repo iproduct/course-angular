@@ -1,19 +1,32 @@
+/*
+ * Copyright (c) 2015-2017 IPT-Intellectual Products & Technologies (IPT).
+ * All rights reserved.
+ *
+ * This file is licensed under terms of GNU GENERAL PUBLIC LICENSE Version 3
+ * (GPL v3). The full text of GPL v3 license is providded in file named LICENSE,
+ * residing in the root folder of this project.
+ *
+ */
+
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
 import { Test } from './test.model';
 import { TestService } from './test.service';
 import { Store } from '@ngrx/store';
-import { State } from '../reducers';
 import * as fromTests from './test.module';
 import { Observable } from 'rxjs/Rx';
 import { TestActions } from './test.actions';
 import { ApplicationError } from '../shared/shared-types';
 import { getTestsState } from './test.selectors';
+import { RootState } from './test.module';
 
 @Injectable()
 export class TestResolver implements Resolve<Test> {
-  constructor(private store: Store<State>, private testService: TestService, private testActions: TestActions, private router: Router) { }
+  constructor(
+    private store: Store<RootState>,
+    private testService: TestService,
+    private testActions: TestActions) { }
 
   public resolve(route: ActivatedRouteSnapshot): Observable<Test> {
     const testId = route.params['id'];
