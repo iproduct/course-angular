@@ -1,16 +1,17 @@
-import { Component, OnInit, OnDestroy, HostBinding, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding, NgZone, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { User } from '../user.model';
 import { UserService } from '../user.service';
 import { Subscription, Observable } from 'rxjs/Rx';
-import { slideInDownAnimation } from '../../common/animations';
-import { IdentityType } from '../../common/common-types';
+import { slideInDownAnimation } from '../../shared/animations';
+import { IdentityType } from '../../shared/shared-types';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '../../reducers';
+import * as fromUsers from '../user.module';
 import { UserActions } from '../user.actions';
-import { getSelectedUserId } from '../../reducers/index';
+import { RootState } from '../user.module';
+import { getUsers, getUsersLoading, getSelectedUserId } from '../user.selectors';
 
 
 @Component({
@@ -18,7 +19,8 @@ import { getSelectedUserId } from '../../reducers/index';
   selector: 'ipt-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
-  animations: [slideInDownAnimation]
+  animations: [slideInDownAnimation],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListComponent implements OnInit, OnDestroy {
   @HostBinding('@routeAnimation') routeAnimation = true;
@@ -34,18 +36,17 @@ export class UserListComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(
-    private store$: Store<fromRoot.State>,
+    private store$: Store<RootState>,
     private userActions: UserActions) {
-    this.users$ = store$.select(fromRoot.getUsers);
-    this.loading$ = store$.select(fromRoot.getUsersLoading);
-    this.selectedId$ = store$.select(fromRoot.getSelectedUserId);
+    this.users$ = store$.select(getUsers);
+    this.loading$ = store$.select(getUsersLoading);
+    this.selectedId$ = store$.select(getSelectedUserId);
   }
 
   public ngOnInit() {
     this.store$.dispatch(this.userActions.loadUsers());
     this.subscription = this.selectedId$
       .filter(id => !!id)
-      .distinctUntilChanged()
       .subscribe(id => this.store$.dispatch(go(['users', id])));
   }
 

@@ -5,10 +5,11 @@ import { Test } from './test.model';
 import { TestService } from './test.service';
 import { Store } from '@ngrx/store';
 import { State } from '../reducers';
-import * as fromRoot from '../reducers';
+import * as fromTests from './test.module';
 import { Observable } from 'rxjs/Rx';
 import { TestActions } from './test.actions';
-import { ApplicationError } from '../common/common-types';
+import { ApplicationError } from '../shared/shared-types';
+import { getTestsState } from './test.selectors';
 
 @Injectable()
 export class TestResolver implements Resolve<Test> {
@@ -16,7 +17,7 @@ export class TestResolver implements Resolve<Test> {
 
   public resolve(route: ActivatedRouteSnapshot): Observable<Test> {
     const testId = route.params['id'];
-    return this.store.select(fromRoot.getTestsState).take(1)
+    return this.store.select(getTestsState).take(1)
       .flatMap(tests => {
         const test = tests.entities[testId];
         if (test) {

@@ -1,21 +1,12 @@
 import { Routes } from '@angular/router';
-
-import { BookExistsGuard } from './guards/book-exists';
-import { FindBookPageComponent } from './containers/find-book-page';
-import { ViewBookPageComponent } from './containers/view-book-page';
-import { CollectionPageComponent } from './containers/collection-page';
-import { NotFoundPageComponent } from './containers/not-found-page';
 import { UserListComponent } from './users/components/user-list.component';
+import { NotFoundComponent } from './ui/components/not-found';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/collection',
+    redirectTo: '/users',
     pathMatch: 'full' },
-  {
-    path: 'collection',
-    component: CollectionPageComponent
-  },
   {
     path: 'tests',
     loadChildren: './tests/test.module#TestModule'
@@ -25,16 +16,7 @@ export const routes: Routes = [
     loadChildren: './users/user.module#UserModule'
   },
   {
-    path: 'book/find',
-    component: FindBookPageComponent
-  },
-  {
-    path: 'book/:id',
-    canActivate: [ BookExistsGuard ],
-    component: ViewBookPageComponent
-  },
-  {
     path: '**',
-    component: NotFoundPageComponent
+    component: NotFoundComponent
   }
 ];

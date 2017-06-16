@@ -5,10 +5,11 @@ import { User } from './user.model';
 import { UserService } from './user.service';
 import { Store } from '@ngrx/store';
 import { State } from '../reducers';
-import * as fromRoot from '../reducers';
+import * as fromUsers from './user.module';
 import { Observable } from 'rxjs/Rx';
 import { UserActions } from './user.actions';
-import { ApplicationError } from '../common/common-types';
+import { ApplicationError } from '../shared/shared-types';
+import { getUsersState } from './user.selectors';
 
 @Injectable()
 export class UserResolver implements Resolve<User> {
@@ -16,7 +17,7 @@ export class UserResolver implements Resolve<User> {
 
   public resolve(route: ActivatedRouteSnapshot): Observable<User> {
     const userId = route.params['id'];
-    return this.store.select(fromRoot.getUsersState).take(1)
+    return this.store.select(getUsersState).take(1)
       .flatMap(users => {
         const user = users.entities[userId];
         if (user) {

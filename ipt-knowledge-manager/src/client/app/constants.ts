@@ -1,6 +1,5 @@
 import { environment } from '../environments/environment';
 import { User } from './users/user.model';
-// import { Product } from './products/product.model';
 import { Test } from './tests/test.model';
 
 export const MOBILE = (typeof window !== 'undefined') ? (window.screen.availWidth < 800) : true;

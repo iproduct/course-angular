@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { User } from './user.model';
-import { BackendService } from '../common/backend.service';
-import { Logger } from '../common/logger.service';
-import { BackendPromiseService } from '../common/backend-promise.service';
+import { BackendService } from '../core/backend.service';
+import { Logger } from '../core/logger.service';
+import { BackendPromiseService } from '../core/backend-promise.service';
 
 @Injectable()
 export class UserPromiseService {

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import { User } from './user.model';
-import { BackendService } from '../common/backend.service';
-import { Logger } from '../common/logger.service';
+import { BackendService } from '../core/backend.service';
+import { Logger } from '../core/logger.service';
 // import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { IdentityType } from '../common/common-types';
+import { IdentityType } from '../shared/shared-types';
 
 @Injectable()
 export class UserService {

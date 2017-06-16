@@ -5,15 +5,16 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Test, License, Difficulty, IQuestion } from '../test.model';
 import { TestService } from '../test.service';
 import { Subscription, Observable } from 'rxjs/Rx';
-import { slideInDownAnimation } from '../../common/animations';
-import { CanComponentDeactivate } from '../../common/can-deactivate-guard.service';
-import { DialogService } from '../../common/dialog.service';
-import { shallowEquals } from '../../common/utils';
-import { IdentityType } from '../../common/common-types';
+import { slideInDownAnimation } from '../../shared/animations';
+import { CanComponentDeactivate } from '../../core/can-deactivate-guard.service';
+import { DialogService } from '../../core/dialog.service';
+import { shallowEquals } from '../../shared/utils';
+import { IdentityType } from '../../shared/shared-types';
 import { Store } from '@ngrx/store';
 import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { TestActions } from '../test.actions';
 import * as fromRoot from '../../reducers';
+import { RootState } from '../test.module';
 
 @Component({
   selector: 'ipt-test-detail',
@@ -61,7 +62,7 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
   };
 
   constructor(
-    private store: Store<fromRoot.State>,
+    private store: Store<RootState>,
     private testActions: TestActions,
     private fb: FormBuilder,
     private route: ActivatedRoute,

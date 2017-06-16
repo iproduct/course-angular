@@ -1,4 +1,4 @@
-import { Identifiable, IdentityType } from '../common/common-types';
+import { Identifiable, IdentityType } from '../shared/shared-types';
 export enum Role {
   STUDENT = 1, INSTRUCTOR, ADMIN
 }

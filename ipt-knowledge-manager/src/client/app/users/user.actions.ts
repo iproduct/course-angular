@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 import { Action } from '@ngrx/store';
 
 import { User, Credentials } from './user.model';
-import { IdentityType, ApplicationError } from '../common/common-types';
+import { IdentityType, ApplicationError } from '../shared/shared-types';
 
 @Injectable()
 export class UserActions {

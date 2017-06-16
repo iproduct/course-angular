@@ -1,4 +1,4 @@
-import { Identifiable, IdentityType } from '../common/common-types';
+import { Identifiable, IdentityType } from '../shared/shared-types';
 
 export enum License {
   CC0 = 1, CC_BY, CC_BY_SA, CC_BY_NC_SA, GNU_FDL, GSFDL, FreeBSD_DL, OPEN_CONTENT_LICENSE, WTFPL

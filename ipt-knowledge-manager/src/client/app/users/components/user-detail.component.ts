@@ -5,15 +5,15 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Role, User } from '../user.model';
 import { UserService } from '../user.service';
 import { Subscription, Observable } from 'rxjs/Rx';
-import { slideInDownAnimation } from '../../common/animations';
-import { CanComponentDeactivate } from '../../common/can-deactivate-guard.service';
-import { DialogService } from '../../common/dialog.service';
-import { shallowEquals } from '../../common/utils';
-import { IdentityType } from '../../common/common-types';
+import { slideInDownAnimation } from '../../shared/animations';
+import { CanComponentDeactivate } from '../../core/can-deactivate-guard.service';
+import { DialogService } from '../../core/dialog.service';
+import { shallowEquals } from '../../shared/utils';
+import { IdentityType } from '../../shared/shared-types';
 import { Store } from '@ngrx/store';
 import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { UserActions } from '../user.actions';
-import * as fromRoot from '../../reducers';
+import { RootState } from '../user.module';
 
 @Component({
   selector: 'ipt-user-detail',
@@ -66,7 +66,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
   };
 
   constructor(
-    private store: Store<fromRoot.State>,
+    private store: Store<RootState>,
     private userActions: UserActions,
     private fb: FormBuilder,
     private route: ActivatedRoute,

@@ -6,47 +6,30 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
 // Feature modules
-import { CommonModule as AppCommonModule } from './common/common.module';
-// import { UserModule } from './users/user.module';
-
+import { CoreModule } from './core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { DBModule } from '@ngrx/db';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { MaterialModule } from '@angular/material';
-
-import { ComponentsModule } from './components/components.module';
-import { BookEffects } from './effects/book';
-import { CollectionEffects } from './effects/collection';
-import { BookExistsGuard } from './guards/book-exists';
-
-import { AppComponent } from './containers/app';
-import { FindBookPageComponent } from './containers/find-book-page';
-import { ViewBookPageComponent } from './containers/view-book-page';
-import { SelectedBookPageComponent } from './containers/selected-book-page';
-import { CollectionPageComponent } from './containers/collection-page';
-import { NotFoundPageComponent } from './containers/not-found-page';
-
-import { GoogleBooksService } from './services/google-books';
-
+import { UiModule } from './ui/ui.module';
+import { MdIconModule } from '@angular/material';
 import { routes } from './routes';
-import { reducer } from './reducers';
-import { schema } from './db';
 import { UserEffects } from './users/user.effects';
-
+import { SharedModule } from './shared/shared.module';
+import { AppComponent } from './app.component';
+import { reducer } from './root.reducer';
 
 
 @NgModule({
   imports: [
-    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    MaterialModule,
     RouterModule.forRoot(routes),
-    AppCommonModule,
-    ComponentsModule,
+    SharedModule,
+    CoreModule,
+    UiModule,
 
     /**
      * StoreModule.provideStore is imported once in the root module, accepting a reducer
@@ -75,32 +58,12 @@ import { UserEffects } from './users/user.effects';
      */
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
 
-    /**
-     * EffectsModule.run() sets up the effects class to be initialized
-     * immediately when the application starts.
-     *
-     * See: https://github.com/ngrx/effects/blob/master/docs/api.md#run
-     */
-    EffectsModule.run(BookEffects),
-    EffectsModule.run(CollectionEffects),
-
-    /**
-     * `provideDB` sets up @ngrx/db with the provided schema and makes the Database
-     * service available.
-     */
-    DBModule.provideDB(schema),
+    // DBModule.provideDB(schema),
   ],
   declarations: [
     AppComponent,
-    FindBookPageComponent,
-    SelectedBookPageComponent,
-    ViewBookPageComponent,
-    CollectionPageComponent,
-    NotFoundPageComponent
   ],
   providers: [
-    BookExistsGuard,
-    GoogleBooksService
   ],
   bootstrap: [
     AppComponent

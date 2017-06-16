@@ -1,20 +1,18 @@
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {API_BASE_URL} from '../../common/common-types';
+import {API_BASE_URL} from '../../shared/shared-types';
 import { TestBed, ComponentFixture, async, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserListComponent } from './user-list.component';
 import { UserService } from '../user.service';
-import { Logger } from '../../common/logger.service';
+import { Logger } from '../../core/logger.service';
 import { User } from '../user.model';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRouteStub } from '../../../testing/router-stubs';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { BackendObservableService } from '../../common/backend-observable.service';
-import { BackendHttpObservableService } from '../../common/backend-http-observable.service';
 import { Http, HttpModule } from '@angular/http';
 
 let comp: UserListComponent;
@@ -57,7 +55,6 @@ describe('users-list', () => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, RouterTestingModule, HttpModule, NoopAnimationsModule],
       providers: [ Logger,
-        { provide: BackendObservableService, useClass: BackendHttpObservableService},
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: UserService, useClass: UserServiceStub },
         { provide: API_BASE_URL, useValue: '/api' }

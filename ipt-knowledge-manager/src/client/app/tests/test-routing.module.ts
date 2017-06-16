@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { TestListComponent } from './components/test-list.component';
 import { TestDetailComponent } from './components/test-detail.component';
 import { TestResolver } from './test-resolver';
-import { CanDeactivateGuard } from '../common/can-deactivate-guard.service';
+import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
 
 @NgModule({
   imports: [

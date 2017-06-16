@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 
 import { TestActions } from './test.actions';
 import { Test } from './test.model';
-import { IdentityType } from '../common/common-types';
+import { IdentityType } from '../shared/shared-types';
 
 export interface State {
   ids: IdentityType[];
@@ -18,7 +18,6 @@ export const initialState: State = {
   entities: {},
   selectedTestId: null,
   loading: false
-
 };
 
 export function testsReducer(state = initialState, action: Action): State {
@@ -123,26 +122,3 @@ export function testsReducer(state = initialState, action: Action): State {
   }
 }
 
-
-
-/**
- * Its optimal to keep selectors and reducers together, because they construct / destruct
- * the same state data sttructure. Keep your selectors small and focused to be easily
- * combined and composed for particular use-case.
- */
-
-export const getEntities = (state: State) => state.entities;
-
-export const getIds = (state: State) => state.ids;
-
-export const getSelectedId = (state: State) => state.selectedTestId;
-
-export const getLoading = (state: State) => state.loading;
-
-export const getSelected = createSelector(getEntities, getSelectedId, (entities, selectedId) => {
-  return entities[selectedId];
-});
-
-export const getAll = createSelector(getEntities, getIds, (entities, ids) => {
-  return ids.map(id => entities[id]);
-});

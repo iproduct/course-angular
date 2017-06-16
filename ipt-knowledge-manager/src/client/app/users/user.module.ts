@@ -14,17 +14,28 @@ import { LoginService } from './login.service';
 import { UserEffects } from './user.effects';
 import { UserActions } from './user.actions';
 import { UserResolver } from './user-resolver';
+import { RootState as State, reducers, reducer } from '../root.reducer';
+import { Store, combineReducers, ActionReducer } from '@ngrx/store';
+import { storeFreeze } from 'ngrx-store-freeze';
+import { compose } from '@ngrx/core';
+import { environment } from '../../environments/environment';
+import { usersReducer, State as UserState } from './user.reducer';
+import * as fromUsers from './user.reducer';
+import { createSelector } from 'reselect';
+import { SharedModule } from '../shared/shared.module';
+import { makeRootReducer } from '../shared/reducer-helpers';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    SharedModule,
     UserRoutingModule,
     DataListModule,
     MdSelectModule,
     MdInputModule,
     MdButtonModule,
-    EffectsModule.run(UserEffects),
+    EffectsModule.run(UserEffects)
   ],
   providers: [
     UserService,
@@ -41,4 +52,13 @@ import { UserResolver } from './user-resolver';
     UserListComponent
   ]
 })
-export class UserModule { }
+export class UserModule {
+  constructor(private store: Store<State>) {
+    reducers.users = usersReducer;
+    store.replaceReducer(makeRootReducer<RootState>(reducers));
+  }
+}
+
+export interface RootState extends State {
+  users: UserState;
+}

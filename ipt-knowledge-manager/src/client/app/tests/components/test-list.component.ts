@@ -5,12 +5,11 @@ import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { Test, Difficulty } from '../test.model';
 import { TestService } from '../test.service';
 import { Subscription, Observable } from 'rxjs/Rx';
-import { slideInDownAnimation } from '../../common/animations';
-import { IdentityType } from '../../common/common-types';
+import { slideInDownAnimation } from '../../shared/animations';
+import { IdentityType } from '../../shared/shared-types';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '../../reducers';
-import { TestActions } from '../test.actions';
-import { getSelectedTestId } from '../../reducers/index';
+import { TestActions } from '../test.actions';import { RootState } from '../test.module';
+import { getTests, getTestsLoading, getSelectedTestId } from '../test.selectors';
 
 
 @Component({
@@ -34,11 +33,11 @@ export class TestListComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(
-    private store: Store<fromRoot.State>,
+    private store: Store<RootState>,
     private testActions: TestActions) {
-    this.tests$ = store.select(fromRoot.getTests);
-    this.loading$ = store.select(fromRoot.getTestsLoading);
-    this.selectedId$ = store.select(fromRoot.getSelectedTestId);
+    this.tests$ = store.select(getTests);
+    this.loading$ = store.select(getTestsLoading);
+    this.selectedId$ = store.select(getSelectedTestId);
   }
 
   public ngOnInit() {

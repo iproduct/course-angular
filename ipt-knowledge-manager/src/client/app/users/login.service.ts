@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { getBaseApiUrl } from '../constants';
-import { RequestBase } from '../common/request-base';
+import { RequestBase } from '../shared/request-base';
 
 @Injectable()
 export class LoginService extends RequestBase {

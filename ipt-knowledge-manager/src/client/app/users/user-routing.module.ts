@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { UserListComponent } from './components/user-list.component';
 import { UserDetailComponent } from './components/user-detail.component';
 import { UserResolver } from './user-resolver';
-import { CanDeactivateGuard } from '../common/can-deactivate-guard.service';
+import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
 
 @NgModule({
   imports: [

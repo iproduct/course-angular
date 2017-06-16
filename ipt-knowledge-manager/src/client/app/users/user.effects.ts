@@ -1,22 +1,25 @@
 /* tslint:disable: member-ordering */
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, toPayload } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { UserActions } from './user.actions';
-import { State } from '../reducers';
+import { RootState } from './user.module'; // Root state type
+import { State } from './user.reducer'; // User specific state type
 import { LoginService } from './login.service';
 import { UserService } from './user.service';
-import { ApplicationError } from '../common/common-types';
+import { ApplicationError } from '../shared/shared-types';
 import { User } from './user.model';
+import { getUsers, getUsersState } from './user.selectors';
+
 
 @Injectable()
 
 export class UserEffects {
   constructor(
     private actions$: Actions,
-    private store: Store<State>,
+    private store: Store<RootState>,
     private loginService: LoginService,
     private userActions: UserActions,
     private userService: UserService
@@ -24,7 +27,6 @@ export class UserEffects {
 
   @Effect() load$ = this.actions$
     .ofType(UserActions.LOAD_USERS)
-    .map(action => action.payload)
     .switchMap(() => this.userService.findAllUsers()
       .mergeMap(users => Observable.of(
         this.userActions.loadUsersSuccess(users)
@@ -37,23 +39,20 @@ export class UserEffects {
   @Effect() loadUser$ = this.actions$
     .ofType(UserActions.LOAD_USER)
     .map(action => action.payload)
-    .switchMap(userId => {
-      return this.store
-        .select(state => state.users).take(1)
-        .flatMap(users => {
-          const user = users.entities[userId];
-          if (user) {
-            return (Observable.of(this.userActions.loadUserSuccess(user)));
-          } else {
-            return this.userService.findUser(userId)
-              .mergeMap(foundUser => Observable.of(
-                this.userActions.loadUserSuccess(foundUser)
-              ))
-              .catch(err => Observable.of(
-                this.userActions.loadUserFailure(new ApplicationError<User>(err, userId, User))
-              ))
-          }
-        });
+    .withLatestFrom(this.store.select<State>(getUsersState))
+    .switchMap( ([userId, users]) => {
+      const user = users.entities[userId];
+      if (user) {
+        return (Observable.of(this.userActions.loadUserSuccess(user)));
+      } else {
+        return this.userService.findUser(userId)
+          .mergeMap(foundUser => Observable.of(
+            this.userActions.loadUserSuccess(foundUser)
+          ))
+          .catch(err => Observable.of(
+            this.userActions.loadUserFailure(new ApplicationError<User>(err, userId, User))
+          ))
+      }
     });
 
   @Effect() add$ = this.actions$
