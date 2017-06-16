@@ -4,7 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` for a dev server + express & mongodb backend API. It may be better to start front-end and back-end in different consoles if output seems too conflated. To do so run `npm run services` and `npm run ngserve` in two different consoles. 
+Then navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+The webpack should proxy to nodejs server on port 9000 - `npm run ngserve` runs `ng serve --proxy-config proxy.conf.json`.
 
 ## Code scaffolding
 
