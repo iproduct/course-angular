@@ -9,7 +9,7 @@ This project demonstrates how to:
 * Integrate Material Design with third party component libraries like PrimeNG
 * more: lazy loading, AOT...
 
-It is work in progress. Users feature is completed, while Tests feature is not.
+It is work in progress. Users feature is complete, while Tests feature is not.
 
 ## Installation and configuration
 
