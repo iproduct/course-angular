@@ -1,6 +1,15 @@
 # IPT Knowledge Manager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.1.
+This project demonstrates how to:
+* Compose NGRX Reducers, Selectors and Middleware
+* Compute derived data using Reselect/RxJS memoization
+* NGRX Router integration
+* Normalization/denormalization of data
+* Process Observable (hot) streams of async actions, and isolating the side effects using @Effect decorator with NGRX/RxJS reactive transforms
+* Integrate Material Design with third party component libraries like PrimeNG
+* more: lazy loading, AOT...
+
+It is work in progress. Users feature is completed, while Tests feature is not.
 
 ## Installation and configuration
 
