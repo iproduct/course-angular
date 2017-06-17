@@ -4,7 +4,7 @@ This project demonstrates how to:
 * Compose NGRX Reducers, Selectors and Middleware
 * Compute derived data using Reselect/RxJS memoization
 * NGRX Router integration
-* Normalization/denormalization of data
+* Data normalization
 * Process Observable (hot) streams of async actions, and isolating the side effects using @Effect decorator with NGRX/RxJS reactive transforms
 * Integrate Material Design with third party component libraries like PrimeNG
 * more: lazy loading, AOT...
