@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.1.
 
+## Installation and configuration
+
+To run the demo you need first to install latest Node.js and MongoDB. The only project configuation needed is to tell the Express.js server where to find/create the MongoDB database. This is done in `package.json` script as in following example:
+
+```
+...
+"scripts": {
+  ...
+  "mongo": "mongod --dbpath=c:/mongo-data --port 27017",
+
+```
+
 ## Development server
 
 Run `npm start` for a dev server + express & mongodb backend API. It may be better to start front-end and back-end in different consoles if output seems too conflated. To do so run `npm run services` and `npm run ngserve` in two different consoles. 
