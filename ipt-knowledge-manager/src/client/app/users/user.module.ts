@@ -62,7 +62,7 @@ import { SharedModule } from '../shared/shared.module';
   ]
 })
 export class UserModule {
-  constructor(private store: Store<OldRootState>) {
+  constructor() {
     addReducer<UserState>('users', usersReducer);
   }
 }
