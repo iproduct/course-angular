@@ -24,7 +24,7 @@ import { LoginService } from './login.service';
 import { UserEffects } from './user.effects';
 import { UserActions } from './user.actions';
 import { UserResolver } from './user-resolver';
-import { RootState as OldRootState, addReducer, rootReducer } from '../root.reducer';
+import { RootState as OldRootState, addReducer } from '../root.reducer';
 import { Store, combineReducers, ActionReducer } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { compose } from '@ngrx/core';

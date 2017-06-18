@@ -15,6 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { DataListModule } from 'primeng/primeng';
 import { MdSelectModule, MdInputModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
+import { MdCardModule } from '@angular/material';
 
 import { TestDetailComponent } from './components/test-detail.component';
 import { TestListComponent } from './components/test-list.component';
@@ -23,7 +24,7 @@ import { TestRoutingModule } from './test-routing.module';
 import { TestEffects } from './test.effects';
 import { TestActions } from './test.actions';
 import { TestResolver } from './test-resolver';
-import { RootState as OldRootState, addReducer, rootReducer } from '../root.reducer';
+import { RootState as OldRootState, addReducer } from '../root.reducer';
 import { Store } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { compose } from '@ngrx/core';
@@ -42,6 +43,7 @@ import { SharedModule } from '../shared/shared.module';
     MdSelectModule,
     MdInputModule,
     MdButtonModule,
+    MdCardModule,
     EffectsModule.run(TestEffects)
   ],
   providers: [
@@ -59,7 +61,7 @@ import { SharedModule } from '../shared/shared.module';
   ]
 })
 export class TestModule {
-  constructor(private store: Store<OldRootState>) {
+  constructor() {
     addReducer<TestState>('tests', testsReducer);
   }
 }

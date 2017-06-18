@@ -28,6 +28,7 @@ import { RootState } from '../test.module';
 @Component({
   selector: 'ipt-test-detail',
   templateUrl: './test-detail.component.html',
+  styleUrls: ['./test-detail.component.css'],
   animations: [slideInDownAnimation]
 })
 export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanComponentDeactivate {
