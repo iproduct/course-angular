@@ -32,7 +32,7 @@ export class TestResolver implements Resolve<Test> {
     const testId = route.params['id'];
     return this.store.select(getTestsState).take(1)
       .flatMap(tests => {
-        const test = tests.entities[testId];
+        const test = tests && tests.entities && tests.entities[testId];
         if (test) {
           return (Observable.of(test));
         } else {

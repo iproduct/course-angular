@@ -24,26 +24,28 @@ import { RootState } from './user.module';
 @Injectable()
 export class UserResolver implements Resolve<User> {
   constructor(
-    private store: Store<RootState>,
+    private store$: Store<RootState>,
     private userService: UserService,
     private userActions: UserActions,
     private router: Router) { }
 
   public resolve(route: ActivatedRouteSnapshot): Observable<User> {
     const userId = route.params['id'];
-    return this.store.select(getUsersState).take(1)
+    this.store$.dispatch(this.userActions.selectUser(userId ));
+    return this.store$.select(getUsersState).take(1)
       .flatMap(users => {
-        const user = users.entities[userId];
+        const user = users && users.entities && users.entities[userId];
+        console.log('Resolved User:', user);
         if (user) {
           return (Observable.of(user));
         } else {
           return this.userService.findUser(userId)
             .switchMap(foundUser => {
-              this.store.dispatch(this.userActions.loadUserSuccess(foundUser));
+              this.store$.dispatch(this.userActions.loadUserSuccess(foundUser));
               return Observable.of(foundUser);
             })
             .catch(err => {
-              this.store.dispatch(
+              this.store$.dispatch(
                 this.userActions.loadUserFailure(new ApplicationError<User>(err, userId, User)));
               throw err;
             })

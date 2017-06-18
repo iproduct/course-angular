@@ -39,7 +39,7 @@ export function addReducer<S>(name: string, reducer: ActionReducer<S>): void {
   reducers[name] = reducer;
   devProdReducers['developmentReducer'] = compose(storeFreeze, combineReducers)(reducers);
   devProdReducers['productionReducer'] = combineReducers(reducers);
-  console.log(reducers);
+  console.log('New reducers:', reducers);
 }
 
 export function rootReducer(state: any, action: any) {
