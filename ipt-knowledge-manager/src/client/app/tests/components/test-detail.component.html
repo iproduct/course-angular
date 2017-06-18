@@ -38,8 +38,26 @@
 		<div formArrayName="questions" class="question-container">
 			<md-card *ngFor="let question of questions.controls; let i=index" [formGroupName]="i">
 				<md-input-container>
-					<input mdInput type="text" id="text" name="text" formControlName="text" placeholder="Question">
+					<input mdInput type="text" id="text" name="text" formControlName="text" placeholder="Question {{i + 1}}">
 				</md-input-container>
+				<md-input-container>
+					<input mdInput type="text" id="hint" name="hint" formControlName="hint" placeholder="Hint">
+				</md-input-container>
+				<md-input-container>
+					<input mdInput type="number" id="weight" name="weight" formControlName="weight" placeholder="Weight">
+				</md-input-container>
+
+				<div formArrayName="answers" class="answer-container">
+					<md-card *ngFor="let answer of questionAnswers(i).controls; let j=index" [formGroupName]="j">
+						<md-input-container>
+							<input mdInput type="text" id="text" name="text" formControlName="text" placeholder="Answer {{j + 1}}">
+						</md-input-container>
+						<md-input-container>
+							<input mdInput type="number" id="weight" name="weight" formControlName="weight" placeholder="Weight">
+						</md-input-container>
+					</md-card>
+				</div>
+
 			</md-card>
 		</div>
 

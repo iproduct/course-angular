@@ -165,6 +165,28 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
         Validators.minLength(2),
         Validators.maxLength(60)
       ]],
+      'hint': [question.hint, [
+        Validators.maxLength(60)
+      ]],
+      'weight': [question.weight, [
+        Validators.required,
+        Validators.min(-10),
+        Validators.max(10)
+      ]],
+      answers: this.fb.array(question.answers.map(answer =>
+        this.fb.group({
+          text: [answer.text, [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(60)
+          ]],
+          'weight': [answer.weight, [
+            Validators.required,
+            Validators.min(-10),
+            Validators.max(10)
+          ]],
+        })
+      ))
     }));
     const questionFormArray = this.fb.array(questionFGs);
     this.testForm.setControl('questions', questionFormArray);
@@ -172,6 +194,10 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
 
   get questions(): FormArray {
     return this.testForm.get('questions') as FormArray;
+  }
+
+ questionAnswers(questionIndex): FormArray {
+    return this.questions.at(questionIndex).get('answers') as FormArray;
   }
 
   public onSubmit() {
