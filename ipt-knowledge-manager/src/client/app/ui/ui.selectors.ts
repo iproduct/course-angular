@@ -15,7 +15,10 @@ import { State } from './ui.reducer';
 /**
  * Ui state specific selectors
  */
-export const getUiShowSidenav = (state: State) => state.showSidenav;
+export const getUiShowSidenav = (state: State) => {
+  console.log(state);
+  return state.showSidenav;
+}
 
 /**
  * Root state selectors - select the `UI` state.

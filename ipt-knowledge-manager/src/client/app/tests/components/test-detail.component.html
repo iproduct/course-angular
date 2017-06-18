@@ -36,11 +36,11 @@
 		</md-select>
 
 		<div formArrayName="questions" class="question-container">
-			<div *ngFor="let question of questions.controls; let i=index" [formGroupName]="i">
+			<md-card *ngFor="let question of questions.controls; let i=index" [formGroupName]="i">
 				<md-input-container>
 					<input mdInput type="text" id="text" name="text" formControlName="text" placeholder="Question">
 				</md-input-container>
-			</div>
+			</md-card>
 		</div>
 
 		<div class="buttons ui-g-10">

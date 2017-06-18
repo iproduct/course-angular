@@ -28,7 +28,7 @@ import { routes } from './routes';
 import { UserEffects } from './users/user.effects';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { reducer } from './root.reducer';
+import { rootReducer } from './root.reducer';
 
 
 @NgModule({
@@ -45,7 +45,7 @@ import { reducer } from './root.reducer';
      * StoreModule.provideStore is imported only once in the root module
      * accepting as param a reducer function or map of reducers.
      */
-    StoreModule.provideStore(reducer),
+    StoreModule.provideStore(rootReducer),
 
     /**
      * @ngrx/router-store keeps router state in the store and uses

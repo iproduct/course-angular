@@ -23,7 +23,7 @@ import { TestRoutingModule } from './test-routing.module';
 import { TestEffects } from './test.effects';
 import { TestActions } from './test.actions';
 import { TestResolver } from './test-resolver';
-import { RootState as State, reducers } from '../root.reducer';
+import { RootState as OldRootState, addReducer, rootReducer } from '../root.reducer';
 import { Store } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { compose } from '@ngrx/core';
@@ -31,7 +31,6 @@ import { environment } from '../../environments/environment';
 import { testsReducer, State as TestState } from './test.reducer';
 import * as fromTests from './test.reducer';
 import { SharedModule } from '../shared/shared.module';
-import { makeRootReducer } from '../shared/reducer-helpers';
 
 @NgModule({
   imports: [
@@ -60,12 +59,11 @@ import { makeRootReducer } from '../shared/reducer-helpers';
   ]
 })
 export class TestModule {
-  constructor(private store: Store<State>) {
-    reducers.tests = testsReducer;
-    store.replaceReducer(makeRootReducer<RootState>(reducers));
+  constructor(private store: Store<OldRootState>) {
+    addReducer<TestState>('tests', testsReducer);
   }
 }
 
-export interface RootState extends State {
+export interface RootState extends OldRootState {
   tests: TestState;
 }

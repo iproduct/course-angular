@@ -23,7 +23,6 @@ import { IdentityType } from '../../shared/shared-types';
 import { Store } from '@ngrx/store';
 import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { TestActions } from '../test.actions';
-import * as fromRoot from '../../reducers';
 import { RootState } from '../test.module';
 
 @Component({

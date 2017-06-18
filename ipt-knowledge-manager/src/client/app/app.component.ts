@@ -12,7 +12,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import 'rxjs/add/operator/let';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { reducer, RootState } from './root.reducer';
+import { RootState } from './root.reducer';
 import { UiActions } from './ui/ui.actions';
 import { getShowSidenav } from './ui/ui.selectors';
 
