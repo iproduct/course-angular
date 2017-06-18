@@ -15,3 +15,12 @@ html {
 body * {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
+
+h2 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.router-outlet {
+  padding: 0px;
+}

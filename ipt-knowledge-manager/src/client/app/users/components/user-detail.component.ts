@@ -28,6 +28,7 @@ import { RootState } from '../user.module';
 @Component({
   selector: 'ipt-user-detail',
   templateUrl: './user-detail.component.html',
+  styleUrls: ['./user-detail.component.css'],
   animations: [slideInDownAnimation]
 })
 export class UserDetailComponent implements OnInit, OnDestroy, OnChanges, CanComponentDeactivate {

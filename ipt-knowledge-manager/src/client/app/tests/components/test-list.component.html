@@ -2,8 +2,10 @@
   <div class="test-list-header ui-g-12">
     <h2>Test List</h2>
   </div>
-  <p class="test-list-header ui-g-8">Pick a test from the list to edit:</p>
-  <button class="ui-g-4" type="button" md-raised-button color="primary" (click)="addNewTest()">Add New Test</button>
+  <div class="ui-g-7">Pick test to edit:</div>
+  <div class="test-list-top-control ui-g-5">
+    <button type="button" md-raised-button color="primary" (click)="addNewTest()">Add New Test</button>
+  </div>
 
   <p-dataList [value]="tests$ | async" [paginator]="true" [rows]="10" class="test-list ui-g-12" (onPage)="paginate($event)">
     <ng-template let-test let-i="index" pTemplate="item">
@@ -18,7 +20,7 @@
   <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
 </div>
 
-<div class="ui-g-12 ui-md-8 ui-lg-6">
+<div class="router-outlet ui-g-12 ui-md-8 ui-lg-6">
   <router-outlet></router-outlet>
 </div>
 

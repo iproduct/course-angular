@@ -2,8 +2,10 @@
   <div class="user-list-header ui-g-12">
     <h2>User List</h2>
   </div>
-  <p class="user-list-header ui-g-8">Pick a user from the list to edit:</p>
-  <button class="ui-g-4" type="button" md-raised-button color="primary" (click)="addNewUser()">Add New User</button>
+  <div class="ui-g-7">Pick user to edit:</div>
+  <div class="user-list-top-control ui-g-5">
+    <button type="button" md-raised-button color="primary" (click)="addNewUser()">Add New User</button>
+  </div>
 
   <p-dataList [value]="users$ | async" [paginator]="true" [rows]="10" class="user-list ui-g-12" (onPage)="paginate($event)">
     <ng-template let-user let-i="index" pTemplate="item">
@@ -22,7 +24,7 @@
   <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
 </div>
 
-<div class="ui-g-12 ui-md-8 ui-lg-6">
+<div class="router-outlet ui-g-12 ui-md-8 ui-lg-6">
   <router-outlet></router-outlet>
 </div>
 

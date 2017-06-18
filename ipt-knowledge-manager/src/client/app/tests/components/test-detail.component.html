@@ -1,41 +1,41 @@
-<div class="test-list-conatainer ui-g-12 ui-md-8 ui-lg-6">
+<div class="test-list-conatainer ui-g-12">
 	<div class="test-list-header ui-g-11">
 		<h2 *ngIf="isNewUser">Add New Test</h2>
 		<h2 *ngIf="!isNewUser">Edit Test: {{test?.title}} </h2>
 	</div>
 
-	<form [formGroup]="testForm" (ngSubmit)="onSubmit()" class="">
+	<form [formGroup]="testForm" (ngSubmit)="onSubmit()" class="ui-g-12 ui-md-8 ui-lg-6">
 		<div *ngIf="test?.id">
-			<md-input-container class="ui-g-11">
+			<md-input-container>
 				<input mdInput type="text" id="id" name="id" formControlName="id" placeholder="ID" />
 			</md-input-container>
 		</div>
 
-		<md-input-container class="ui-g-11">
+		<md-input-container>
 			<input mdInput type="text" id="title" name="title" formControlName="title" placeholder="Test title" required>
 			<md-error *ngIf="formErrors.title">{{ formErrors.title }}</md-error>
 		</md-input-container>
 
-		<md-input-container class="ui-g-11">
+		<md-input-container>
 			<input mdInput type="text" id="description" name="description" formControlName="description" placeholder="Description">
 		</md-input-container>
 
-		<md-input-container class="ui-g-11">
+		<md-input-container>
 			<input mdInput type="author" id="author" name="email" formControlName="author" placeholder="Author" required>
 			<md-error *ngIf="formErrors.author">{{ formErrors.author }}</md-error>
 		</md-input-container>
 
-		<md-select mdInput placeholder="Difficulty" id="difficulty" name="difficulty" formControlName="difficulty" required class="ui-g-11">
+		<md-select mdInput placeholder="Difficulty" id="difficulty" name="difficulty" formControlName="difficulty" required>
 			<md-option *ngFor="let difficulty of difficulties" [value]="difficulty.key">{{difficulty.value }}</md-option>
 			<md-error *ngIf="formErrors.difficulty">{{ formErrors.difficulty }}</md-error>
 		</md-select>
 
-		<md-select mdInput placeholder="License" id="license" name="license" formControlName="license" required class="ui-g-11">
+		<md-select mdInput placeholder="License" id="license" name="license" formControlName="license" required>
 			<md-option *ngFor="let license of licenses" [value]="license.key">{{license.value }}</md-option>
 			<md-error *ngIf="formErrors.license">{{ formErrors.license }}</md-error>
 		</md-select>
 
-		<div formArrayName="questions" class="question-container ui-g-11">
+		<div formArrayName="questions" class="question-container">
 			<md-card *ngFor="let question of questions.controls; let i=index" [formGroupName]="i">
 				<md-input-container>
 					<input mdInput type="text" id="text" name="text" formControlName="text" placeholder="Question">
@@ -43,7 +43,7 @@
 			</md-card>
 		</div>
 
-		<div class="buttons ui-g-11">
+		<div class="buttons">
 			<button type="submit" md-raised-button color="primary" [disabled]="testForm.pristine || !testForm.valid">Submit</button>
 			<button type="button" md-raised-button color="warn" (click)="resetForm()">Reset</button>
 			<button type="button" md-raised-button (click)="goBack()">Cancel</button>
