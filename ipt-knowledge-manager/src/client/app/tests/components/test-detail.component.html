@@ -5,12 +5,12 @@
 	</div>
 
 	<form [formGroup]="testForm" (ngSubmit)="onSubmit()" class="ui-g-12 ui-md-8 ui-lg-6">
-		<div class="test-dates">
+		<div class="test-dates ui-g-12">
 			<div class="ui-g-12 ui-md-6">
-				<div class="dates-legend">Created:</div><input type="text" id="dateCreated" name="dateCreated" formControlName="dateCreated" />
+				<div class="dates-legend">Created:</div><div class="dates">{{test.dateCreated | date:'HH:mm - dd.MM.yyyy'}}</div>
 			</div>
 			<div class="ui-g-12 ui-md-6">
-				<div class="dates-legend">Modified:</div><input type="text" id="dateModified" name="dateModified" formControlName="dateModified" />
+				<div class="dates-legend">Modified:</div><div class="dates">{{test.dateModified | date:'HH:mm - dd.MM.yyyy'}}</div>
 			</div>
 		</div>
 

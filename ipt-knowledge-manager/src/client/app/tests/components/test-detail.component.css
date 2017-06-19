@@ -2,9 +2,20 @@ md-input-container, md-select, .question-container, .buttons {
   width: 90%;
 }
 
+.test-dates{
+  padding-left: 0;
+  margin-left: 0;
+  padding-bottom: 15px;
+}
+.dates, .dates-legend {
+  padding-left: 0;
+  margin-left: 0;
+  color: #999;
+  display: inline-block;
+}
+
 .dates-legend {
   width: 4.5em;
-  display: inline-block;
 }
 
 .buttons {

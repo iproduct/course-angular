@@ -18,7 +18,7 @@ import { Subscription, Observable } from 'rxjs/Rx';
 import { slideInDownAnimation } from '../../shared/animations';
 import { CanComponentDeactivate } from '../../core/can-deactivate-guard.service';
 import { DialogService } from '../../core/dialog.service';
-import { shallowEquals } from '../../shared/utils';
+import { shallowEquals, deepEquals } from '../../shared/utils';
 import { IdentityType } from '../../shared/shared-types';
 import { Store } from '@ngrx/store';
 import { go, replace, search, show, back, forward } from '@ngrx/router-store';
@@ -121,7 +121,7 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
 
   canDeactivate(): Promise<boolean> | boolean {
     // Allow synchronous navigation (`true`) if no test or the test data is not changed
-    if (shallowEquals(this.test, this.testForm.getRawValue() as Test)) {
+    if (deepEquals(this.test, this.testForm.getRawValue() as Test)) {
       return true;
     }
     // Otherwise ask the test with the dialog service and return its
@@ -209,15 +209,7 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
   }
 
   public resetForm() {
-    const created = new Date();
-    const modified = new Date();
-    created.setTime(this.test.dateCreated);
-    modified.setTime(this.test.dateModified);
-    const testWithDatesFormatted = Object.assign({}, this.test, {
-      'dateCreated': created.toLocaleString(),
-      'dateModified': modified.toLocaleString()
-    }) as Test;
-    this.testForm.reset(testWithDatesFormatted);
+    this.testForm.reset(this.test);
     this.setQuestions(this.test.questions);
   }
 
@@ -264,9 +256,8 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
   }
 
   public onSubmit() {
-    const dateCreated = this.test.dateCreated;
     this.test = this.testForm.getRawValue() as Test;
-    this.test = Object.assign({}, this.test, { dateCreated, dateModified: Date.now() }); // set date modified
+    this.test = Object.assign({}, this.test, { dateModified: Date.now() }); // set date modified
     if (this.isNewTest) {
       this.store.dispatch(this.testActions.addTest(this.test));
     } else {
