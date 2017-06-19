@@ -25,6 +25,8 @@ import { MdListModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
 import { MdIconModule } from '@angular/material';
 import { ToolbarModule } from 'primeng/primeng';
+import { ButtonModule } from 'primeng/primeng';
+import { OrderListModule } from './components/orderlist/orderlist';
 
 @NgModule({
   imports: [
@@ -36,14 +38,15 @@ import { ToolbarModule } from 'primeng/primeng';
     MdListModule,
     MdButtonModule,
     MdIconModule,
-    ToolbarModule
+    ToolbarModule,
+    ButtonModule,
   ],
   declarations: [
     LayoutComponent,
     ToolbarComponent,
     SidenavComponent,
     NavItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   providers: [
     UiActions
@@ -53,7 +56,8 @@ import { ToolbarModule } from 'primeng/primeng';
     ToolbarComponent,
     SidenavComponent,
     NavItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    OrderListModule,
   ]
 })
 export class UiModule {}

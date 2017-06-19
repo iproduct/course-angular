@@ -2,6 +2,15 @@ md-input-container, md-select, .question-container, .buttons {
   width: 90%;
 }
 
+.dates-legend {
+  width: 4.5em;
+  display: inline-block;
+}
+
+.buttons {
+  padding-left: 7%;
+}
+
 md-input-container, .question-container {
   margin: 0 0 10px;
 }
@@ -18,15 +27,49 @@ md-select {
   margin: 0 0 5px;
 }
 
-.question-container>md-card {
+.question-container md-card {
   background: #ffffcc;
 }
 
 .question-container md-input-container {
   margin: 0;
-  width: 100%;
+  width: 90%;
 }
 
 .question-container md-card md-card {
+  background: #ffffff;
   padding: 5px;
+}
+
+.question-controls, .answer-controls {
+  float: right;
+  padding: 0;
+}
+
+.question-control {
+  color:#ffffff;
+  padding: 2px;
+  border-radius: 2px;
+  box-shadow: 3px 3px 5px #888888;
+  margin-bottom: 10px;
+}
+
+.question-control:active {
+  box-shadow: 1px 1px 2px #888888;
+}
+
+.delete-question, .delete-answer {
+  background: #c5513f;
+}
+
+.add-answer {
+  background: #3f51b5;
+}
+
+.delete-question:hover, .delete-answer:hover  {
+  background: #ff614f;
+}
+
+.add-answer:hover  {
+  background: #4f61ff;
 }

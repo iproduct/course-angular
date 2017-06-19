@@ -8,11 +8,11 @@
  *
  */
 
-import { Component, Input, OnInit, OnChanges, SimpleChange, HostBinding, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChange, HostBinding, OnDestroy, NgModule, ChangeDetectorRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Test, License, Difficulty, IQuestion } from '../test.model';
+import { Test, License, Difficulty, IQuestion, Question, Answer, IAnswer } from '../test.model';
 import { TestService } from '../test.service';
 import { Subscription, Observable } from 'rxjs/Rx';
 import { slideInDownAnimation } from '../../shared/animations';
@@ -76,7 +76,8 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
     private testActions: TestActions,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private changeDetect: ChangeDetectorRef
   ) {
 
     // tslint:disable-next-line:prefer-const
@@ -131,6 +132,8 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
   public buildForm(): void {
     this.testForm = this.fb.group({
       'id': [{ value: this.test.id, disabled: true }],
+      'dateCreated': [{ value: this.test.dateCreated, disabled: true }],
+      'dateModified': [{ value: this.test.dateModified, disabled: true }],
       'title': [this.test.title, [
         Validators.required,
         Validators.minLength(2),
@@ -148,7 +151,7 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
       'license': [this.test.license, [
         Validators.required
       ]],
-      'questions': this.fb.array([], () => null)
+      'questions': this.fb.array([])
     });
 
     this.testForm.statusChanges
@@ -157,8 +160,17 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
     this.onStatusChanged(); // reset validation messages
   }
 
-  public setQuestions(questions: IQuestion[]) {
-    const questionFGs = questions.map(question => this.fb.group({
+  get questions(): FormArray {
+    return this.testForm.get('questions') as FormArray;
+  }
+
+  private setQuestions(questions: IQuestion[]) {
+    const questionFormArray = this.fb.array(questions.map(this.makeQuestionFormGroup));
+    this.testForm.setControl('questions', questionFormArray);
+  }
+
+  private makeQuestionFormGroup = (question) =>
+    this.fb.group({
       'id': [{ value: question.id, disabled: true }],
       'text': [question.text, [
         Validators.required,
@@ -173,50 +185,99 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
         Validators.min(-10),
         Validators.max(10)
       ]],
-      answers: this.fb.array(question.answers.map(answer =>
-        this.fb.group({
-          text: [answer.text, [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(60)
-          ]],
-          'weight': [answer.weight, [
-            Validators.required,
-            Validators.min(-10),
-            Validators.max(10)
-          ]],
-        })
-      ))
-    }));
-    const questionFormArray = this.fb.array(questionFGs);
-    this.testForm.setControl('questions', questionFormArray);
+      answers: this.fb.array(question.answers.map(this.makeAnswerFormGroup))
+    });
+
+
+  private makeAnswerFormGroup = (answer) =>
+    this.fb.group({
+      'id': [{ value: answer.id, disabled: true }],
+      'text': [answer.text, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(60)
+      ]],
+      'weight': [answer.weight, [
+        Validators.required,
+        Validators.min(-10),
+        Validators.max(10)
+      ]],
+    });
+
+  questionAnswers(qIndex): FormArray {
+    return this.questions.at(qIndex).get('answers') as FormArray;
   }
 
-  get questions(): FormArray {
-    return this.testForm.get('questions') as FormArray;
+  public resetForm() {
+    const created = new Date();
+    const modified = new Date();
+    created.setTime(this.test.dateCreated);
+    modified.setTime(this.test.dateModified);
+    const testWithDatesFormatted = Object.assign({}, this.test, {
+      'dateCreated': created.toLocaleString(),
+      'dateModified': modified.toLocaleString()
+    }) as Test;
+    this.testForm.reset(testWithDatesFormatted);
+    this.setQuestions(this.test.questions);
   }
 
- questionAnswers(questionIndex): FormArray {
-    return this.questions.at(questionIndex).get('answers') as FormArray;
+  public refreshForm() {
+    const formValue = this.testForm.getRawValue() as Test;
+    console.log(formValue);
+    this.testForm.reset(formValue);
+    this.setQuestions(formValue.questions);
+    this.testForm.markAsDirty();
+  }
+
+  public addQuestion() {
+    const newQuestion = new Question(this.getMaxQuestionId() + 1);
+    const questionFBGroup = this.makeQuestionFormGroup(newQuestion);
+    this.questions.push(questionFBGroup);
+    this.refreshForm();
+  }
+
+  public deleteQuestion(qIndex: number) {
+    this.questions.removeAt(qIndex);
+    this.refreshForm();
+  }
+
+  public addAnswer(qIndex: number) {
+    this.questionAnswers(qIndex).push(this.fb.group(new Answer(this.getMaxQuestionAnswerId(qIndex) + 1)));
+    this.refreshForm();
+  }
+
+  public deleteAnswer(qIndex: number, ansIndex: number) {
+    this.questionAnswers(qIndex).removeAt(ansIndex);
+    this.refreshForm();
+  }
+
+  private getMaxQuestionId(): number {
+    return this.questions.controls
+      .map(questionGroup => questionGroup.get('id').value)
+      .reduce((prevId, currId) => (currId > prevId) ? currId : prevId, 0);
+  }
+
+  private getMaxQuestionAnswerId(qIndex: number): number {
+    return this.questionAnswers(qIndex).controls
+      .map(answerGroup => answerGroup.get('id').value)
+      .reduce((prevId, currId) => (currId > prevId) ? currId : prevId, 0);
   }
 
   public onSubmit() {
+    const dateCreated = this.test.dateCreated;
     this.test = this.testForm.getRawValue() as Test;
+    this.test = Object.assign({}, this.test, { dateCreated, dateModified: Date.now() }); // set date modified
     if (this.isNewTest) {
       this.store.dispatch(this.testActions.addTest(this.test));
     } else {
       this.store.dispatch(this.testActions.editTest(this.test));
     }
+    this.resetForm();
     // this.goBack();
   }
 
   public goBack() {
     this.store.dispatch(go(['tests']))
-  }
-
-  public resetForm() {
-    this.testForm.reset(this.test);
-    this.setQuestions(this.test.questions);
   }
 
   private unsubscribe() {
@@ -245,4 +306,3 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
   }
 
 }
-

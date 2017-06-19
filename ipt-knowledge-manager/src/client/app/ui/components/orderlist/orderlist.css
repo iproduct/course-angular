@@ -1,0 +1,132 @@
+.ui-orderlist {
+    display: table;
+}
+
+.ui-orderlist .ui-orderlist-controls {
+    max-height: 40em;
+    height: auto;
+    padding: 0 .25em;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.ui-orderlist .ui-orderlist-controls .mat-raised-button {
+    display: block;
+    margin-bottom: 0.4em;
+    padding: 0 6px;
+    min-width: 40px;
+}
+
+.ui-orderlist .ui-orderlist-container {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.ui-orderlist .ui-orderlist-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow:auto;
+    max-height: 40em;
+    height: auto;
+    width: 12.5em;
+}
+
+.ui-orderlist .ui-orderlist-caption {
+    text-align: center;
+	padding: .5em .75em;
+    border-bottom: 0 none;
+}
+
+.ui-orderlist .ui-orderlist-list .ui-orderlist-item {
+    margin: 1px;
+    padding: .125em;
+    cursor: pointer;
+    border: 0 none;
+    font-weight: inherit;
+}
+
+.ui-orderlist .ui-orderlist-filter-container {
+    position: relative;
+    width: 100%;
+    padding: .5em .7em;
+    border-bottom: 0 none;
+}
+
+.ui-orderlist .ui-orderlist-filter-container .ui-inputtext {
+    text-indent: 1.1em;
+    width: 100%;
+}
+
+.ui-orderlist .ui-orderlist-filter-container .fa {
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    margin-top: -.6em;
+}
+
+.ui-orderlist.ui-state-disabled .ui-orderlist-item,
+.ui-orderlist.ui-state-disabled .ui-button {
+    cursor: default;
+}
+
+.ui-orderlist.ui-state-disabled .ui-orderlist-list {
+    overflow:hidden;
+}
+
+/* Responsive */
+.ui-orderlist.ui-orderlist-responsive {
+    width: 100%;
+}
+
+.ui-orderlist.ui-orderlist-responsive .ui-orderlist-controls {
+    width: 7%;
+    padding-right: .5em;
+}
+
+.ui-orderlist.ui-orderlist-responsive .ui-orderlist-list-container {
+    width: 93%;
+}
+
+.ui-orderlist.ui-orderlist-responsive .ui-orderlist-list,
+.ui-orderlist.ui-orderlist-responsive .ui-orderlist-caption {
+    width: 100%;
+}  
+
+.ui-orderlist.ui-orderlist-responsive .ui-orderlist-controls > .ui-button {
+    width: 100%;
+}
+
+.ui-orderlist .ui-orderlist-droppoint {
+    height: 6px;
+    list-style-type: none;
+}
+
+.ui-orderlist-item.ui-state-highlight {
+    background: #3f51b5;
+}
+
+@media (max-width: 40em) {
+    .ui-orderlist.ui-orderlist-responsive .ui-orderlist-controls {
+        text-align: center;
+        width: 100%;
+        display: inline-block;
+        height: auto;
+    }
+    
+    .ui-orderlist.ui-orderlist-responsive .ui-orderlist-controls .mat-raised-button {
+        display: inline;
+        width: 15%;
+        display: inline-block;
+    }
+    
+    .ui-orderlist.ui-orderlist-responsive .ui-orderlist-list {
+        max-height:9000px;
+        height: auto;
+    }
+    .ui-orderlist.ui-orderlist-responsive .ui-orderlist-list-container {
+        width: 100%;
+        max-height:9000px;
+        height: auto;
+    }
+}

@@ -13,9 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { DataListModule } from 'primeng/primeng';
-import { MdSelectModule, MdInputModule } from '@angular/material';
-import { MdButtonModule } from '@angular/material';
-import { MdCardModule } from '@angular/material';
+import { MdSelectModule, MdInputModule, MdIconModule, MdButtonModule, MdCardModule } from '@angular/material';
 
 import { TestDetailComponent } from './components/test-detail.component';
 import { TestListComponent } from './components/test-list.component';
@@ -32,6 +30,7 @@ import { environment } from '../../environments/environment';
 import { testsReducer, State as TestState } from './test.reducer';
 import * as fromTests from './test.reducer';
 import { SharedModule } from '../shared/shared.module';
+import { UiModule } from '../ui/ui.module';
 
 @NgModule({
   imports: [
@@ -42,8 +41,10 @@ import { SharedModule } from '../shared/shared.module';
     DataListModule,
     MdSelectModule,
     MdInputModule,
+    MdIconModule,
     MdButtonModule,
     MdCardModule,
+    UiModule,
     EffectsModule.run(TestEffects)
   ],
   providers: [

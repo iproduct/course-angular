@@ -39,6 +39,8 @@ export interface ITest extends Identifiable {
     readonly author: string;
     readonly license: License;
     readonly questions: IQuestion[];
+    readonly dateCreated: number;
+    readonly dateModified: number;
 }
 
 export class Answer implements IAnswer {
@@ -65,5 +67,7 @@ export class Test implements ITest {
     public readonly difficulty: Difficulty = Difficulty.MEDIUM,
     public readonly author: string = '',
     public readonly license: License = License.CC_BY_SA,
+    public readonly dateCreated: number = Date.now(),
+    public readonly dateModified: number = Date.now(),
     public readonly questions: IQuestion[] = []) {}
 }

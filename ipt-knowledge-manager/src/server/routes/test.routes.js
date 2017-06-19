@@ -31,8 +31,19 @@ router.get('/', function (req, res) {
                     if(typeof test.difficulty !== 'number'){
                         test.difficulty = 2;
                     }
+                    if(!test.dateCreated){
+                        test.dateCreated = Date.now();
+                    }
                     if(!test.questions){
                         test.questions = [];
+                    } else {
+                        test.questions = test.questions // fix null answer questions
+                            .map(q => {
+                                if(!q.answers) {
+                                    q.answers = [];
+                                } 
+                                return q;
+                            });
                     }
                     return test;
                 })
@@ -77,6 +88,8 @@ router.post('/', function (req, res) {
         description: 'string',
         author: 'required|string|min:2',
         license: 'required|integer|above:0|under:20',
+        dateCreated: 'required|integer|above:0',
+        dateModified: 'required|integer|above:0',
         questions: 'array'
     }).then(() => {
         const collection = db.collection('tests');
@@ -109,6 +122,8 @@ router.put('/:testId', function (req, res) {
         description: 'string',
         author: 'required|string|min:2',
         license: 'required|integer|above:0|under:20',
+        dateCreated: 'required|integer|above:0',
+        dateModified: 'required|integer|above:0',
         questions: 'array'
     }).then(() => {
         if (test.id !== req.params.testId) {
