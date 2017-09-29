@@ -22,7 +22,7 @@ import { getUsersState } from './user.selectors';
 import { RootState } from './user.module';
 
 @Injectable()
-export class UserResolver implements Resolve<User> {
+export class UserResolver implements Resolve<{} | User> {
   constructor(
     private store$: Store<RootState>,
     private userService: UserService,
@@ -47,7 +47,7 @@ export class UserResolver implements Resolve<User> {
             .catch(err => {
               this.store$.dispatch(
                 this.userActions.loadUserFailure(new ApplicationError<User>(err, userId, User)));
-              throw err;
+              return Observable.throw(err);
             })
         }
       });

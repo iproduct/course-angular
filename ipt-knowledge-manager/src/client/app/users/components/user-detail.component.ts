@@ -21,9 +21,11 @@ import { DialogService } from '../../core/dialog.service';
 import { shallowEquals } from '../../shared/utils';
 import { IdentityType } from '../../shared/shared-types';
 import { Store } from '@ngrx/store';
-import { go, replace, search, show, back, forward } from '@ngrx/router-store';
+
 import { UserActions } from '../user.actions';
 import { RootState } from '../user.module';
+
+import { Go } from '../../shared/routing.actions';
 
 @Component({
   selector: 'ipt-user-detail',
@@ -170,7 +172,9 @@ export class UserDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
   }
 
   public goBack() {
-    this.store.dispatch(go(['users']))
+    this.store.dispatch(new Go({
+      path: ['/users'],
+    }));
   }
 
   public resetForm() {

@@ -18,7 +18,7 @@ import { TestActions } from './test.actions';
 import { RootState } from './test.module'; // Root state type
 import { State } from './test.reducer'; // Test specific state type
 import { TestService } from './test.service';
-import { ApplicationError } from '../shared/shared-types';
+import { ApplicationError, ActionWithPayload, IdentityType } from '../shared/shared-types';
 import { Test } from './test.model';
 import { getTests, getTestsState } from './test.selectors';
 
@@ -46,7 +46,7 @@ export class TestEffects {
 
   @Effect() loadTest$ = this.actions$
     .ofType(TestActions.LOAD_TEST)
-    .map(action => action.payload)
+    .map((action: ActionWithPayload<IdentityType>) => action.payload)
     .withLatestFrom(this.store.select<State>(getTestsState))
     .switchMap( ([testId, tests]) => {
       const test = tests.entities[testId];
@@ -65,7 +65,7 @@ export class TestEffects {
 
   @Effect() add$ = this.actions$
     .ofType(TestActions.ADD_TEST)
-    .map(action => action.payload)
+    .map((action: ActionWithPayload<Test>) => action.payload)
     .switchMap(test =>
       this.testService.addTest(test)
         .mergeMap(createdTest => Observable.of(
@@ -78,7 +78,7 @@ export class TestEffects {
 
   @Effect() edit$ = this.actions$
     .ofType(TestActions.EDIT_TEST)
-    .map(action => action.payload)
+    .map((action: ActionWithPayload<Test>) => action.payload)
     .switchMap(test =>
       this.testService.editTest(test)
         .mergeMap(editedTest => Observable.of(
@@ -91,7 +91,7 @@ export class TestEffects {
 
   @Effect() delete$ = this.actions$
     .ofType(TestActions.DELETE_TEST)
-    .map(action => action.payload)
+    .map((action: ActionWithPayload<IdentityType>) => action.payload)
     .switchMap(testId =>
       this.testService.deleteTest(testId)
         .mergeMap(test => Observable.of(

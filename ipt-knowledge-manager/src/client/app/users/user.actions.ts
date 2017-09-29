@@ -13,8 +13,9 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Action } from '@ngrx/store';
 
+
 import { User, Credentials } from './user.model';
-import { IdentityType, ApplicationError } from '../shared/shared-types';
+import { IdentityType, ApplicationError, ActionWithPayload } from '../shared/shared-types';
 
 @Injectable()
 export class UserActions {
@@ -28,7 +29,7 @@ export class UserActions {
   }
 
   static LOAD_USERS_SUCCESS = '[User] Load Users Success';
-  loadUsersSuccess(users: User[]): Action {
+  loadUsersSuccess(users: User[]): ActionWithPayload<User[]> {
     return {
       type: UserActions.LOAD_USERS_SUCCESS,
       payload: users
@@ -36,7 +37,7 @@ export class UserActions {
   }
 
   static LOAD_USERS_FAILURE = '[User] Load Users Failure';
-  loadUsersFailure(error: ApplicationError<User>): Action {
+  loadUsersFailure(error: ApplicationError<User>): ActionWithPayload<ApplicationError<User>> {
     return {
       type: UserActions.LOAD_USERS_FAILURE,
       payload: error
@@ -45,7 +46,7 @@ export class UserActions {
 
   // Load individual user
   static LOAD_USER = '[User] Load User';
-  loadUser(userId: IdentityType): Action {
+  loadUser(userId: IdentityType):  ActionWithPayload<IdentityType> {
     return {
       type: UserActions.LOAD_USER,
       payload: userId
@@ -53,7 +54,7 @@ export class UserActions {
   }
 
   static LOAD_USER_SUCCESS = '[User] Load User Success';
-  loadUserSuccess(user: User): Action {
+  loadUserSuccess(user: User):  ActionWithPayload<User> {
     return {
       type: UserActions.LOAD_USER_SUCCESS,
       payload: user
@@ -61,7 +62,7 @@ export class UserActions {
   }
 
   static LOAD_USER_FAILURE = '[User] Load User Failure';
-  loadUserFailure(error: ApplicationError<User>): Action {
+  loadUserFailure(error: ApplicationError<User>): ActionWithPayload<ApplicationError<User>> {
     return {
       type: UserActions.LOAD_USER_FAILURE,
       payload: error
@@ -70,7 +71,7 @@ export class UserActions {
 
   // Select user
   static SELECT_USER = '[User] Select User';
-  selectUser(userId: IdentityType): Action {
+  selectUser(userId: IdentityType): ActionWithPayload<IdentityType> {
     return {
       type: UserActions.SELECT_USER,
       payload: userId
@@ -79,7 +80,7 @@ export class UserActions {
 
   // Add new user
   static ADD_USER = '[User] Add User';
-  addUser(user: User): Action {
+  addUser(user: User): ActionWithPayload<User> {
     return {
       type: UserActions.ADD_USER,
       payload: user
@@ -87,7 +88,7 @@ export class UserActions {
   }
 
   static ADD_USER_SUCCESS = '[User] Add User Success';
-  addUserSuccess(user: User): Action {
+  addUserSuccess(user: User): ActionWithPayload<User> {
     return {
       type: UserActions.ADD_USER_SUCCESS,
       payload: user
@@ -95,7 +96,7 @@ export class UserActions {
   }
 
   static ADD_USER_FAILURE = '[User]  Add User Failure';
-  addUserFailure(error: ApplicationError<User>): Action {
+  addUserFailure(error: ApplicationError<User>): ActionWithPayload<ApplicationError<User>> {
     return {
       type: UserActions.ADD_USER_FAILURE,
       payload: error
@@ -104,7 +105,7 @@ export class UserActions {
 
   // Edit existing user
   static EDIT_USER = '[User] Edit User';
-  editUser(user: User): Action {
+  editUser(user: User): ActionWithPayload<User> {
     return {
       type: UserActions.EDIT_USER,
       payload: user
@@ -112,7 +113,7 @@ export class UserActions {
   }
 
   static EDIT_USER_SUCCESS = '[User] Edit User Success';
-  editUserSuccess(user: User): Action {
+  editUserSuccess(user: User): ActionWithPayload<User> {
     return {
       type: UserActions.EDIT_USER_SUCCESS,
       payload: user
@@ -120,7 +121,7 @@ export class UserActions {
   }
 
   static EDIT_USER_FAILURE = '[User] Edit User Failure';
-  editUserFailure(error: ApplicationError<User>): Action {
+  editUserFailure(error: ApplicationError<User>): ActionWithPayload<ApplicationError<User>> {
     return {
       type: UserActions.EDIT_USER_FAILURE,
       payload: error
@@ -129,7 +130,7 @@ export class UserActions {
 
   // Delete user by id
   static DELETE_USER = '[User] Delete User';
-  deleteUser(userId: IdentityType): Action {
+  deleteUser(userId: IdentityType):  ActionWithPayload<IdentityType> {
     return {
       type: UserActions.DELETE_USER,
       payload: userId
@@ -137,7 +138,7 @@ export class UserActions {
   }
 
   static DELETE_USER_SUCCESS = '[User] Delete User Success';
-  deleteUserSuccess(deletedUser: User): Action {
+  deleteUserSuccess(deletedUser: User): ActionWithPayload<User> {
     return {
       type: UserActions.DELETE_USER_SUCCESS,
       payload: deletedUser
@@ -145,7 +146,7 @@ export class UserActions {
   }
 
   static DELETE_USER_FAILURE = '[User] Delete User Failure';
-  deleteUserFailure(error: ApplicationError<User>): Action {
+  deleteUserFailure(error: ApplicationError<User>): ActionWithPayload<ApplicationError<User>> {
     return {
       type: UserActions.DELETE_USER_FAILURE,
       payload: error
@@ -154,7 +155,7 @@ export class UserActions {
 
   // User login
   static LOGIN = '[User] Login';
-  login(credentials: Credentials): Action {
+  login(credentials: Credentials): ActionWithPayload<Credentials> {
     return {
       type: UserActions.LOGIN,
       payload: credentials
@@ -162,7 +163,7 @@ export class UserActions {
   }
 
   static LOGIN_SUCCESS = '[User] Logout Success';
-  loginSuccess(res: Response): Action {
+  loginSuccess(res: Response): ActionWithPayload<Response> {
     return {
       type: UserActions.LOGIN_SUCCESS,
       payload: res
@@ -170,7 +171,7 @@ export class UserActions {
   }
 
   static LOGIN_FAILURE = '[User] Logout Failure';
-  loginFailure(error: ApplicationError<User>): Action {
+  loginFailure(error: ApplicationError<User>): ActionWithPayload<ApplicationError<User>> {
     return {
       type: UserActions.LOGIN_FAILURE,
       payload: error
@@ -186,7 +187,7 @@ export class UserActions {
   }
 
   static LOGOUT_SUCCESS = '[User] Logout Success';
-  logoutSuccess(res: Response): Action {
+  logoutSuccess(res: Response): ActionWithPayload<Response> {
     return {
       type: UserActions.LOGOUT_SUCCESS,
       payload: res
@@ -194,7 +195,7 @@ export class UserActions {
   }
 
   static LOGOUT_FAILURE = '[User] Logout Failure';
-  logoutFailure(error: ApplicationError<User>): Action {
+  logoutFailure(error: ApplicationError<User>): ActionWithPayload<ApplicationError<User>> {
     return {
       type: UserActions.LOGOUT_FAILURE,
       payload: error

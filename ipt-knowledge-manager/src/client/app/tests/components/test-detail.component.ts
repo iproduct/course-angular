@@ -21,9 +21,10 @@ import { DialogService } from '../../core/dialog.service';
 import { shallowEquals, deepEquals } from '../../shared/utils';
 import { IdentityType } from '../../shared/shared-types';
 import { Store } from '@ngrx/store';
-import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { TestActions } from '../test.actions';
 import { RootState } from '../test.module';
+
+import { Go } from '../../shared/routing.actions';
 
 @Component({
   selector: 'ipt-test-detail',
@@ -268,7 +269,9 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
   }
 
   public goBack() {
-    this.store.dispatch(go(['tests']))
+    this.store.dispatch(new Go({
+      path: ['/tests'],
+    }));
   }
 
   private unsubscribe() {

@@ -24,10 +24,9 @@ import { LoginService } from './login.service';
 import { UserEffects } from './user.effects';
 import { UserActions } from './user.actions';
 import { UserResolver } from './user-resolver';
-import { RootState as OldRootState, addReducer } from '../root.reducer';
-import { Store, combineReducers, ActionReducer } from '@ngrx/store';
+import {addReducer, RootState as OldRootState} from '../root.reducer';
+import { Store, combineReducers, ActionReducer, StoreModule } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
-import { compose } from '@ngrx/core';
 import { environment } from '../../environments/environment';
 import { usersReducer, State as UserState } from './user.reducer';
 import * as fromUsers from './user.reducer';
@@ -44,7 +43,8 @@ import { SharedModule } from '../shared/shared.module';
     MdSelectModule,
     MdInputModule,
     MdButtonModule,
-    EffectsModule.run(UserEffects)
+    StoreModule.forFeature('users', usersReducer),
+    EffectsModule.forFeature([UserEffects])
   ],
   providers: [
     UserService,
@@ -63,7 +63,7 @@ import { SharedModule } from '../shared/shared.module';
 })
 export class UserModule {
   constructor() {
-    addReducer<UserState>('users', usersReducer);
+
   }
 }
 

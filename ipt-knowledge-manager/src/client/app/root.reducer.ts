@@ -12,20 +12,20 @@ import { createSelector } from 'reselect';
 import { ActionReducer, combineReducers } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
 import * as fromUi from './ui/ui.reducer';
-import { compose } from '@ngrx/core';
+import { compose, ActionReducerMap } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../environments/environment';
 
 export interface RootState {
   ui: fromUi.State;
-  router: fromRouter.RouterState;
+  router: fromRouter.RouterReducerState;
 }
 
 export interface ReducersMap {
   [key: string]: ActionReducer<any>;
 }
 
-const reducers: ReducersMap = {
+export const reducers: ActionReducerMap<RootState> = {
   ui: fromUi.reducer,
   router: fromRouter.routerReducer
 };

@@ -20,7 +20,7 @@ import { CoreModule } from './core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { DBModule } from '@ngrx/db';
-import { RouterStoreModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UiModule } from './ui/ui.module';
 import { MdIconModule } from '@angular/material';
@@ -28,7 +28,8 @@ import { routes } from './routes';
 import { UserEffects } from './users/user.effects';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { rootReducer } from './root.reducer';
+import { rootReducer, reducers } from './root.reducer';
+import { RoutingEffects } from './shared/routing.effects';
 
 
 @NgModule({
@@ -45,13 +46,15 @@ import { rootReducer } from './root.reducer';
      * StoreModule.provideStore is imported only once in the root module
      * accepting as param a reducer function or map of reducers.
      */
-    StoreModule.provideStore(rootReducer),
+    StoreModule.forRoot(reducers),
 
     /**
      * @ngrx/router-store keeps router state in the store and uses
      * it as the single source of truth.
      */
-    RouterStoreModule.connectRouter(),
+    StoreRouterConnectingModule,
+
+    EffectsModule.forRoot([RoutingEffects]),
 
     /**
      * Store devtools instrument the store by aggregating state changes,
@@ -60,7 +63,7 @@ import { rootReducer } from './root.reducer';
      * from appropriate browser store. For details see:
      * https://github.com/zalmoxisus/redux-devtools-extension
      */
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    StoreDevtoolsModule.instrument({}),
 
     /**
      * @ngrx - IndexedDB integeation - configure it with db schema

@@ -32,7 +32,7 @@ export class BackendMockService implements BackendPromiseService {
       // case Product.name:
       //   return Promise.resolve(PRODUCTS);
       case User.name:
-        return Promise.resolve(USERS);
+        return Promise.resolve(USERS as T[]);
       default:
        const err = new Error(`Cannot recognize entity type: ${type.name}`);
         return Promise.reject<T[]>(err);

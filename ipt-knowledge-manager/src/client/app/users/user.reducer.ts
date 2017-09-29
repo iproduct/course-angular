@@ -14,7 +14,7 @@ import { createSelector } from 'reselect';
 
 import { UserActions } from './user.actions';
 import { User } from './user.model';
-import { IdentityType } from '../shared/shared-types';
+import { IdentityType, ActionWithPayload } from '../shared/shared-types';
 
 export interface State {
   ids: IdentityType[];
@@ -30,7 +30,7 @@ export const initialState: State = {
   loading: false
 };
 
-export function usersReducer(state = initialState, action: Action): State {
+export function usersReducer(state = initialState, action: ActionWithPayload<any>): State {
   switch (action.type) {
 
     case UserActions.LOAD_USERS:

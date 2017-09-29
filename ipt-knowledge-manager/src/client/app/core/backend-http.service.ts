@@ -33,7 +33,7 @@ export class BackendHttpService implements BackendService {
         this.http.get(this.baseUrl + '/' + collection)
           .map(response => response.json().data as T[])
           .do((items: T[]) => this.logger.log(`Fetched ${items ? items.length : 0} ${collection}.`))
-          .catch(this.handleErrorObservable)
+          .catch(this.handleErrorObservable) as Observable<T[]>
       );
   }
 
@@ -45,7 +45,7 @@ export class BackendHttpService implements BackendService {
           .do((item: T) => this.logger.log(`Fetched ${item} from ${collection}.`))
           .catch(response => (response.status && response.status === 404) ?
             Observable.throw(`Cannot find ${type.name} with id: ${id}`) : response
-          ).catch(this.handleErrorObservable)
+          ).catch(this.handleErrorObservable) as Observable<T>
       )
   }
 
@@ -93,7 +93,7 @@ export class BackendHttpService implements BackendService {
     }
   }
 
-  private handleErrorObservable<T>(error: Response | any): Observable<T> {
+  private handleErrorObservable<T>(error: Response | any): Observable<any> {
     // in a real world app, we may send the error to some remote logging infrastructure
     let errMsg: string;
     if (error instanceof Response) {

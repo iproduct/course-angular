@@ -14,7 +14,7 @@ import { Response } from '@angular/http';
 import { Action } from '@ngrx/store';
 
 import { Test } from './test.model';
-import { IdentityType, ApplicationError } from '../shared/shared-types';
+import { IdentityType, ApplicationError, ActionWithPayload } from '../shared/shared-types';
 
 @Injectable()
 export class TestActions {
@@ -28,7 +28,7 @@ export class TestActions {
   }
 
   static LOAD_TESTS_SUCCESS = '[Test] Load Tests Success';
-  loadTestsSuccess(tests: Test[]): Action {
+  loadTestsSuccess(tests: Test[]): ActionWithPayload<Test[]> {
     return {
       type: TestActions.LOAD_TESTS_SUCCESS,
       payload: tests
@@ -36,7 +36,7 @@ export class TestActions {
   }
 
   static LOAD_TESTS_FAILURE = '[Test] Load Tests Failure';
-  loadTestsFailure(error: ApplicationError<Test>): Action {
+  loadTestsFailure(error: ApplicationError<Test>): ActionWithPayload<ApplicationError<Test>> {
     return {
       type: TestActions.LOAD_TESTS_FAILURE,
       payload: error
@@ -45,7 +45,7 @@ export class TestActions {
 
   // Load individual test
   static LOAD_TEST = '[Test] Load Test';
-  loadTest(testId: IdentityType): Action {
+  loadTest(testId: IdentityType): ActionWithPayload<IdentityType> {
     return {
       type: TestActions.LOAD_TEST,
       payload: testId
@@ -53,7 +53,7 @@ export class TestActions {
   }
 
   static LOAD_TEST_SUCCESS = '[Test] Load Test Success';
-  loadTestSuccess(test: Test): Action {
+  loadTestSuccess(test: Test): ActionWithPayload<Test> {
     return {
       type: TestActions.LOAD_TEST_SUCCESS,
       payload: test
@@ -61,7 +61,7 @@ export class TestActions {
   }
 
   static LOAD_TEST_FAILURE = '[Test] Load Test Failure';
-  loadTestFailure(error: ApplicationError<Test>): Action {
+  loadTestFailure(error: ApplicationError<Test>): ActionWithPayload<ApplicationError<Test>> {
     return {
       type: TestActions.LOAD_TEST_FAILURE,
       payload: error
@@ -70,7 +70,7 @@ export class TestActions {
 
   // Select test
   static SELECT_TEST = '[Test] Select Test';
-  selectTest(testId: IdentityType): Action {
+  selectTest(testId: IdentityType): ActionWithPayload<IdentityType> {
     return {
       type: TestActions.SELECT_TEST,
       payload: testId
@@ -79,7 +79,7 @@ export class TestActions {
 
   // Add new test
   static ADD_TEST = '[Test] Add Test';
-  addTest(test: Test): Action {
+  addTest(test: Test): ActionWithPayload<Test> {
     return {
       type: TestActions.ADD_TEST,
       payload: test
@@ -87,7 +87,7 @@ export class TestActions {
   }
 
   static ADD_TEST_SUCCESS = '[Test] Add Test Success';
-  addTestSuccess(test: Test): Action {
+  addTestSuccess(test: Test): ActionWithPayload<Test> {
     return {
       type: TestActions.ADD_TEST_SUCCESS,
       payload: test
@@ -95,7 +95,7 @@ export class TestActions {
   }
 
   static ADD_TEST_FAILURE = '[Test]  Add Test Failure';
-  addTestFailure(error: ApplicationError<Test>): Action {
+  addTestFailure(error: ApplicationError<Test>): ActionWithPayload<ApplicationError<Test>> {
     return {
       type: TestActions.ADD_TEST_FAILURE,
       payload: error
@@ -104,7 +104,7 @@ export class TestActions {
 
   // Edit existing test
   static EDIT_TEST = '[Test] Edit Test';
-  editTest(test: Test): Action {
+  editTest(test: Test): ActionWithPayload<Test> {
     return {
       type: TestActions.EDIT_TEST,
       payload: test
@@ -112,7 +112,7 @@ export class TestActions {
   }
 
   static EDIT_TEST_SUCCESS = '[Test] Edit Test Success';
-  editTestSuccess(test: Test): Action {
+  editTestSuccess(test: Test): ActionWithPayload<Test> {
     return {
       type: TestActions.EDIT_TEST_SUCCESS,
       payload: test
@@ -120,7 +120,7 @@ export class TestActions {
   }
 
   static EDIT_TEST_FAILURE = '[Test] Edit Test Failure';
-  editTestFailure(error: ApplicationError<Test>): Action {
+  editTestFailure(error: ApplicationError<Test>): ActionWithPayload<ApplicationError<Test>> {
     return {
       type: TestActions.EDIT_TEST_FAILURE,
       payload: error
@@ -129,7 +129,7 @@ export class TestActions {
 
   // Delete test by id
   static DELETE_TEST = '[Test] Delete Test';
-  deleteTest(testId: IdentityType): Action {
+  deleteTest(testId: IdentityType): ActionWithPayload<IdentityType> {
     return {
       type: TestActions.DELETE_TEST,
       payload: testId
@@ -137,7 +137,7 @@ export class TestActions {
   }
 
   static DELETE_TEST_SUCCESS = '[Test] Delete Test Success';
-  deleteTestSuccess(deletedTest: Test): Action {
+  deleteTestSuccess(deletedTest: Test): ActionWithPayload<Test> {
     return {
       type: TestActions.DELETE_TEST_SUCCESS,
       payload: deletedTest
@@ -145,7 +145,7 @@ export class TestActions {
   }
 
   static DELETE_TEST_FAILURE = '[Test] Delete Test Failure';
-  deleteTestFailure(error: ApplicationError<Test>): Action {
+  deleteTestFailure(error: ApplicationError<Test>): ActionWithPayload<ApplicationError<Test>> {
     return {
       type: TestActions.DELETE_TEST_FAILURE,
       payload: error

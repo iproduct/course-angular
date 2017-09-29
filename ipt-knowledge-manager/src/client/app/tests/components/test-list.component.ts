@@ -11,7 +11,6 @@
 import { Component, OnInit, OnDestroy, HostBinding, NgZone, ChangeDetectorRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { Test, Difficulty } from '../test.model';
 import { TestService } from '../test.service';
 import { Subscription, Observable } from 'rxjs/Rx';
@@ -20,6 +19,7 @@ import { IdentityType } from '../../shared/shared-types';
 import { Store } from '@ngrx/store';
 import { TestActions } from '../test.actions';import { RootState } from '../test.module';
 import { getTests, getTestsLoading, getSelectedTestId } from '../test.selectors';
+import { Go } from '../../shared/routing.actions';
 
 
 @Component({
@@ -54,7 +54,7 @@ export class TestListComponent implements OnInit, OnDestroy {
     this.store.dispatch(this.testActions.loadTests());
     this.subscription = this.selectedId$
       .filter(id => !!id)
-      .subscribe(id => this.store.dispatch(go(['tests', id])));
+      .subscribe(id => this.store.dispatch(new Go({path: ['tests', id]})));
   }
 
   public ngOnDestroy() {
@@ -72,7 +72,7 @@ export class TestListComponent implements OnInit, OnDestroy {
 
   public addNewTest() {
     this.store.dispatch(this.testActions.selectTest(null));
-    this.store.dispatch(go(['tests', 'new']));
+    this.store.dispatch(new Go({path: ['tests', 'new']}));
   }
 
   public paginate(event) {

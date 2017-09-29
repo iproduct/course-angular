@@ -10,6 +10,7 @@
 
 import { InjectionToken, Type } from '@angular/core';
 import { ENTITY_TYPES } from '../constants';
+import { Action } from '@ngrx/store';
 
 export const API_BASE_URL = new InjectionToken<string>('api.base.url');
 
@@ -30,4 +31,8 @@ export class ApplicationError<T> {
     public readonly forEntityType?: Type<T>,
     public readonly forEntity?: T,
     public readonly type: ErrorType = ErrorType.ERROR) {}
+}
+
+export interface ActionWithPayload<T> extends Action {
+  payload: T;
 }

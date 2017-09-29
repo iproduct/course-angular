@@ -23,9 +23,8 @@ import { TestEffects } from './test.effects';
 import { TestActions } from './test.actions';
 import { TestResolver } from './test-resolver';
 import { RootState as OldRootState, addReducer } from '../root.reducer';
-import { Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
-import { compose } from '@ngrx/core';
 import { environment } from '../../environments/environment';
 import { testsReducer, State as TestState } from './test.reducer';
 import * as fromTests from './test.reducer';
@@ -45,7 +44,8 @@ import { UiModule } from '../ui/ui.module';
     MdButtonModule,
     MdCardModule,
     UiModule,
-    EffectsModule.run(TestEffects)
+    StoreModule.forFeature('tests', testsReducer),
+    EffectsModule.forFeature([TestEffects])
   ],
   providers: [
     TestService,

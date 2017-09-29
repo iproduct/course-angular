@@ -22,7 +22,7 @@ import { getTestsState } from './test.selectors';
 import { RootState } from './test.module';
 
 @Injectable()
-export class TestResolver implements Resolve<Test> {
+export class TestResolver implements Resolve<{} | Test> {
   constructor(
     private store: Store<RootState>,
     private testService: TestService,
@@ -44,7 +44,7 @@ export class TestResolver implements Resolve<Test> {
             .catch(err => {
               this.store.dispatch(
                 this.testActions.loadTestFailure(new ApplicationError<Test>(err, testId, Test)));
-              throw err;
+              return Observable.throw(err);
             })
         }
       });

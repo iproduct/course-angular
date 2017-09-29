@@ -11,7 +11,6 @@
 import { Component, OnInit, OnDestroy, HostBinding, NgZone, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { go, replace, search, show, back, forward } from '@ngrx/router-store';
 import { User } from '../user.model';
 import { UserService } from '../user.service';
 import { Subscription, Observable } from 'rxjs/Rx';
@@ -22,6 +21,7 @@ import * as fromUsers from '../user.module';
 import { UserActions } from '../user.actions';
 import { RootState } from '../user.module';
 import { getUsers, getUsersLoading, getSelectedUserId } from '../user.selectors';
+import { Go } from '../../shared/routing.actions';
 
 @Component({
   // moduleId: module.id,
@@ -56,7 +56,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.store$.dispatch(this.userActions.loadUsers());
     this.subscription = this.selectedId$
       .filter(id => !!id)
-      .subscribe(id => this.store$.dispatch(go(['users', id])));
+      .subscribe(id => this.store$.dispatch(new Go({path: ['users', id]})));
   }
 
   public ngOnDestroy() {
@@ -74,7 +74,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   public addNewUser() {
     this.store$.dispatch(this.userActions.selectUser(null));
-    this.store$.dispatch(go(['users', 'new']));
+    this.store$.dispatch(new Go({path: ['users', 'new']}));
   }
 
   public paginate(event) {

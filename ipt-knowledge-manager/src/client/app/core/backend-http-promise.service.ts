@@ -74,12 +74,13 @@ export class BackendHttpService implements BackendPromiseService {
       );
   }
 
-  public delete<T extends Identifiable>(type: Type<T>, id: string): Promise<void> {
+  public delete<T extends Identifiable>(type: Type<T>, id: string): Promise<T> {
     return this.getCollectionName(type)
       .then(collection =>
          this.http.delete(`${this.baseUrl}/${collection}/${id}`)
-          .map(resp => this.logger.log(`${type.name} with id:${id} successfully deleted.`))
-          .toPromise<void>().catch(this.handleErrorPromise)
+          .map(response => response.json() as T)
+          .do(deleted => this.logger.log(`${type.name} with id:${id} successfully deleted.`))
+          .toPromise<T>().catch(this.handleErrorPromise)
       ).catch(err =>
         Promise.reject(`Cannot delete ${type.name} with id:${id}. Error: ${err}`)
       );

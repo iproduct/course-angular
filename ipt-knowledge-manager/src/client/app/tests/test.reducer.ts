@@ -14,7 +14,7 @@ import { createSelector } from 'reselect';
 
 import { TestActions } from './test.actions';
 import { Test } from './test.model';
-import { IdentityType } from '../shared/shared-types';
+import { IdentityType, ActionWithPayload } from '../shared/shared-types';
 
 export interface State {
   ids: IdentityType[];
@@ -30,7 +30,7 @@ export const initialState: State = {
   loading: false
 };
 
-export function testsReducer(state = initialState, action: Action): State {
+export function testsReducer(state = initialState, action: ActionWithPayload<any>): State {
   switch (action.type) {
 
     case TestActions.LOAD_TESTS:
