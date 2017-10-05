@@ -67,7 +67,7 @@ if (app.get('env') === 'development') {
 const url = 'mongodb://localhost:27017/tests';
 
 // Use connect to connect to db
-MongoClient.connect(url, { db: { w: 1 } }).then((db) => {
+MongoClient.connect(url, { w: 1 }).then((db) => {
   // assert.equal(null, err);
   console.log(`Successfully connected to MongoDB server at: ${url}`);
 
@@ -82,4 +82,4 @@ MongoClient.connect(url, { db: { w: 1 } }).then((db) => {
     console.log(`Example app listening on port ${SERVER_PORT}!`)
   })
 
-}).catch((err) => { throw err; });
+}).catch((err) => { console.log(err); });
