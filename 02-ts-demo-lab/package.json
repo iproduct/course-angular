@@ -1,0 +1,24 @@
+{
+  "name": "02-ts-demo-lab",
+  "version": "1.0.0",
+  "description": "typescript lab",
+  "scripts": {
+    "lite": "lite-server",
+    "start": "concurrently \"tsc -w\" \"lite-server\" ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "main": "index.js",
+  "repository": "https://github.com/iproduct/course-angular",
+  "author": "Trayan Iliev",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "core-js": "^2.5.1",
+    "jquery": "^3.2.1",
+    "systemjs": "^0.20.19"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.2.13",
+    "concurrently": "^3.5.0",
+    "lite-server": "^2.3.0"
+  }
+}

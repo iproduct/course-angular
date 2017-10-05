@@ -1,7 +1,7 @@
 // import greeter from './greeter';
 import { UserRepository, DemoUserRepository } from './user-repository';
 import { DemoLoginController, LoginController } from './login-controller';
-import { Customer, Admin, User } from './users';
+import { Customer, Admin, User, PhysicalPerson } from './users';
 import { LoginComponent } from './login-component';
 
 const userRepo: UserRepository = new DemoUserRepository();
@@ -21,7 +21,7 @@ const loginController: LoginController = new DemoLoginController(userRepo);
 
 const loginComponent = new LoginComponent('#content', loginController);
 
-// console.log(new PhysicalPerson('Ivan', 'Donchev', 'Petrov').salutation);
+console.log(new PhysicalPerson('Ivan', 'Donchev', 'Petrov').salutation);
 
 interface Repository<T> {
   add(key: number, value: T): void;
@@ -52,4 +52,4 @@ const mockData: Array<[number, User]> = [
 ];
 
 mockData.forEach(entry => userRepoGeneric.add(entry[0], entry[1]));
-console.log(userRepoGeneric.findAll().map(u => u.firstName));
+console.log(userRepoGeneric.findAll().map(u => u.salutation));

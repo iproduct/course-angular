@@ -2,14 +2,14 @@ export interface Person {
     id: number;
     firstName: string;
     lastName: string;
-    email: string;
+    readonly salutation: string;
     contact?: Contact;
 }
 
 export interface User extends Person {
+    email: string;
     password: string;
-    roles: Array<Role>;
-    readonly salutation: string;
+    roles: Role[];
 }
 
 export interface Contact {
@@ -19,7 +19,7 @@ export interface Contact {
 }
 
 export enum Role {
-    ADMIN, CUSTOMER
+    ADMIN = 2, CUSTOMER = 5
 }
 
 export class Customer implements User {
@@ -45,16 +45,24 @@ export class Admin implements User {
 
 }
 
-export class PhysicalPerson {
+export class PhysicalPerson implements Person {
+    id: number;
     public restNames: string[];
+
     constructor(public firstName: string, ...restNames: string[]) {
         this.restNames = restNames;
     }
+
+    public get lastName() {
+        return (this.restNames.length > 0) ? this.restNames[this.restNames.length - 1] : '';
+    }
+
     public get salutation() {
         let salutation = this.firstName;
         for (let name of this.restNames) {
             salutation += ' ' + name;
         }
         return salutation;
-    }
+    } 
+
 }

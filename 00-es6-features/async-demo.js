@@ -1,5 +1,10 @@
 async function f() {
   return 1;
 }
+async function g() {
+  return 2;
+}
 
-f().then(v => console.log(v)); // 1
+Promise.all([f(),g()]).then(v => console.log(v), err => console.log(err) ); // 1
+console.log("Finished.");
+// f().then(v => console.log(v));
