@@ -11,7 +11,7 @@ export interface Message {
 })
 export class AppComponent implements OnInit {
   title = 'Hello from Angular 2!';
-  // todo: Message = {message: 'From Parent TODO.'};
+  todo: Message = {message: 'From Parent TODO.'};
 
   ngOnInit() {
   }

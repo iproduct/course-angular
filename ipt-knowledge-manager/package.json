@@ -6,7 +6,7 @@
     "ng": "ng",
     "ngserve": "ng serve --proxy-config proxy.conf.json",
     "server": "nodemon -w ./src/server ./src/server/server.js",
-    "mongo": "mongod --dbpath=c:/mongo-data --port 27017",
+    "mongo": "mongod --dbpath=c:/mongo-data-test --port 27017",
     "services": "concurrently --kill-others \"npm run mongo\" \"npm run server\"",
     "start": "concurrently --kill-others \"npm run mongo\" \"npm run server\" \"npm run ngserve\"",
     "build": "ng build",
