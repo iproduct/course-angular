@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-// import { Message } from '../app.component';
+import { Message } from './message.model';
 
 @Component({
   selector: 'app-demo',
@@ -7,7 +7,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./demo.component.css']
 })
 export class DemoComponent implements OnInit {
-  @Input() public message = 'Default TODO.';
+  @Input() public message: Message = {message: 'Default TODO.'};
   @Output() values = new EventEmitter<string>();
 
   constructor() { }

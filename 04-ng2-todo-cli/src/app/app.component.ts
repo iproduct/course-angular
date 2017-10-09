@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface Message {
-  message: string;
-}
+import { Message } from './demo/message.model';
 
 @Component({
   selector: 'app-root',

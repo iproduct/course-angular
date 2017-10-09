@@ -3,6 +3,7 @@ import {User} from './users';
 import {resolvePromiseAfterTimeout} from './utilities';
 
 export interface LoginController {
+    login(user: User): Promise<User>;
     login(email: string, password: string): Promise<User>;
     logout(): Promise<User>;
     getCurrentUser(): User;
