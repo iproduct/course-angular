@@ -12,7 +12,7 @@ import { Injectable } from '@angular/core';
 
 import { User } from './user.model';
 import { BackendService } from '../core/backend.service';
-import { Logger } from '../core/logger.service';
+import { LoggerService } from '../core/logger.service';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { IdentityType } from '../shared/shared-types';
@@ -22,7 +22,7 @@ export class UserService {
 
   constructor(
     private backend: BackendService,
-    private logger: Logger) { }
+    private logger: LoggerService) { }
 
   public findAllUsers(): Observable<User[]> {
     return this.backend.findAll(User);

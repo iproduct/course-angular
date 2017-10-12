@@ -1,0 +1,56 @@
+{
+  "name": "ng2-quickstart-04",
+  "version": "1.0.0",
+  "description": "Angular 2 quickstart project",
+  "main": "index.js",
+  "scripts": {
+    "lite": "lite-server",
+    "start": "rimraf dist && concurrently \"tsc -w\" \"lite-server\" ",
+    "test": "test"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/angular/angular.io/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iproduct/course-angular2.git"
+  },
+  "keywords": [
+    "angular2",
+    "quickstart",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iproduct/course-angular2/issues"
+  },
+  "homepage": "https://github.com/iproduct/course-angular2#readme",
+  "dependencies": {
+    "@angular/common": "^4.4.4",
+    "@angular/compiler": "^4.4.4",
+    "@angular/core": "^4.4.4",
+    "@angular/forms": "^4.4.4",
+    "@angular/http": "^4.4.4",
+    "@angular/platform-browser": "^4.4.4",
+    "@angular/platform-browser-dynamic": "^4.4.4",
+    "@angular/router": "^4.4.4",
+    "@angular/upgrade": "^4.4.4",
+    "angular-in-memory-web-api": "^0.5.0",
+    "bootstrap": "^3.3.7",
+    "core-js": "^2.5.1",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "^5.4.3",
+    "systemjs": "^0.20.19",
+    "zone.js": "^0.8.18"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "lite-server": "^2.3.0",
+    "typescript": "^2.5.3"
+  }
+}
+

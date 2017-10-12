@@ -11,7 +11,7 @@
 import { Injectable } from '@angular/core';
 import { Test } from './test.model';
 import { BackendService } from '../core/backend.service';
-import { Logger } from '../core/logger.service';
+import { LoggerService } from '../core/logger.service';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { IdentityType } from '../shared/shared-types';
@@ -21,7 +21,7 @@ export class TestService {
 
   constructor(
     private backend: BackendService,
-    private logger: Logger) { }
+    private logger: LoggerService) { }
 
   public findAllTests(): Observable<Test[]> {
     return this.backend.findAll(Test);

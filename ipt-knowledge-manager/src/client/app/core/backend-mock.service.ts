@@ -10,7 +10,7 @@
 
 import { Injectable, Type } from '@angular/core';
 
-import { Logger } from './logger.service';
+import { LoggerService } from './logger.service';
 import { User, Role } from '../users/user.model';
 import { Identifiable } from '../shared/shared-types';
 import { BackendService } from './backend.service';
@@ -25,7 +25,7 @@ const USERS: Identifiable[] = [
 
 @Injectable()
 export class BackendMockService implements BackendPromiseService {
-  constructor(private logger: Logger) { }
+  constructor(private logger: LoggerService) { }
 
   public findAll<T extends Identifiable>(type: Type<T>): Promise<T[]> {
     switch (type.name) {

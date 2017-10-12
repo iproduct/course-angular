@@ -1,0 +1,7 @@
+<app-todo-input (onTodo)="addTodo($event)"></app-todo-input>
+<h3>Todo List:</h3>
+<ul class="todos">
+  <li *ngFor="let todo of todosService.findAll()" class="todo-item">
+    <app-todo-item [todo]=todo (onCompletionChange)="removeTodo(todo)" ></app-todo-item>
+  </li>
+</ul>

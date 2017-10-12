@@ -1,0 +1,30 @@
+<div class="user-list-caption row">
+	<h2>User List</h2>
+	<div class="action-buttons">
+		<button type="submit" class="btn btn-primary" (click)="addUser()">Add New User</button>
+	</div>
+</div>
+<div class="user-list row">
+	<p><i>Pick a user from the list:</i></p>
+	<ul class="items users">
+		<li *ngFor="let user of users; let i=index; trackBy: trackByUserId" class="user" (click)="selectItem(user)" [title]="user.name"
+			[class.selected]="user.id === selectedId">
+			<span class="item-badge">{{i + 1}}</span> <span class="user-info">{{user.firstName}} {{user.lastName}} in role: {{getRoleAsString(user.role)}}</span>
+
+      <span class="remove-item glyphicon glyphicon-remove-circle danger pull-right" (click)="deleteItem(user.id); $event.stopPropagation()" 
+        aria-hidden="true" title="Click to delete this product.">
+      </span>
+			<span class="user-icon" [ngSwitch]="user.role + user.gender">
+        <span *ngSwitchCase="CUSTOMER_MALE"><img [src]="customerMaleImage"></span>
+        <span *ngSwitchCase="CUSTOMER_FEMALE"><img [src]="customerFemaleImage"></span>
+        <span *ngSwitchCase="OPERATOR_MALE"><img [src]="operatorMaleImage"></span>
+        <span *ngSwitchCase="OPERATOR_FEMALE"><img [src]="operatorFemaleImage"></span>
+        <span *ngSwitchCase="ADMIN_MALE"><img [src]="adminMaleImage"></span>
+        <span *ngSwitchCase="ADMIN_FEMALE"><img [src]="adminFemaleImage"></span>
+        <span *ngSwitchDefault>Other</span>
+			</span>
+			
+		</li>
+	</ul>
+	<!--<user-detail *ngIf="selectedUser" [user]="selectedUser"></user-detail>-->
+</div>

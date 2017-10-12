@@ -11,7 +11,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BackendService } from './backend.service';
-import { Logger } from './logger.service';
+import { LoggerService } from './logger.service';
 import { BackendHttpService } from './backend-http.service';
 import { HttpModule } from '@angular/http';
 
@@ -27,7 +27,7 @@ import { CanDeactivateGuard } from './can-deactivate-guard.service';
     // InMemoryWebApiModule.forRoot(InMemoryDataModel, {delay: 200}),
   ],
   providers: [
-    Logger,
+    LoggerService,
     DialogService,
     CanDeactivateGuard,
     { provide: API_BASE_URL, useFactory: getBaseApiUrl },

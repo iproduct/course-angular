@@ -1,0 +1,3 @@
+<input type="text" #todoText (keyup.enter)="onNewTodo(todoText.value); todoText.value=''"
+  (change)="onNewTodo(todoText.value); todoText.value=''">
+<button (click)="onNewTodo(todoText.value); todoText.value=''">Add</button>

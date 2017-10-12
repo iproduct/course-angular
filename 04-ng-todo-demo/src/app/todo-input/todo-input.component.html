@@ -1,0 +1,2 @@
+<input type="text" #todo (keyup.enter)="addTodo(todo.value); todo.value=''" (blur)="addTodo(todo.value); todo.value=''">
+<button (click)="addTodo(todo.value); todo.value=''">Add</button>
