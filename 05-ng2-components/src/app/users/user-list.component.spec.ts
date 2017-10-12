@@ -7,7 +7,7 @@ import { UserListComponent } from './user-list.component';
 import { FormsModule } from '@angular/forms';
 import { BackendService } from '../core/backend.service';
 import { UserService } from './user.service';
-import { Logger } from '../core/logger.service';
+import { LoggerService } from '../core/logger.service';
 import { Admin, Gender } from './user.model';
 
 let comp: UserListComponent;
@@ -23,7 +23,7 @@ describe('App', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      providers: [BackendService, UserService, Logger],
+      providers: [BackendService, UserService, LoggerService],
       declarations: [UserDetailComponent, UserListComponent]
     });
 

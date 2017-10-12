@@ -6,7 +6,7 @@ import { ProductListComponent } from './product-list.component';
 import { ProductDetailComponent } from './product-detail.component';
 import { BackendService } from '../core/backend.service';
 import { ProductService } from './product.service';
-import { Logger } from '../core/logger.service';
+import { LoggerService } from '../core/logger.service';
 import { Product } from './product.model';
 
 let comp: ProductListComponent;
@@ -22,7 +22,7 @@ describe('App', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      providers: [BackendService, ProductService, Logger],
+      providers: [BackendService, ProductService, LoggerService],
       declarations: [ProductDetailComponent, ProductListComponent]
     });
 
