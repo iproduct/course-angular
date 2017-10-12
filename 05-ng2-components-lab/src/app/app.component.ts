@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
     <div class="container-fluid">
       <img [src]="logo" alt="Test image">
       <!--<simple-form></simple-form>-->
-      <user-list></user-list>
+     <!-- <user-list></user-list> -->
       <product-list></product-list>
-      <sales-tax></sales-tax>
+    <!--  <sales-tax></sales-tax> -->
     </div>
   `
 })

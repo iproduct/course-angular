@@ -1,9 +1,7 @@
 import { NgModule }     from '@angular/core';
 import { AppComponent } from './app.component';
-import { SalesModule } from './sales/sales.module';
 import { CoreModule } from './core/core.module';
 import { ProductModule } from './products/product.module';
-import { UserModule } from './users/users.module';
 import { SimpleFormComponent } from './simple.form.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -13,9 +11,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule,
     CoreModule,
-    ProductModule,
-    UserModule,
-    SalesModule
+    ProductModule
   ],
   declarations: [AppComponent, SimpleFormComponent],
   exports: [AppComponent],
