@@ -50,7 +50,7 @@
   "devDependencies": {
     "concurrently": "^3.5.0",
     "lite-server": "^2.3.0",
+    "rimraf": "^2.6.2",
     "typescript": "^2.5.3"
   }
 }
-

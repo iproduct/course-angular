@@ -35,6 +35,7 @@ export class HeroFormReactiveComponent implements OnInit {
   active = true;
   addHero() {
     this.hero = new Hero(42, '', '');
+    // this.heroForm.controls['name'].reset({value: 'Pesho', disabled: true});
     this.buildForm();
 
     this.active = false;
@@ -61,7 +62,7 @@ export class HeroFormReactiveComponent implements OnInit {
         Validators.minLength(4),
         Validators.maxLength(24),
         forbiddenNameValidator(/bob/i)
-      ], [nameTakenValidator('john')]
+      ], nameTakenValidator('john')
       ],
       'alterEgo': [this.hero.alterEgo, [], [nameTakenValidator('doctor')]],
       'power': [this.hero.power, Validators.required]

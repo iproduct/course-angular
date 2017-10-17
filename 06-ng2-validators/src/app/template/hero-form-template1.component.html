@@ -1,7 +1,7 @@
 <div class="container">
   <div [hidden]="submitted">
     <h1>Hero Form 1 (Template)</h1>
-    <form #heroForm="ngForm"  *ngIf="active"  (ngSubmit)="onSubmit()">
+    <form #heroForm="ngForm"  *ngIf="active"  (ngSubmit)="onSubmit(heroForm)">
       <div class="form-group">
         <label for="name">Name</label>
 
@@ -9,6 +9,7 @@
                required minlength="4" maxlength="24"
                name="name" [(ngModel)]="hero.name"
                #name="ngModel" >
+               {{getStatus(name)}}
 
         <div *ngIf="name.errors && (name.dirty || name.touched)"
              class="alert alert-danger">
@@ -46,11 +47,13 @@
       </div>
 
       <button type="submit" class="btn btn-default"
-             [disabled]="!heroForm.form.valid">Submit</button>
+             [disabled]="!heroForm.valid">Submit</button>
       <button type="button" class="btn btn-default"
              (click)="addHero()">New Hero</button>
     </form>
   </div>
+
+  
 
   <hero-submitted [hero]="hero" [submitted]="submitted" (submittedChange)="onSubmittedChange($event)">
   </hero-submitted>

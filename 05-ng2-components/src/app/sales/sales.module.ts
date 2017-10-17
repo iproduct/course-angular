@@ -11,11 +11,11 @@ import { SalesTaxRateService } from './sales-tax-rate.service';
     FormsModule
   ],
   providers: [
-    SalesTaxService,
     SalesTaxRateService
   ],
   declarations: [
-    SalesTaxComponent
+    SalesTaxComponent,
+    SalesTaxService
   ],
   exports: [SalesTaxComponent]
 })

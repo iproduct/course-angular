@@ -1,10 +1,11 @@
+import { NgModel } from '@angular/forms/src/directives';
 /* tslint:disable: member-ordering */
 import { Component, ViewChild  } from '@angular/core';
 
 
 import { Hero }      from '../shared/hero';
 import { MySubmitted } from '../shared/submitted.component';
-import { NgForm } from '@angular/forms';
+import { NgForm, AbstractControl } from '@angular/forms';
 
 
 
@@ -22,7 +23,12 @@ export class HeroFormTemplate1Component {
 
   submitted = false;
 
-  onSubmit() {
+  getStatus(control: AbstractControl ){
+    return JSON.stringify(control.errors);
+  }
+
+  onSubmit(form: NgForm) {
+    console.log("Form: ", form.valid, form);
     this.submitted = true;
   }
   // Reset the form with a new hero AND restore 'pristine' class state

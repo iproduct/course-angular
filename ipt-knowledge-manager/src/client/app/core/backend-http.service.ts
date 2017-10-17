@@ -12,7 +12,7 @@ import { Injectable, Inject, Type, InjectionToken, Injector } from '@angular/cor
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import { Logger } from './logger.service';
+import { LoggerService } from './logger.service';
 import { Identifiable, IdentityType, API_BASE_URL } from '../shared/shared-types';
 import { BackendService } from './backend.service';
 import { ENTITY_TYPES } from '../constants';
@@ -25,7 +25,7 @@ export class BackendHttpService implements BackendService {
   constructor(
     @Inject(API_BASE_URL) private baseUrl: string,
     private http: Http,
-    private logger: Logger) {}
+    private logger: LoggerService) {}
 
   public findAll<T extends Identifiable>(type: Type<T>): Observable<T[]> {
     return this.getCollectionName(type)

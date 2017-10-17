@@ -29,7 +29,7 @@ export function nameTakenValidator(name: string): AsyncValidatorFn {
           } else {
             resolve(null);
           };
-        }, 500);
+        }, 2000);
       }).then((validationResult: ValidationResult) => {
           control.markAsUntouched({onlySelf: true});
           return validationResult;

@@ -15,7 +15,8 @@ import { SalesTaxService } from './sales-tax.service';
       {{ tax | currency:'USD':true:'1.2-2' }}
       </div>
     </div>
-  `
+  `,
+  // providers: [SalesTaxService]
 })
 export class SalesTaxComponent {
   public tax: number;

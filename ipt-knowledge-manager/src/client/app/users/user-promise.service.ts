@@ -12,7 +12,7 @@ import { Injectable } from '@angular/core';
 
 import { User } from './user.model';
 import { BackendService } from '../core/backend.service';
-import { Logger } from '../core/logger.service';
+import { LoggerService } from '../core/logger.service';
 import { BackendPromiseService } from '../core/backend-promise.service';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class UserPromiseService {
 
   constructor(
     private backend: BackendPromiseService,
-    private logger: Logger) { }
+    private logger: LoggerService) { }
 
   public getUsers(): Promise<User[]> {
     return this.backend.findAll(User).then(
