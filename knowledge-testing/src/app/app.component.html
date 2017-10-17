@@ -1,23 +1,17 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <kt-layout>
   <kt-sidenav [open]="sidenavOpen">
-    <kt-nav-item (activate)="chooseView($event)" [viewId]="viewHome" icon="view_list">
+    <kt-nav-item (activate)="chooseView($event)" [viewId]="viewHome" icon="home" hint="Welcome page">
       Home
     </kt-nav-item>
-    <kt-nav-item (activate)="chooseView($event)" [viewId]="viewUsers" icon="people">
-      Home
+    <kt-nav-item (activate)="chooseView($event)" [viewId]="viewUsers" icon="people" hint="Users management">
+      Users
     </kt-nav-item>
-    <kt-nav-item (activate)="chooseView($event)" [viewId]="viewUsers" icon="people">
-      Home
+    <kt-nav-item (activate)="chooseView($event)" [viewId]="viewUsers" icon="view_list" hint="Tests management">
+      Tests
     </kt-nav-item>
   </kt-sidenav>
   <kt-toolbar (openSidenav)="openSidenav()">
     Knowledge Tester
   </kt-toolbar>
 </kt-layout>
-
-
-<div style="text-align:center ">
-  <h1>
-    {{title}}
-  </h1>

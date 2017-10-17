@@ -18,5 +18,6 @@ export class AppComponent {
 
   chooseView(view: Views) {
     console.log(Views[view]);
+    this.sidenavOpen = false;
   }
 }
