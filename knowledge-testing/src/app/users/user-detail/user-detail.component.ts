@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 import { User, Role } from '../user.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserService } from '../user.service';
@@ -11,9 +11,9 @@ import { UserService } from '../user.service';
 export class UserDetailComponent implements OnInit {
 
   @Input() user: User = new User(''); // user with empty id
+  @Input() isNewUser = true; // new user by default
   roles: { key: Role, value: string }[] = [];
   userForm: FormGroup;
-  @Input() isNewUser = true; // new user by default
   errorMessage: string;
 
   formErrors = {
@@ -55,7 +55,12 @@ export class UserDetailComponent implements OnInit {
     this.buildForm();
   }
 
-
+  public ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
+    const chng = changes['user'];
+    if (chng.currentValue !== chng.previousValue) {
+      this.resetForm();
+    }
+  }
 
   buildForm(): void {
     this.userForm = this.fb.group({

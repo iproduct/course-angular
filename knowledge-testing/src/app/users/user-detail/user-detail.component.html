@@ -1,7 +1,7 @@
 <div class="user-list-conatainer">
 	<div class="user-list-header ui-g-12">
 		<h2 *ngIf="isNewUser">Add New User</h2>
-	<!--	<h2 *ngIf="!isNewUser">Edit User: {{user?.fname}} {{user?.lname}}</h2>-->
+		<h2 *ngIf="!isNewUser">Edit User: {{user?.fname}} {{user?.lname}}</h2>
 	</div>
 
 	<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="ui-g-12 ui-mat-8 ui-lg-6">
@@ -21,7 +21,7 @@
 			<mat-error *ngIf="formErrors.lname">{{ formErrors.lname }}</mat-error>
 		</mat-input-container> -->
 
-			<<mat-input-container>
+		<mat-input-container>
 			<input matInput type="email" id="email" name="email" formControlName="email" placeholder="E-mail" required>
 			<mat-error *ngIf="formErrors.email">{{ formErrors.email }}</mat-error>
 		</mat-input-container>
