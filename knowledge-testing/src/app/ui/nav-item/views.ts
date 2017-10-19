@@ -1,5 +1,5 @@
 
 export enum Views {
-  HOME, USERS
+  HOME, USERS, TESTS
 }
 

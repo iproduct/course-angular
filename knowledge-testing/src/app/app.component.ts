@@ -9,14 +9,17 @@ import { Views } from './ui/nav-item/views';
 export class AppComponent {
   viewHome = Views.HOME;
   viewUsers =  Views.USERS;
+  viewTests =  Views.TESTS;
   title = 'Knowledge Tester';
   sidenavOpen = false;
+  currentView = Views.HOME;
 
   openSidenav() {
     this.sidenavOpen = !this.sidenavOpen;
   }
 
   chooseView(view: Views) {
+    this.currentView = view;
     console.log(Views[view]);
     this.sidenavOpen = false;
   }
