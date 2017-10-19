@@ -1,4 +1,5 @@
 import { environment } from '../../environments/environment';
+import { User } from '../users/user.model';
 
 
 export function getBaseApiUrl() {
@@ -7,3 +8,5 @@ export function getBaseApiUrl() {
 
 
 export const MOBILE = (typeof window !== 'undefined') ? (window.screen.availWidth < 800) : true;
+
+export const ENTITY_TYPES = [User];

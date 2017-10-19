@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'kt-user-list',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-  constructor() { }
+
+  currentUser = {};
+
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.findAllUsers().then(users => this.currentUser = users[0]);
   }
 
 }

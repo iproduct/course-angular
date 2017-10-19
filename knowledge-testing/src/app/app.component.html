@@ -15,10 +15,10 @@
     Knowledge Tester
   </kt-toolbar>
 
-<div [ngSwitch]="currentView">
-  <kt-user-list *ngSwitchCase="viewUsers"></kt-user-list>
-  <kt-test-list *ngSwitchCase="viewTests"></kt-test-list>
-  <kt-home *ngSwitchCase="viewHome"></kt-home>
-</div>
+  <div [ngSwitch]="currentView">
+    <kt-user-list *ngSwitchCase="viewUsers"></kt-user-list>
+    <kt-test-list *ngSwitchCase="viewTests"></kt-test-list>
+    <kt-home *ngSwitchCase="viewHome"></kt-home>
+  </div>
 
 </kt-layout>

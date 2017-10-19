@@ -1,0 +1,15 @@
+mat-input-container, mat-select, .buttons {
+  width: 90%;
+}
+
+mat-input-container {
+  margin: 0 0 10px;
+}
+
+mat-select {
+  margin: 10px 0 30px;
+}
+
+.buttons {
+  margin: 20px 0;
+}
