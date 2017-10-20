@@ -94,10 +94,23 @@ export class UserDetailComponent implements OnInit, OnChanges {
     this.onStatusChanged(); // reset validation messages
   }
 
+  public onSubmit() {
+    this.user = this.userForm.getRawValue() as User;
+    if (this.isNewUser) {
+      this.service.addUser(this.user);
+    } else {
+      this.service.editUser(this.user);
+    }
+    // this.goBack();
+  }
   resetForm() {
     if (this.userForm) {
       this.userForm.reset(this.user);
     }
+  }
+
+  public goBack() {
+    window.location.replace('/');
   }
 
   private onStatusChanged(data?: any) {
