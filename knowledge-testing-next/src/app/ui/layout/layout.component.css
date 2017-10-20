@@ -1,0 +1,8 @@
+mat-sidenav-container {
+  background: #fafafa;
+}
+
+*, /deep/ * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

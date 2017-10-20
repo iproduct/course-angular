@@ -1,0 +1,46 @@
+<div class="user-list-conatainer">
+	<div class="user-list-header ui-g-12">
+		<h2 *ngIf="isNewUser">Add New User</h2>
+		<h2 *ngIf="!isNewUser">Edit User: {{user?.fname}} {{user?.lname}}</h2>
+	</div>
+
+	<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="ui-g-12 ui-mat-8 ui-lg-6">
+		<div *ngIf="user?.id">
+			<mat-input-container>
+				<input matInput type="text" id="id" name="id" formControlName="id" placeholder="ID" />
+			</mat-input-container>
+		</div>
+
+	<!--	<mat-input-container>
+			<input matInput type="text" id="fname" name="fname" formControlName="fname" placeholder="First name" required>
+			<mat-error *ngIf="formErrors.fname">{{ formErrors.fname }}</mat-error>
+		</mat-input-container>
+
+		<mat-input-container>
+			<input matInput type="text" id="lname" name="lname" formControlName="lname" placeholder="Last name" required>
+			<mat-error *ngIf="formErrors.lname">{{ formErrors.lname }}</mat-error>
+		</mat-input-container> -->
+
+		<mat-input-container>
+			<input matInput type="email" id="email" name="email" formControlName="email" placeholder="E-mail" required>
+			<mat-error *ngIf="formErrors.email">{{ formErrors.email }}</mat-error>
+		</mat-input-container>
+
+		<!--	<mat-input-container>
+			<input matInput type="password" id="password" name="password" formControlName="password" placeholder="Password" required>
+			<mat-error *ngIf="formErrors.password">{{ formErrors.password }}</mat-error>
+		</mat-input-container>
+
+		<mat-select matInput placeholder="Role" id="role" name="role" formControlName="role" required>
+			<mat-option *ngFor="let role of roles" [value]="role.key">{{ role.value }}</mat-option>
+			<mat-error *ngIf="formErrors.role">{{ formErrors.role }}</mat-error>
+		</mat-select> -->
+
+
+		<div class="buttons">
+			<button type="submit"  mat-raised-button color="primary" [disabled]="userForm.pristine || !userForm.valid">Submit</button>
+			<button type="button"  mat-raised-button color="warn" (click)="resetForm()">Reset</button>
+			<button type="button"  mat-raised-button (click)="goBack()">Cancel</button>
+		</div>
+	</form>
+</div>
