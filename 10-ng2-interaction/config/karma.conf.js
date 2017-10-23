@@ -25,7 +25,6 @@ module.exports = function (config) {
     },
 
     reporters: ['progress', 'kjhtml', 'html'],
-
     // HtmlReporter configuration
     htmlReporter: {
       // Open this file to see results in browser
@@ -35,12 +34,11 @@ module.exports = function (config) {
       pageTitle: 'Unit Tests',
       subPageTitle: __dirname
     },
-
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['PhantomJS','Chrome'],
+    browsers: ['Chrome' , 'PhantomJS'],
     singleRun: false
   };
 
