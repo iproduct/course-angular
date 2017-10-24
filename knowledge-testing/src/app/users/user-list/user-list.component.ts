@@ -24,8 +24,11 @@ export class UserListComponent implements OnInit {
   }
 
   addNewUser() {
-    this.isNew = true;
     this.selectedUser = {} as User;
+  }
+
+  editCompleted() {
+    this.selectedUser = undefined;
   }
 
 }

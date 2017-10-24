@@ -1,0 +1,28 @@
+.user-list {
+  padding-bottom: 8px;
+  max-width: 500px;
+  border: 1px solid lightgray;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(245, 239, 239)), to(rgb(229, 237, 238)));
+  background-image: -webkit-linear-gradient(top, rgb(245, 239, 239), rgb(229, 237, 238));
+  background-image: -moz-linear-gradient(top, rgb(245, 239, 239), rgb(229, 237, 238));
+  background-image: linear-gradient(to bottom, rgb(245, 239, 239), rgb(229, 237, 238));
+ }
+
+ .button-row {
+   margin-bottom: 20px;
+ }
+
+ .user-item {
+  padding: 7px 16px;
+}
+.user-item:hover {
+  background: #cce0ff;
+  color: #000000;
+}
+.user-item.selected {
+  background: #ffca44;
+}
+.remove-item {
+  color: #ee0000;
+}
+
