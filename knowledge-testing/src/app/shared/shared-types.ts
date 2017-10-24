@@ -8,10 +8,8 @@
  *
  */
 
-import { InjectionToken, Type } from '@angular/core';
+import { Type } from '@angular/core';
 import { ENTITY_TYPES } from './constants';
-
-export const API_BASE_URL = new InjectionToken<string>('api.base.url');
 
 export type IdentityType = string;
 

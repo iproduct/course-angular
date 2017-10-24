@@ -16,6 +16,10 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.fetchUsers();
+  }
+
+  fetchUsers() {
     this.userService.findAllUsers().then(users => this.users = users);
   }
 
@@ -28,6 +32,7 @@ export class UserListComponent implements OnInit {
   }
 
   editCompleted() {
+    this.fetchUsers();
     this.selectedUser = undefined;
   }
 
