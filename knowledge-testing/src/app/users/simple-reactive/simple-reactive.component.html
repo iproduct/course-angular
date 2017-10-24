@@ -6,10 +6,13 @@
     <mat-input-container>
       <input  matInput type="email" id="email" name="email" formControlName="email"
         placeholder="E-mail" />
+      <mat-error *ngIf="formErrors.email">{{ formErrors.email }}</mat-error>
     </mat-input-container>
     <div class="buttons">
       <button type="submit" mat-raised-button color="primary"
-        [disabled]="userForm.pristine || userForm.invalid">Submit</button>
-    </div>
+      [disabled]="userForm.pristine || userForm.invalid">Submit</button>
+      <button type="button" mat-raised-button color="default"
+        [disabled]="userForm.pristine" (click)="resetForm()">Reset</button>
+</div>
   </form>
 </div>

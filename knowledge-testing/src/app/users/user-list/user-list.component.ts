@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { User } from '../user.model';
 
 @Component({
   selector: 'kt-user-list',
@@ -8,13 +9,23 @@ import { UserService } from '../user.service';
 })
 export class UserListComponent implements OnInit {
 
-
-  currentUser = {};
+  users: User[] = [];
+  selectedUser: User;
+  isNew = false;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.findAllUsers().then(users => this.currentUser = users[0]);
+    this.userService.findAllUsers().then(users => this.users = users);
+  }
+
+  selectItem(user: User) {
+    this.selectedUser = user;
+  }
+
+  addNewUser() {
+    this.isNew = true;
+    this.selectedUser = {} as User;
   }
 
 }
