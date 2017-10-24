@@ -22,11 +22,11 @@ export class UserService {
     return this.backend.add(User, user);
   }
 
-  addEdit(user: User) {
+  editUser(user: User) {
     return this.backend.edit(User, user);
   }
 
-  addDelete(userId: IdentityType) {
+  deleteUser(userId: IdentityType) {
     return this.backend.delete(User, userId);
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChange, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange, OnChanges, Output, EventEmitter } from '@angular/core';
 import { User, Role } from '../user.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserService } from '../user.service';
@@ -11,7 +11,8 @@ import { UserService } from '../user.service';
 export class UserDetailComponent implements OnInit, OnChanges {
 
   @Input() user: User = new User(''); // user with empty id
-  @Input() isNewUser = true; // new user by default
+  @Output() onComplete = new EventEmitter<void>();
+  isNew = true; // new user by default
   roles: { key: Role, value: string }[] = [];
   userForm: FormGroup;
   errorMessage: string;
@@ -49,6 +50,12 @@ export class UserDetailComponent implements OnInit, OnChanges {
   };
 
   constructor( private service: UserService, private fb: FormBuilder) {
+    this.isNew = !this.user.id;
+    for (const role in Role) {
+      if (typeof Role[role] === 'number') {
+        this.roles.push({ key: +Role[role], value: role });
+      }
+    }
   }
 
   ngOnInit() {
@@ -69,23 +76,23 @@ export class UserDetailComponent implements OnInit, OnChanges {
         Validators.required,
         Validators.email,
       ]],
-      // 'fname': [this.user.fname, [
-      //   Validators.required,
-      //   Validators.minLength(2),
-      //   Validators.maxLength(24)
-      // ]],
-      // 'lname': [this.user.lname, [
-      //   Validators.required,
-      //   Validators.minLength(2),
-      //   Validators.maxLength(24)
-      // ]],
-      // 'password': [this.user.password, [
-      //   Validators.required,
-      //   Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d!$%@#£€*?&]{6,20}$')
-      // ]],
-      // 'role': [this.user.role, [
-      //   Validators.required
-      // ]]
+      'fname': [this.user.fname, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(24)
+      ]],
+      'lname': [this.user.lname, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(24)
+      ]],
+      'password': [this.user.password, [
+        Validators.required,
+        Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d!$%@#£€*?&]{6,20}$')
+      ]],
+      'role': [this.user.role, [
+        Validators.required
+      ]]
     });
 
     this.userForm.statusChanges
@@ -94,10 +101,26 @@ export class UserDetailComponent implements OnInit, OnChanges {
     this.onStatusChanged(); // reset validation messages
   }
 
+  public onSubmit() {
+    this.user = this.userForm.getRawValue() as User;
+    if (this.isNew) {
+      this.service.addUser(this.user);
+    } else {
+      this.service.editUser(this.user);
+    }
+    this.goBack();
+  }
+
   resetForm() {
+    this.isNew = !this.user.id;
     if (this.userForm) {
       this.userForm.reset(this.user);
     }
+  }
+
+  public goBack() {
+    this.onComplete.emit();
+    // window.location.replace('/');
   }
 
   private onStatusChanged(data?: any) {

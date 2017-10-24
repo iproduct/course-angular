@@ -1,3 +1,7 @@
+.user-detail-conatainer {
+  margin-top: 20px;
+}
+
 mat-input-container, mat-select, .buttons {
   width: 90%;
 }
@@ -11,5 +15,5 @@ mat-select {
 }
 
 .buttons {
-  margin: 20px 0;
+  margin-bottom: 50px;
 }

@@ -8,6 +8,7 @@ import {CoreModule} from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { UsersModule } from './users/users.module';
 import { TestsModule } from './tests/tests.module';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TestsModule } from './tests/tests.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpModule,
     CoreModule,
     UiModule,
     HomeModule,

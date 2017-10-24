@@ -15,12 +15,12 @@ const USERS: Identifiable[] = [
 @Injectable()
 export class BackendMockService implements BackendPromiseService {
 
+  private nextId = 1234568;
   constructor(private logger: LoggerService) { }
 
   find <T extends Identifiable>(type: Type<T>, id: IdentityType) {
     return Promise.resolve(this.findAll(type).then(
       items => items.filter(item => item.id === id)))[0];
-
   }
 
   findAll <T extends Identifiable>(type: Type<T>): Promise<T[]> {
@@ -33,14 +33,39 @@ export class BackendMockService implements BackendPromiseService {
   }
 
   add <T extends Identifiable>(type: Type<T>, item: T): Promise<T> {
-    throw new Error('Method not implemented.');
+    switch (type.name) {
+      case User.name:
+        item.id = this.getNextId();
+        USERS.push(item);
+        this.logger.log(`User ${item.id} added successfully.`);
+        return Promise.resolve(item);
+      default:
+        return Promise.reject<T>(new ApplicationError<T>(`Cannot recognize entity type: ${type.name}.`));
+    }
   }
   edit <T extends Identifiable>(type: Type<T>, item: T): Promise<T> {
-    throw new Error('Method not implemented.');
+    switch (type.name) {
+      case User.name:
+        USERS.splice(USERS.findIndex(it => it.id === item.id), 1, item);
+        return Promise.resolve(item);
+      default:
+        return Promise.reject<T>(new ApplicationError<T>(`Cannot recognize entity type: ${type.name}.`));
+    }
   }
   delete <T extends Identifiable>(type: Type<T>, id: string): Promise<T> {
-    throw new Error('Method not implemented.');
+    switch (type.name) {
+      case User.name:
+        const index = USERS.findIndex(it => it.id === id);
+        const deleted = <T[]> USERS.splice(index, 1);
+        const deletedElem = (deleted.length > 0) ? deleted[0] : null;
+        return Promise.resolve<T>(deletedElem);
+      default:
+        return Promise.reject<T>(new ApplicationError<T>(`Cannot recognize entity type: ${type.name}.`));
+    }
   }
 
+  private getNextId(): IdentityType {
+    return '123456789abcdef0' + (this.nextId++);
+  }
 
 }
