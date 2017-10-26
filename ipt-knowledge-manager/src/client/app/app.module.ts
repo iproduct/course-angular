@@ -36,7 +36,6 @@ import { RoutingEffects } from './shared/routing.effects';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpModule,
     RouterModule.forRoot(routes),
     SharedModule,
     CoreModule,

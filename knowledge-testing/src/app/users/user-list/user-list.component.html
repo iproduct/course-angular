@@ -1,22 +1,25 @@
-<div class="user-list-conatainer ui-g-12 ui-md-8 ui-lg-6">
+<div class="user-container" >
+  <div class="user-list-container">
     <div class="user-list-header ui-g-12">
-      <h2>Pick a User to Edit:</h2>
+      <h2>Users</h2>
     </div>
     <div class="button-row">
       <button type="button" mat-raised-button color="primary" (click)="addNewUser()">Add New User</button>
     </div>
 
     <mat-list class="user-list">
-     <mat-list-item *ngFor="let user of users; let i = index" class="user-item"
-        [class.selected]="user.id === selectedUser?.id" (click)="selectItem(user)"
-        [title]="user.fname">
-        <span class="item-badge"> {{i + 1}} </span> {{user.fname}} {{user.lname}}
+      <mat-list-item *ngFor="let user of users; let i = index" class="user-item"
+          [class.selected]="user.id === selectedUser?.id" (click)="selectItem(user)"
+          [title]="user.fname">
+          <span class="item-badge"> {{i + 1}} </span> {{user.fname}} {{user.lname}}
+          <mat-icon class="remove-item" (click)="deleteUser(user.id); $event.stopPropagation()"
+            aria-hidden="true" title="Click to delete this product.">remove_circle</mat-icon>
       </mat-list-item>
     </mat-list>
-
     <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+  </div>
 
-  <div class="router-outlet">
+  <div class="user-details-container">
     <kt-user-detail *ngIf="selectedUser || isNew" [user]="selectedUser" (onComplete)="editCompleted()"></kt-user-detail>
   </div>
 </div>

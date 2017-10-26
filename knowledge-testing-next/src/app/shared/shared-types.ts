@@ -8,10 +8,8 @@
  *
  */
 
-import { InjectionToken, Type } from '@angular/core';
+import { Type } from '@angular/core';
 import { ENTITY_TYPES } from './constants';
-
-export const API_BASE_URL = new InjectionToken<string>('api.base.url');
 
 export type IdentityType = string;
 
@@ -26,8 +24,16 @@ export enum ErrorType {
 export class ApplicationError<T> {
   constructor(
     public readonly message: string,
-    public readonly forEntityId?: IdentityType,
     public readonly forEntityType?: Type<T>,
+    public readonly forEntityId?: IdentityType,
     public readonly forEntity?: T,
     public readonly type: ErrorType = ErrorType.ERROR) {}
+
+    toString() {
+      let result = `${ErrorType[this.type]}: ${this.message}`;
+      if (this.forEntity || this.forEntityId) {
+        result += ` for ${this.forEntityType.name} ${this.forEntity ? JSON.stringify(this.forEntity) : 'ID: ' + this.forEntityId}.`;
+      }
+      return result;
+    }
 }

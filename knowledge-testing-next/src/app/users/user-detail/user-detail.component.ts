@@ -2,6 +2,7 @@ import { Component, OnInit, Input, SimpleChange, OnChanges, Output, EventEmitter
 import { User, Role } from '../user.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserService } from '../user.service';
+import { ApplicationError } from '../../shared/shared-types';
 
 @Component({
   selector: 'kt-user-detail',
@@ -11,7 +12,7 @@ import { UserService } from '../user.service';
 export class UserDetailComponent implements OnInit, OnChanges {
 
   @Input() user: User = new User(''); // user with empty id
-  @Output() onComplete = new EventEmitter<void>();
+  @Output() onComplete = new EventEmitter<User>();
   isNew = true; // new user by default
   roles: { key: Role, value: string }[] = [];
   userForm: FormGroup;
@@ -103,12 +104,16 @@ export class UserDetailComponent implements OnInit, OnChanges {
 
   public onSubmit() {
     this.user = this.userForm.getRawValue() as User;
+    let result: Promise<User>;
     if (this.isNew) {
-      this.service.addUser(this.user);
+      result = this.service.addUser(this.user);
     } else {
-      this.service.editUser(this.user);
+      result = this.service.editUser(this.user);
     }
-    this.goBack();
+    result.then(user => this.complete(user))
+    .catch(error => {
+      this.errorMessage = (error as ApplicationError<User>).toString();
+    });
   }
 
   resetForm() {
@@ -118,8 +123,8 @@ export class UserDetailComponent implements OnInit, OnChanges {
     }
   }
 
-  public goBack() {
-    this.onComplete.emit();
+  public complete(user: User) {
+    this.onComplete.emit(user);
     // window.location.replace('/');
   }
 

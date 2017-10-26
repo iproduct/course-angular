@@ -8,7 +8,7 @@ import {CoreModule} from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { UsersModule } from './users/users.module';
 import { TestsModule } from './tests/tests.module';
-import { HttpModule } from '@angular/http';
+import { WikiModule } from './wiki/wiki.module';
 
 @NgModule({
   declarations: [
@@ -17,12 +17,12 @@ import { HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpModule,
     CoreModule,
     UiModule,
     HomeModule,
     UsersModule,
-    TestsModule
+    TestsModule,
+    WikiModule
   ],
   providers: [],
   bootstrap: [AppComponent]

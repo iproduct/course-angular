@@ -15,7 +15,7 @@ const USERS: Identifiable[] = [
 @Injectable()
 export class BackendMockService implements BackendPromiseService {
 
-  private nextId = 1234568;
+  private nextId = 12345678;
   constructor(private logger: LoggerService) { }
 
   find <T extends Identifiable>(type: Type<T>, id: IdentityType) {

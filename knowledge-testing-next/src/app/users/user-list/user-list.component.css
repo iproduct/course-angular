@@ -1,6 +1,18 @@
+.user-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user-list-container {
+  flex-basis: 1;
+  flex-grow: 1;
+  min-width: 320px;
+  max-width: 600px;
+  margin: 20px;
+}
+
 .user-list {
   padding-bottom: 8px;
-  max-width: 500px;
   border: 1px solid lightgray;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(245, 239, 239)), to(rgb(229, 237, 238)));
   background-image: -webkit-linear-gradient(top, rgb(245, 239, 239), rgb(229, 237, 238));
@@ -23,6 +35,18 @@
   background: #ffca44;
 }
 .remove-item {
+  margin-left: auto;
+  order: 2;
   color: #ee0000;
+  float: right;
+  font-size: 100%;
+}
+
+.user-details-container {
+  flex-basis: 1;
+  flex-grow: 1;
+  min-width: 320px;
+  max-width: 600px;
+  margin: 20px;
 }
 

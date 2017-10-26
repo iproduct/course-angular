@@ -88,4 +88,4 @@ setTimeout(() => {
     .catch(err => {
       console.log(err);
     });
-}, 3000);
+}, 4000);

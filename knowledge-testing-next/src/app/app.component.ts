@@ -10,6 +10,8 @@ export class AppComponent {
   viewHome = Views.HOME;
   viewUsers =  Views.USERS;
   viewTests =  Views.TESTS;
+  viewWiki =  Views.WIKI;
+
   title = 'Knowledge Tester';
   sidenavOpen = false;
   currentView = Views.HOME;
