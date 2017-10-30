@@ -40,3 +40,8 @@ h2 {
   margin-right: .8em;
   border-radius: 50%;
 }
+
+.active {
+  background-color: lightgray;
+  border: 1px dotted gray;
+}

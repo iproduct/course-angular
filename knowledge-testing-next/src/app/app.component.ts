@@ -22,8 +22,8 @@ export class AppComponent {
   }
 
   chooseView(view: Views) {
-    this.currentView = view;
-    console.log(Views[view]);
+    // this.currentView = view;
+    // console.log(Views[view]);
     this.sidenavOpen = false;
   }
 }

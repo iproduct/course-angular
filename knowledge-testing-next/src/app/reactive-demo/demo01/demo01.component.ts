@@ -4,11 +4,11 @@ import 'rxjs/Rx';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'kt-demo01',
+  selector: 'kt-reactive-demo',
   templateUrl: './demo01.component.html',
   styleUrls: ['./demo01.component.css']
 })
-export class Demo01Component implements OnInit, OnDestroy {
+export class ReactiveDemoComponent implements OnInit, OnDestroy {
   @ViewChild('mybutton') button: ElementRef;
 
   names$: Observable<string>;

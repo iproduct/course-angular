@@ -1,19 +1,19 @@
 <!--The content below is only a placeholder and can be replaced.-->
   <kt-layout>
     <kt-sidenav [open]="sidenavOpen">
-      <kt-nav-item (activate)="chooseView($event)" [viewId]="viewHome" icon="home" hint="Welcome page">
+      <kt-nav-item (activate)="chooseView($event)" routerLink="/home" icon="home" hint="Welcome page">
         Home
       </kt-nav-item>
-      <kt-nav-item (activate)="chooseView($event)" [viewId]="viewUsers" icon="people" hint="Users management">
+      <kt-nav-item (activate)="chooseView($event)" routerLink="/users"  icon="people" hint="Users management">
         Users
       </kt-nav-item>
-      <kt-nav-item (activate)="chooseView($event)" [viewId]="viewTests" icon="view_list" hint="Tests management">
+      <kt-nav-item (activate)="chooseView($event)" routerLink="/tests"  icon="view_list" hint="Tests management">
         Tests
       </kt-nav-item>
-      <kt-nav-item (activate)="chooseView($event)" [viewId]="viewReactive" icon="view_stream" hint="RxJS Observable demos">
+      <kt-nav-item (activate)="chooseView($event)" routerLink="/reactive-demo"  icon="view_stream" hint="RxJS Observable demos">
         Reactive Demos
       </kt-nav-item>
-      <kt-nav-item (activate)="chooseView($event)" [viewId]="viewWiki" icon="search" hint="Wikipedia search demo with RxJS">
+      <kt-nav-item (activate)="chooseView($event)" routerLink="/wiki-search"  icon="search" hint="Wikipedia search demo with RxJS">
         Reactive Wiki Search Demo
       </kt-nav-item>
     </kt-sidenav>
@@ -21,12 +21,13 @@
       Knowledge Tester
     </kt-toolbar>
 
-    <div [ngSwitch]="currentView" class="main-view">
+    <router-outlet></router-outlet>
+
+    <!-- <div [ngSwitch]="currentView" class="main-view">
       <kt-user-list *ngSwitchCase="viewUsers"></kt-user-list>
       <kt-test-list *ngSwitchCase="viewTests"></kt-test-list>
       <kt-home *ngSwitchCase="viewHome"></kt-home>
-      <kt-demo01 *ngSwitchCase="viewReactive"></kt-demo01>
+      <kt-reactive-demo *ngSwitchCase="viewReactive"></kt-reactive-demo>
       <kt-wiki *ngSwitchCase="viewWiki"></kt-wiki>
-    </div>
-
+    </div> -->
   </kt-layout>
