@@ -2,7 +2,9 @@
 	<div class="user-detail-header ui-g-12">
 		<h2 *ngIf="isNew">Add New User</h2>
 		<h2 *ngIf="!isNew">Edit User: {{user?.fname}} {{user?.lname}}</h2>
-	</div>
+  </div>
+
+  <kt-message [message]="errorMessage"></kt-message>
 
 	<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="ui-g-12 ui-mat-8 ui-lg-6">
 		<div *ngIf="user?.id">
@@ -42,7 +44,7 @@
       <button type="submit"  mat-raised-button color="primary"
         [disabled]="userForm.pristine || !userForm.valid">Submit</button>
 			<button type="button"  mat-raised-button color="warn" (click)="resetForm()">Reset</button>
-			<button type="button"  mat-raised-button (click)="goBack()">Cancel</button>
+			<button type="button"  mat-raised-button (click)="complete()">Cancel</button>
 		</div>
 	</form>
 </div>

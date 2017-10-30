@@ -8,6 +8,8 @@ import {CoreModule} from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { UsersModule } from './users/users.module';
 import { TestsModule } from './tests/tests.module';
+import { ErrorMessageComponent } from './shared/error-message/error-message.component';
+import { ReactiveDemoModule } from './reactive-demo/reactive-demo.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { TestsModule } from './tests/tests.module';
     UiModule,
     HomeModule,
     UsersModule,
-    TestsModule
+    TestsModule,
+    ReactiveDemoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

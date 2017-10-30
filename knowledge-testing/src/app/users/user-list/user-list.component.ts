@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../user.model';
-import { IdentityType } from '../../shared/shared-types';
+import { IdentityType, ApplicationError } from '../../shared/shared-types';
 
 @Component({
   selector: 'kt-user-list',
@@ -13,6 +13,7 @@ export class UserListComponent implements OnInit {
   users: User[] = [];
   selectedUser: User;
   isNew = false;
+  errorMessage = '';
 
   constructor(private userService: UserService) { }
 
@@ -21,7 +22,11 @@ export class UserListComponent implements OnInit {
   }
 
   fetchUsers() {
-    this.userService.findAllUsers().then(users => this.users = users);
+    this.userService.findAllUsers()
+      .then(users => this.users = users)
+      .catch(error => {
+        this.errorMessage = error.toString();
+      });
   }
 
   selectItem(user: User) {
@@ -32,14 +37,21 @@ export class UserListComponent implements OnInit {
     this.selectedUser = {} as User;
   }
 
-  editCompleted() {
-    this.fetchUsers();
+  editCompleted(user: User | undefined) {
+    // this.fetchUsers();
+    if (user) {
+     this.users.push(user);
+    }
     this.selectedUser = undefined;
   }
 
   deleteUser(itemId: IdentityType) {
-    this.userService.deleteUser(itemId).then(deleted => {
+    this.userService.deleteUser(itemId)
+    .then(deleted => {
       this.fetchUsers();
+    })
+    .catch(error => {
+      this.errorMessage = error.toString();
     });
   }
 

@@ -10,6 +10,8 @@ export class AppComponent {
   viewHome = Views.HOME;
   viewUsers =  Views.USERS;
   viewTests =  Views.TESTS;
+  viewReactive = Views.REACTIVE;
+
   title = 'Knowledge Tester';
   sidenavOpen = false;
   currentView = Views.HOME;

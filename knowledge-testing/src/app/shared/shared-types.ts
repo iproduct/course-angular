@@ -24,8 +24,16 @@ export enum ErrorType {
 export class ApplicationError<T> {
   constructor(
     public readonly message: string,
-    public readonly forEntityId?: IdentityType,
     public readonly forEntityType?: Type<T>,
+    public readonly forEntityId?: IdentityType,
     public readonly forEntity?: T,
     public readonly type: ErrorType = ErrorType.ERROR) {}
+
+    toString() {
+      let result = `${ErrorType[this.type]}: ${this.message}`;
+      if (this.forEntityId || this.forEntity) {
+        result += `for ${this.forEntityType} ${this.forEntity ? this.forEntity : 'ID ' + this.forEntityId}.`;
+      }
+      return result;
+    }
 }

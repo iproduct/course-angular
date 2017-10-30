@@ -11,7 +11,7 @@ import { UserService } from '../user.service';
 export class UserDetailComponent implements OnInit, OnChanges {
 
   @Input() user: User = new User(''); // user with empty id
-  @Output() onComplete = new EventEmitter<void>();
+  @Output() onComplete = new EventEmitter<User | undefined>();
   isNew = true; // new user by default
   roles: { key: Role, value: string }[] = [];
   userForm: FormGroup;
@@ -104,11 +104,22 @@ export class UserDetailComponent implements OnInit, OnChanges {
   public onSubmit() {
     this.user = this.userForm.getRawValue() as User;
     if (this.isNew) {
-      this.service.addUser(this.user);
+      this.service.addUser(this.user)
+        .then(user => {
+          this.complete(user);
+        })
+        .catch(error => {
+          this.errorMessage = error.toString();
+        });
     } else {
-      this.service.editUser(this.user);
+      this.service.editUser(this.user)
+      .then(user => {
+        this.complete(user);
+      })
+      .catch(error => {
+        this.errorMessage = error.toString();
+      });
     }
-    this.goBack();
   }
 
   resetForm() {
@@ -118,8 +129,8 @@ export class UserDetailComponent implements OnInit, OnChanges {
     }
   }
 
-  public goBack() {
-    this.onComplete.emit();
+  public complete (user?: User) {
+    this.onComplete.emit(user);
     // window.location.replace('/');
   }
 
