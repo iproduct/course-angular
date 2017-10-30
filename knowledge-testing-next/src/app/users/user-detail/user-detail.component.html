@@ -2,11 +2,9 @@
 	<div class="user-detail-header ui-g-12">
 		<h2 *ngIf="isNew">Add New User</h2>
 		<h2 *ngIf="!isNew">Edit User: {{user?.fname}} {{user?.lname}}</h2>
-	</div>
+  </div>
 
-  <mat-card *ngIf="errorMessage" class="error">
-    <mat-error >{{errorMessage}}</mat-error>
-  </mat-card>
+  <kt-message [message]="errorMessage"></kt-message>
 
 	<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="ui-g-12 ui-mat-8 ui-lg-6">
 		<div *ngIf="user?.id">

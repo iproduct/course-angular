@@ -1,5 +1,6 @@
+import { WikipediaService } from '../../wiki/wikipedia.service';
 
 export enum Views {
-  HOME, USERS, TESTS, WIKI
+  HOME, USERS, TESTS, REACTIVE, WIKI
 }
 

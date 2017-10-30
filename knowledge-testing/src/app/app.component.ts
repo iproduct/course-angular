@@ -11,6 +11,7 @@ export class AppComponent {
   viewUsers =  Views.USERS;
   viewTests =  Views.TESTS;
   viewReactive = Views.REACTIVE;
+  viewWiki = Views.WIKI;
 
   title = 'Knowledge Tester';
   sidenavOpen = false;

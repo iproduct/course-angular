@@ -1,12 +1,14 @@
 import { Injectable, Inject, Type } from '@angular/core';
 import { API_BASE_URL } from '../shared/constants';
-import {HttpErrorResponse, HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LoggerService } from './logger.service';
 import { BackendPromiseService } from './backend-promise.service';
-import { Identifiable, IdentityType, ApplicationError, ErrorType } from '../shared/shared-types';
+import { Identifiable, IdentityType, ApplicationError } from '../shared/shared-types';
+import { HttpErrorResponse } from '@angular/common/http';
 // import 'rxjs/operator/map';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
+
 
 @Injectable()
 export class BackendPromiseHttpService implements BackendPromiseService {
@@ -19,45 +21,51 @@ export class BackendPromiseHttpService implements BackendPromiseService {
 
   find <T extends Identifiable>(type: Type<T>, id: IdentityType): Promise<T> {
     return this.http.get<T>(this.baseUrl + '/' + this.getCollectionName(type) + '/' + id)
-    .catch(error => Observable.throw(new ApplicationError<T>(this.getErrorMessage(error), type, id)))
-    .toPromise();
+      .catch(error => {
+        return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type, id));
+      }).toPromise();
   }
 
   findAll<T extends Identifiable>(type: Type<T>): Promise<T[]> {
-    return this.http.get<{data: T[]}>(this.baseUrl + '/' + this.getCollectionName(type))
+    return this.http.get<{ data: T[] }>(this.baseUrl + '/' + this.getCollectionName(type))
       .map( json => json.data)
-      .catch(error => Observable.throw(new ApplicationError<T>(this.getErrorMessage(error), type))).
-      toPromise();
+      .catch(error => {
+        return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type));
+      }).toPromise();
   }
 
   add<T extends Identifiable>(type: Type<T>, item: T): Promise<T> {
     return this.http.post<T>(this.baseUrl + '/' + this.getCollectionName(type), item)
-    .catch(error => Observable.throw(new ApplicationError<T>(this.getErrorMessage(error), type, item.id, item)))
-    .toPromise();
+    .catch(error => {
+      return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type, item.id, item));
+    }).toPromise();
   }
-
   edit<T extends Identifiable>(type: Type<T>, item: T): Promise<T> {
     return this.http.put<T>(this.baseUrl + '/' + this.getCollectionName(type) + '/' + item.id, item)
-    .catch(error => Observable.throw(new ApplicationError<T>(this.getErrorMessage(error), type, item.id, item)))
-    .toPromise();
+    .catch(error => {
+      return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type, item.id, item));
+    }).toPromise();
   }
-
   delete<T extends Identifiable>(type: Type<T>, id: IdentityType): Promise<T> {
     return this.http.delete<T>(this.baseUrl + '/' + this.getCollectionName(type) + '/' + id)
-    .catch(error => Observable.throw(new ApplicationError<T>(this.getErrorMessage(error), type, id)))
-    .toPromise();
-  }
+    .catch(error => {
+      return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type, id));
+    }).toPromise();
+}
 
   private getCollectionName<T>(type: Type<T>) {
     return type.name + 's';
   }
 
-  private getErrorMessage(error:  HttpErrorResponse) {
-    if (error.error instanceof Error) {  // Client-side or network error
+  private getErrorMessage(error: HttpErrorResponse) {
+    if (error.error instanceof Error) {
+      // An Angular HHTP client or network error occurred. Handle it accordingly.
       return error.error.message;
-    } else {                             // Backend returned an unsuccessful response code
-      return `Backend returned code ${error.status}: ${error.statusText || ''}, body was: ${error.error}`;
+    } else {
+      // The server backend returned an unsuccessful response code.
+      return `Backend returned code ${error.status}: ${error.statusText}, body was: ${error.error}`;
     }
   }
 
 }
+

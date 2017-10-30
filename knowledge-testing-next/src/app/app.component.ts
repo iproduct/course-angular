@@ -10,7 +10,8 @@ export class AppComponent {
   viewHome = Views.HOME;
   viewUsers =  Views.USERS;
   viewTests =  Views.TESTS;
-  viewWiki =  Views.WIKI;
+  viewReactive = Views.REACTIVE;
+  viewWiki = Views.WIKI;
 
   title = 'Knowledge Tester';
   sidenavOpen = false;

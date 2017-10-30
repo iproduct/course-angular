@@ -25,7 +25,7 @@ export class UserListComponent implements OnInit {
     this.userService.findAllUsers()
       .then(users => this.users = users)
       .catch(error => {
-        this.errorMessage = (error as ApplicationError<User>).toString();
+        this.errorMessage = error.toString();
       });
   }
 
@@ -37,14 +37,21 @@ export class UserListComponent implements OnInit {
     this.selectedUser = {} as User;
   }
 
-  editCompleted() {
-    this.fetchUsers();
+  editCompleted(user: User | undefined) {
+    // this.fetchUsers();
+    if (user) {
+     this.users.push(user);
+    }
     this.selectedUser = undefined;
   }
 
   deleteUser(itemId: IdentityType) {
-    this.userService.deleteUser(itemId).then(deleted => {
+    this.userService.deleteUser(itemId)
+    .then(deleted => {
       this.fetchUsers();
+    })
+    .catch(error => {
+      this.errorMessage = error.toString();
     });
   }
 

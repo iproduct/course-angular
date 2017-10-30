@@ -31,8 +31,8 @@ export class ApplicationError<T> {
 
     toString() {
       let result = `${ErrorType[this.type]}: ${this.message}`;
-      if (this.forEntity || this.forEntityId) {
-        result += ` for ${this.forEntityType.name} ${this.forEntity ? JSON.stringify(this.forEntity) : 'ID: ' + this.forEntityId}.`;
+      if (this.forEntityId || this.forEntity) {
+        result += `for ${this.forEntityType} ${this.forEntity ? this.forEntity : 'ID ' + this.forEntityId}.`;
       }
       return result;
     }

@@ -40,9 +40,3 @@ h2 {
   margin-right: .8em;
   border-radius: 50%;
 }
-
-.error {
-  border-color: rgb(189, 3, 3) !important;
-  background-color: rgba(255, 0, 0, 0.2) !important;
-  margin-bottom: 20px;
-}

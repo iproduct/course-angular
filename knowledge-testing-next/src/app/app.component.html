@@ -8,10 +8,13 @@
         Users
       </kt-nav-item>
       <kt-nav-item (activate)="chooseView($event)" [viewId]="viewTests" icon="view_list" hint="Tests management">
-          Tests
-        </kt-nav-item>
-      <kt-nav-item (activate)="chooseView($event)" [viewId]="viewWiki" icon="view_list" hint="Wikipedia search demo">
-          Wiki
+        Tests
+      </kt-nav-item>
+      <kt-nav-item (activate)="chooseView($event)" [viewId]="viewReactive" icon="view_stream" hint="RxJS Observable demos">
+        Reactive Demos
+      </kt-nav-item>
+      <kt-nav-item (activate)="chooseView($event)" [viewId]="viewWiki" icon="search" hint="Wikipedia search demo with RxJS">
+        Reactive Wiki Search Demo
       </kt-nav-item>
     </kt-sidenav>
     <kt-toolbar (openSidenav)="openSidenav()">
@@ -22,6 +25,7 @@
       <kt-user-list *ngSwitchCase="viewUsers"></kt-user-list>
       <kt-test-list *ngSwitchCase="viewTests"></kt-test-list>
       <kt-home *ngSwitchCase="viewHome"></kt-home>
+      <kt-demo01 *ngSwitchCase="viewReactive"></kt-demo01>
       <kt-wiki *ngSwitchCase="viewWiki"></kt-wiki>
     </div>
 

@@ -7,9 +7,7 @@
       <button type="button" mat-raised-button color="primary" (click)="addNewUser()">Add New User</button>
     </div>
 
-    <mat-card *ngIf="errorMessage" class="error">
-        <mat-error >{{errorMessage}}</mat-error>
-    </mat-card>
+    <kt-message [message]="errorMessage"></kt-message>
 
     <mat-list class="user-list">
       <mat-list-item *ngFor="let user of users; let i = index" class="user-item"
@@ -20,7 +18,6 @@
             aria-hidden="true" title="Click to delete this product.">remove_circle</mat-icon>
       </mat-list-item>
     </mat-list>
-
   </div>
 
   <div class="user-details-container">

@@ -1,4 +1,4 @@
-import {MatInputModule, MatSelectModule, MatButtonModule, MatListModule, MatIconModule, MatCardModule} from '@angular/material';
+import {MatInputModule, MatSelectModule, MatButtonModule, MatListModule, MatIconModule} from '@angular/material';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserListComponent } from './user-list/user-list.component';
@@ -7,17 +7,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './user.service';
 import { SimpleReactiveComponent } from './simple-reactive/simple-reactive.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    SharedModule,
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
     MatListModule,
-    MatIconModule,
-    MatCardModule
+    MatIconModule
   ],
   declarations: [UserListComponent, UserDetailComponent, SimpleReactiveComponent],
   exports: [UserListComponent],
