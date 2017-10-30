@@ -11,6 +11,7 @@ import { TestsModule } from './tests/tests.module';
 import { ErrorMessageComponent } from './shared/error-message/error-message.component';
 import { ReactiveDemoModule } from './reactive-demo/reactive-demo.module';
 import { WikiModule } from './wiki/wiki.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { WikiModule } from './wiki/wiki.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     CoreModule,
     UiModule,
     HomeModule,

@@ -9,8 +9,8 @@ import { Views } from './views';
 export class NavItemComponent implements OnInit {
   @Input() icon = '';
   @Input() hint = '';
-  @Input() viewId = Views.HOME;
-  @Output() activate = new EventEmitter<Views>();
+  @Input() routerLink = '';
+  @Output() activate = new EventEmitter<void>();
 
   constructor() { }
 

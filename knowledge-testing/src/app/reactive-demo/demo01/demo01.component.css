@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  width: 100%;
+  position: absolute;
+}
+
+h2, h3, button {
+  margin: 20px;
+}

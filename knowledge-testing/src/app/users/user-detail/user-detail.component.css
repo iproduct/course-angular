@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  width: 100%;
+  position: absolute;
+}
+
 .user-detail-conatainer {
   margin-top: 20px;
 }

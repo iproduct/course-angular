@@ -11,10 +11,13 @@ import { NavItemComponent } from './nav-item/nav-item.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LayoutComponent } from './layout/layout.component';
+import { RouterModule } from '@angular/router';
+import { RouteNotFoundComponent } from './route-not-found/route-not-found.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
@@ -25,7 +28,8 @@ import { LayoutComponent } from './layout/layout.component';
     NavItemComponent,
     SidenavComponent,
     ToolbarComponent,
-    LayoutComponent
+    LayoutComponent,
+    RouteNotFoundComponent
   ],
   exports: [
     NavItemComponent,
