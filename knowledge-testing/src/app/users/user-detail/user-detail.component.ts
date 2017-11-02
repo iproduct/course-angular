@@ -4,6 +4,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Observer } from 'rxjs/Observer';
 import { Subscription } from 'rxjs/Subscription';
+import { LoggerService } from '../../core/logger.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'kt-user-detail',
@@ -61,7 +63,13 @@ export class UserDetailComponent implements OnInit, OnChanges {
     complete: () => { }
   };
 
-  constructor( private service: UserService, private fb: FormBuilder) {
+  constructor(
+    private service: UserService,
+    private fb: FormBuilder,
+    private logger: LoggerService,
+    private route: ActivatedRoute,
+    private roter: Router
+  ) {
     this.isNew = !this.user.id;
     for (const role in Role) {
       if (typeof Role[role] === 'number') {
@@ -72,6 +80,19 @@ export class UserDetailComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.buildForm();
+    this.route.paramMap
+      .map( paramMap => paramMap.get('id') )
+      .filter( id => !!id )
+      .do( id => this.logger.log(id) )
+      .switchMap( id => this.service.findUser(id))
+      .do( user => this.logger.log(user) )
+      .subscribe( user => {
+        this.isNew = false;
+        this.user = user;
+        this.resetForm();
+      },
+      error => this.errorMessage = error.toString()
+    );
   }
 
   public ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {

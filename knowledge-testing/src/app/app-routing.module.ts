@@ -11,7 +11,6 @@ import { RouteNotFoundComponent } from './ui/route-not-found/route-not-found.com
 const APP_ROUTES: Route[] = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'users', component: UserListComponent },
   { path: 'tests', component: TestListComponent },
   { path: 'reactive-demo', component: Demo01Component },
   { path: 'wiki-demo', component: WikiComponent },

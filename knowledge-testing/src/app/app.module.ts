@@ -20,14 +20,14 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     CoreModule,
     UiModule,
     HomeModule,
     UsersModule,
     TestsModule,
     ReactiveDemoModule,
-    WikiModule
+    WikiModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

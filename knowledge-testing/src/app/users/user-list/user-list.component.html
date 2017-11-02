@@ -12,7 +12,7 @@
 
     <mat-list class="user-list">
       <mat-list-item *ngFor="let user of users; let i = index" class="user-item"
-          [class.selected]="user.id === selectedUser?.id" (click)="selectItem(user)"
+          [class.selected]="user.id === selectedId" (click)="selectItem(user)"
           [title]="user.fname">
           <span class="item-badge"> {{i + 1}} </span> {{user.fname}} {{user.lname}}
           <mat-icon class="remove-item" (click)="deleteUser(user.id); $event.stopPropagation()"
@@ -21,10 +21,10 @@
     </mat-list>
   </div>
 
-  <div class="user-details-container">
+ <!-- <div class="user-details-container">
     <kt-user-detail *ngIf="selectedUser || isNew" [user]="selectedUser" (onComplete)="editCompleted($event)">
     </kt-user-detail>
-  </div>
+  </div> -->
 </div>
   <!-- <hr>
     <ipt-user-detail *ngIf="selectedUser" [user]="selectedUser"></user-detail> -->
