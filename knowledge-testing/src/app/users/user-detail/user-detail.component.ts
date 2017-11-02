@@ -20,6 +20,7 @@ export class UserDetailComponent implements OnInit, OnChanges {
   roles: { key: Role, value: string }[] = [];
   userForm: FormGroup;
   errorMessage: string;
+  title = '';
 
   formErrors = {
     'fname': '',
@@ -68,7 +69,7 @@ export class UserDetailComponent implements OnInit, OnChanges {
     private fb: FormBuilder,
     private logger: LoggerService,
     private route: ActivatedRoute,
-    private roter: Router
+    private router: Router
   ) {
     this.isNew = !this.user.id;
     for (const role in Role) {
@@ -91,6 +92,11 @@ export class UserDetailComponent implements OnInit, OnChanges {
         this.user = user;
         this.resetForm();
       },
+      error => this.errorMessage = error.toString()
+    );
+
+    this.route.data.subscribe(
+      ({ title }) => this.title = title,
       error => this.errorMessage = error.toString()
     );
   }
@@ -153,7 +159,12 @@ export class UserDetailComponent implements OnInit, OnChanges {
   }
 
   public complete (user?: User) {
-    this.onComplete.emit(user);
+    if (user && this.isNew) {
+      this.router.navigate(['..', {selectedId: user.id}], { relativeTo: this.route});
+    } else { // EDIT
+      this.router.navigate(['..'], { relativeTo: this.route});
+    }
+    // this.onComplete.emit(user);
     // window.location.replace('/');
   }
 

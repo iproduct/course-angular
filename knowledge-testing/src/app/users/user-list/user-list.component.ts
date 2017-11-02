@@ -36,6 +36,10 @@ export class UserListComponent implements OnInit, OnDestroy {
         users => this.users = users,
         error => this.errorMessage = error.toString()
       );
+    this.route.paramMap
+      .do(paramMap => this.logger.log(paramMap))
+      .map(paramMap => paramMap.get('selectedId'))
+      .subscribe(selectedId => this.selectedId = selectedId);
   }
 
   ngOnDestroy(): void {
@@ -44,10 +48,11 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   selectItem(user: User) {
     this.selectedId = user.id;
-    this.router.navigate([user.id], { relativeTo: this.route});
+    this.router.navigate(['/users', { selectedId: this.selectedId }, user.id, ]);
   }
 
   addNewUser() {
+    this.router.navigate(['/users/add']);
     // this.selectedUser = {} as User;
   }
 

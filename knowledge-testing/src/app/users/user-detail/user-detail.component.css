@@ -1,7 +1,12 @@
 :host {
   display: block;
   width: 100%;
-  position: absolute;
+  position: relative;
+  flex-basis: 1;
+  flex-grow: 1;
+  min-width: 320px;
+  max-width: 600px;
+  margin: 20px;
 }
 
 .user-detail-conatainer {

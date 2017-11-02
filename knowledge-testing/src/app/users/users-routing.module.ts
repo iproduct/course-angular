@@ -5,10 +5,23 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserListComponent } from './user-list/user-list.component';
 
 const USER_ROUTES: Route[] = [
-  { path: 'users', component: UserListComponent },
-  { path: 'users/add', component: UserDetailComponent},
-  { path: 'users/:id', component: UserDetailComponent},
-];
+  {
+    path: 'users',
+    component: UserListComponent,
+    children: [
+      { path: 'add',
+        data: {
+          title: 'Add New User'
+        },
+      component: UserDetailComponent
+    },
+      { path: ':id',
+        data: {
+          title: 'Edit User'
+        },
+        component: UserDetailComponent}
+    ]
+  }];
 
 @NgModule({
   imports: [
