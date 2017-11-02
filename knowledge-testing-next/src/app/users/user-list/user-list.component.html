@@ -5,13 +5,14 @@
     </div>
     <div class="button-row">
       <button type="button" mat-raised-button color="primary" (click)="addNewUser()">Add New User</button>
+      <button type="button" mat-raised-button color="default" (click)="refreshUsers()">Refresh Users</button>
     </div>
 
     <kt-message [message]="errorMessage"></kt-message>
 
     <mat-list class="user-list">
       <mat-list-item *ngFor="let user of users; let i = index" class="user-item"
-          [class.selected]="user.id === selectedUser?.id" (click)="selectItem(user)"
+          [class.selected]="user.id === selectedId" (click)="selectItem(user)"
           [title]="user.fname">
           <span class="item-badge"> {{i + 1}} </span> {{user.fname}} {{user.lname}}
           <mat-icon class="remove-item" (click)="deleteUser(user.id); $event.stopPropagation()"
@@ -20,9 +21,11 @@
     </mat-list>
   </div>
 
-  <div class="user-details-container">
-    <kt-user-detail *ngIf="selectedUser || isNew" [user]="selectedUser" (onComplete)="editCompleted()"></kt-user-detail>
-  </div>
+  <router-outlet></router-outlet>
+
+  <!--<div class="user-details-container">
+    <kt-user-detail *ngIf="selectedUser || isNew" [user]="selectedUser" (onComplete)="editCompleted($event)">
+    </kt-user-detail>
+  </div>-->
 </div>
-  <!-- <hr>
-    <ipt-user-detail *ngIf="selectedUser" [user]="selectedUser"></user-detail> -->
+

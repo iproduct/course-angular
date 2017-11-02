@@ -28,4 +28,4 @@ import { UserDetailComponent } from './user-detail.component';
     RouterModule
   ]
 })
-export class UserRoutingModule {}
+export class UsersRoutingModule {}

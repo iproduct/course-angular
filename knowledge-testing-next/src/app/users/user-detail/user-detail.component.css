@@ -1,5 +1,16 @@
+:host {
+  /*display: block;*/
+  width: 100%;
+  position: relative;
+  flex-basis: 1;
+  flex-grow: 1;
+  min-width: 320px;
+  max-width: 600px;
+  margin: 20px;
+}
+
 .user-detail-conatainer {
-  margin-top: 20px;
+  margin: 20px;
 }
 
 mat-input-container, mat-select, .buttons {

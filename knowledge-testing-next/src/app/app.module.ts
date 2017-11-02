@@ -12,6 +12,7 @@ import { ErrorMessageComponent } from './shared/error-message/error-message.comp
 import { ReactiveDemoModule } from './reactive-demo/reactive-demo.module';
 import { WikiModule } from './wiki/wiki.module';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -20,10 +21,11 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    LoginModule,
+    UsersModule,
     CoreModule,
     UiModule,
     HomeModule,
-    UsersModule,
     TestsModule,
     ReactiveDemoModule,
     WikiModule,

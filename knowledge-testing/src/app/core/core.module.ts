@@ -6,6 +6,8 @@ import { BackendMockService } from './backend-mock.service';
 import { BackendPromiseService } from './backend-promise.service';
 import { API_BASE_URL, getBaseApiUrl } from '../shared/constants';
 import { BackendPromiseHttpService } from './backend-promise-http.service';
+import { BackendHttpService } from './backend-http.service';
+import { BackendService } from './backend.service';
 
 @NgModule({
   imports: [
@@ -16,8 +18,8 @@ import { BackendPromiseHttpService } from './backend-promise-http.service';
   providers: [
     LoggerService,
     {provide: API_BASE_URL, useFactory: getBaseApiUrl},
-    {provide: BackendPromiseService, useClass: BackendPromiseHttpService}
-
+    {provide: BackendPromiseService, useClass: BackendPromiseHttpService},
+    {provide: BackendService, useClass: BackendHttpService}
   ]
 })
 export class CoreModule { }

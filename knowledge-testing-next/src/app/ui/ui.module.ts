@@ -11,8 +11,8 @@ import { NavItemComponent } from './nav-item/nav-item.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LayoutComponent } from './layout/layout.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RouterModule } from '@angular/router';
+import { RouteNotFoundComponent } from './route-not-found/route-not-found.component';
 
 @NgModule({
   imports: [
@@ -29,7 +29,7 @@ import { RouterModule } from '@angular/router';
     SidenavComponent,
     ToolbarComponent,
     LayoutComponent,
-    PageNotFoundComponent
+    RouteNotFoundComponent
   ],
   exports: [
     NavItemComponent,

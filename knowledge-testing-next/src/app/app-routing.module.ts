@@ -1,38 +1,45 @@
-import { RouterModule, Routes } from '@angular/router';
+import { Route, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HomeModule } from './home/home.module';
+import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home/home.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { TestListComponent } from './tests/test-list/test-list.component';
-import { ReactiveDemoComponent } from './reactive-demo/demo01/demo01.component';
+import { Demo01Component } from './reactive-demo/demo01/demo01.component';
 import { WikiComponent } from './wiki/wiki.component';
-import { PageNotFoundComponent } from './ui/page-not-found/page-not-found.component';
+import { RouteNotFoundComponent } from './ui/route-not-found/route-not-found.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
 
-
-const appRoutes: Routes = [
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
+const APP_ROUTES: Route[] = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'users', component: UserListComponent },
+  // {
+  //   path: 'users',
+  //   component: UserListComponent,
+  //   children: [
+  //     {
+  //       path: 'add',
+  //       component: UserDetailComponent,
+  //       data: {
+  //         title: 'Add New User'
+  //       }
+  //     },
+  //     {
+  //       path: ':id',
+  //       component: UserDetailComponent,
+  //       data: {
+  //         title: 'Edit User'
+  //       }
+  //     }
+  //   ]
+  // },
   { path: 'tests', component: TestListComponent },
-  { path: 'reactive-demo', component: ReactiveDemoComponent },
-  { path: 'wiki-search', component: WikiComponent },
-  { path: '**',  component: PageNotFoundComponent }
+  { path: 'reactive-demo', component: Demo01Component },
+  { path: 'wiki-demo', component: WikiComponent },
+  { path: '**', component: RouteNotFoundComponent }
 ];
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(appRoutes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [CommonModule, RouterModule.forRoot(APP_ROUTES)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

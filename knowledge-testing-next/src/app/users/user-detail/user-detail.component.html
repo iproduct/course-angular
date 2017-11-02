@@ -1,7 +1,8 @@
 <div class="user-detail-conatainer">
 	<div class="user-detail-header ui-g-12">
-		<h2 *ngIf="isNew">Add New User</h2>
-		<h2 *ngIf="!isNew">Edit User: {{user?.fname}} {{user?.lname}}</h2>
+    <h2>{{title}}</h2>
+	<!--	<h2 *ngIf="isNew">Add New User</h2>
+		<h2 *ngIf="!isNew">Edit User: {{user?.fname}} {{user?.lname}}</h2> -->
   </div>
 
   <kt-message [message]="errorMessage"></kt-message>
@@ -44,7 +45,7 @@
       <button type="submit"  mat-raised-button color="primary"
         [disabled]="userForm.pristine || !userForm.valid">Submit</button>
 			<button type="button"  mat-raised-button color="warn" (click)="resetForm()">Reset</button>
-			<button type="button"  mat-raised-button (click)="complete()">Cancel</button>
+			<button type="button"  mat-raised-button (click)="cancel()">Cancel</button>
 		</div>
 	</form>
 </div>

@@ -3,6 +3,8 @@ import { UserService } from '../user.service';
 import { User } from '../user.model';
 import { IdentityType, ApplicationError } from '../../shared/shared-types';
 import { slideInDownAnimation } from '../../shared/animations';
+import { Subscription } from 'rxjs/Subscription';
+import { LoggerService } from '../../core/logger.service';
 
 @Component({
   selector: 'kt-user-list',
@@ -17,19 +19,17 @@ export class UserListComponent implements OnInit {
   selectedUser: User;
   isNew = false;
   errorMessage = '';
+  private subscription: Subscription;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private logger: LoggerService) { }
 
   ngOnInit() {
-    this.fetchUsers();
-  }
-
-  fetchUsers() {
-    this.userService.findAllUsers()
-      .then(users => this.users = users)
-      .catch(error => {
-        this.errorMessage = error.toString();
-      });
+    this.subscription = this.userService.findAllUsers()
+      .do(users => this.logger.log(users))
+      .subscribe(
+        users => this.users = users,
+        error => { this.errorMessage = error.toString(); }
+      );
   }
 
   selectItem(user: User) {
@@ -40,22 +40,47 @@ export class UserListComponent implements OnInit {
     this.selectedUser = {} as User;
   }
 
+  refreshUsers() {
+    this.userService.refreshUsers();
+  }
+
   editCompleted(user: User | undefined) {
-    // this.fetchUsers();
-    if (user) {
-     this.users.push(user);
+    if (this.selectedUser && this.selectedUser.id) {  // EDIT
+      this.replaceUser(user);
+    } else { // ADD
+      this.addUser(user);
     }
     this.selectedUser = undefined;
   }
 
   deleteUser(itemId: IdentityType) {
     this.userService.deleteUser(itemId)
-    .then(deleted => {
-      this.fetchUsers();
-    })
-    .catch(error => {
-      this.errorMessage = error.toString();
-    });
+      .subscribe(
+        deleted => this.removeUser(deleted),
+        error => {
+          this.errorMessage = error.toString();
+        }
+      );
+  }
+
+  private removeUser(deleted: User) {
+    if (deleted) {
+      const index = this.users.findIndex(user => user.id === deleted.id);
+      this.users.splice(index, 1);
+    }
+  }
+
+  private replaceUser(edited: User) {
+    if (edited) {
+      const index = this.users.findIndex(user => user.id === edited.id);
+      this.users.splice(index, 1, edited);
+    }
+  }
+
+  private addUser(user: User) {
+    if (user) {
+      this.users.push(user);
+    }
   }
 
 }

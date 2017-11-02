@@ -2,6 +2,8 @@ import { Component, OnInit, Input, SimpleChange, OnChanges, Output, EventEmitter
 import { User, Role } from '../user.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserService } from '../user.service';
+import { Observer } from 'rxjs/Observer';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'kt-user-detail',
@@ -47,6 +49,16 @@ export class UserDetailComponent implements OnInit, OnChanges {
     'role': {
       'required': 'Password is required.'
     }
+  };
+
+  private observer: Observer<User> = {
+    next: user => {
+      this.complete(user);
+    },
+    error: error => {
+      this.errorMessage = error.toString();
+    },
+    complete: () => { }
   };
 
   constructor( private service: UserService, private fb: FormBuilder) {
@@ -105,20 +117,10 @@ export class UserDetailComponent implements OnInit, OnChanges {
     this.user = this.userForm.getRawValue() as User;
     if (this.isNew) {
       this.service.addUser(this.user)
-        .then(user => {
-          this.complete(user);
-        })
-        .catch(error => {
-          this.errorMessage = error.toString();
-        });
+        .subscribe(this.observer);
     } else {
       this.service.editUser(this.user)
-      .then(user => {
-        this.complete(user);
-      })
-      .catch(error => {
-        this.errorMessage = error.toString();
-      });
+        .subscribe(this.observer);
     }
   }
 

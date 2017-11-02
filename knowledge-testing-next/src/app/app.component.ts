@@ -15,13 +15,13 @@ export class AppComponent {
 
   title = 'Knowledge Tester';
   sidenavOpen = false;
-  currentView = Views.HOME;
+  // currentView = Views.HOME;
 
   openSidenav() {
     this.sidenavOpen = !this.sidenavOpen;
   }
 
-  chooseView(view: Views) {
+  chooseView() {
     // this.currentView = view;
     // console.log(Views[view]);
     this.sidenavOpen = false;

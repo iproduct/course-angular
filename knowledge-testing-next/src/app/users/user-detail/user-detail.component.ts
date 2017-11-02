@@ -1,21 +1,32 @@
-import { Component, OnInit, Input, SimpleChange, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange, OnChanges, Output, EventEmitter, HostBinding } from '@angular/core';
 import { User, Role } from '../user.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserService } from '../user.service';
+import { Observer } from 'rxjs/Observer';
+import { Subscription } from 'rxjs/Subscription';
+import { ActivatedRoute,   Router,   Params,   CanDeactivate } from '@angular/router';
+import { slideInDownAnimation } from '../../shared/animations';
+import { LoggerService } from '../../core/logger.service';
+import { shallowEquals } from '../../shared/utils';
+import { DialogService } from '../../core/dialog.service';
 
 @Component({
   selector: 'kt-user-detail',
   templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css']
+  styleUrls: ['./user-detail.component.css'],
+  animations: [slideInDownAnimation]
 })
-export class UserDetailComponent implements OnInit, OnChanges {
+export class UserDetailComponent implements OnInit, OnChanges, CanDeactivate<UserDetailComponent> {
+  @HostBinding('@routeAnimation') routeAnimation = true;
 
   @Input() user: User = new User(''); // user with empty id
   @Output() onComplete = new EventEmitter<User | undefined>();
+  title = '';
   isNew = true; // new user by default
   roles: { key: Role, value: string }[] = [];
   userForm: FormGroup;
   errorMessage: string;
+  private isCanceled = false;
 
   formErrors = {
     'fname': '',
@@ -49,7 +60,23 @@ export class UserDetailComponent implements OnInit, OnChanges {
     }
   };
 
-  constructor( private service: UserService, private fb: FormBuilder) {
+  private observer: Observer<User> = {
+    next: user => {
+      this.complete(user);
+    },
+    error: error => {
+      this.errorMessage = error.toString();
+    },
+    complete: () => { }
+  };
+
+  constructor(
+      private service: UserService,
+      private logger: LoggerService,
+      private dialogService: DialogService,
+      private fb: FormBuilder,
+      private route: ActivatedRoute,
+      private router: Router) {
     this.isNew = !this.user.id;
     for (const role in Role) {
       if (typeof Role[role] === 'number') {
@@ -60,6 +87,33 @@ export class UserDetailComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.buildForm();
+    // this.route.paramMap
+    //   .map(paramMap => paramMap.get('id'))
+    //   .filter(id => !!id)
+    //   .switchMap(id => this.service.findUser(id))
+    //   .subscribe(user => {
+    //       this.isNew = false;
+    //       this.user = user;
+    //       this.resetForm();
+    //     },
+    //     error => this.errorMessage = error.toString()
+    //   );
+
+    this.route.data
+      .subscribe(({ title, user }) => {
+        this.title = title;
+        if (user) {
+          this.user = user;
+          this.resetForm();
+        }
+      },
+      error => this.errorMessage = error.toString()
+    );
+
+    this.route.data.do(data => this.logger.log(JSON.stringify(data)))
+      .forEach((data: Params) => {
+        this.title = data['title'];
+      });
   }
 
   public ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
@@ -105,20 +159,10 @@ export class UserDetailComponent implements OnInit, OnChanges {
     this.user = this.userForm.getRawValue() as User;
     if (this.isNew) {
       this.service.addUser(this.user)
-        .then(user => {
-          this.complete(user);
-        })
-        .catch(error => {
-          this.errorMessage = error.toString();
-        });
+        .subscribe(this.observer);
     } else {
       this.service.editUser(this.user)
-      .then(user => {
-        this.complete(user);
-      })
-      .catch(error => {
-        this.errorMessage = error.toString();
-      });
+        .subscribe(this.observer);
     }
   }
 
@@ -129,9 +173,25 @@ export class UserDetailComponent implements OnInit, OnChanges {
     }
   }
 
+  public cancel() {
+    this.isCanceled = true;
+    this.complete(this.user);
+  }
+
   public complete (user?: User) {
-    this.onComplete.emit(user);
+    this.router.navigate(['..'], { relativeTo: this.route });
+    // this.onComplete.emit(user);
     // window.location.replace('/');
+  }
+
+  public canDeactivate(): Promise<boolean> | boolean {
+    // Allow synchronous navigation (`true`) if no user or the user data is not changed
+    if (this.isCanceled || shallowEquals(this.user, this.userForm.getRawValue() as User)) {
+      return true;
+    }
+    // Otherwise ask the user with the dialog service and return its
+    // promise which resolves to true or false when the user decides
+    return this.dialogService.confirm('Discard changes?');
   }
 
   private onStatusChanged(data?: any) {

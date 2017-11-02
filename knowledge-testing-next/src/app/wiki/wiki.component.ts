@@ -1,13 +1,19 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, HostBinding } from '@angular/core';
 import { Observable, Subject } from 'rxjs/Rx';
 import { WikipediaService } from './wikipedia.service';
 import { URLSearchParams } from '@angular/http';
+import { slideInDownAnimation } from '../shared/animations';
 
 @Component({
   selector: 'kt-wiki',
   styles: [`
     .demo {
       padding: 30px;
+    }
+    :host {
+      display: block;
+      width: 100%;
+      position: absolute;
     }
     `],
   template: `
@@ -20,14 +26,17 @@ import { URLSearchParams } from '@angular/http';
     </ul>
     </div>
   `,
+  animations: [slideInDownAnimation],
   providers: [WikipediaService]
 })
 export class WikiComponent {
+  @HostBinding('@routeAnimation') routeAnimation = true;
+
   private searchTermStream = new Subject<string>();
   public items: Observable<string[]> = this.searchTermStream
-    .debounceTime(500)
-    .map(search => search.trim())
-    .distinctUntilChanged()
+    .debounceTime(1000)
+    .map(term => term.trim())
+    .distinct()
     .switchMap((term: string) => this.wikipediaService.search(term));
 
   constructor(private wikipediaService: WikipediaService) { }

@@ -8,12 +8,14 @@ import { UserService } from './user.service';
 import { SimpleReactiveComponent } from './simple-reactive/simple-reactive.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from '../shared/shared.module';
+import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
+    UserRoutingModule,
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
