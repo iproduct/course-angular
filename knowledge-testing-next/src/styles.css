@@ -41,4 +41,21 @@ h2 {
   border-radius: 50%;
 }
 
+/* Main toolbar */
 
+.mat-toolbar-row {
+  flex-wrap: wrap;
+  height: 72px !important;
+}
+
+.in-toolbar .mat-form-field-ripple {
+  background-color: white;
+}
+
+.in-toolbar .mat-form-field-placeholder {
+  color: lightgray;
+}
+
+.in-toolbar .mat-focused .mat-form-field-placeholder {
+  color: white;
+}

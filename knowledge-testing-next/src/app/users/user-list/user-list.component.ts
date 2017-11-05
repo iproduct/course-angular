@@ -1,4 +1,14 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+/*
+ * Copyright (c) 2015-2017 IPT-Intellectual Products & Technologies (IPT).
+ * All rights reserved.
+ *
+ * This file is licensed under terms of GNU GENERAL PUBLIC LICENSE Version 3
+ * (GPL v3). The full text of GPL v3 license is providded in file named LICENSE,
+ * residing in the root folder of this project.
+ *
+ */
+
+import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../user.model';
 import { IdentityType, ApplicationError } from '../../shared/shared-types';
@@ -13,7 +23,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./user-list.component.css'],
   animations: [slideInDownAnimation]
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
   @HostBinding('@routeAnimation') routeAnimation = true;
 
   users: User[] = [];
@@ -40,6 +50,10 @@ export class UserListComponent implements OnInit {
       .subscribe(paramMap => {
         this.selectedId = paramMap.get('selectedId');
       });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   selectItem(user: User) {

@@ -2,3 +2,14 @@
   flex: 1 1 auto;
 }
 
+mat-toolbar-row {
+  flex-wrap: wrap
+}
+
+.salutation {
+  margin: 0;
+  padding: 0 0 0 10px;
+  font-size: 0.8em;
+}
+
+

@@ -6,6 +6,16 @@ import { BackendService } from '../core/backend.service';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
+/*
+ * Copyright (c) 2015-2017 IPT-Intellectual Products & Technologies (IPT).
+ * All rights reserved.
+ *
+ * This file is licensed under terms of GNU GENERAL PUBLIC LICENSE Version 3
+ * (GPL v3). The full text of GPL v3 license is providded in file named LICENSE,
+ * residing in the root folder of this project.
+ *
+ */
+
 export class UserService {
 
   constructor(private logger: LoggerService, private backend: BackendService) {
@@ -24,7 +34,7 @@ export class UserService {
   }
 
   findUserByEmail(email: string): Observable<User> {
-    return this.findAllUsers().switchMap(users => Observable.from<User>(users).first(user => user.email === email));
+    return this.backend.findAll(User).map(users => users.find(user => user.email === email));
   }
 
   addUser(user: User) {

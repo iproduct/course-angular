@@ -1,6 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
   <kt-layout>
     <kt-sidenav [open]="sidenavOpen">
+      <kt-nav-item (activate)="chooseView()"
+        [routerLink]="!authService.isUserLoggedIn() ? ['/login'] : ['/login', {logout: true}]"
+        icon="verified_user" [hint]="!authService.isUserLoggedIn() ? 'Login with email and password' : ''">
+        {{ !authService.isUserLoggedIn() ? 'Login' : 'Logout' }}
+      </kt-nav-item>
       <kt-nav-item (activate)="chooseView()" routerLink="/home" icon="home" hint="Welcome page">
         Home
       </kt-nav-item>
@@ -20,7 +25,7 @@
     <kt-toolbar (openSidenav)="openSidenav()">
       Knowledge Tester
       <span class="example-fill-remaining-space"></span>
-      <kt-login inToolbar="true"></kt-login>
+      <div *ngIf="authService.isUserLoggedIn()" class="salutation">{{ authService.getSalutation() }}</div>
     </kt-toolbar>
 
     <router-outlet></router-outlet>

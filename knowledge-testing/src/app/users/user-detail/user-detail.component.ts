@@ -81,22 +81,28 @@ export class UserDetailComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.buildForm();
-    this.route.paramMap
-      .map( paramMap => paramMap.get('id') )
-      .filter( id => !!id )
-      .do( id => this.logger.log(id) )
-      .switchMap( id => this.service.findUser(id))
-      .do( user => this.logger.log(user) )
-      .subscribe( user => {
-        this.isNew = false;
-        this.user = user;
-        this.resetForm();
-      },
-      error => this.errorMessage = error.toString()
-    );
+    // this.route.paramMap
+    //   .map( paramMap => paramMap.get('id') )
+    //   .filter( id => !!id )
+    //   .do( id => this.logger.log(id) )
+    //   .switchMap( id => this.service.findUser(id))
+    //   .do( user => this.logger.log(user) )
+    //   .subscribe( user => {
+    //     this.isNew = false;
+    //     this.user = user;
+    //     this.resetForm();
+    //   },
+    //   error => this.errorMessage = error.toString()
+    // );
 
     this.route.data.subscribe(
-      ({ title }) => this.title = title,
+      ({ title, user }) => {
+        this.title = title;
+        if (user) {
+          this.user = user;
+          this.resetForm();
+        }
+      },
       error => this.errorMessage = error.toString()
     );
   }

@@ -1,0 +1,19 @@
+form {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  align-items: baseline;
+}
+
+.form-field {
+  margin: 0px 5px;
+}
+
+.in-toolbar {
+  font-size: 10pt;
+}
+
+.in-toolbar .error-message {
+  position: relative;
+  top: -12px;
+}

@@ -4,6 +4,10 @@
   position: absolute;
 }
 
-h1 {
+h1,h2,h3 {
   margin: 20px;
+}
+
+h2 {
+  font-size: 1.2em;
 }

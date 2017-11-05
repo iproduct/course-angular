@@ -19,6 +19,11 @@ export class DialogService {
    * @param `message` the confirmation message to show
    * @return promise of confirmation resolution (true=confirm or false=cancel)
    */
+  alert(message: string) {
+    return new Promise<void>(resolve => {
+      return resolve(window.alert(message));
+    });
+  }
   confirm(message?: string) {
     return new Promise<boolean>(resolve => {
       return resolve(window.confirm(message || 'OK?'));

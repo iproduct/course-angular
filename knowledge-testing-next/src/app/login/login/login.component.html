@@ -1,0 +1,29 @@
+<h2>{{!authService.isUserLoggedIn() ? 'LOGIN' : 'LOGOUT'}}</h2>
+<div *ngIf="message">{{message}}</div>
+
+<form *ngIf="!authService.isUserLoggedIn()" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+  <mat-form-field class="form-field">
+    <input matInput ngModel id="email" name="email" placeholder="Email" required email #email="ngModel" />
+    <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+      {{ email.errors['required']? 'Email is required' : 'Email is not valid' }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <input matInput ngModel type="password" id="password" name="password" placeholder="Password" #password="ngModel" required/>
+    <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+      Password is required
+    </mat-error>
+  </mat-form-field>
+
+  <button type="submit"  mat-raised-button [color]="inToolbar ? 'accent' : 'primary'"
+    [disabled]="loginForm.pristine || !loginForm.valid">Submit</button>
+
+  <!--{{ loginForm.value | json}} -->
+</form>
+
+<button *ngIf="!inToolbar && authService.isUserLoggedIn()" type="button" mat-raised-button (click)="logout()">Logout</button>
+<mat-error *ngIf="errorMessage" class="error-message">{{errorMessage}}</mat-error>
+
+
+

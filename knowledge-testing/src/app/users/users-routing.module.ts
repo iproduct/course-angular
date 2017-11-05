@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Route, RouterModule } from '@angular/router';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { UserDetailResolver } from './user-detail-resolver.service';
 
 const USER_ROUTES: Route[] = [
   {
@@ -19,6 +20,9 @@ const USER_ROUTES: Route[] = [
         data: {
           title: 'Edit User'
         },
+        resolve: {
+          user: UserDetailResolver
+        },
         component: UserDetailComponent}
     ]
   }];
@@ -29,6 +33,7 @@ const USER_ROUTES: Route[] = [
     RouterModule.forChild(USER_ROUTES)
   ],
   declarations: [],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [UserDetailResolver]
 })
 export class UsersRoutingModule { }
