@@ -1,7 +1,7 @@
 import {Component, NgZone, ElementRef, ChangeDetectionStrategy} from '@angular/core';
 import {ComponentTen} from '../component-ten';
 import {ComponentEleven} from '../component-eleven';
-import {toggleClass} from '../../toggle-class.service';
+import { ToggleClassService } from '../../toggle-class.service';
 
 @Component({
   selector: 'cmp-five',
@@ -17,10 +17,10 @@ import {toggleClass} from '../../toggle-class.service';
 })
 export class ComponentFive {
 
-  constructor(private zone: NgZone, private el: ElementRef) {}
+  constructor(private el: ElementRef, private toggleClassService: ToggleClassService) {}
 
   ngAfterViewChecked() {
-    toggleClass(this.el, this.zone);
+    this.toggleClassService.toggleElementClass(this.el);
   }
 }
 

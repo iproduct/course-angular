@@ -1,5 +1,5 @@
 import { Component, NgZone, ElementRef, AfterViewChecked } from '@angular/core';
-import {toggleClass} from '../../toggle-class.service';
+import { ToggleClassService } from '../../toggle-class.service';
 
 @Component({
   selector: 'cmp-ten',
@@ -8,13 +8,13 @@ import {toggleClass} from '../../toggle-class.service';
     {{counter}}
   `
 })
-export class ComponentTen implements AfterViewChecked{
+export class ComponentTen implements AfterViewChecked {
   counter = 0;
 
-  constructor(private zone: NgZone, private el: ElementRef) {}
+  constructor(private el: ElementRef, private toggleClassService: ToggleClassService) {}
 
   ngAfterViewChecked() {
-    toggleClass(this.el, this.zone);
+    this.toggleClassService.toggleElementClass(this.el);
   }
 
   callMe() {

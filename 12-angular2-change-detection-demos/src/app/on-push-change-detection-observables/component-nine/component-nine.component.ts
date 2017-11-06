@@ -1,7 +1,7 @@
 import {Input, Component, NgZone, ElementRef, ChangeDetectionStrategy} from '@angular/core';
 import {Subject} from 'rxjs/Rx';
 import {ComponentSeventeen} from '../component-seventeen';
-import {toggleClass} from '../../toggle-class.service';
+import { ToggleClassService } from '../../toggle-class.service';
 
 @Component({
   selector: 'cmp-nine',
@@ -18,9 +18,9 @@ export class ComponentNine {
 
   @Input() model:Subject<any>;
 
-  constructor(private zone: NgZone, private el: ElementRef) {}
+  constructor(private el: ElementRef, private toggleClassService: ToggleClassService) {}
 
   ngAfterViewChecked() {
-    toggleClass(this.el, this.zone);
+    this.toggleClassService.toggleElementClass(this.el);
   }
 }

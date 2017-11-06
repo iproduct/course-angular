@@ -1,7 +1,7 @@
-import { Component, OnInit, NgZone, ElementRef } from '@angular/core';
+import { Component, OnInit, NgZone, ElementRef, AfterViewChecked } from '@angular/core';
 import { ComponentTwo } from '../component-two';
-import { toggleClass } from '../../toggle-class.service';
 import { ComponentThree } from '../component-three';
+import { ToggleClassService } from '../../toggle-class.service';
 
 @Component({
   selector: 'cmp-one',
@@ -14,11 +14,11 @@ import { ComponentThree } from '../component-three';
     </ul>
   `
 })
-export class ComponentOne {
+export class ComponentOne implements AfterViewChecked{
 
-  constructor(private zone: NgZone, private el: ElementRef) {}
+  constructor(private el: ElementRef, private toggleClassService: ToggleClassService) {}
 
   ngAfterViewChecked() {
-    toggleClass(this.el, this.zone);
+    this.toggleClassService.toggleElementClass(this.el);
   }
 }

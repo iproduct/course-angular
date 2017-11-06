@@ -1,6 +1,6 @@
 import {Input, Component, NgZone, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {Subject} from 'rxjs/Rx';
-import {toggleClass} from '../../toggle-class.service';
+import { ToggleClassService } from '../../toggle-class.service';
 
 @Component({
   selector: 'cmp-seventeen',
@@ -13,20 +13,20 @@ import {toggleClass} from '../../toggle-class.service';
 export class ComponentSeventeen {
 
   @Input() model: Subject<any>;
-  counter: number = 0;
+  counter = 0;
 
-  constructor(private zone: NgZone, private el: ElementRef, private cd: ChangeDetectorRef) {}
+  constructor(private el: ElementRef, private cd: ChangeDetectorRef, private toggleClassService: ToggleClassService) {}
 
   ngOnInit() {
     this.model.subscribe(() => {
       this.cd.markForCheck();
-      toggleClass(this.el, this.zone, 'checked-observable');
+      this.toggleClassService.toggleElementClass(this.el,'checked-observable');
       this.counter ++;
     })
   }
 
   ngAfterViewChecked() {
-    toggleClass(this.el, this.zone);
+    this.toggleClassService.toggleElementClass(this.el);
   }
 }
 

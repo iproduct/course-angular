@@ -2,7 +2,7 @@ import {Component, Input, ChangeDetectorRef, NgZone, ElementRef, ChangeDetection
 import {Subject} from 'rxjs/Rx';
 import {ComponentFour} from '../component-four';
 import {ComponentFive} from '../component-five';
-import {toggleClass} from '../../toggle-class.service';
+import { ToggleClassService } from '../../toggle-class.service';
 
 @Component({
   selector: 'cmp-two',
@@ -21,7 +21,7 @@ export class ComponentTwo {
   @Input() notifier: Subject<any>;
   attached = false;
 
-  constructor(private zone: NgZone, private el: ElementRef, private cd: ChangeDetectorRef) {
+  constructor(private el: ElementRef, private cd: ChangeDetectorRef, private toggleClassService: ToggleClassService) {
   }
 
   ngOnInit() {
@@ -39,6 +39,6 @@ export class ComponentTwo {
   }
 
   ngAfterViewChecked() {
-    toggleClass(this.el, this.zone);
+    this.toggleClassService.toggleElementClass(this.el);
   }
 }

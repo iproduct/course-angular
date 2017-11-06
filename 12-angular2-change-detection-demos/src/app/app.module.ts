@@ -10,6 +10,7 @@ import { ManualChangeDetectionModule } from './manual-change-detection/manual-ch
 import { OnPushChangeDetectionObservablesModule } from './on-push-change-detection-observables/on-push-change-detection-observables.module';
 import { OnPushChangeDetectionModule } from './on-push-change-detection/on-push-change-detection.module';
 import { ToggleStateService } from './toggle-state.service';
+import { ToggleClassService } from './toggle-class.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { ToggleStateService } from './toggle-state.service';
     OnPushChangeDetectionModule,
     OnPushChangeDetectionObservablesModule
   ],
-  providers: [ToggleStateService],
+  providers: [ToggleStateService, ToggleClassService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
