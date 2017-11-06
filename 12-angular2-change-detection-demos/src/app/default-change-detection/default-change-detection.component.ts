@@ -11,8 +11,8 @@ import { ComponentOne } from './component-one';
 export class DefaultChangeDetectionComponent {
 
   @ViewChild('checkbox') checkbox;
-  notifier:Subject<any>;
-  runInterval:boolean;
+  notifier: Subject<any>;
+  runInterval: boolean;
 
   constructor(private toggleStateService: ToggleStateService) {}
 
