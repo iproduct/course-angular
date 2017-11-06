@@ -32,7 +32,8 @@ export class FormDemoComponent implements DoCheck {
   public onSubmit(f: NgForm) {console.log(f.value); console.log(f.valid); }
   public setValue() { this.fullName = {first: 'Brian', last: 'Adams'}; }
   public incrementDate(f: NgForm) { this.date.setDate(this.date.getDate() + 1); }
-  public reset(f: NgForm) { this.fullName = defaultName; f.value.email = ''; this.date = new Date(); }
+  public reset(f: NgForm) { this.fullName = defaultName; f.value.email = '';
+    this.date = new Date(); }
   public ngDoCheck() {
     if (this.previousDate && this.previousDate.getDate() === this.date.getDate()) {
       // this.ref.detectChanges();
