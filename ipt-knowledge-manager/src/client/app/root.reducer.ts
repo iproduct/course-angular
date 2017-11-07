@@ -21,31 +21,31 @@ export interface RootState {
   router: fromRouter.RouterReducerState;
 }
 
-export interface ReducersMap {
-  [key: string]: ActionReducer<any>;
-}
+// export interface ReducersMap {
+//   [key: string]: ActionReducer<any>;
+// }
 
 export const reducers: ActionReducerMap<RootState> = {
   ui: fromUi.reducer,
   router: fromRouter.routerReducer
 };
 
-const devProdReducers: ReducersMap = {
-  developmentReducer: compose(storeFreeze, combineReducers)(reducers),
-  productionReducer: combineReducers(reducers)
-}
+// const devProdReducers: ReducersMap = {
+//   developmentReducer: compose(storeFreeze, combineReducers)(reducers),
+//   productionReducer: combineReducers(reducers)
+// }
 
-export function addReducer<S>(name: string, reducer: ActionReducer<S>): void {
-  reducers[name] = reducer;
-  devProdReducers['developmentReducer'] = compose(storeFreeze, combineReducers)(reducers);
-  devProdReducers['productionReducer'] = combineReducers(reducers);
-  console.log('New reducers:', reducers);
-}
+// export function addReducer<S>(name: string, reducer: ActionReducer<S>): void {
+//   reducers[name] = reducer;
+//   devProdReducers['developmentReducer'] = compose(storeFreeze, combineReducers)(reducers);
+//   devProdReducers['productionReducer'] = combineReducers(reducers);
+//   console.log('New reducers:', reducers);
+// }
 
-export function rootReducer(state: any, action: any) {
-  if (environment.production) {
-    return devProdReducers.productionReducer(state, action);
-  } else {
-    return devProdReducers.developmentReducer(state, action);
-  }
-}
+// export function rootReducer(state: any, action: any) {
+//   if (environment.production) {
+//     return devProdReducers.productionReducer(state, action);
+//   } else {
+//     return devProdReducers.developmentReducer(state, action);
+//   }
+// }

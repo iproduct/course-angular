@@ -28,8 +28,9 @@ import { routes } from './routes';
 import { UserEffects } from './users/user.effects';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { rootReducer, reducers } from './root.reducer';
+import { reducers } from './root.reducer';
 import { RoutingEffects } from './shared/routing.effects';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { RoutingEffects } from './shared/routing.effects';
     UiModule,
 
     /**
-     * StoreModule.provideStore is imported only once in the root module
+     * StoreModule.forRoot is imported only once in the root module
      * accepting as param a reducer function or map of reducers.
      */
     StoreModule.forRoot(reducers),
@@ -62,7 +63,7 @@ import { RoutingEffects } from './shared/routing.effects';
      * from appropriate browser store. For details see:
      * https://github.com/zalmoxisus/redux-devtools-extension
      */
-    StoreDevtoolsModule.instrument({}),
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : []
 
     /**
      * @ngrx - IndexedDB integeation - configure it with db schema

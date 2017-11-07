@@ -45,8 +45,8 @@ export class UserListComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(
-    private store$: Store<RootState>,
-    private userActions: UserActions) {
+      private store$: Store<RootState>,
+      private userActions: UserActions) {
     this.users$ = store$.select(getUsers);
     this.loading$ = store$.select(getUsersLoading);
     this.selectedId$ = store$.select(getSelectedUserId);

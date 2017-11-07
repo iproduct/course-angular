@@ -22,7 +22,7 @@ import { TestRoutingModule } from './test-routing.module';
 import { TestEffects } from './test.effects';
 import { TestActions } from './test.actions';
 import { TestResolver } from './test-resolver';
-import { RootState as OldRootState, addReducer } from '../root.reducer';
+import { RootState as OldRootState } from '../root.reducer';
 import { Store, StoreModule } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../../environments/environment';
@@ -63,7 +63,7 @@ import { UiModule } from '../ui/ui.module';
 })
 export class TestModule {
   constructor() {
-    addReducer<TestState>('tests', testsReducer);
+    // addReducer<TestState>('tests', testsReducer);
   }
 }
 

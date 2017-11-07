@@ -10,6 +10,7 @@ import { HomeModule } from './home/home.module';
 import { PipesModule } from './pipes/pipes.module';
 import { DirectivesModule } from './directives/directives.module';
 import { NgZoneModule } from './zones/ng-zone.module';
+import { Renderer2Module } from './renderer2/renderer2.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { NgZoneModule } from './zones/ng-zone.module';
     InteractionModule,
     PipesModule,
     DirectivesModule,
-    NgZoneModule
+    NgZoneModule,
+    Renderer2Module
   ],
   declarations: [AppComponent, AppNavComponent],
   exports: [AppComponent],

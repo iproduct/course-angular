@@ -1,0 +1,10 @@
+<h2>Renderer2 Demo</h2>
+<div class="container">
+  <h3>DOM Manipulation using ElementRef.nativeElement</h3>
+  <button (click)="appendNativeElement()" class="btn btn-primary">Append Item to Child</button>
+  <div #appendNativeElementElem></div>   
+  <h3>DOM Manipulation using  Renderer2</h3>
+  <button (click)="appendRenderer2()" class="btn btn-primary">Append Item to Child</button>
+  <div #appendRenderer2Elem></div>
+  <h3 #content [style.color]="'red'" >SAMPLE CONTENT</h3>
+</div>

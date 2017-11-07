@@ -10,6 +10,8 @@ import { CountdownViewChildParentComponent } from './interaction/countdown-viewc
 import { MissionControlComponent } from './interaction/mission-control.component';
 import { HeroAsyncMessageComponent } from './pipes/hero-async-message.component';
 import { NgZoneDemo } from './zones/ng-zone-demo';
+import { Renderer2Component } from './renderer2/renderer2.component';
+
 
 @NgModule({
   imports: [
@@ -24,6 +26,7 @@ import { NgZoneDemo } from './zones/ng-zone-demo';
       { path: 'countdown-viewchild', component: CountdownViewChildParentComponent },
       { path: 'mission', component: MissionControlComponent },
       { path: 'async', component: HeroAsyncMessageComponent },
+      { path: 'renderer2', component: Renderer2Component },
       { path: 'ng-zone-demo', component: NgZoneDemo }
     ])
   ],
