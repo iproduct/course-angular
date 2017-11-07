@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer, reducers } from './counter';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { counterReducer, reducers } from './counter';
       initialState: {
         counter: 0
       }
-    })
+    }),
+    StoreDevtoolsModule.instrument({})
   ],
   declarations: [
     AppComponent
