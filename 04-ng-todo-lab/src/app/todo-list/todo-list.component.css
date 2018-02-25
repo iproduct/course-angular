@@ -1,0 +1,11 @@
+.todos {
+  list-style-type: none;
+}
+
+.odd {
+  background-color: aquamarine;
+}
+
+li {
+  width: 100%;
+}
