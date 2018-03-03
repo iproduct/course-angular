@@ -11,8 +11,11 @@ export class BackendService {
   findAll<T extends Identifiable> (type: Type<T>): Promise<T[]> {
     switch (type.name) {
       case Product.name:
-        this.logger.log(`BackendService called for Products.`);
+        this.logger.log(`BackendService called for ${type.name}s.`);
         return Promise.resolve(PRODUCTS as T[]);
+      // case User.name:
+      //   this.logger.log(`BackendService called for Products.`);
+      //   return Promise.resolve(USERS as T[]);
       default:
         const err = new Error(`Cannot recognize entity type: ${type.name}`);
         return Promise.reject(err);
