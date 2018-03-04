@@ -4,9 +4,7 @@
     <form [formGroup]="heroForm" *ngIf="active" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="name">Name</label>
-
-        <input type="text" id="name" class="form-control" formControlName="name" required (blur)="onBlur($event)">
-
+        <input type="text" id="name" class="form-control" formControlName="name" required>
         <div *ngIf="formErrors.name" class="alert alert-danger">
           {{ formErrors.name }}
         </div>
@@ -14,7 +12,7 @@
 
       <div class="form-group">
         <label for="alterEgo">Alter Ego</label>
-        <input type="text" id="alterEgo" class="form-control" formControlName="alterEgo" (blur)="onBlur($event)">
+        <input type="text" id="alterEgo" class="form-control" formControlName="alterEgo">
         <div *ngIf="formErrors.alterEgo" class="alert alert-danger">
           {{ formErrors.alterEgo }}
         </div>
@@ -25,7 +23,6 @@
         <select id="power" class="form-control" formControlName="power" required>
           <option *ngFor="let p of powers" [value]="p">{{p}}</option>
         </select>
-
         <div *ngIf="formErrors.power" class="alert alert-danger">
           {{ formErrors.power }}
         </div>
@@ -42,7 +39,7 @@
 </div>
 
 
-<!-- 
+<!--
 Copyright 2016 Google Inc. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at http://angular.io/license

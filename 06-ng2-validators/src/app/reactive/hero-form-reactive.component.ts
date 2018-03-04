@@ -1,9 +1,17 @@
 /* tslint:disable: member-ordering forin */
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl
+} from '@angular/forms';
 
 import { Hero } from '../shared/hero';
-import { forbiddenNameValidator, nameTakenValidator } from '../shared/forbidden-name.directive';
+import {
+  forbiddenNameValidator,
+  nameTakenValidator
+} from '../shared/forbidden-name.directive';
 import { MySubmitted } from '../shared/submitted.component';
 
 @Component({
@@ -11,7 +19,6 @@ import { MySubmitted } from '../shared/submitted.component';
   templateUrl: './hero-form-reactive.component.html'
 })
 export class HeroFormReactiveComponent implements OnInit {
-
   powers = ['Really Smart', 'Super Flexible', 'Weather Changer'];
 
   hero = new Hero(18, 'Dr. WhatIsHisName', this.powers[0], 'Dr. What');
@@ -38,38 +45,47 @@ export class HeroFormReactiveComponent implements OnInit {
     // this.heroForm.controls['name'].reset({value: 'Pesho', disabled: true});
     this.buildForm();
 
-    this.active = false;
-    setTimeout(() => this.active = true, 0);
+    // this.active = false;
+    // setTimeout(() => this.active = true, 0);
   }
 
   heroForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.buildForm();
   }
 
-  onBlur(event: Event) {
-    let fieldName = (event.target as HTMLInputElement).id;
-    let control: AbstractControl = this.heroForm.get(fieldName);
-    control.updateValueAndValidity({ emitEvent: true });
-  }
+  // onBlur(event: Event) {
+  //   const fieldName = (event.target as HTMLInputElement).id;
+  //   const control: AbstractControl = this.heroForm.get(fieldName);
+  //   control.updateValueAndValidity({ emitEvent: true });
+  // }
 
   buildForm(): void {
     this.heroForm = this.fb.group({
-      'name': [this.hero.name, [
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(24),
-        forbiddenNameValidator(/bob/i)
-      ], nameTakenValidator('john')
+      name: [
+        this.hero.name,
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(24),
+          forbiddenNameValidator(/bob/i)
+        ],
+        nameTakenValidator('john')
+        // { updateOn: 'blur' }
       ],
-      'alterEgo': [this.hero.alterEgo, [], [nameTakenValidator('doctor')]],
-      'power': [this.hero.power, Validators.required]
+      alterEgo: [
+        this.hero.alterEgo,
+        [],
+        [nameTakenValidator('doctor')]
+      ],
+      power: [this.hero.power, Validators.required]
     });
 
-    this.heroForm.statusChanges
-      .subscribe(data => this.onStatusChanged(data));
+    this.heroForm.statusChanges.subscribe((data: any) =>
+      this.onStatusChanged(data)
+    );
 
     this.onStatusChanged(); // (re)set validation messages now
   }
@@ -78,7 +94,9 @@ export class HeroFormReactiveComponent implements OnInit {
   // }
 
   onStatusChanged(data?: any) {
-    if (!this.heroForm) { return; }
+    if (!this.heroForm) {
+      return;
+    }
     if (this.pendingSubmit && !this.heroForm.pending) {
       if (this.heroForm.valid) {
         this.submitted = true;
@@ -97,9 +115,12 @@ export class HeroFormReactiveComponent implements OnInit {
       if (control && !control.valid) {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
-          let error = control.errors[key];
+          const error = control.errors[key];
           if (key === 'nameTaken') {
-            let message = (messages[key] as string).replace('$', error.invalidValue);
+            const message = (messages[key] as string).replace(
+              '$',
+              error.invalidValue
+            );
             this.formErrors[field] += message + ' ';
           } else {
             this.formErrors[field] += messages[key] + ' ';
@@ -110,28 +131,27 @@ export class HeroFormReactiveComponent implements OnInit {
   }
 
   formErrors = {
-    'name': '',
-    'alterEgo': '',
-    'power': ''
+    name: '',
+    alterEgo: '',
+    power: ''
   };
 
   validationMessages = {
-    'name': {
-      'required': 'Name is required.',
-      'minlength': 'Name must be at least 4 characters long.',
-      'maxlength': 'Name cannot be more than 24 characters long.',
-      'forbiddenName': 'Someone named "Bob" cannot be a hero.',
-      'nameTaken': "Username '$' is alrady taken."
+    name: {
+      required: 'Name is required.',
+      minlength: 'Name must be at least 4 characters long.',
+      maxlength: 'Name cannot be more than 24 characters long.',
+      forbiddenName: 'Someone named "Bob" cannot be a hero.',
+      nameTaken: "Username '$' is alrady taken."
     },
-    'alterEgo': {
-      'nameTaken': "Alter ego '$' is alrady taken."
+    alterEgo: {
+      nameTaken: "Alter ego '$' is alrady taken."
     },
-    'power': {
-      'required': 'Power is required.'
+    power: {
+      required: 'Power is required.'
     }
   };
 }
-
 
 /*
 Copyright 2016 Google Inc. All Rights Reserved.

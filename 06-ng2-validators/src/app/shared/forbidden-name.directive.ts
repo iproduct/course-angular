@@ -1,13 +1,8 @@
 import { Directive, Input, OnChanges, SimpleChanges } from '@angular/core';
 import {
   AbstractControl, NG_VALIDATORS, Validator, ValidatorFn,
-  AsyncValidatorFn, Validators
+  AsyncValidatorFn, Validators, ValidationErrors
 } from '@angular/forms';
-
-interface ValidationResult {
-  [key: string]: any;
-}
-
 
 /** A hero's name can't match the given regular expression */
 export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
@@ -19,24 +14,25 @@ export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
 }
 
 export function nameTakenValidator(name: string): AsyncValidatorFn {
-  return (control: AbstractControl): Promise<ValidationResult> => {
+  return (control: AbstractControl): Promise<ValidationErrors> => {
     // let pending: number;
-    if (control.touched) {
-      return new Promise<ValidationResult>((resolve, reject) => {
+    // if (control.touched) {
+      return new Promise<ValidationErrors>((resolve, reject) => {
         setTimeout(() => {
           if (name && control.value && control.value.toLowerCase() === name.toLowerCase()) {
             resolve({ 'nameTaken': {invalidValue: control.value} });
           } else {
             resolve(null);
-          };
+          }
         }, 2000);
-      }).then((validationResult: ValidationResult) => {
-          control.markAsUntouched({onlySelf: true});
-          return validationResult;
       });
-    } else {
-      return Promise.resolve(null);
-    }
+      // .then((validationResult: ValidationErrors) => {
+      //     control.markAsUntouched({onlySelf: true});
+      //     return validationResult;
+      // });
+    // } else {
+    //   return Promise.resolve(null);
+    // }
   };
 }
 
@@ -63,8 +59,6 @@ export class ForbiddenValidatorDirective implements Validator, OnChanges {
     return this.valFn(control);
   }
 }
-
-
 
 /*
 Copyright 2016 Google Inc. All Rights Reserved.

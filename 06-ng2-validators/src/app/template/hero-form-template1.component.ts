@@ -1,13 +1,8 @@
-import { NgModel } from '@angular/forms/src/directives';
 /* tslint:disable: member-ordering */
 import { Component, ViewChild  } from '@angular/core';
-
-
-import { Hero }      from '../shared/hero';
+import { Hero } from '../shared/hero';
 import { MySubmitted } from '../shared/submitted.component';
 import { NgForm, AbstractControl } from '@angular/forms';
-
-
 
 @Component({
   selector: 'hero-form-template1',
@@ -23,12 +18,13 @@ export class HeroFormTemplate1Component {
 
   submitted = false;
 
-  getStatus(control: AbstractControl ){
+  getStatus(control: AbstractControl) {
     return JSON.stringify(control.errors);
   }
 
-  onSubmit(form: NgForm) {
-    console.log("Form: ", form.valid, form);
+  onSubmit() {
+    // tslint:disable-next-line:no-console
+    console.log('Form: ', this.currentForm.value, this.currentForm);
     this.submitted = true;
   }
   // Reset the form with a new hero AND restore 'pristine' class state
@@ -46,14 +42,8 @@ export class HeroFormTemplate1Component {
   }
 
   onSubmittedChange(event: MySubmitted) {
+    // tslint:disable-next-line:no-console
     console.log(JSON.stringify(event));
     this.submitted = event.submitted;
   }
 }
-
-
-/*
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/

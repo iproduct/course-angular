@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
     "target": "es5",
-    "module": "system",
+    "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
@@ -9,16 +10,11 @@
     "removeComments": false,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "dist",
-    "watch": true,
-    "lib": ["dom", "es5", "es2015"]
+    "lib": ["dom", "es5", "es2017"],
+    "types": []
   },
-   "include": [
-        "src/**/*"
-    ],
-    "exclude": [
-        "node_modules",
-        "**/*.spec.ts",
-        "**/*-aot.ts"
-    ]
+  "exclude": [
+    "node_modules/*",
+    "**/*-aot.ts"
+  ]
 }

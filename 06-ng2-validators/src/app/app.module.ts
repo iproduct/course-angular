@@ -1,9 +1,9 @@
+// tslint:disable-next-line:import-spacing
 import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent }           from './app.component';
 import { HeroFormTemplateModule } from './template/hero-form-template.module';
 import { HeroFormReactiveModule } from './reactive/hero-form-reactive.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [

@@ -6,7 +6,7 @@
         <label for="name">Name</label>
 
         <input type="text" id="name" class="form-control"
-               required minlength="2" maxlength="24" [forbiddenName]="forbName"
+               required minlength="4" maxlength="24" [forbiddenName]="forbName"
                name="name" [(ngModel)]="hero.name" >
 
         <div *ngIf="formErrors.name" class="alert alert-danger">
@@ -45,7 +45,7 @@
 </div>
 
 
-<!-- 
+<!--
 Copyright 2016 Google Inc. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at http://angular.io/license

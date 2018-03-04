@@ -9,11 +9,16 @@ import { Product } from '../product.model';
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
+  selectedProduct: Product;
 
   constructor(public productService: ProductService) { }
 
   ngOnInit() {
     this.productService.findAll().then(products => this.products = products);
+  }
+
+  selectProduct(product) {
+    this.selectedProduct = product;
   }
 
 }

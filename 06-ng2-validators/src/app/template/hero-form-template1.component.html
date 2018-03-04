@@ -1,7 +1,7 @@
 <div class="container">
   <div [hidden]="submitted">
     <h1>Hero Form 1 (Template)</h1>
-    <form #heroForm="ngForm"  *ngIf="active"  (ngSubmit)="onSubmit(heroForm)">
+    <form #heroForm="ngForm"  *ngIf="active"  (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="name">Name</label>
 

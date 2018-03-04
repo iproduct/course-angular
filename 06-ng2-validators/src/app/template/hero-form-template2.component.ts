@@ -2,7 +2,7 @@
 import { Component, AfterViewChecked, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Hero }      from '../shared/hero';
+import { Hero } from '../shared/hero';
 
 @Component({
   selector: 'hero-form-template2',
