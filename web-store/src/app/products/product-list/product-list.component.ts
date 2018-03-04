@@ -14,7 +14,10 @@ export class ProductListComponent implements OnInit {
   constructor(public productService: ProductService) { }
 
   ngOnInit() {
-    this.productService.findAll().then(products => this.products = products);
+    this.productService.findAll().then(products => {
+      console.log(products);
+      this.products = products;
+    }).catch(err => console.log('Error:', err));
   }
 
   selectProduct(product) {

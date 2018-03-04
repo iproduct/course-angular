@@ -41,9 +41,10 @@ export class HeroFormReactiveComponent implements OnInit {
   // TODO: Workaround until NgForm has a reset method (#6822)
   active = true;
   addHero() {
-    this.hero = new Hero(42, '', '');
+    // this.hero = new Hero(42, '', '');
     // this.heroForm.controls['name'].reset({value: 'Pesho', disabled: true});
-    this.buildForm();
+    this.heroForm.reset({id: 42, name: 'Pesho', power: ''});
+    // this.buildForm();
 
     // this.active = false;
     // setTimeout(() => this.active = true, 0);
@@ -73,7 +74,6 @@ export class HeroFormReactiveComponent implements OnInit {
           forbiddenNameValidator(/bob/i)
         ],
         nameTakenValidator('john')
-        // { updateOn: 'blur' }
       ],
       alterEgo: [
         this.hero.alterEgo,
