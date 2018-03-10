@@ -1,13 +1,3 @@
-/*
- * Copyright (c) 2015-2017 IPT-Intellectual Products & Technologies (IPT).
- * All rights reserved.
- *
- * This file is licensed under terms of GNU GENERAL PUBLIC LICENSE Version 3
- * (GPL v3). The full text of GPL v3 license is providded in file named LICENSE,
- * residing in the root folder of this project.
- *
- */
-
 const express = require('express');
 const router = express.Router();
 const mongodb = require('mongodb');
@@ -17,24 +7,19 @@ const util = require('util');
 const indicative = require('indicative');
 
 
-// GET users list
+// GET users list 
 router.get('/', function (req, res) {
     const db = req.app.locals.db;
     db.collection('users').find().toArray(
-        function (err, docs) {
+        function (err, users) {
             if (err) throw err;
-            res.json({
-                data: docs.map((user) => {
-                    user.id = user._id;
-                    delete (user._id);
-                    return user;
-                })
-            });
+            users.forEach( (user) => replaceId(user) );
+            res.json({ data: users });
         }
     );
 });
 
-// GET users list
+// GET users list 
 router.get('/:userId', function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
@@ -49,7 +34,7 @@ router.get('/:userId', function (req, res) {
                             error(req, res, 404, `User with Id=${params.userId} not found.`, err);
                         } else {
                             replaceId(user);
-                            res.json(user);
+                            res.json({ data: user});
                         }
 
                     });
@@ -66,10 +51,11 @@ router.post('/', function (req, res) {
     indicative.validate(user, {
         id: 'regex:^[0-9a-f]{24}$',
         email: 'required|email',
-        fname: 'required|string|min:2',
-        lname: 'required|string|min:2',
-        password: 'required|string|min:6|max:20',
-        role: 'required|integer|above:0|under:4'
+        firstName: 'required|string|min:2',
+        lastName: 'required|string|min:2',
+        password: 'required|string|min:8',
+        role: 'required|regex:^\\d+$',
+        gender: 'regex:^\\d*$'
     }).then(() => {
         const collection = db.collection('users');
         console.log('Inserting user:', user);
@@ -78,7 +64,7 @@ router.post('/', function (req, res) {
                 replaceId(user);
                 const uri = req.baseUrl + '/' + user.id;
                 console.log('Created User: ', uri);
-                res.location(uri).status(201).json(user);
+                res.location(uri).json({ data: user });
             } else {
                 error(req, res, 400, `Error creating new user: ${user}`);
             }
@@ -90,17 +76,18 @@ router.post('/', function (req, res) {
     });
 });
 
-// PUT (edit) user by id
+// PUT (edit) user by id 
 router.put('/:userId', function (req, res) {
     const db = req.app.locals.db;
     const user = req.body;
     indicative.validate(user, {
-        id: 'regex:^[0-9a-f]{24}$',
+         id: 'regex:^[0-9a-f]{24}$',
         email: 'required|email',
-        fname: 'required|string|min:2',
-        lname: 'required|string|min:2',
-        password: 'required|string|min:6|max:20',
-        role: 'required|integer|above:0|under:4'
+        firstName: 'required|string|min:2',
+        lastName: 'required|string|min:2',
+        password: 'required|string|min:8',
+        role: 'required|regex:^\\d+$',
+        gender: 'regex:^\\d*$'
     }).then(() => {
         if (user.id !== req.params.userId) {
             error(req, res, 400, `Invalid user data - id in url doesn't match: ${user}`);
@@ -114,7 +101,7 @@ router.put('/:userId', function (req, res) {
             .then(result => {
                 const resultUser = replaceId(user);
                 if (result.result.ok && result.modifiedCount === 1) {
-                    res.json(resultUser);
+                    res.json({ data: resultUser});
                 } else {
                     error(req, res, 400, `Data was NOT modified in database: ${JSON.stringify(user)}`);
                 }
@@ -122,12 +109,11 @@ router.put('/:userId', function (req, res) {
                 error(req, res, 500, `Server error: ${err}`, err);
             })
     }).catch(errors => {
-        console.log(errors)
         error(req, res, 400, `Invalid user data: ${util.inspect(errors)}`);
     })
 });
 
-// DELETE users list
+// DELETE users list 
 router.delete('/:userId', function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
@@ -140,7 +126,7 @@ router.delete('/:userId', function (req, res) {
                         if (err) throw err;
                         if (result.ok) {
                             replaceId(result.value);
-                            res.json(result.value);
+                            res.json({ data: result.value });
                         } else {
                             error(req, res, 404, `User with Id=${params.userId} not found.`, err);
                         }
