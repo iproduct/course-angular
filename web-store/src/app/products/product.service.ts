@@ -11,4 +11,8 @@ findAll() {
   return this.backend.findAll(Product);
 }
 
+add(product: Product) {
+  return this.backend.add(Product, product);
+}
+
 }

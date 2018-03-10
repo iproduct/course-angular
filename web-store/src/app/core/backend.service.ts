@@ -1,7 +1,7 @@
 import { Injectable, Type } from '@angular/core';
 import { LoggerService } from './logger.service';
 import { Product } from '../products/product.model';
-import { Identifiable, CollectionResponse } from '../shared/common-types';
+import { Identifiable, CollectionResponse, IndividualResponse } from '../shared/common-types';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 // tslint:disable-next-line:import-blacklist
 // import 'rxjs/Rx';
@@ -39,6 +39,17 @@ export class BackendService {
       // .do(products => this.logger.log(products))
       // .toPromise<T[]>();
   }
+
+  /** POST: add a new item */
+  add <T extends Identifiable> (type: Type<T>, item: T): Promise<T> {
+    const url = API_URL + this.getCollectionName(type);
+    return this.http.post<IndividualResponse<T>>(url, item)
+    .pipe(
+      map(productsResponse => productsResponse.data),
+      catchError(this.handleError)
+    ).toPromise();
+  }
+
 
   private getCollectionName<T extends Identifiable> (type: Type<T>): string {
     return  type.name.toLowerCase() + 's';
