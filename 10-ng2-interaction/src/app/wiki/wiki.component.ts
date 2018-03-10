@@ -1,4 +1,5 @@
 ﻿import { Component } from '@angular/core';
+// tslint:disable-next-line:no-submodule-imports
 import { Observable, Subject } from 'rxjs/Rx';
 import { WikipediaService } from './wikipedia.service';
 import { URLSearchParams } from '@angular/http';

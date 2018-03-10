@@ -6,17 +6,16 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
   styleUrls: ['./renderer2.component.css']
 })
 export class Renderer2Component {
-  @ViewChild('content') content: ElementRef;
-  @ViewChild('appendNativeElementElem') appendNativeElementElem: ElementRef;
-  @ViewChild('appendRenderer2Elem') appendRenderer2Elem: ElementRef;
-  
-  constructor(private renderer: Renderer2) { }
+  @ViewChild('content') public content: ElementRef;
+  @ViewChild('appendNativeElementElem') public appendNativeElementElem: ElementRef;
+  @ViewChild('appendRenderer2Elem') public appendRenderer2Elem: ElementRef;
 
-  appendNativeElement() {
+  constructor(private renderer: Renderer2) { }
+  public appendNativeElement() {
     this.appendNativeElementElem.nativeElement.appendChild(this.content.nativeElement);
   }
-  
-  appendRenderer2() {
+
+  public appendRenderer2() {
     this.renderer.appendChild(this.appendRenderer2Elem.nativeElement, this.content.nativeElement);
   }
 

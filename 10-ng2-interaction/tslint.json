@@ -9,6 +9,10 @@
         "no-var-requires": false,
         "object-literal-sort-keys": false,
         "ordered-imports": false,
-        "trailing-comma": false
+        "trailing-comma": false,
+        "member-ordering": false,
+        "arrow-parens": false,
+        "no-angle-bracket-type-assertion": false,
+        "member-acces": false
     }
 }

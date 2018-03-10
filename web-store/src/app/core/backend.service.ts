@@ -13,7 +13,7 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { Observable } from 'rxjs/Observable';
 
 
-const API_URL = 'http://localhost:4200/apixx/';
+const API_URL = 'http://localhost:4200/api/';
 
 @Injectable()
 export class BackendService {

@@ -5,8 +5,8 @@ import {Jsonp, Response, URLSearchParams} from '@angular/http';
 export class WikipediaService {
     constructor(private jsonp: Jsonp) { }
     public search(term: string) {
-        let wikiUrl = 'http://en.wikipedia.org/w/api.php';
-        let params = new URLSearchParams();
+        const wikiUrl = 'http://en.wikipedia.org/w/api.php';
+        const params = new URLSearchParams();
         params.set('search', term); // the user's search value
         params.set('action', 'opensearch');
         params.set('format', 'json');
