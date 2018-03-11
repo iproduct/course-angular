@@ -28,6 +28,7 @@ export class ProductDetailReactiveComponent implements OnInit {
 
   isNewProduct = true;
   productForm: FormGroup;
+  errors: string;
 
   formErrors = {
     name: '',
@@ -60,10 +61,16 @@ export class ProductDetailReactiveComponent implements OnInit {
     if(this.isNewProduct) {
       this.service.add(this.product).subscribe(product => {
         this.submittedProduct.emit(product);
+        this.errors = undefined;
+      }, err => {
+        this.errors = err;
       });
     } else {
       this.service.update(this.product).subscribe(product => {
         this.submittedProduct.emit(product);
+        this.errors = undefined;
+      }, err => {
+        this.errors = err;
       });
     }
     this.goBack();

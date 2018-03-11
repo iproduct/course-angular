@@ -10,6 +10,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError, map, tap, retry, delay, take, retryWhen, concat, switchMap } from 'rxjs/operators';
 import { COLLECTION_TYPES } from './collection-types';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
 import { Observable } from 'rxjs/Observable';
 import { BackendService } from './backend.service';
 
@@ -97,7 +98,9 @@ export class BackendObservableService implements BackendService {
     }
     const collection = type.name.toLowerCase() + 's';
     this.logger.log(`BackendService called for ${collection}.`);
-    return new Observable(obs => { obs.next(collection); obs.complete();}) ;
+    return ArrayObservable.of(collection) ;
+    // return new Observable(obs => { obs.next(collection); obs.complete();}) ;
+
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -112,7 +115,7 @@ export class BackendObservableService implements BackendService {
         message was: ${JSON.stringify(error.message)}`);
     }
     // return ErrorObservable with a user-facing error message
-    return new ErrorObservable('There was a problem with backend service. Try again later.');
+    return new ErrorObservable('Error performing the operation. Correct data and try again.');
   }
 
 
