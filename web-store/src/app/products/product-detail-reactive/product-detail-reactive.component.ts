@@ -37,8 +37,8 @@ export class ProductDetailReactiveComponent implements OnInit {
   private validationMessages = {
     name: {
       required: 'Name is required.',
-      minLength: 'Name must be atleast 2 characters long.',
-      maxLength: 'Name cannot be more than 24 characters long.'
+      minlength: 'Name must be atleast 2 characters long.',
+      maxlength: 'Name cannot be more than 24 characters long.'
     },
     price: {
       required: 'Price is required.',
@@ -58,15 +58,18 @@ export class ProductDetailReactiveComponent implements OnInit {
   onSubmit() {
     this.product = this.productForm.getRawValue() as Product;
     if(this.isNewProduct) {
-      this.service.add(this.product);
+      this.service.add(this.product).subscribe(product => {
+        this.submittedProduct.emit(product);
+      });
     } else {
-      // this.service.edit(this.product);
+      this.service.update(this.product).subscribe(product => {
+        this.submittedProduct.emit(product);
+      });
     }
     this.goBack();
   }
 
   goBack() {
-    this.submittedProduct.emit(this.product);
   }
 
   resetForm() {
@@ -97,7 +100,7 @@ export class ProductDetailReactiveComponent implements OnInit {
       if(control && control.dirty && control.invalid) {
         const messages = this.validationMessages[field];
         for(const key in control.errors) {
-          this.formErrors[key] += messages[key] + ' ';
+          this.formErrors[field] += messages[key] + ' ';
         }
       }
     }

@@ -16,10 +16,10 @@ export class ProductListComponent implements OnInit {
   constructor(public productService: ProductService) { }
 
   ngOnInit() {
-    this.productService.findAll().then(products => {
+    this.productService.findAll().subscribe(products => {
       console.log(products);
       this.products = products;
-    }).catch(err => {
+    }, err => {
       console.log('Error:', err);
       this.errors = err;
     });

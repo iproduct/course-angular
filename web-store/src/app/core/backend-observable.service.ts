@@ -1,13 +1,13 @@
 import { Injectable, Type } from '@angular/core';
 import { LoggerService } from './logger.service';
 import { Product } from '../products/product.model';
-import { Identifiable, CollectionResponse, IndividualResponse } from '../shared/common-types';
+import { Identifiable, CollectionResponse, IndividualResponse, KeyType } from '../shared/common-types';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 // tslint:disable-next-line:import-blacklist
 // import 'rxjs/Rx';
 // import 'rxjs/add/operator/flatMap';
 // import 'rxjs/add/operator/do';
-import { catchError, map, tap, retry, delay, take, retryWhen, concat, flatMap } from 'rxjs/operators';
+import { catchError, map, tap, retry, delay, take, retryWhen, concat, switchMap } from 'rxjs/operators';
 import { COLLECTION_TYPES } from './collection-types';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { Observable } from 'rxjs/Observable';
@@ -17,12 +17,13 @@ import { BackendService } from './backend.service';
 const API_URL = 'http://localhost:4200/api/';
 
 @Injectable()
-export class BackendObservableService implements BackendService{
+export class BackendObservableService implements BackendService {
   constructor(private http: HttpClient, private logger: LoggerService) {}
 
+  /** GET: find all item */
   findAll<T extends Identifiable> (type: Type<T>): Observable<T[]> {
     return this.getCollectionName(type).pipe(
-      flatMap(collection =>
+      switchMap(collection =>
         this.http.get<CollectionResponse<T>>(API_URL + collection)
         .pipe(
           map(productsResponse => productsResponse.data),
@@ -35,11 +36,52 @@ export class BackendObservableService implements BackendService{
     );
   }
 
+  /** GET: find an item by id*/
+  find <T extends Identifiable> (type: Type<T>, id: KeyType): Observable<T> {
+    return this.getCollectionName(type).pipe(
+      switchMap(collection =>
+        this.http.get<IndividualResponse<T>>(`${API_URL}${collection}/${id}`)
+        .pipe(
+          map(productsResponse => productsResponse.data),
+          catchError(this.handleError)
+        )
+      )
+    );
+  }
+
+
+
   /** POST: add a new item */
   add <T extends Identifiable> (type: Type<T>, item: T): Observable<T> {
     return this.getCollectionName(type).pipe(
-      flatMap(collection =>
+      switchMap(collection =>
         this.http.post<IndividualResponse<T>>(API_URL + collection, item)
+        .pipe(
+          map(productsResponse => productsResponse.data),
+          catchError(this.handleError)
+        )
+      )
+    );
+  }
+
+  /** PUT: update an item */
+  update <T extends Identifiable> (type: Type<T>, item: T): Observable<T> {
+    return this.getCollectionName(type).pipe(
+      switchMap(collection =>
+        this.http.put<IndividualResponse<T>>(`${API_URL}${collection}/${item.id}`, item)
+        .pipe(
+          map(productsResponse => productsResponse.data),
+          catchError(this.handleError)
+        )
+      )
+    );
+  }
+
+  /** DELETE: remove an item */
+  remove <T extends Identifiable> (type: Type<T>, id: KeyType): Observable<T> {
+    return this.getCollectionName(type).pipe(
+      switchMap(collection =>
+        this.http.delete<IndividualResponse<T>>(`${API_URL}${collection}/${id}`)
         .pipe(
           map(productsResponse => productsResponse.data),
           catchError(this.handleError)
@@ -55,7 +97,7 @@ export class BackendObservableService implements BackendService{
     }
     const collection = type.name.toLowerCase() + 's';
     this.logger.log(`BackendService called for ${collection}.`);
-    return new Observable(obs => { obs.next(collection); }) ;
+    return new Observable(obs => { obs.next(collection); obs.complete();}) ;
   }
 
   private handleError(error: HttpErrorResponse) {
