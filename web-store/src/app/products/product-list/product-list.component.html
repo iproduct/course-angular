@@ -1,4 +1,5 @@
 <h2>Products Available</h2>
+<button class="btn btn-primary" (click)="onAddProduct()">Add New Product</button>
 <div class="alert alert-danger" role="alert" *ngIf="errors">{{errors}}</div>
 <ul class="items">
     <li *ngFor="let product of products; let i=index;" class="product-item"
@@ -7,4 +8,5 @@
         {{product.name}} - {{product.price | currency:'USD':'symbol'}} - {{product.description}}
     </li>
 </ul>
-<ws-product-detail *ngIf="selectedProduct" [product]="selectedProduct"></ws-product-detail>
+<ws-product-detail-reactive *ngIf="selectedProduct" [product]="selectedProduct"
+  (submittedProduct)="onSubmittedProduct($event)"></ws-product-detail-reactive>

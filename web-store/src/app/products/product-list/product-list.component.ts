@@ -11,6 +11,7 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   selectedProduct: Product;
   errors: string;
+  newProduct = false;
 
   constructor(public productService: ProductService) { }
 
@@ -25,7 +26,23 @@ export class ProductListComponent implements OnInit {
   }
 
   selectProduct(product) {
+    this.newProduct = false;
     this.selectedProduct = product;
+  }
+
+  onAddProduct() {
+    this.newProduct = true;
+    this.selectedProduct = new Product(undefined, undefined, undefined);
+  }
+
+  onSubmittedProduct(product: Product) {
+    if(this.newProduct) {
+      this.products.push(product);
+    } else {
+      const ind = this.products.findIndex(p => p.id === product.id);
+      this.products[ind] = product;
+    }
+    this.selectedProduct = undefined;
   }
 
 }

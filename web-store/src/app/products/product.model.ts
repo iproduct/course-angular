@@ -8,7 +8,5 @@ export class Product implements Identifiable {
     public name: string,
     public price: number,
     public description?: string
-  ) {
-    this.id = ++nextId;
-  }
+  ) { }
 }

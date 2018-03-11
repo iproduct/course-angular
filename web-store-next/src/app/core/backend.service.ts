@@ -10,6 +10,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 // import 'rxjs/add/operator/do';
 import { catchError, map, tap, retry } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { Observable } from 'rxjs/Observable';
 
 const API_URL = 'http://localhost:4200/api/';
 
@@ -107,8 +108,13 @@ export class BackendService {
         ).toPromise();
   }
 
-  private getCollectionName<T extends Identifiable> (type: Type<T>): string {
-    return  type.name.toLowerCase() + 's';
+  private getCollectionName<T extends Identifiable> (type: Type<T>): Observable<string> {
+    if (COLLECTION_TYPES.indexOf(type) < 0) {
+      return Promise.reject(`Cannot recognize entity type: ${type.name}`);
+    }
+    const collection = type.name.toLowerCase() + 's';
+    this.logger.log(`BackendService called for ${collection}.`);
+    return new Observable();
   }
 
   private handleError(error: HttpErrorResponse) {

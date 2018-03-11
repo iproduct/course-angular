@@ -4,11 +4,13 @@ import { Product } from './product.model';
 
 @Injectable()
 export class ProductService {
+  constructor(private backend: BackendService) {}
 
-constructor(private backend: BackendService) { }
+  findAll() {
+    return this.backend.findAll(Product);
+  }
 
-findAll() {
-  return this.backend.findAll(Product);
-}
-
+  add(product: Product) {
+    return this.backend.add(Product, product);
+  }
 }
