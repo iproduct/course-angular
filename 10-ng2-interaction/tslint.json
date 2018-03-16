@@ -13,6 +13,7 @@
         "member-ordering": false,
         "arrow-parens": false,
         "no-angle-bracket-type-assertion": false,
-        "member-acces": false
+        "member-acces": false,
+        "max-line-length": false
     }
 }

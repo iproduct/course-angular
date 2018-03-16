@@ -2,8 +2,6 @@ import { Product } from '../products/product.model';
 import { Identifiable } from '../shared/common-types';
 import { Type } from '@angular/core';
 
-export const COLLECTION_TYPES: Array<Type<Identifiable>> = [Product];
-
 export const PRODUCTS: Identifiable[] =   [
   new Product('Logitech Mouse', 12.99, 'Super mouse'),
   new Product('Wireless Keyboard', 23.85, 'Type whereever you are!'),

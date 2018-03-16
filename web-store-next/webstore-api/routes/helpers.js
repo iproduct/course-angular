@@ -1,6 +1,8 @@
 exports.replaceId = function (entity) {
-  entity.id = entity._id;
-  delete (entity._id);
+  if(entity) {
+    entity.id = entity._id;
+    delete (entity._id);
+  }
   return entity;
 }
 

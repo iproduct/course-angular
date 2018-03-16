@@ -26,6 +26,6 @@ import { MatInputModule, MatButtonModule } from '@angular/material';
     MatButtonModule,
   ],
   declarations: [LoginComponent],
-  exports: [LoginComponent]
+  exports: [LoginRoutingModule, LoginComponent]
 })
 export class LoginModule { }

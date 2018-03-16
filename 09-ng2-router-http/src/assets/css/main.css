@@ -81,7 +81,7 @@ button:disabled {
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
-  width: 30em;
+  width: 50em;
 }
 .items li {
   cursor: pointer;
@@ -104,9 +104,7 @@ button:disabled {
 .items li.selected:hover {
   background-color: #BBD8DC;
 }
-.items .text {
 
-}
 .items .item-badge {
   display: inline-block;
   font-size: small;

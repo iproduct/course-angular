@@ -1,4 +1,4 @@
-import { NgModule }     from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { WikiComponent } from './wiki/wiki.component';
 import { HomeComponent } from './home/home.component';
@@ -11,7 +11,6 @@ import { MissionControlComponent } from './interaction/mission-control.component
 import { HeroAsyncMessageComponent } from './pipes/hero-async-message.component';
 import { NgZoneDemo } from './zones/ng-zone-demo';
 import { Renderer2Component } from './renderer2/renderer2.component';
-
 
 @NgModule({
   imports: [

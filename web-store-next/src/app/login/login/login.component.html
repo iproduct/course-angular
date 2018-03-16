@@ -1,0 +1,41 @@
+<div *ngIf="!inToolbar">
+  <h2>{{!authService.isUserLoggedIn() ? 'LOGIN' : 'LOGOUT'}}</h2>
+
+  <div class="col-xs-12" *ngIf="message" class="alert">{{message}}</div>
+  <div class="error"  *ngIf="errorMessage" class="error-message alert alert-danger">{{errorMessage}}</div>
+
+  <form *ngIf="!authService.isUserLoggedIn()" #loginForm="ngForm" (ngSubmit)="login(loginForm)"
+  class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-md-4">
+
+    <div class="form-group">
+      <label class="control-label hidded-xs col-sm-3" for="email">Email:</label>
+      <div class="col-xs-12 col-sm-9">
+        <input ngModel id="email" name="email" placeholder="Email" required email #email="ngModel" class="form-control"/>
+      </div>
+    </div>
+    <div class="error" *ngIf="email.invalid && (email.dirty || email.touched)"  class="alert alert-danger">
+        {{ email.errors['required']? 'Email is required' : 'Email is not valid' }}
+    </div>
+
+    <div class="form-group">
+      <label class="control-label hidded-xs col-sm-3" for="password">Password:</label>
+      <div class="col-xs-12 col-sm-9">
+        <input ngModel type="password" id="password" name="password" placeholder="Password"
+        #password="ngModel" required class="form-control"/>
+      </div>
+    </div>
+    <div class="error" *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+        Password is required
+    </div>
+
+    <!--{{ loginForm.value | json}} -->
+    <div class="col-xs-12">
+      <button type="submit" class="btn btn-primary" [disabled]="loginForm.pristine || !loginForm.valid">Login</button>
+    </div>
+  </form>
+</div>
+
+<button *ngIf="inToolbar && !authService.isUserLoggedIn()" type="button" class="btn btn-default"(click)="gotoLogin()">Login</button>
+<button *ngIf="inToolbar && authService.isUserLoggedIn()" type="button" class="btn btn-default"(click)="logout()">Logout</button>
+
+

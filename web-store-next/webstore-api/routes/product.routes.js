@@ -7,7 +7,7 @@ const util = require('util');
 const indicative = require('indicative');
 
 
-// GET products list 
+// GET products list
 router.get('/', function (req, res) {
     const db = req.app.locals.db;
     db.collection('products').find().toArray(
@@ -19,7 +19,7 @@ router.get('/', function (req, res) {
     );
 });
 
-// GET products list 
+// GET products list
 router.get('/:productId', function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
@@ -51,7 +51,7 @@ router.post('/', function (req, res) {
     indicative.validate(product, {
         id: 'regex:^[0-9a-f]{24}$',
         name: 'required|string|min:2',
-        price: 'required|regex:^\\d+([.]\\d*)?$',
+        price: 'required|regex:^\\d+(\\.\\d+)?$',
         description: 'string'
     }).then(() => {
         const collection = db.collection('products');
@@ -73,14 +73,14 @@ router.post('/', function (req, res) {
     });
 });
 
-// PUT (edit) product by id 
+// PUT (edit) product by id
 router.put('/:productId', function (req, res) {
     const db = req.app.locals.db;
     const product = req.body;
     indicative.validate(product, {
         id: 'regex:^[0-9a-f]{24}$',
         name: 'required|string|min:2',
-        price: 'required|regex:^\\d+[.]?\\d+$',
+        price: 'required|regex:^\\d+(\\.\\d+)?$',
         description: 'string'
     }).then(() => {
         if (product.id !== req.params.productId) {
@@ -107,7 +107,7 @@ router.put('/:productId', function (req, res) {
     })
 });
 
-// DELETE products list 
+// DELETE products list
 router.delete('/:productId', function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;

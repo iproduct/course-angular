@@ -40,24 +40,39 @@ button:disabled {
   cursor: auto;
 }
 
-/* Navigation link styles */
-nav a {
-  padding: 5px 10px;
-  text-decoration: none;
-  margin-top: 10px;
-  display: inline-block;
-  background-color: #eee;
-  border-radius: 4px;
+
+/* main navigation */
+.navbar-default .navbar-nav>li>a.active {
+    background-color: #e5e5e5 ;
+    color: #666;
 }
-nav a:visited, a:link {
-  color: #607D8B;
+
+.navbar-default .navbar-nav>li>a:focus {
+    background-color: #ddd ;
+    color: #555;
 }
-nav a:hover {
-  color: #039be5;
-  background-color: #CFD8DC;
+
+.navbar-default .navbar-nav>li>a:hover {
+    background-color: #ccc ;
+    color: #222;
 }
-nav a.active {
-  color: #039be5;
+.navbar-brand {
+    padding: 0;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+/* Home page */
+.jumbotron img {
+    padding-right: 50px;
+}
+
+.jumbotron .learn-more {
+    margin-top: 20px;
 }
 
 /* items class */
@@ -65,7 +80,7 @@ nav a.active {
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
-  width: 24em;
+  width: 40em;
 }
 .items li {
   cursor: pointer;

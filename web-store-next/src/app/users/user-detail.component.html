@@ -1,0 +1,66 @@
+<hr>
+<h3>{{title}}</h3>
+<form #userForm="ngForm" (ngSubmit)="onSubmit()" class="form-horizontal col-xs-12 col-sm-9 col-md-8 col-lg-6"
+  autocomplete="off">
+	<div *ngIf="user?.id" class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="id">ID:</label>
+		<div class="col-xs-12 col-sm-9">
+			<input [ngModel]="user.id" id="id" name="id" disabled class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="firstName">First Name:</label>
+		<div class="col-xs-12 col-sm-9">
+			<input [(ngModel)]="user.firstName" autocomplete="off" class="col-xs-12 col-sm-9" id="firstName" name="firstName" placeholder="First Name" required
+			 class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="lastName">Last Name:</label>
+		<div class="col-xs-12 col-sm-9">
+      <input [(ngModel)]="user.lastName" class="form-control col-xs-12 col-sm-9" id="lastName" name="lastName"
+      placeholder="Last Name" required autocomplete="off">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="email">Email:</label>
+		<div class="col-xs-12 col-sm-9">
+      <input [(ngModel)]="user.email" class="form-control col-xs-12 col-sm-9" id="email" name="email"
+       placeholder="Email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+			 #email="ngModel" class="form-control" autocomplete="off">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="password">Password:</label>
+		<div class="col-xs-12 col-sm-9">
+			<input type="password" [(ngModel)]="user.password" class="col-xs-12 col-sm-9" id="password" name="password" placeholder="Password" required
+			 pattern="^[A-Za-z0-9._%@!$#^~*+-]{8,}$" #password="ngModel" autocomplete="off" class="form-control">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="role">Group: </label>
+		<div class="col-xs-12 col-sm-9">
+			<select class="form-control" [(ngModel)]="user.role" id="role" name="role" autocomplete="off">
+				<option [value]="ROLE_CUSTOMER">CUSTOMER</option>
+				<option [value]="ROLE_OPERATOR">OPERATOR</option>
+				<option [value]="ROLE_ADMIN">ADMIN</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="col-md-offset-3">
+		<label class="radio-inline">
+			<input type="radio" name="gender" id="gender1" [value]="GENDER_MALE" [(ngModel)]="user.gender"> Male
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="gender" id="igender2" [value]="GENDER_FEMALE" [(ngModel)]="user.gender"> Female
+		</label>
+	</div>
+
+	<div class="form-group button-panel">
+		<button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit</button>
+		<button type="button" class="btn btn-danger" (click)="resetForm()">Reset</button>
+		<button type="button" class="btn btn-default" (click)="cancelForm()">Cancel</button>
+	</div>
+</form>
