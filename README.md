@@ -1,2 +1,1 @@
-# course-angular2
-IPT course Angular and TypeScript examples
+# IPT Course Angular and TypeScript Examples
