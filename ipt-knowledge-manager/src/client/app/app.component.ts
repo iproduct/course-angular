@@ -7,14 +7,16 @@
  * residing in the root folder of this project.
  *
  */
-
-import { Component, ChangeDetectionStrategy } from '@angular/core';
 import 'rxjs/add/operator/let';
-import { Observable } from 'rxjs/Observable';
+
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+
 import { RootState } from './root.reducer';
 import { UiActions } from './ui/ui.actions';
 import { getShowSidenav } from './ui/ui.selectors';
+
 
 /**
  * The main component of the application bootstrapped by the root module.
@@ -29,11 +31,12 @@ import { getShowSidenav } from './ui/ui.selectors';
 export class AppComponent {
   showSidenav$: Observable<boolean>;
 
-  constructor(private store: Store<RootState>,  private uiActions: UiActions) {
-    this.showSidenav$ = this.store.select(getShowSidenav);
+  constructor(private store: Store<RootState>, private uiActions: UiActions) {
+    this.showSidenav$
+    = this.store.select(getShowSidenav);
   }
 
-closeSidenav() {
+  closeSidenav() {
     this.store.dispatch(this.uiActions.closeSidenav());
   }
 
@@ -41,4 +44,3 @@ closeSidenav() {
     this.store.dispatch(this.uiActions.openSidenav());
   }
 }
-

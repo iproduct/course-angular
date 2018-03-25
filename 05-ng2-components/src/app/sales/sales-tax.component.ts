@@ -11,8 +11,8 @@ import { SalesTaxService } from './sales-tax.service';
                                 (blur)="calculateTax(amountBox.value)">
       <button (click)=calculateTax(amountBox.value)>Calculate Tax</button>
       <div *ngIf="amountBox.value">
-      The calculateed sales tax is: 
-      {{ tax | currency:'USD':true:'1.2-2' }}
+      The calculateed sales tax is:
+      {{ tax | currency:'USD':'symbol':'1.2-2' }}
       </div>
     </div>
   `,

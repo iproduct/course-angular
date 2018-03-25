@@ -1,9 +1,0 @@
-<h3>Todo List:</h3>
-<td-todo-input (nextTodo)="addTodo($event)"></td-todo-input>
-<ul class="todos">
-  <li [class.odd]="odd" *ngFor="let todo of todoRepo.findAll(); let i=index; let odd=odd"
-  class="todo-item">
-    {{i + 1}}. <td-todo-item [todo]="todo" (completionChanged)="removeTodo(todo)">
-    </td-todo-item>
-  </li>
-</ul>

@@ -104,10 +104,20 @@ module.exports = {
     ]
   },
 
+  optimization: {
+    minimize: true,
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: "commons",
+          chunks: "initial",
+          minChunks: 3
+        }
+      }
+    }
+  },
+
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['app', 'vendor', 'polyfills']
-    }),
     // Workaround for angular/angular#11580
     new webpack.ContextReplacementPlugin(
       // The (\\|\/) piece accounts for path separators in *nix and Windows
@@ -115,10 +125,10 @@ module.exports = {
       helpers.root('./src'), // location of your src
       {} // a map of your routes
     ),
+
     new HtmlWebpackPlugin({
-      template: 'index.html',
-      title: 'React TODO Demo',
-      favicon: './favicon.ico'
+      template: "index.html"
     })
   ]
+
 };
