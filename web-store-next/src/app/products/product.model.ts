@@ -3,7 +3,7 @@ import { Identifiable, KeyType } from '../shared/common-types';
 let nextId = 0;
 
 export class Product implements Identifiable {
-  id: KeyType;
+  id: KeyType = null;
   constructor(
     public name: string,
     public price: number,

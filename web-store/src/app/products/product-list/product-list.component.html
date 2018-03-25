@@ -3,10 +3,13 @@
 <div class="alert alert-danger" role="alert" *ngIf="errors">{{errors}}</div>
 <ul class="items">
     <li *ngFor="let product of products; let i=index;" class="product-item"
-      (click)="selectProduct(product)" [class.selected]="product === selectedProduct">
+      (click)="selectProduct(product.id)" [class.selected]="product.id === selectedId">
         <span class="badge">{{i+ 1}}</span>
         {{product.name}} - {{product.price | currency:'USD':'symbol'}} - {{product.description}}
-    </li>
+        <span class="remove-item glyphicon glyphicon-remove-circle text-danger pull-right"
+          (click)="deleteItem(product.id); $event.stopPropagation()"
+          aria-hidden="true" title="Click to delete this product."></span>
+      </li>
 </ul>
-<ws-product-detail-reactive *ngIf="selectedProduct" [product]="selectedProduct"
-  (submittedProduct)="onSubmittedProduct($event)"></ws-product-detail-reactive>
+<!--<ws-product-detail-reactive *ngIf="selectedProduct" [product]="selectedProduct"
+  (submittedProduct)="onSubmittedProduct($event)"></ws-product-detail-reactive> -->

@@ -46,4 +46,7 @@
 
   <button type="submit" class="btn btn-primary"
     [disabled]="productForm.pristine || productForm.invalid">Submit</button>
+  <button class="btn btn-default" (click)="resetForm()"
+    [disabled]="productForm.pristine">Reset</button>
+  <button class="btn btn-default" (click)="cancelForm()">Cancel</button>
 </form>

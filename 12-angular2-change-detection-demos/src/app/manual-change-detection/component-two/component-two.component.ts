@@ -31,6 +31,7 @@ export class ComponentTwo {
       if (attach) {
         this.el.nativeElement.querySelector('a').classList.remove('detached');
         this.cd.reattach();
+        this.cd.detectChanges();
       } else {
         this.el.nativeElement.querySelector('a').classList.add('detached');
         this.cd.detach();

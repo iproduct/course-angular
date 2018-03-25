@@ -11,6 +11,7 @@ export class Renderer2Component {
   @ViewChild('appendRenderer2Elem') public appendRenderer2Elem: ElementRef;
 
   constructor(private renderer: Renderer2) { }
+
   public appendNativeElement() {
     this.appendNativeElementElem.nativeElement.appendChild(this.content.nativeElement);
   }

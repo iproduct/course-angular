@@ -20,7 +20,7 @@ import { CoreModule } from './core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { DBModule } from '@ngrx/db';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UiModule } from './ui/ui.module';
 import { MdIconModule } from '@angular/material';
@@ -28,7 +28,7 @@ import { routes } from './routes';
 import { UserEffects } from './users/user.effects';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { reducers } from './root.reducer';
+import { reducers, CustomSerializer } from './root.reducer';
 import { RoutingEffects } from './shared/routing.effects';
 import { environment } from '../environments/environment';
 
@@ -52,7 +52,9 @@ import { environment } from '../environments/environment';
      * @ngrx/router-store keeps router state in the store and uses
      * it as the single source of truth.
      */
-    StoreRouterConnectingModule,
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router'
+    }),
 
     EffectsModule.forRoot([RoutingEffects]),
 
@@ -74,6 +76,7 @@ import { environment } from '../environments/environment';
     AppComponent,
   ],
   providers: [
+    { provide: RouterStateSerializer, useClass: CustomSerializer }
   ],
   bootstrap: [
     AppComponent

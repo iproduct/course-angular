@@ -8,9 +8,9 @@ import { CountdownTimerComponent }  from './countdown-timer.component';
   <button (click)="start()">Start</button>
   <button (click)="stop()">Stop</button>
   <div class="seconds">{{ seconds() }}</div>
-  <countdown-timer #timer > 
+  <countdown-timer #timer>
     <header>Countdown Timer Header</header>
-    <timer-name></timer-name>
+    <timer-name>Custom Timer</timer-name>
     <div class="footer"> Countdown @ViewChild Timer Footer </div>
   </countdown-timer>
   `,
@@ -29,7 +29,7 @@ import { CountdownTimerComponent }  from './countdown-timer.component';
   encapsulation: ViewEncapsulation.Native
 })
 export class CountdownViewChildParentComponent implements AfterViewInit {
-  @ViewChild(CountdownTimerComponent)
+  @ViewChild('timer')
   private timerComponent: CountdownTimerComponent;
   seconds() { return 0; }
   ngAfterViewInit() {

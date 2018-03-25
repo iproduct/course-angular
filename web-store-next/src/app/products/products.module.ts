@@ -6,13 +6,14 @@ import { ProductDetailComponent } from "./product-detail/product-detail.componen
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ProductDetailReactiveComponent } from "./product-detail-reactive/product-detail-reactive.component";
 import { ProductsRoutingModule } from "./products-routing.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
   ],
   declarations: [
     ProductListComponent,

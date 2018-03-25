@@ -1,29 +1,18 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Product } from '../product.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../product.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ws-product-detail-reactive',
   templateUrl: './product-detail-reactive.component.html',
   styleUrls: ['./product-detail-reactive.component.css']
 })
-export class ProductDetailReactiveComponent implements OnInit {
-  private _product: Product;
+export class ProductDetailReactiveComponent implements OnInit, OnChanges {
 
-  @Input()
-  get product() {
-    return this._product;
-  }
-  set product(value) {
-    this._product = value;
-    if(!this.product) {
-      this.product = new Product(undefined, undefined, undefined);
-    }
-    this.isNewProduct = !this.product.id;
-    this.resetForm();
-  }
-
+  @Input() product: Product = new Product(undefined, undefined, undefined);
   @Output() submittedProduct = new EventEmitter<Product>();
 
   isNewProduct = true;
@@ -49,11 +38,40 @@ export class ProductDetailReactiveComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: ProductService
+    private service: ProductService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit() {
     this.buildForm();
+    this.route.params.subscribe(params => {
+      const id = params['productId'];
+      if(id) {
+        this.isNewProduct = false;
+        // this.service.find(id).subscribe(product => {
+        //   this.product = product;
+        //   this.resetForm();
+        // }, err => this.errors = err);
+      }
+    });
+    this.route.data.subscribe(data => {
+      console.log(data);
+      this.product = data.product || this.product;
+      this.isNewProduct = !this.product.id;
+      this.resetForm();
+    }, err => this.errors = err);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.product&& changes.product.currentValue !== changes.product.previousValue){
+      if(!this.product) {
+        this.product = new Product(undefined, undefined, undefined);
+      }
+      this.isNewProduct = !this.product.id;
+      this.resetForm();
+    }
   }
 
   onSubmit() {
@@ -73,16 +91,16 @@ export class ProductDetailReactiveComponent implements OnInit {
         this.errors = err;
       });
     }
-    this.goBack();
-  }
-
-  goBack() {
   }
 
   resetForm() {
     if(this.productForm) {
       this.productForm.reset(this.product);
     }
+  }
+
+  cancelForm() {
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 
   private buildForm() {

@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppNavComponent } from './app-nav.component';
 import { SmallDemosModule } from './small-demos/small-demos.module';
 import { LoginModule } from './login/login.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { LoginModule } from './login/login.module';
     HomeModule,
     SalesModule,
     SmallDemosModule,
-    LoginModule
+    LoginModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   declarations: [

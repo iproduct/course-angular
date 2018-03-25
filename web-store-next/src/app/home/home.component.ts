@@ -5,13 +5,11 @@ import { slideInDownAnimation } from '../shared/animations';
 @Component({
   selector: 'simple-form',
   templateUrl: './home.component.html',
-  animations: [ slideInDownAnimation ]
+  animations: [ slideInDownAnimation ],
+  styleUrls: [ './home.component.css']
 })
 export class HomeComponent {
   @HostBinding('@routeAnimation') routeAnimation = true;
-  @HostBinding('style.display')   display = 'block';
-  @HostBinding('style.width')   width = '100%';
-  @HostBinding('style.position')  position = 'absolute';
 
   imageBox = '../../assets/img/ipt-box.png';
 }

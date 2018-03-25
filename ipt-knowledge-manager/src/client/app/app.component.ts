@@ -33,7 +33,7 @@ export class AppComponent {
     this.showSidenav$ = this.store.select(getShowSidenav);
   }
 
-  closeSidenav() {
+closeSidenav() {
     this.store.dispatch(this.uiActions.closeSidenav());
   }
 

@@ -2,21 +2,22 @@ import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChange
 import { Product } from '../product.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../product.service';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Router, Params, CanDeactivate } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Location } from '@angular/common';
 import { shallowEquals } from '../../shared/utils';
 import { DialogService } from '../../core/dialog.service';
+import { CanComponentDeactivate } from '../../core/can-deactivate-guard.service';
 
 @Component({
   selector: 'ws-product-detail-reactive',
   templateUrl: './product-detail-reactive.component.html',
   styleUrls: ['./product-detail-reactive.component.css']
 })
-export class ProductDetailReactiveComponent implements OnInit,  OnChanges  {
+export class ProductDetailReactiveComponent implements OnInit,  OnChanges, CanComponentDeactivate {
   private subscription: Subscription;
 
-  @Input() product: Product = new Product(undefined, undefined, undefined);;
+  @Input() product: Product = new Product(null, null, null);;
   @Output() submittedProduct = new EventEmitter<Product>();
 
   title: string;
@@ -163,7 +164,7 @@ export class ProductDetailReactiveComponent implements OnInit,  OnChanges  {
 
   public canDeactivate(): Promise<boolean> | boolean {
     // Allow navigation if no user or the user data is not changed
-    if (this.isCanceled || shallowEquals(this.product, this.productForm.getRawValue() as Product)) {
+    if (this.isCanceled || shallowEquals(this.product, this.productForm.getRawValue())) {
       return true;
     }
     // Otherwise ask the user to confirm loosing changes using the dialog service

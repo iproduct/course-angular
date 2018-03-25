@@ -15,7 +15,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 import { UserService } from '../users/user.service';
 import { LoggerService } from '../core/logger.service';
-import { User, Role } from '../users/user.model';
+import { User, Role, Admin } from '../users/user.model';
 import { tap, map } from 'rxjs/operators';
 
 @Injectable()

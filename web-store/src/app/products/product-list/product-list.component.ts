@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
+import { KeyType } from '../../shared/common-types';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ws-product-list',
@@ -9,11 +11,15 @@ import { Product } from '../product.model';
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
-  selectedProduct: Product;
+  selectedId: KeyType;
   errors: string;
   newProduct = false;
 
-  constructor(public productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.productService.findAll().subscribe(products => {
@@ -25,14 +31,16 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  selectProduct(product) {
+  selectProduct(id) {
     this.newProduct = false;
-    this.selectedProduct = product;
+    this.selectedId = id;
+    this.router.navigate([id], { relativeTo: this.route });
   }
 
   onAddProduct() {
     this.newProduct = true;
-    this.selectedProduct = new Product(undefined, undefined, undefined);
+    this.selectedId = undefined;
+    this.router.navigate(['products', 'new']);
   }
 
   onSubmittedProduct(product: Product) {
@@ -42,7 +50,15 @@ export class ProductListComponent implements OnInit {
       const ind = this.products.findIndex(p => p.id === product.id);
       this.products[ind] = product;
     }
-    this.selectedProduct = undefined;
+    this.selectedId = undefined;
+  }
+
+  deleteItem(id: KeyType) {
+    this.productService.remove(id).subscribe(product => {
+      this.products.splice(this.products.findIndex(p => p.id === product.id), 1);
+    }, err => {
+      this.errors = err;
+    });
   }
 
 }
