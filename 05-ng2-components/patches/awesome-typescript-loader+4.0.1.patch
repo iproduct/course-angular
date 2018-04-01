@@ -1,0 +1,2203 @@
+patch-package
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/angular-webpack-starter.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/angular-webpack-starter.js
+@@ -0,0 +1,66 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++var shelljs_1 = require("shelljs");
++utils_1.xspec(__filename, function (_env, done) {
++    return __awaiter(this, void 0, void 0, function () {
++        var wp, code;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    this.timeout(5 * 60 * 1000);
++                    shelljs_1.exec('rimraf package.json');
++                    shelljs_1.exec('git clone --depth 1 https://github.com/angularclass/angular2-webpack-starter.git .');
++                    shelljs_1.exec('yarn install');
++                    shelljs_1.exec('rimraf node_modules/awesome-typescript-loader');
++                    shelljs_1.ln('-s', _env.LOADER, './node_modules/awesome-typescript-loader');
++                    wp = utils_1.exec('npm', ['run', 'webpack']);
++                    return [4, wp.wait(utils_1.stdout('[at-loader] Ok'))];
++                case 1:
++                    _a.sent();
++                    return [4, wp.alive()];
++                case 2:
++                    code = _a.sent();
++                    utils_1.expect(code).eq(0);
++                    done();
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=angular-webpack-starter.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/angular-webpack-starter.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"angular-webpack-starter.js","sourceRoot":"","sources":["../../src/__test__/angular-webpack-starter.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAA4D;AAE5D,mCAAkC;AAElC,aAAK,CAAC,UAAU,EAAE,UAAe,IAAI,EAAE,IAAI;;;;;;oBAC1C,IAAI,CAAC,OAAO,CAAC,CAAC,GAAG,EAAE,GAAG,IAAI,CAAC,CAAA;oBAE3B,cAAI,CAAC,qBAAqB,CAAC,CAAA;oBAC3B,cAAI,CAAC,oFAAoF,CAAC,CAAA;oBAC1F,cAAI,CAAC,cAAc,CAAC,CAAA;oBACpB,cAAI,CAAC,+CAA+C,CAAC,CAAA;oBACrD,YAAE,CAAC,IAAI,EAAE,IAAI,CAAC,MAAM,EAAE,0CAA0C,CAAC,CAAA;oBAE3D,EAAE,GAAG,YAAG,CAAC,KAAK,EAAE,CAAC,KAAK,EAAE,SAAS,CAAC,CAAC,CAAA;oBAEzC,WAAM,EAAE,CAAC,IAAI,CAAC,cAAM,CAAC,gBAAgB,CAAC,CAAC,EAAA;;oBAAvC,SAAuC,CAAA;oBAE1B,WAAM,EAAE,CAAC,KAAK,EAAE,EAAA;;oBAAvB,IAAI,GAAG,SAAgB;oBAC7B,cAAM,CAAC,IAAI,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAA;oBAElB,IAAI,EAAE,CAAA;;;;;CACN,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/babel.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/babel.js
+@@ -0,0 +1,73 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var index, config, watcher, stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    index = utils_1.src('index.ts', "\n        class HiThere {\n            constructor(a: number, b: string) {\n                const t = a + b;\n            }\n        }\n    ");
++                    utils_1.install('babel-core', 'babel-preset-es2015');
++                    utils_1.tsconfig();
++                    config = utils_1.webpackConfig(utils_1.query({
++                        useBabel: true,
++                        babelOptions: {
++                            presets: ['es2015']
++                        }
++                    }));
++                    return [4, utils_1.watch(config)];
++                case 1:
++                    watcher = _a.sent();
++                    return [4, watcher.wait()];
++                case 2:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    utils_1.checkOutput('index.js', "\n        var HiThere = function HiThere(a, b) {\n            _classCallCheck(this, HiThere);\n            var t = a + b;\n        }\n    ");
++                    index.update(function () { return "\n        function sum(...items: number[]) {\n            return items.reduce((a,b) => a + b, 0);\n        }\n    "; });
++                    return [4, watcher.wait()];
++                case 3:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    utils_1.checkOutput('index.js', "\n        function sum() {\n            for(var _len = arguments.length,\n                items = Array(_len),\n                _key = 0;\n                _key < _len;\n                _key++\n            ) {\n                items[_key] = arguments[_key];\n            }\n            return items.reduce(function(a,b){ return a + b; }, 0);\n        }\n    ");
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=babel.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/babel.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"babel.js","sourceRoot":"","sources":["../../src/__test__/babel.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAUgB;AAEhB,YAAI,CAAC,UAAU,EAAE;;;;;;oBACV,KAAK,GAAG,WAAG,CAChB,UAAU,EACV,8IAMG,CACH,CAAA;oBAED,eAAO,CAAC,YAAY,EAAE,qBAAqB,CAAC,CAAA;oBAC5C,gBAAQ,EAAE,CAAA;oBAEJ,MAAM,GAAG,qBAAa,CAC3B,aAAK,CAAC;wBACL,QAAQ,EAAE,IAAI;wBACd,YAAY,EAAE;4BACb,OAAO,EAAE,CAAC,QAAQ,CAAC;yBACnB;qBACD,CAAC,CACF,CAAA;oBAEe,WAAM,aAAK,CAAC,MAAM,CAAC,EAAA;;oBAA7B,OAAO,GAAG,SAAmB;oBAEvB,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAA5B,KAAK,GAAG,SAAoB;oBAEhC,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;oBACtB,mBAAW,CACV,UAAU,EACV,4IAKG,CACH,CAAA;oBAED,KAAK,CAAC,MAAM,CACX,cAAM,OAAA,oHAIH,EAJG,CAIH,CACH,CAAA;oBAEO,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAA5B,KAAK,GAAG,SAAoB,CAAA;oBAE5B,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;oBACtB,mBAAW,CACV,UAAU,EACV,uWAYG,CACH,CAAA;;;;;CACD,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/compile-output.d.ts
+@@ -0,0 +1 @@
++export declare function config(env: any): void;
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/compile-output.js
+@@ -0,0 +1,67 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++function config(env) {
++    utils_1.file("webpack.config.js", "\n        const path = require('path')\n        module.exports = {\n            entry: { index: path.join(process.cwd(), '" + env.SRC_DIR + "', 'index.ts') },\n            output: {\n                path: path.join(process.cwd(), '" + env.OUT_DIR + "'),\n                filename: '[name].js'\n            },\n            resolve: {\n                extensions: ['.ts', '.tsx', '.js', '.jsx'],\n            },\n            module: {\n                loaders: [\n                    {\n                        test: /.(tsx?|jsx?)/,\n                        loader: path.resolve(process.cwd(), '..', '..', 'index.js'),\n                        include: [ path.join(process.cwd(), '" + env.SRC_DIR + "') ],\n                        query: {\n                            silent: true\n                        }\n                    }\n                ]\n            }\n        }\n    ");
++}
++exports.config = config;
++utils_1.spec(__filename, function (env, done) {
++    return __awaiter(this, void 0, void 0, function () {
++        var webpack;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.src('index.ts', "\n        export default function sum(a: number, b: number) {\n            return a + b;\n        }\n\n        sum(1, '1');\n    ");
++                    utils_1.tsconfig();
++                    config(env);
++                    webpack = utils_1.execWebpack();
++                    webpack.strictOutput();
++                    return [4, webpack.wait(utils_1.stdout([
++                            'ERROR in [at-loader]',
++                            "Argument of type '\"1\"' is not assignable to parameter of type 'number'"
++                        ]))];
++                case 1:
++                    _a.sent();
++                    webpack.close();
++                    done();
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=compile-output.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/compile-output.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"compile-output.js","sourceRoot":"","sources":["../../src/__test__/compile-output.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAwE;AAExE,gBAAuB,GAAG;IACzB,YAAI,CACH,mBAAmB,EACnB,+HAGsD,GAAG,CAAC,OAAO,kGAEjB,GAAG,CAAC,OAAO,qbAWE,GAAG,CAAC,OAAO,2LAQrE,CACH,CAAA;AACF,CAAC;AA7BD,wBA6BC;AAED,YAAI,CAAC,UAAU,EAAE,UAAe,GAAG,EAAE,IAAI;;;;;;oBACxC,WAAG,CACF,UAAU,EACV,mIAMG,CACH,CAAA;oBAED,gBAAQ,EAAE,CAAA;oBACV,MAAM,CAAC,GAAG,CAAC,CAAA;oBAEL,OAAO,GAAG,mBAAW,EAAE,CAAA;oBAC7B,OAAO,CAAC,YAAY,EAAE,CAAA;oBAEtB,WAAM,OAAO,CAAC,IAAI,CACjB,cAAM,CAAC;4BACN,sBAAsB;4BACtB,0EAAwE;yBACxE,CAAC,CACF,EAAA;;oBALD,SAKC,CAAA;oBAED,OAAO,CAAC,KAAK,EAAE,CAAA;oBACf,IAAI,EAAE,CAAA;;;;;CACN,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/config-file-name.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/config-file-name.js
+@@ -0,0 +1,61 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var config, stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.src('index.ts', "\n        const a = {}\n        const b = Object.values(a);\n    ");
++                    utils_1.tsconfig({
++                        target: 'es2017'
++                    }, undefined, './config/tsconfig.json');
++                    config = utils_1.webpackConfig(utils_1.query({
++                        configFileName: './config/tsconfig.json'
++                    }));
++                    return [4, utils_1.compile(config)];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=config-file-name.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/config-file-name.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"config-file-name.js","sourceRoot":"","sources":["../../src/__test__/config-file-name.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAA0F;AAE1F,YAAI,CAAC,UAAU,EAAE;;;;;;oBAChB,WAAG,CACF,UAAU,EACV,mEAGG,CACH,CAAA;oBAED,gBAAQ,CACP;wBACC,MAAM,EAAE,QAAQ;qBAChB,EACD,SAAS,EACT,wBAAwB,CACxB,CAAA;oBAEK,MAAM,GAAG,qBAAa,CAC3B,aAAK,CAAC;wBACL,cAAc,EAAE,wBAAwB;qBACxC,CAAC,CACF,CAAA;oBAEW,WAAM,eAAO,CAAC,MAAM,CAAC,EAAA;;oBAA7B,KAAK,GAAG,SAAqB;oBACjC,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;;;;;CACtB,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/create-cache-dir.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/create-cache-dir.js
+@@ -0,0 +1,63 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++var path = require("path");
++var fs = require("fs");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var config, exists;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.src('index.ts', "\n        class HiThere {\n            constructor(a: number, b: string) {\n                const t = a + b;\n            }\n        }\n    ");
++                    utils_1.tsconfig();
++                    config = utils_1.webpackConfig(utils_1.query({
++                        useCache: true,
++                        cacheDirectory: path.join(process.cwd(), 'cache', '.cache')
++                    }));
++                    return [4, utils_1.compile(config)];
++                case 1:
++                    _a.sent();
++                    exists = fs.existsSync(path.join(process.cwd(), 'cache', '.cache'));
++                    utils_1.expect(exists).true;
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=create-cache-dir.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/create-cache-dir.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"create-cache-dir.js","sourceRoot":"","sources":["../../src/__test__/create-cache-dir.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAoF;AAEpF,2BAA4B;AAC5B,uBAAwB;AAExB,YAAI,CAAC,UAAU,EAAE;;;;;;oBAChB,WAAG,CACF,UAAU,EACV,8IAMG,CACH,CAAA;oBAED,gBAAQ,EAAE,CAAA;oBAEJ,MAAM,GAAG,qBAAa,CAC3B,aAAK,CAAC;wBACL,QAAQ,EAAE,IAAI;wBAEd,cAAc,EAAE,IAAI,CAAC,IAAI,CAAC,OAAO,CAAC,GAAG,EAAE,EAAE,OAAO,EAAE,QAAQ,CAAC;qBAC3D,CAAC,CACF,CAAA;oBAED,WAAM,eAAO,CAAC,MAAM,CAAC,EAAA;;oBAArB,SAAqB,CAAA;oBAEf,MAAM,GAAG,EAAE,CAAC,UAAU,CAAC,IAAI,CAAC,IAAI,CAAC,OAAO,CAAC,GAAG,EAAE,EAAE,OAAO,EAAE,QAAQ,CAAC,CAAC,CAAA;oBACzE,cAAM,CAAC,MAAM,CAAC,CAAC,IAAI,CAAA;;;;;CACnB,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/declaration.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/declaration.js
+@@ -0,0 +1,70 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var index, watcher, stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    index = utils_1.src('index.ts', "\n        export { default as sum } from './utils/sum'\n    ");
++                    utils_1.src('utils/sum.ts', "\n        export default function sum(a: number, b: number) {\n            return a + b;\n        }\n    ");
++                    utils_1.tsconfig({
++                        declarationDir: 'decl',
++                        declaration: true
++                    });
++                    watcher = utils_1.watch(utils_1.webpackConfig());
++                    return [4, watcher.wait()];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    utils_1.checkOutput('../decl/index.d.ts', "\n        export { default as sum } from './utils/sum'\n    ");
++                    utils_1.checkOutput('../decl/utils/sum.d.ts', "\n        export default function sum(a: number, b: number): number\n    ");
++                    utils_1.src('utils/mul.ts', "\n        export default function mul(a: number, b: number) {\n            return a * b;\n        }\n    ");
++                    index.update(function () { return "\n        export { default as sum } from './utils/sum'\n        export { default as mul } from './utils/mul'\n    "; });
++                    return [4, watcher.wait()];
++                case 2:
++                    _a.sent();
++                    utils_1.checkOutput('../decl/utils/mul.d.ts', "\n        export default function mul(a: number, b: number): number\n    ");
++                    utils_1.checkOutput('../decl/index.d.ts', "\n        export { default as sum } from './utils/sum';\n        export { default as mul } from './utils/mul';\n    ");
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=declaration.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/declaration.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"declaration.js","sourceRoot":"","sources":["../../src/__test__/declaration.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAA8F;AAE9F,YAAI,CAAC,UAAU,EAAE;;;;;;oBACV,KAAK,GAAG,WAAG,CAChB,UAAU,EACV,8DAEG,CACH,CAAA;oBAED,WAAG,CACF,cAAc,EACd,2GAIG,CACH,CAAA;oBAED,gBAAQ,CAAC;wBACR,cAAc,EAAE,MAAM;wBACtB,WAAW,EAAE,IAAI;qBACjB,CAAC,CAAA;oBAEI,OAAO,GAAG,aAAK,CAAC,qBAAa,EAAE,CAAC,CAAA;oBAE1B,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAA5B,KAAK,GAAG,SAAoB;oBAEhC,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;oBAEtB,mBAAW,CACV,oBAAoB,EACpB,8DAEG,CACH,CAAA;oBAED,mBAAW,CACV,wBAAwB,EACxB,2EAEG,CACH,CAAA;oBAED,WAAG,CACF,cAAc,EACd,2GAIG,CACH,CAAA;oBAED,KAAK,CAAC,MAAM,CACX,cAAM,OAAA,oHAGH,EAHG,CAGH,CACH,CAAA;oBAED,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAApB,SAAoB,CAAA;oBAEpB,mBAAW,CACV,wBAAwB,EACxB,2EAEG,CACH,CAAA;oBAED,mBAAW,CACV,oBAAoB,EACpB,sHAGG,CACH,CAAA;;;;;CACD,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/error.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/error.js
+@@ -0,0 +1,60 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.src('index.ts', "\n        function sum(a: number, b: number) {\n            return a + b;\n        }\n\n        sum('test', 1);\n    ");
++                    utils_1.tsconfig();
++                    return [4, utils_1.compile(utils_1.webpackConfig())];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 1, [
++                        './src/index.ts',
++                        "Argument of type '\"test\"' is not assignable to parameter of type 'number'"
++                    ]);
++                    utils_1.checkOutput('index.js', "\n        function sum(a, b) {\n            return a + b;\n        }\n\n        sum('test', 1);\n    ");
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=error.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/error.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"error.js","sourceRoot":"","sources":["../../src/__test__/error.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAgG;AAEhG,YAAI,CAAC,UAAU,EAAE;;;;;;oBAChB,WAAG,CACF,UAAU,EACV,uHAMG,CACH,CAAA;oBAED,gBAAQ,EAAE,CAAA;oBAEE,WAAM,eAAO,CAAC,qBAAa,EAAE,CAAC,EAAA;;oBAAtC,KAAK,GAAG,SAA8B;oBAE1C,oBAAY,CAAC,KAAK,EAAE,CAAC,EAAE;wBACtB,gBAAgB;wBAChB,6EAA2E;qBAC3E,CAAC,CAAA;oBAEF,mBAAW,CACV,UAAU,EACV,uGAMG,CACH,CAAA;;;;;CACD,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/exclude.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/exclude.js
+@@ -0,0 +1,63 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.file('vendor/with-err.ts', "\n        export function error(a: number, b: string): number {\n            return a + b\n        }\n    ");
++                    utils_1.file('vendor/with-err21.ts', "\n        export function error(a, b)asdf {\n            return a + b\n        }\n    ");
++                    utils_1.src('index.tsx', "\n        console.log(1);\n    ");
++                    utils_1.tsconfig({
++                        jsx: 'react',
++                        allowJs: true
++                    }, {
++                        exclude: ['vendor']
++                    });
++                    return [4, utils_1.compile(utils_1.webpackConfig(utils_1.entry('index.tsx')))];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=exclude.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/exclude.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"exclude.js","sourceRoot":"","sources":["../../src/__test__/exclude.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAgG;AAEhG,YAAI,CAAC,UAAU,EAAE;;;;;;oBAChB,YAAI,CACH,oBAAoB,EACpB,4GAIG,CACH,CAAA;oBAED,YAAI,CACH,sBAAsB,EACtB,wFAIG,CACH,CAAA;oBAED,WAAG,CACF,WAAW,EACX,iCAEG,CACH,CAAA;oBAED,gBAAQ,CACP;wBACC,GAAG,EAAE,OAAO;wBACZ,OAAO,EAAE,IAAI;qBACb,EACD;wBACC,OAAO,EAAE,CAAC,QAAQ,CAAC;qBACnB,CACD,CAAA;oBAEW,WAAM,eAAO,CAAC,qBAAa,CAAC,aAAK,CAAC,WAAW,CAAC,CAAC,CAAC,EAAA;;oBAAxD,KAAK,GAAG,SAAgD;oBAE5D,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;;;;;CACtB,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/import-empty-declaration.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/import-empty-declaration.js
+@@ -0,0 +1,58 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.src('index.ts', "\n        import './empty.d.ts'\n    ");
++                    utils_1.src('empty.d.ts', "");
++                    utils_1.tsconfig();
++                    return [4, utils_1.compile(utils_1.webpackConfig())];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    utils_1.expectWarnings(stats, 1, ['TypeScript declaration files should never be required']);
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=import-empty-declaration.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/import-empty-declaration.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"import-empty-declaration.js","sourceRoot":"","sources":["../../src/__test__/import-empty-declaration.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAmG;AAEnG,YAAI,CAAC,UAAU,EAAE;;;;;;oBAChB,WAAG,CACF,UAAU,EACV,uCAEG,CACH,CAAA;oBAED,WAAG,CAAC,YAAY,EAAE,EAAE,CAAC,CAAA;oBACrB,gBAAQ,EAAE,CAAA;oBAEI,WAAM,eAAO,CAAC,qBAAa,EAAE,CAAC,EAAA;;oBAAtC,KAAK,GAAG,SAA8B;oBAC5C,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;oBACtB,sBAAc,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,uDAAuD,CAAC,CAAC,CAAA;;;;;CACnF,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/paths-plugin.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/paths-plugin.js
+@@ -0,0 +1,65 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++var paths_plugin_1 = require("../paths-plugin");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var config, stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.src('index.ts', "\n        import App from 'ui/app'\n\n        const app = new App()\n        app.render();\n    ");
++                    utils_1.src('./ui/app/index.ts', "\n        export default class App { render() { return 'App' } }\n    ");
++                    utils_1.tsconfig({
++                        baseUrl: '.',
++                        paths: {
++                            'ui/*': ['./src/ui/*']
++                        }
++                    });
++                    config = utils_1.webpackConfig();
++                    config.resolve.plugins = [new paths_plugin_1.PathPlugin()];
++                    return [4, utils_1.compile(config)];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=paths-plugin.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/paths-plugin.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"paths-plugin.js","sourceRoot":"","sources":["../../src/__test__/paths-plugin.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAmF;AAEnF,gDAA4C;AAE5C,YAAI,CAAC,UAAU,EAAE;;;;;;oBAChB,WAAG,CACF,UAAU,EACV,kGAKG,CACH,CAAA;oBAED,WAAG,CACF,mBAAmB,EACnB,wEAEG,CACH,CAAA;oBAED,gBAAQ,CAAC;wBACR,OAAO,EAAE,GAAG;wBACZ,KAAK,EAAE;4BACN,MAAM,EAAE,CAAC,YAAY,CAAC;yBACtB;qBACD,CAAC,CAAA;oBAEI,MAAM,GAAG,qBAAa,EAAE,CAC7B;oBAAC,MAAM,CAAC,OAAe,CAAC,OAAO,GAAG,CAAC,IAAI,yBAAU,EAAE,CAAC,CAAA;oBACzC,WAAM,eAAO,CAAC,MAAM,CAAC,EAAA;;oBAA7B,KAAK,GAAG,SAAqB;oBAEjC,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;;;;;CACtB,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/react.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/react.js
+@@ -0,0 +1,60 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.install('react', 'react-dom', '@types/react', '@types/react-dom');
++                    utils_1.src('index.tsx', "\n        import * as React from 'react'\n        import * as ReactDOM from 'react-dom'\n        import App from './app'\n        ReactDOM.render(<App title='Test' />, document.body)\n    ");
++                    utils_1.src('app.tsx', "\n        import * as React from 'react'\n\n        export default class App extends React.Component<{title: string}, {}> {\n            render() {\n                return <div>{ this.props.title }</div>\n            }\n        }\n    ");
++                    utils_1.tsconfig({
++                        jsx: 'react'
++                    });
++                    return [4, utils_1.compile(utils_1.webpackConfig(utils_1.entry('index.tsx')))];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=react.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/react.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"react.js","sourceRoot":"","sources":["../../src/__test__/react.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAmG;AAEnG,YAAI,CAAC,UAAU,EAAE;;;;;;oBAChB,eAAO,CAAC,OAAO,EAAE,WAAW,EAAE,cAAc,EAAE,kBAAkB,CAAC,CAAA;oBAEjE,WAAG,CACF,WAAW,EACX,8LAKG,CACH,CAAA;oBAED,WAAG,CACF,SAAS,EACT,6OAQG,CACH,CAAA;oBAED,gBAAQ,CAAC;wBACR,GAAG,EAAE,OAAO;qBACZ,CAAC,CAAA;oBAEU,WAAM,eAAO,CAAC,qBAAa,CAAC,aAAK,CAAC,WAAW,CAAC,CAAC,CAAC,EAAA;;oBAAxD,KAAK,GAAG,SAAgD;oBAE5D,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;;;;;CACtB,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/remove.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/remove.js
+@@ -0,0 +1,67 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var index, mul, watcher, stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    index = utils_1.src('index.ts', "\n        import sum from './sum'\n        import mul from './mul'\n\n        sum(1, 1)\n        mul(1, 1)\n    ");
++                    utils_1.src('sum.ts', "\n        export default function sum(a: number, b: number) {\n            return a + b;\n        }\n    ");
++                    mul = utils_1.src('mul.ts', "\n        // function with error\n        export default function mul(a: number, b: number) {\n            return a * c;\n        }\n    ");
++                    utils_1.tsconfig();
++                    return [4, utils_1.watch(utils_1.webpackConfig())];
++                case 1:
++                    watcher = _a.sent();
++                    return [4, watcher.wait()];
++                case 2:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 1, ["Cannot find name 'c'"]);
++                    mul.remove();
++                    index.update(function () { return "\n        import sum from './sum'\n        sum(1, 1)\n    "; });
++                    return [4, watcher.wait()];
++                case 3:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=remove.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/remove.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"remove.js","sourceRoot":"","sources":["../../src/__test__/remove.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAiF;AAEjF,YAAI,CAAC,UAAU,EAAE;;;;;;oBACV,KAAK,GAAG,WAAG,CAChB,UAAU,EACV,kHAMG,CACH,CAAA;oBAED,WAAG,CACF,QAAQ,EACR,2GAIG,CACH,CAAA;oBAEK,GAAG,GAAG,WAAG,CACd,QAAQ,EACR,2IAKG,CACH,CAAA;oBAED,gBAAQ,EAAE,CAAA;oBACM,WAAM,aAAK,CAAC,qBAAa,EAAE,CAAC,EAAA;;oBAAtC,OAAO,GAAG,SAA4B;oBAEhC,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAA5B,KAAK,GAAG,SAAoB;oBAEhC,oBAAY,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,sBAAsB,CAAC,CAAC,CAAA;oBAEhD,GAAG,CAAC,MAAM,EAAE,CAAA;oBACZ,KAAK,CAAC,MAAM,CACX,cAAM,OAAA,4DAGH,EAHG,CAGH,CACH,CAAA;oBAEO,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAA5B,KAAK,GAAG,SAAoB,CAAA;oBAC5B,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;;;;;CACtB,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/rename-case.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/rename-case.js
+@@ -0,0 +1,73 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var index, file, watcher, stats, stats, stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    index = utils_1.src('index.ts', "\n        import { a } from './MyFIle'\n    ");
++                    file = utils_1.src('MyFIle.ts', "\n        export let a: number = '10'\n    ");
++                    utils_1.tsconfig();
++                    watcher = utils_1.watch(utils_1.webpackConfig());
++                    return [4, watcher.wait()];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 1, ["Type '\"10\"' is not assignable to type 'number'"]);
++                    index.update(function (text) {
++                        return "\n            import { a } from './MyFile'\n        ";
++                    });
++                    file.move('src/MyFile.ts');
++                    return [4, watcher.wait()];
++                case 2:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 1, ["Type '\"10\"' is not assignable to type 'number'"]);
++                    file.update(function (text) {
++                        return "\n            export let a: number = 10\n        ";
++                    });
++                    return [4, watcher.wait()];
++                case 3:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=rename-case.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/rename-case.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"rename-case.js","sourceRoot":"","sources":["../../src/__test__/rename-case.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAiF;AAEjF,YAAI,CAAC,UAAU,EAAE;;;;;;oBACV,KAAK,GAAG,WAAG,CAChB,UAAU,EACV,8CAEG,CACH,CAAA;oBAEK,IAAI,GAAG,WAAG,CACf,WAAW,EACX,6CAEG,CACH,CAAA;oBAED,gBAAQ,EAAE,CAAA;oBAEJ,OAAO,GAAG,aAAK,CAAC,qBAAa,EAAE,CAAC,CAAA;oBAGzB,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAA5B,KAAK,GAAG,SAAoB;oBAChC,oBAAY,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,kDAAgD,CAAC,CAAC,CAAA;oBAG3E,KAAK,CAAC,MAAM,CAAC,UAAA,IAAI;wBAChB,MAAM,CAAC,sDAEA,CAAA;oBACR,CAAC,CAAC,CAAA;oBAEF,IAAI,CAAC,IAAI,CAAC,eAAe,CAAC,CAAA;oBAGb,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAA5B,KAAK,GAAG,SAAoB;oBAChC,oBAAY,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,kDAAgD,CAAC,CAAC,CAAA;oBAG3E,IAAI,CAAC,MAAM,CAAC,UAAA,IAAI;wBACf,MAAM,CAAC,mDAEA,CAAA;oBACR,CAAC,CAAC,CAAA;oBAGW,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAA5B,KAAK,GAAG,SAAoB;oBAChC,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;;;;;CAEvB,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/report-files.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/report-files.js
+@@ -0,0 +1,72 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var stats, stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.src('index.ts', "\n        import 'project/index'\n        export let a: number\n        a = '10'\n    ");
++                    utils_1.file('node_modules/project/package.json', "\n        {\n            \"name\": \"project\",\n            \"version\": \"0.0.0\",\n            \"main\": \"index.ts\"\n        }\n    ");
++                    utils_1.file('node_modules/project/index.ts', "\n        export let a: number\n        a = '10'\n    ");
++                    utils_1.src('skip.ts', "\n        export let a: number\n        a = '10'\n    ");
++                    utils_1.tsconfig();
++                    return [4, utils_1.compile(utils_1.webpackConfig(utils_1.query({
++                            reportFiles: ['src/**/*.{ts,tsx}', '!src/skip.ts']
++                        }), utils_1.include('node_modules')))];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 1, ['./src/index.ts', "Type '\"10\"' is not assignable to type 'number'"]);
++                    return [4, utils_1.compile(utils_1.webpackConfig(utils_1.include('node_modules')))];
++                case 2:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 3, [
++                        './src/index.ts',
++                        "Type '\"10\"' is not assignable to type 'number'",
++                        './src/skip.ts',
++                        "Type '\"10\"' is not assignable to type 'number'",
++                        './node_modules/project/index.ts',
++                        "Type '\"10\"' is not assignable to type 'number'"
++                    ]);
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=report-files.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/report-files.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"report-files.js","sourceRoot":"","sources":["../../src/__test__/report-files.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAUgB;AAEhB,YAAI,CAAC,UAAU,EAAE;;;;;;oBAChB,WAAG,CACF,UAAU,EACV,wFAIG,CACH,CAAA;oBAED,YAAI,CACH,mCAAmC,EACnC,2IAMG,CACH,CAAA;oBAED,YAAI,CACH,+BAA+B,EAC/B,wDAGG,CACH,CAAA;oBAED,WAAG,CACF,SAAS,EACT,wDAGG,CACH,CAAA;oBAED,gBAAQ,EAAE,CAAA;oBAGG,WAAM,eAAO,CACxB,qBAAa,CACZ,aAAK,CAAC;4BACL,WAAW,EAAE,CAAC,mBAAmB,EAAE,cAAc,CAAC;yBAClD,CAAC,EACF,eAAO,CAAC,cAAc,CAAC,CACvB,CACD,EAAA;;oBAPG,KAAK,GAAG,SAOX;oBAED,oBAAY,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,gBAAgB,EAAE,kDAAgD,CAAC,CAAC,CAAA;oBAIhF,WAAM,eAAO,CAAC,qBAAa,CAAC,eAAO,CAAC,cAAc,CAAC,CAAC,CAAC,EAAA;;oBAA7D,KAAK,GAAG,SAAqD;oBAEjE,oBAAY,CAAC,KAAK,EAAE,CAAC,EAAE;wBACtB,gBAAgB;wBAChB,kDAAgD;wBAChD,eAAe;wBACf,kDAAgD;wBAChD,iCAAiC;wBACjC,kDAAgD;qBAChD,CAAC,CAAA;;;;;CAEH,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/simple.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/simple.js
+@@ -0,0 +1,57 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.src('index.ts', "\n        class HiThere {\n            constructor(a: number, b: string) {\n                const t = a + b;\n            }\n        }\n    ");
++                    utils_1.tsconfig();
++                    return [4, utils_1.compile(utils_1.webpackConfig())];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    utils_1.checkOutput('index.js', "\n        class HiThere {\n            constructor(a, b) {\n                const t = a + b;\n            }\n        }\n    ");
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=simple.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/simple.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"simple.js","sourceRoot":"","sources":["../../src/__test__/simple.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAgG;AAEhG,YAAI,CAAC,UAAU,EAAE;;;;;;oBAChB,WAAG,CACF,UAAU,EACV,8IAMG,CACH,CAAA;oBAED,gBAAQ,EAAE,CAAA;oBACE,WAAM,eAAO,CAAC,qBAAa,EAAE,CAAC,EAAA;;oBAAtC,KAAK,GAAG,SAA8B;oBAE1C,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;oBACtB,mBAAW,CACV,UAAU,EACV,8HAMG,CACH,CAAA;;;;;CACD,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/skipLibCheck.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/skipLibCheck.js
+@@ -0,0 +1,69 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.src('index.ts', "\n        /// <reference path=\"./index.d.ts\" />\n        function sum(a: number, b: number) {\n            return a + b;\n        }\n\n        sum(1, 1);\n    ");
++                    utils_1.src('index.d.ts', "\n        function sum(a: number, b: number): number;\n    ");
++                    utils_1.tsconfig({
++                        skipLibCheck: true
++                    });
++                    return [4, utils_1.compile(utils_1.webpackConfig())];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    utils_1.tsconfig({
++                        skipLibCheck: false
++                    });
++                    return [4, utils_1.compile(utils_1.webpackConfig())];
++                case 2:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 2, [
++                        "A 'declare' modifier is required for a top level declaration in a .d.ts file",
++                        'Overload signatures must all be exported or non-exported'
++                    ]);
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=skipLibCheck.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/skipLibCheck.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"skipLibCheck.js","sourceRoot":"","sources":["../../src/__test__/skipLibCheck.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAmF;AAEnF,YAAI,CAAC,UAAU,EAAE;;;;;;oBAChB,WAAG,CACF,UAAU,EACV,mKAOG,CACH,CAAA;oBAED,WAAG,CACF,YAAY,EACZ,6DAEG,CACH,CAAA;oBAED,gBAAQ,CAAC;wBACR,YAAY,EAAE,IAAI;qBAClB,CAAC,CAAA;oBAEU,WAAM,eAAO,CAAC,qBAAa,EAAE,CAAC,EAAA;;oBAAtC,KAAK,GAAG,SAA8B;oBAE1C,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;oBAEtB,gBAAQ,CAAC;wBACR,YAAY,EAAE,KAAK;qBACnB,CAAC,CAAA;oBAEM,WAAM,eAAO,CAAC,qBAAa,EAAE,CAAC,EAAA;;oBAAtC,KAAK,GAAG,SAA8B,CAAA;oBAEtC,oBAAY,CAAC,KAAK,EAAE,CAAC,EAAE;wBACtB,8EAA8E;wBAC9E,0DAA0D;qBAC1D,CAAC,CAAA;;;;;CACF,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/source-map.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/source-map.js
+@@ -0,0 +1,61 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var config, stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    utils_1.src('index.ts', "\n        class HiThere {\n            constructor(a: number, b: string) {\n                const t = a + b;\n            }\n        }\n    ");
++                    utils_1.tsconfig();
++                    config = utils_1.webpackConfig();
++                    config.devtool = 'source-map';
++                    return [4, utils_1.compile(config)];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    utils_1.checkOutput('index.js.map', "\"file\":\"index.js\"");
++                    utils_1.checkOutput('index.js.map', "\"sourcesContent\":");
++                    utils_1.checkOutput('index.js.map', "\"mappings\":");
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=source-map.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/source-map.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"source-map.js","sourceRoot":"","sources":["../../src/__test__/source-map.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAgG;AAEhG,YAAI,CAAC,UAAU,EAAE;;;;;;oBAChB,WAAG,CACF,UAAU,EACV,8IAMG,CACH,CAAA;oBAED,gBAAQ,EAAE,CAAA;oBAEJ,MAAM,GAAG,qBAAa,EAAE,CAAA;oBAC9B,MAAM,CAAC,OAAO,GAAG,YAAY,CAAA;oBAEjB,WAAM,eAAO,CAAC,MAAM,CAAC,EAAA;;oBAA7B,KAAK,GAAG,SAAqB;oBAEjC,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;oBACtB,mBAAW,CAAC,cAAc,EAAE,uBAAmB,CAAC,CAAA;oBAChD,mBAAW,CAAC,cAAc,EAAE,qBAAmB,CAAC,CAAA;oBAChD,mBAAW,CAAC,cAAc,EAAE,eAAa,CAAC,CAAA;;;;;CAC1C,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/utils.d.ts
+@@ -0,0 +1,88 @@
++/// <reference types="node" />
++import * as child from 'child_process';
++import * as webpack from 'webpack';
++import { LoaderConfig } from '../interfaces';
++import { expect } from 'chai';
++export { expect };
++export declare const defaultOutputDir: string;
++export declare const defaultFixturesDir: string;
++export interface ConfigOptions {
++    loaderQuery?: LoaderConfig;
++    watch?: boolean;
++    include?: (string | RegExp)[];
++    exclude?: (string | RegExp)[];
++}
++export declare function entry(file: string): (config: any) => void;
++export declare function query(q: any): (config: any) => void;
++export declare function include(...folders: string[]): (config: any) => void;
++export declare function webpackConfig(...enchance: any[]): webpack.Configuration;
++export interface Output {
++    type: 'stderr' | 'stdout';
++    data: string;
++}
++export declare type OutputMatcher = (o: Output) => boolean;
++export declare class Exec {
++    process: child.ChildProcess;
++    watchers: {
++        resolve: any;
++        reject: any;
++        matchers: OutputMatcher[];
++    }[];
++    exitCode: number | null;
++    private _strictOutput;
++    close(): void;
++    strictOutput(): void;
++    invoke({stdout, stderr}: {
++        stdout: any;
++        stderr: any;
++    }): void;
++    wait(...matchers: OutputMatcher[]): Promise<any>;
++    alive(): Promise<any>;
++}
++export declare type Test = string | (string | [boolean, string])[] | RegExp | ((str: string) => boolean);
++export declare function streamTest(stream: string, test: Test): (o: Output) => boolean;
++export declare const stdout: (test: Test) => (o: Output) => boolean;
++export declare const stderr: (test: Test) => (o: Output) => boolean;
++export declare function execWebpack(args?: string[]): Exec;
++export declare function execNode(command: string, args?: string[]): Exec;
++export declare function exec(command: string, args?: string[]): Exec;
++export declare function expectErrors(stats: any, count: number, errors?: string[]): void;
++export declare function expectWarnings(stats: any, count: number, warnings?: string[]): void;
++export declare function tsconfig(compilerOptions?: any, config?: any, fileName?: string): Fixture;
++export declare function install(...name: string[]): Buffer;
++export declare function json(obj: any): string;
++export declare function checkOutput(fileName: string, fragment: string): void;
++export declare function readOutput(fileName: string): string;
++export declare function touchFile(fileName: string): Promise<any>;
++export declare function moveFile(from: string, to: string): void;
++export declare function compile(config: any): Promise<any>;
++export interface TestEnv {
++    TEST_DIR: string;
++    OUT_DIR: string;
++    SRC_DIR: string;
++    LOADER: string;
++    WEBPACK: string;
++}
++export declare function spec<T>(name: string, cb: (env: TestEnv, done?: () => void) => Promise<T>, disable?: boolean): void;
++export declare function xspec<T>(name: string, cb: (env: TestEnv, done?: () => void) => Promise<T>): void;
++export declare function watch(config: any, cb?: (err, stats) => void): Watch;
++export declare class Watch {
++    close: (callback: () => void) => void;
++    private resolves;
++    invoke(err: any, stats: any): void;
++    wait(): Promise<any>;
++}
++export declare function pkg(): void;
++export declare function src(fileName: string, text: string): Fixture;
++export declare function file(fileName: string, text: string): Fixture;
++export declare class Fixture {
++    private text;
++    private fileName;
++    constructor(fileName: string, text: string);
++    path(): string;
++    toString(): string;
++    touch(): void;
++    move(to: string): void;
++    update(updater: (text: string) => string): void;
++    remove(): void;
++}
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/utils.js
+@@ -0,0 +1,422 @@
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++var path = require("path");
++var fs = require("fs");
++var _ = require("lodash");
++var child = require("child_process");
++var webpack = require("webpack");
++var shelljs_1 = require("shelljs");
++require('source-map-support').install();
++var chai_1 = require("chai");
++exports.expect = chai_1.expect;
++var BPromise = require('bluebird');
++var mkdirp = BPromise.promisify(require('mkdirp'));
++var readFile = BPromise.promisify(fs.readFile);
++var writeFile = BPromise.promisify(fs.writeFile);
++exports.defaultOutputDir = path.join(process.cwd(), '.test');
++exports.defaultFixturesDir = path.join(process.cwd(), 'fixtures');
++var TEST_DIR = path.join(process.cwd(), '.test');
++var SRC_DIR = './src';
++var OUT_DIR = './out';
++var WEBPACK = path.join(path.dirname(path.dirname(require.resolve('webpack'))), 'bin', 'webpack.js');
++mkdirp.sync(TEST_DIR);
++var LOADER = path.join(process.cwd(), 'index.js');
++function entry(file) {
++    return function (config) {
++        config.entry.index = path.join(process.cwd(), SRC_DIR, file);
++    };
++}
++exports.entry = entry;
++function query(q) {
++    return function (config) {
++        _.merge(config.module.loaders.find(function (loader) { return loader.loader === LOADER; }).query, q);
++    };
++}
++exports.query = query;
++function include() {
++    var folders = [];
++    for (var _i = 0; _i < arguments.length; _i++) {
++        folders[_i] = arguments[_i];
++    }
++    return function (config) {
++        (_a = config.module.loaders.find(function (loader) { return loader.loader === LOADER; }).include).push.apply(_a, folders.map(function (f) {
++            return path.join(process.cwd(), f);
++        }));
++        var _a;
++    };
++}
++exports.include = include;
++function webpackConfig() {
++    var enchance = [];
++    for (var _i = 0; _i < arguments.length; _i++) {
++        enchance[_i] = arguments[_i];
++    }
++    var config = {
++        entry: { index: path.join(process.cwd(), SRC_DIR, 'index.ts') },
++        output: {
++            path: path.join(process.cwd(), OUT_DIR),
++            filename: '[name].js'
++        },
++        resolve: {
++            extensions: ['.ts', '.tsx', '.js', '.jsx']
++        },
++        module: {
++            loaders: [
++                {
++                    test: /\.(tsx?|jsx?)/,
++                    loader: LOADER,
++                    include: [path.join(process.cwd(), SRC_DIR)],
++                    query: {
++                        silent: true
++                    }
++                }
++            ]
++        }
++    };
++    enchance.forEach(function (e) { return e(config); });
++    return config;
++}
++exports.webpackConfig = webpackConfig;
++var Exec = (function () {
++    function Exec() {
++        this.watchers = [];
++        this._strictOutput = false;
++    }
++    Exec.prototype.close = function () {
++        this.process.kill();
++    };
++    Exec.prototype.strictOutput = function () {
++        this._strictOutput = true;
++    };
++    Exec.prototype.invoke = function (_a) {
++        var _this = this;
++        var stdout = _a.stdout, stderr = _a.stderr;
++        this.watchers = this.watchers.filter(function (watcher) {
++            var output = {
++                type: stdout ? 'stdout' : 'stderr',
++                data: stdout || stderr
++            };
++            var index = watcher.matchers.findIndex(function (m) { return m(output); });
++            if (_this._strictOutput && index === -1) {
++                watcher.reject(new Error("Unexpected " + output.type + ":\n" + output.data));
++                return false;
++            }
++            watcher.matchers.splice(index, 1);
++            if (watcher.matchers.length === 0) {
++                watcher.resolve();
++                return false;
++            }
++            else {
++                return true;
++            }
++        });
++    };
++    Exec.prototype.wait = function () {
++        var _this = this;
++        var matchers = [];
++        for (var _i = 0; _i < arguments.length; _i++) {
++            matchers[_i] = arguments[_i];
++        }
++        return new Promise(function (resolve, reject) {
++            var watcher = {
++                resolve: resolve,
++                reject: reject,
++                matchers: matchers
++            };
++            _this.watchers.push(watcher);
++        });
++    };
++    Exec.prototype.alive = function () {
++        var _this = this;
++        return new Promise(function (resolve, reject) {
++            if (_this.exitCode != null) {
++                resolve(_this.exitCode);
++            }
++            else {
++                _this.process.on('exit', resolve);
++            }
++        });
++    };
++    return Exec;
++}());
++exports.Exec = Exec;
++function streamTest(stream, test) {
++    if (stream === void 0) { stream = 'stdout'; }
++    var matcher;
++    if (typeof test === 'string') {
++        matcher = function (o) { return o.indexOf(test) !== -1; };
++    }
++    else if (Array.isArray(test)) {
++        matcher = function (o) {
++            return test.every(function (test) {
++                if (typeof test === 'string') {
++                    return o.indexOf(test) !== -1;
++                }
++                else {
++                    var flag = test[0], str = test[1];
++                    if (flag) {
++                        return o.indexOf(str) !== -1;
++                    }
++                    else {
++                        return o.indexOf(str) === -1;
++                    }
++                }
++            });
++        };
++    }
++    else if (test instanceof RegExp) {
++        (function (matcher) { return function (o) { return test.test(o); }; });
++    }
++    else {
++        matcher = test;
++    }
++    return function (o) { return o.type === stream && matcher(o.data); };
++}
++exports.streamTest = streamTest;
++exports.stdout = function (test) { return streamTest('stdout', test); };
++exports.stderr = function (test) { return streamTest('stderr', test); };
++function execWebpack(args) {
++    return execNode(WEBPACK, args);
++}
++exports.execWebpack = execWebpack;
++function execNode(command, args) {
++    if (args === void 0) { args = []; }
++    return exec('node', [command].concat(args));
++}
++exports.execNode = execNode;
++function exec(command, args) {
++    var p = shelljs_1.exec(command + " " + args.join(' '), {
++        async: true
++    });
++    var waiter = new Exec();
++    p.stdout.on('data', function (data) {
++        console.log(data.toString());
++        waiter.invoke({ stdout: data.toString(), stderr: null });
++    });
++    p.stderr.on('data', function (data) {
++        console.error(data.toString());
++        waiter.invoke({ stdout: null, stderr: data.toString() });
++    });
++    process.on('beforeExit', function () {
++        p.kill();
++    });
++    process.on('exit', function (code) {
++        waiter.exitCode = code;
++        p.kill();
++    });
++    waiter.process = p;
++    return waiter;
++}
++exports.exec = exec;
++function expectErrors(stats, count, errors) {
++    if (errors === void 0) { errors = []; }
++    stats.compilation.errors.every(function (err) {
++        var str = err.toString();
++        chai_1.expect(errors.some(function (e) { return str.indexOf(e) !== -1; }), 'Error is not covered: \n' + str).true;
++    });
++    chai_1.expect(stats.compilation.errors.length).eq(count);
++}
++exports.expectErrors = expectErrors;
++function expectWarnings(stats, count, warnings) {
++    if (warnings === void 0) { warnings = []; }
++    stats.compilation.warnings.every(function (warn) {
++        var str = warn.toString();
++        chai_1.expect(warnings.some(function (e) { return str.indexOf(e) !== -1; }), 'Warning is not covered: \n' + str).true;
++    });
++    chai_1.expect(stats.compilation.warnings.length).eq(count);
++}
++exports.expectWarnings = expectWarnings;
++function tsconfig(compilerOptions, config, fileName) {
++    if (fileName === void 0) { fileName = 'tsconfig.json'; }
++    var res = _.merge({
++        compilerOptions: _.merge({
++            target: 'es6',
++            moduleResolution: 'node',
++            typeRoots: ['./node_modules/@types']
++        }, compilerOptions)
++    }, config);
++    return file(fileName, json(res));
++}
++exports.tsconfig = tsconfig;
++function install() {
++    var name = [];
++    for (var _i = 0; _i < arguments.length; _i++) {
++        name[_i] = arguments[_i];
++    }
++    return child.execSync("yarn add " + name.join(' '));
++}
++exports.install = install;
++function json(obj) {
++    return JSON.stringify(obj, null, 4);
++}
++exports.json = json;
++function checkOutput(fileName, fragment) {
++    var source = readOutput(fileName);
++    if (!source) {
++        process.exit();
++    }
++    chai_1.expect(source.replace(/\s/g, '')).include(fragment.replace(/\s/g, ''));
++}
++exports.checkOutput = checkOutput;
++function readOutput(fileName) {
++    return fs.readFileSync(path.join(OUT_DIR, fileName || 'index.js')).toString();
++}
++exports.readOutput = readOutput;
++function touchFile(fileName) {
++    return readFile(fileName)
++        .then(function (buf) { return buf.toString(); })
++        .then(function (source) { return writeFile(fileName, source); });
++}
++exports.touchFile = touchFile;
++function moveFile(from, to) {
++    fs.renameSync(from, to);
++}
++exports.moveFile = moveFile;
++function compile(config) {
++    return new Promise(function (resolve, reject) {
++        var compiler = webpack(config);
++        compiler.run(function (err, stats) {
++            if (err) {
++                reject(err);
++            }
++            else {
++                resolve(stats);
++            }
++        });
++    });
++}
++exports.compile = compile;
++function spec(name, cb, disable) {
++    if (disable === void 0) { disable = false; }
++    var runner = function (done) {
++        var temp = path.join(TEST_DIR, path.basename(name).replace('.', '') +
++            '-' +
++            new Date()
++                .toTimeString()
++                .replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1')
++                .replace(/:/g, '-'));
++        mkdirp.sync(temp);
++        var cwd = process.cwd();
++        process.chdir(temp);
++        pkg();
++        var env = {
++            TEST_DIR: TEST_DIR,
++            OUT_DIR: OUT_DIR,
++            SRC_DIR: SRC_DIR,
++            LOADER: LOADER,
++            WEBPACK: WEBPACK
++        };
++        var promise = cb.call(this, env, done);
++        return promise
++            .then(function (a) {
++            process.chdir(cwd);
++            return a;
++        })
++            .catch(function (e) {
++            process.chdir(cwd);
++            throw e;
++        });
++    };
++    var asyncRunner = cb.length === 2
++        ? function (done) {
++            runner.call(this, done).catch(done);
++            return;
++        }
++        : function () {
++            return runner.call(this);
++        };
++    if (disable) {
++        xit(name, asyncRunner);
++    }
++    else {
++        it(name, asyncRunner);
++    }
++}
++exports.spec = spec;
++function xspec(name, cb) {
++    return spec(name, cb, true);
++}
++exports.xspec = xspec;
++function watch(config, cb) {
++    var compiler = webpack(config);
++    var watch = new Watch();
++    var webpackWatcher = compiler.watch({}, function (err, stats) {
++        watch.invoke(err, stats);
++        if (cb) {
++            cb(err, stats);
++        }
++    });
++    watch.close = webpackWatcher.close;
++    return watch;
++}
++exports.watch = watch;
++var Watch = (function () {
++    function Watch() {
++        this.resolves = [];
++    }
++    Watch.prototype.invoke = function (err, stats) {
++        this.resolves.forEach(function (_a) {
++            var resolve = _a.resolve, reject = _a.reject;
++            if (err) {
++                reject(err);
++            }
++            else {
++                resolve(stats);
++            }
++        });
++        this.resolves = [];
++    };
++    Watch.prototype.wait = function () {
++        var _this = this;
++        return new Promise(function (resolve, reject) {
++            _this.resolves.push({ resolve: resolve, reject: reject });
++        });
++    };
++    return Watch;
++}());
++exports.Watch = Watch;
++function pkg() {
++    file('package.json', "\n        {\n            \"name\": \"test\",\n            \"license\": \"MIT\"\n        }\n    ");
++}
++exports.pkg = pkg;
++function src(fileName, text) {
++    return new Fixture(path.join(SRC_DIR, fileName), text);
++}
++exports.src = src;
++function file(fileName, text) {
++    return new Fixture(fileName, text);
++}
++exports.file = file;
++var Fixture = (function () {
++    function Fixture(fileName, text) {
++        this.text = text;
++        this.fileName = fileName;
++        mkdirp.sync(path.dirname(this.fileName));
++        fs.writeFileSync(this.fileName, text);
++    }
++    Fixture.prototype.path = function () {
++        return this.fileName;
++    };
++    Fixture.prototype.toString = function () {
++        return this.path();
++    };
++    Fixture.prototype.touch = function () {
++        touchFile(this.fileName);
++    };
++    Fixture.prototype.move = function (to) {
++        mkdirp.sync(path.dirname(to));
++        moveFile(this.fileName, to);
++        this.fileName = to;
++    };
++    Fixture.prototype.update = function (updater) {
++        var newText = updater(this.text);
++        this.text = newText;
++        fs.writeFileSync(this.fileName, newText);
++    };
++    Fixture.prototype.remove = function () {
++        fs.unlinkSync(this.fileName);
++    };
++    return Fixture;
++}());
++exports.Fixture = Fixture;
++//# sourceMappingURL=utils.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/utils.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"utils.js","sourceRoot":"","sources":["../../src/__test__/utils.ts"],"names":[],"mappings":"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"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/watch-output.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/watch-output.js
+@@ -0,0 +1,68 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++var compile_output_1 = require("./compile-output");
++utils_1.spec(__filename, function (env, done) {
++    return __awaiter(this, void 0, void 0, function () {
++        var index, webpack;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    index = utils_1.src('index.ts', "\n        export default function sum(a: number, b: number) {\n            return a + b;\n        }\n\n        sum(1, '1');\n    ");
++                    utils_1.tsconfig();
++                    compile_output_1.config(env);
++                    webpack = utils_1.execWebpack(['--watch']);
++                    webpack.strictOutput();
++                    return [4, webpack.wait(utils_1.stdout('Webpack is watching the files…'), utils_1.stdout([
++                            'ERROR in [at-loader] ./src/index.ts',
++                            "TS2345: Argument of type '\"1\"' is not assignable to parameter of type 'number'"
++                        ]))];
++                case 1:
++                    _a.sent();
++                    index.update(function () { return "\n        export default function sum(a: number, b: number) {\n            return a + b;\n        }\n\n        sum(1, 1);\n    "; });
++                    return [4, webpack.wait(utils_1.stdout([[true, '[emitted]'], [false, 'ERROR']]))];
++                case 2:
++                    _a.sent();
++                    webpack.close();
++                    done();
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=watch-output.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/watch-output.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"watch-output.js","sourceRoot":"","sources":["../../src/__test__/watch-output.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAkE;AAElE,mDAAyC;AAEzC,YAAI,CAAC,UAAU,EAAE,UAAe,GAAG,EAAE,IAAI;;;;;;oBAClC,KAAK,GAAG,WAAG,CAChB,UAAU,EACV,mIAMG,CACH,CAAA;oBAED,gBAAQ,EAAE,CAAA;oBACV,uBAAM,CAAC,GAAG,CAAC,CAAA;oBAEL,OAAO,GAAG,mBAAW,CAAC,CAAC,SAAS,CAAC,CAAC,CAAA;oBACxC,OAAO,CAAC,YAAY,EAAE,CAAA;oBAEtB,WAAM,OAAO,CAAC,IAAI,CACjB,cAAM,CAAC,gCAAgC,CAAC,EACxC,cAAM,CAAC;4BACN,qCAAqC;4BACrC,kFAAgF;yBAChF,CAAC,CACF,EAAA;;oBAND,SAMC,CAAA;oBAED,KAAK,CAAC,MAAM,CACX,cAAM,OAAA,iIAMH,EANG,CAMH,CACH,CAAA;oBAED,WAAM,OAAO,CAAC,IAAI,CAAC,cAAM,CAAC,CAAC,CAAC,IAAI,EAAE,WAAW,CAAC,EAAE,CAAC,KAAK,EAAE,OAAO,CAAC,CAAC,CAAC,CAAC,EAAA;;oBAAnE,SAAmE,CAAA;oBAEnE,OAAO,CAAC,KAAK,EAAE,CAAA;oBACf,IAAI,EAAE,CAAA;;;;;CACN,CAAC,CAAA"}
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/watch.d.ts
+@@ -0,0 +1 @@
++export {};
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/watch.js
+@@ -0,0 +1,68 @@
++"use strict";
++var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
++    return new (P || (P = Promise))(function (resolve, reject) {
++        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
++        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
++        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
++        step((generator = generator.apply(thisArg, _arguments || [])).next());
++    });
++};
++var __generator = (this && this.__generator) || function (thisArg, body) {
++    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
++    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
++    function verb(n) { return function (v) { return step([n, v]); }; }
++    function step(op) {
++        if (f) throw new TypeError("Generator is already executing.");
++        while (_) try {
++            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
++            if (y = 0, t) op = [0, t.value];
++            switch (op[0]) {
++                case 0: case 1: t = op; break;
++                case 4: _.label++; return { value: op[1], done: false };
++                case 5: _.label++; y = op[1]; op = [0]; continue;
++                case 7: op = _.ops.pop(); _.trys.pop(); continue;
++                default:
++                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
++                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
++                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
++                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
++                    if (t[2]) _.ops.pop();
++                    _.trys.pop(); continue;
++            }
++            op = body.call(thisArg, _);
++        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
++        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
++    }
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++var utils_1 = require("./utils");
++utils_1.spec(__filename, function () {
++    return __awaiter(this, void 0, void 0, function () {
++        var sum, index, watcher, stats;
++        return __generator(this, function (_a) {
++            switch (_a.label) {
++                case 0:
++                    sum = utils_1.src('sum.ts', "\n        export default function sum(a: number, b: number) {\n            return a + b;\n        }\n    ");
++                    index = utils_1.src('index.ts', "\n        import sum from './sum'\n        sum(1, 1);\n    ");
++                    utils_1.tsconfig();
++                    watcher = utils_1.watch(utils_1.webpackConfig());
++                    return [4, watcher.wait()];
++                case 1:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    sum.update(function () { return "\n        export default function sum(a: number, b: string) {\n            return a + b;\n        }\n    "; });
++                    return [4, watcher.wait()];
++                case 2:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 1, ["Argument of type '1' is not assignable to parameter of type 'string'"]);
++                    index.update(function () { return "\n        import sum from './sum'\n        sum(1, '1');\n    "; });
++                    return [4, watcher.wait()];
++                case 3:
++                    stats = _a.sent();
++                    utils_1.expectErrors(stats, 0);
++                    return [2];
++            }
++        });
++    });
++});
++//# sourceMappingURL=watch.js.map
+\ No newline at end of file
+new file mode 100644
+--- /dev/null
++++ b/node_modules/awesome-typescript-loader/dist/__test__/watch.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"watch.js","sourceRoot":"","sources":["../../src/__test__/watch.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iCAAiF;AAEjF,YAAI,CAAC,UAAU,EAAE;;;;;;oBACV,GAAG,GAAG,WAAG,CACd,QAAQ,EACR,2GAIG,CACH,CAAA;oBAEK,KAAK,GAAG,WAAG,CAChB,UAAU,EACV,6DAGG,CACH,CAAA;oBAED,gBAAQ,EAAE,CAAA;oBAEJ,OAAO,GAAG,aAAK,CAAC,qBAAa,EAAE,CAAC,CAAA;oBAE1B,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAA5B,KAAK,GAAG,SAAoB;oBAChC,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;oBAEtB,GAAG,CAAC,MAAM,CACT,cAAM,OAAA,2GAIH,EAJG,CAIH,CACH,CAAA;oBAEO,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAA5B,KAAK,GAAG,SAAoB,CAAA;oBAE5B,oBAAY,CAAC,KAAK,EAAE,CAAC,EAAE,CAAC,sEAAsE,CAAC,CAAC,CAAA;oBAEhG,KAAK,CAAC,MAAM,CACX,cAAM,OAAA,+DAGH,EAHG,CAGH,CACH,CAAA;oBAEO,WAAM,OAAO,CAAC,IAAI,EAAE,EAAA;;oBAA5B,KAAK,GAAG,SAAoB,CAAA;oBAE5B,oBAAY,CAAC,KAAK,EAAE,CAAC,CAAC,CAAA;;;;;CACtB,CAAC,CAAA"}
+\ No newline at end of file
+--- a/node_modules/awesome-typescript-loader/dist/instance.d.ts
++++ b/node_modules/awesome-typescript-loader/dist/instance.d.ts
+@@ -3,6 +3,7 @@ import * as fs from 'fs';
+ import * as ts from 'typescript';
+ import { Checker } from './checker';
+ import { CompilerInfo, LoaderConfig, TsConfig } from './interfaces';
++import { Compiler } from 'webpack';
+ export interface Instance {
+     id: number;
+     babelImpl?: any;
+--- a/node_modules/awesome-typescript-loader/dist/instance.js
++++ b/node_modules/awesome-typescript-loader/dist/instance.js
+@@ -29,6 +29,9 @@ function getRootCompiler(compiler) {
+ }
+ exports.getRootCompiler = getRootCompiler;
+ function resolveInstance(compiler, instanceName) {
++    if (!compiler) {
++        return null;
++    }
+     if (!compiler._tsInstances) {
+         compiler._tsInstances = {};
+     }
+@@ -211,12 +214,11 @@ var filterMtimes = function (mtimes) {
+     return res;
+ };
+ function setupWatchRun(compiler, instanceName) {
+-    compiler.plugin('watch-run', function (watching, callback) {
+-        var instance = resolveInstance(watching.compiler, instanceName);
++    compiler.hooks.watchRun.tapAsync('at-loader', function (compiler, callback) {
++        var instance = resolveInstance(compiler, instanceName);
+         var checker = instance.checker;
+-        var watcher = watching.compiler.watchFileSystem.watcher ||
+-            watching.compiler.watchFileSystem.wfs.watcher;
+-        var startTime = instance.startTime || watching.startTime;
++        var watcher = compiler.watchFileSystem.watcher || compiler.watchFileSystem.wfs.watcher;
++        var startTime = instance.startTime || compiler.startTime;
+         var times = filterMtimes(watcher.getTimes());
+         var lastCompiled = instance.compiledFiles;
+         instance.compiledFiles = {};
+@@ -277,7 +279,7 @@ function isWatching(compiler) {
+ }
+ function setupAfterCompile(compiler, instanceName, forkChecker) {
+     if (forkChecker === void 0) { forkChecker = false; }
+-    compiler.plugin('after-compile', function (compilation, callback) {
++    compiler.hooks.afterCompile.tapAsync('at-loader', function (compilation, callback) {
+         if (compilation.compiler.isChild()) {
+             callback();
+             return;
+@@ -301,12 +303,7 @@ function setupAfterCompile(compiler, instanceName, forkChecker) {
+         };
+         var files = instance.checker.getFiles().then(function (_a) {
+             var files = _a.files;
+-            var normalized = files.map(function (file) {
+-                var rpath = path.normalize(file);
+-                instance.compiledFiles[file] = true;
+-                return rpath;
+-            });
+-            Array.prototype.push.apply(compilation.fileDependencies, normalized);
++            Array.prototype.push.apply(compilation.fileDependencies, files.map(path.normalize));
+         });
+         var timeStart = +new Date();
+         var diag = function () {
+--- a/node_modules/awesome-typescript-loader/dist/instance.js.map
++++ b/node_modules/awesome-typescript-loader/dist/instance.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"instance.js","sourceRoot":"","sources":["../src/instance.ts"],"names":[],"mappings":"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"}
+\ No newline at end of file
++{"version":3,"file":"instance.js","sourceRoot":"","sources":["../src/instance.ts"],"names":[],"mappings":"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"}
+\ No newline at end of file
+--- a/node_modules/awesome-typescript-loader/src/instance.ts
++++ b/node_modules/awesome-typescript-loader/src/instance.ts
+@@ -8,6 +8,8 @@ import { CompilerInfo, LoaderConfig, TsConfig } from './interfaces'
+ import { WatchModeSymbol } from './watch-mode'
+ import { createHash } from 'crypto'
+ 
++import { Compiler } from 'webpack'
++
+ import chalk from 'chalk'
+ 
+ let pkg = require('../package.json')
+@@ -70,6 +72,9 @@ export function getRootCompiler(compiler) {
+ }
+ 
+ function resolveInstance(compiler, instanceName): Instance {
++	if (!compiler) {
++		return null;
++	}
+ 	if (!compiler._tsInstances) {
+ 		compiler._tsInstances = {}
+ 	}
+@@ -364,14 +369,12 @@ const filterMtimes = (mtimes: any) => {
+ }
+ 
+ function setupWatchRun(compiler, instanceName: string) {
+-	compiler.plugin('watch-run', function(watching, callback) {
+-		const instance = resolveInstance(watching.compiler, instanceName)
++	compiler.hooks.watchRun.tapAsync('at-loader', function(compiler, callback) {
++		const instance = resolveInstance(compiler, instanceName)
+ 		const checker = instance.checker
+-		const watcher =
+-			watching.compiler.watchFileSystem.watcher ||
+-			watching.compiler.watchFileSystem.wfs.watcher
++		const watcher = compiler.watchFileSystem.watcher || compiler.watchFileSystem.wfs.watcher
+ 
+-		const startTime = instance.startTime || watching.startTime
++		const startTime = instance.startTime || compiler.startTime
+ 		const times = filterMtimes(watcher.getTimes())
+ 		const lastCompiled = instance.compiledFiles
+ 
+@@ -442,7 +445,7 @@ function isWatching(compiler: any): WatchMode {
+ }
+ 
+ function setupAfterCompile(compiler, instanceName, forkChecker = false) {
+-	compiler.plugin('after-compile', function(compilation, callback) {
++	compiler.hooks.afterCompile.tapAsync('at-loader', function(compilation, callback) {
+ 		// Don"t add errors for child compilations
+ 		if (compilation.compiler.isChild()) {
+ 			callback()
+@@ -467,12 +470,7 @@ function setupAfterCompile(compiler, instanceName, forkChecker = false) {
+ 		}
+ 
+ 		const files = instance.checker.getFiles().then(({ files }) => {
+-			const normalized = files.map(file => {
+-				const rpath = path.normalize(file)
+-				instance.compiledFiles[file] = true
+-				return rpath
+-			})
+-			Array.prototype.push.apply(compilation.fileDependencies, normalized)
++			Array.prototype.push.apply(compilation.fileDependencies, files.map(path.normalize))
+ 		})
+ 
+ 		const timeStart = +new Date()

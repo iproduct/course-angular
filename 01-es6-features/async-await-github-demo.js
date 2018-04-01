@@ -10,7 +10,7 @@ async function showGithubData() {
   console.log(githubData);
 
   // show user picture
-  let img = document.createElement("img");
+  let img = new Image();
   img.src = githubData.avatar_url;
   document.body.append(img);
 

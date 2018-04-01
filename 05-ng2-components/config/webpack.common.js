@@ -1,7 +1,7 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var helpers = require('./helpers');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const helpers = require('./helpers');
 
 module.exports = {
   context: helpers.root('src'),
@@ -51,9 +51,8 @@ module.exports = {
       {
         test: /\.p?css$/,
         exclude: helpers.root('src', 'app'),
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
+        use: [MiniCssExtractPlugin.loader, 
+          {
             loader: 'css-loader',
             options: {
               sourceMap: true,
@@ -74,18 +73,18 @@ module.exports = {
                 ];
               }
             }
-          }]
-        })
+          }
+        ]
       },
       {
         test: /\.sass$/,
         include: helpers.root('src', 'app'),
-        loader: ['css-to-string-loader','css-loader','sass-loader'] 
+        loader: ['css-to-string-loader','css-loader?modules','sass-loader'] 
       },
       {
         test: /\.css$/,
         include: helpers.root('src', 'app'),
-        loader: ['css-to-string-loader','css-loader']
+        loader: ['css-to-string-loader','css-loader?modules']
       }
       // {
       //   test: /\.css$/,
@@ -129,6 +128,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "index.html"
     })
+
   ]
 
 };

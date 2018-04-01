@@ -1,4 +1,4 @@
-import { NgModule }     from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SalesModule } from './sales/sales.module';
 import { CoreModule } from './core/core.module';

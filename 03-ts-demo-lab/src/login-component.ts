@@ -34,7 +34,7 @@ export class LoginComponent {
         const formElem = $("<form class='form-inline' role='form'>").addClass('form-inline');
         const usernameInputElem =
             $("<input id='username' type='email' placeholder='email'>")
-            .addClass('form-control').bind('keypress', keyboardEventHandler);
+            .addClass('form-control').bind('keypress', <EventHandlerkeyboardEventHandler);
         const passwordInputElem =
             $("<input id='password' type='password' placeholder='password' autocomplete='off'>")
             .addClass('form-control').bind('keypress', keyboardEventHandler);
@@ -57,7 +57,7 @@ export class LoginComponent {
     }
 
     public showCurrentUser(): void {
-        const user = this.loginController.getCurrentUser();
+        let user = this.loginController.getCurrentUser();
         this.messagesElement.html(user ? `Welcome ${user.salutation}.` : `No user is logged in.`);
     }
 

@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var webpackMerge = require('webpack-merge');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var commonConfig = require('./webpack.common.js');
 var helpers = require('./helpers');
 
@@ -16,7 +16,10 @@ module.exports = webpackMerge(commonConfig, {
   },
 
   plugins: [
-    new ExtractTextPlugin('assets/css/[name].css'),
+    new MiniCssExtractPlugin({
+      filename: "assets/css/[name].css",
+      chunkFilename: "assets/css/[id].css"
+    }),
     new webpack.NamedModulesPlugin() // Enable named module updates with React HMR
   ],
 

@@ -8,6 +8,6 @@
         "object-literal-sort-keys": false,
         "ordered-imports": [false],
         "trailing-comma": [false],
-        "arrow-parens": [false],
+        "max-classes-per-file": [false],
     }
 }
