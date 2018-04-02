@@ -1,2 +1,3 @@
-<input type="text" #todo placeholder="What todo?" />
+<input type="text" #todo placeholder="What todo?" (keyup)="onKey($event)" />
 <button (click)="addTodo(todo.value); todo.value='';">Add TODO</button>
+<div>{{currentText}}</div>

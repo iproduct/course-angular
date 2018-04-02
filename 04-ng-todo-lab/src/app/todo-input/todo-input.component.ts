@@ -8,6 +8,7 @@ import { Todo } from '../todo.model';
 })
 export class TodoInputComponent implements OnInit {
   @Output() nextTodo = new EventEmitter<Todo>();
+  currentText = '';
 
   constructor() { }
 
@@ -18,6 +19,10 @@ export class TodoInputComponent implements OnInit {
     if (text.trim().length > 0) {
       this.nextTodo.emit(new Todo(text));
     }
+  }
+
+  onKey(ev: KeyboardEvent) {
+    this.currentText += (ev.target as HTMLInputElement).value  + ' | ' ;
   }
 
 }
