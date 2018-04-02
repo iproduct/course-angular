@@ -15,6 +15,10 @@ export class TodoListComponent implements OnInit {
   ngOnInit() {
   }
 
+  addTodo(todo: Todo) {
+    this.todos.push(todo);
+  }
+
   removeTodo(todo: Todo) {
     this.todos = this.todos.filter( td => td.title !== todo.title );
   }
