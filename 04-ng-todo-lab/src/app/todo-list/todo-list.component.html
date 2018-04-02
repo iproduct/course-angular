@@ -1,0 +1,6 @@
+<h3>Todo List</h3>
+<ul class="todos">
+  <li *ngFor="let todo of todos" class="todo-item">
+    <td-todo-item [todo]="todo" (completed)="removeTodo($event)"></td-todo-item>
+  </li>
+</ul>
