@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   <form #fElem #f="ngForm" (ngSubmit)="onSubmit(f)">
     <p *ngIf="nameCtrl.invalid">Name is invalid.</p>
     <div ngModelGroup="name" #nameElem #nameCtrl="ngModelGroup">
-      <input #first="ngModel" name="first" [ngModel]="name.first" required minlength="2"><br>
-      {{first.errors | json}}
+      <input #first="ngModel" name="first" [ngModel]="name.first" required minlength="2">
+      {{first.errors | json}}<br>
       <div class="danger" *ngIf="first.errors && first.errors['required']">First name is required.</div>
       <input name="last" [ngModel]="name.last" required>
     </div>
