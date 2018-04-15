@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { TodoInputComponent } from './todo-input/todo-input.component';
+import { LoggerService } from './logger.service';
+import { TodoRepoService } from './todo-repo.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,7 @@ import { TodoInputComponent } from './todo-input/todo-input.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LoggerService, TodoRepoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

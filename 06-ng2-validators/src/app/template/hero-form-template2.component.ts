@@ -25,7 +25,7 @@ export class HeroFormTemplate2Component implements AfterViewChecked {
   // to be removed/re-added in a tick via NgIf
   // TODO: Workaround until NgForm has a reset method (#6822)
   active = true;
-  forbName ='bob';
+  forbName = 'bob';
 
   addHero() {
     this.hero = new Hero(42, '', '');
@@ -48,7 +48,7 @@ export class HeroFormTemplate2Component implements AfterViewChecked {
     this.heroForm = this.currentForm;
     if (this.heroForm) {
       this.heroForm.valueChanges
-        .subscribe(data => this.onValueChanged(data));
+        .subscribe((data) => this.onValueChanged(data));
     }
   }
 
@@ -87,7 +87,6 @@ export class HeroFormTemplate2Component implements AfterViewChecked {
     }
   };
 }
-
 
 /*
 Copyright 2016 Google Inc. All Rights Reserved.

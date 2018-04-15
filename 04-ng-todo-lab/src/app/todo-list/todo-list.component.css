@@ -1,3 +1,7 @@
 li {
   list-style-type: none;
+  background-color: rgb(255, 254, 165)
  }
+.odd {
+  background-color: lightcyan;
+}

@@ -22,7 +22,7 @@ export class TodoInputComponent implements OnInit {
   }
 
   onKey(ev: KeyboardEvent) {
-    this.currentText += (ev.target as HTMLInputElement).value  + ' | ' ;
+    this.currentText = (ev.target as HTMLInputElement).value  ;
   }
 
 }
