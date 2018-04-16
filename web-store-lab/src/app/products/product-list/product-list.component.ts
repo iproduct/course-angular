@@ -10,6 +10,7 @@ import { ProductsService } from '../products.service';
 })
 export class ProductListComponent implements OnInit {
   errors: string;
+  messages: string;
   products: Product[] = [];
   selectedId: IdType;
   selectedProduct: Product;
@@ -33,7 +34,13 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteItem(id: IdType) {
-
+    this.productService.remove(id)
+      .then( product => {
+        this.messages = `Successfully deleted product '${product.name}.'`;
+        setTimeout(() => { this.messages = ''; }, 10000);
+      }).catch(err => {
+        this.errors = err;
+      });
   }
 
 }

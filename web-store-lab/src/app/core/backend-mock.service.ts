@@ -19,6 +19,35 @@ export class BackendMockService {
     return Promise.resolve( results);
   }
 
+  create<T extends Identifiable> (type: Type<T>, item: T): Promise<T> {
+    if (!COLLECTION_TYPES[type.name]) {
+      return Promise.reject(`Can not recognise the entity type ${type.name}`);
+    }
+    switch (COLLECTION_TYPES[type.name]) {
+      case 'products':
+        item.id = Date.now();
+        PRODUCTS.push(item);
+        break;
+    }
+    return Promise.resolve(item);
+  }
+
+  update<T extends Identifiable> (type: Type<T>, item: T): Promise<T> {
+    if (!COLLECTION_TYPES[type.name]) {
+      return Promise.reject(`Can not recognise the entity type ${type.name}`);
+    }
+    switch (COLLECTION_TYPES[type.name]) {
+      case 'products':
+        const index = PRODUCTS.findIndex(p => p.id === item.id);
+        if (index < 0) {
+          return Promise.reject(`Item with ${item.id} was not found.`);
+        }
+        PRODUCTS[index] = item;
+        break;
+    }
+    return Promise.resolve(item);
+  }
+
   remove<T extends Identifiable> (type: Type<T>, id: IdType): Promise<T> {
     if (!COLLECTION_TYPES[type.name]) {
       return Promise.reject(`Can not recognise the entity type ${type.name}`);
@@ -26,13 +55,14 @@ export class BackendMockService {
     let result: T;
     switch (COLLECTION_TYPES[type.name]) {
       case 'products':
-        index = PRODUCTS.findIndex(p => p.id === id);
-        if(index < 0) return nu
-      result =
-        PRODUCTS.splice(, 1)[0] as T;
+        const index = PRODUCTS.findIndex(p => p.id === id);
+        if (index < 0) {
+          return Promise.reject(`Item with ${id} was not found.`);
+        }
+        result = PRODUCTS.splice(index, 1)[0] as T;
         break;
     }
-    return Promise.resolve( result);
+    return Promise.resolve(result);
   }
 
   // getCollectionName<T extends Identifiable> (type: Type<T>): string {

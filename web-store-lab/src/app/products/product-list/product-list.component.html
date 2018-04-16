@@ -1,6 +1,7 @@
 <h2>Products Available</h2>
 <button class="btn btn-primary" (click)="onAddProduct()">Add New Product</button>
 <div class="alert alert-danger" role="alert" *ngIf="errors">{{errors}}</div>
+<div class="alert alert-success" role="alert" *ngIf="messages">{{messages}}</div>
 <ul class="items">
   <li *ngFor="let product of products; let i=index;" class="product-item"
     (click)="selectProduct(product)" [class.selected]="product.id === selectedId">
@@ -11,4 +12,5 @@
       (click)="deleteItem(product.id)" title="Click to delete this product"></span>
 </li>
 </ul>
-<ws-product-detail *ngIf="selectedProduct" [product]=selectedProduct></ws-product-detail>
+<ws-product-detail-reactive *ngIf="selectedProduct" [product]=selectedProduct>
+</ws-product-detail-reactive>
