@@ -71,7 +71,7 @@ export class HeroFormReactiveComponent implements OnInit {
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(24),
-          forbiddenNameValidator(/bob/i)
+          forbiddenNameValidator(/root/i)
         ],
         nameTakenValidator('john')
       ],

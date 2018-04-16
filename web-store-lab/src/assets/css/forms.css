@@ -1,9 +1,11 @@
-.ng-valid[required], .ng-valid.required {
-  border-left: 5px solid #42A948;
+.ng-pristine.required  {
+  border-left: 5px solid rgb(66, 131, 169); /* blue */
 }
-.ng-invalid:not(form) {
-  border-left: 5px solid #ff4442;
+
+.ng-valid[required]  {
+  border-left: 5px solid #42A948; /* green */
 }
-.danger {
-  color: red;
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
 }

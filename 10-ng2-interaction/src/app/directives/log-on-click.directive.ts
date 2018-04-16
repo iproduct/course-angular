@@ -11,6 +11,6 @@ export class LogOnClickDirective {
     @HostListener('click')
     public onClick() {
         console.log('Element clicked again!');
-        this.color = '#ff0000';
+        // this.color = '#ff0000';
     }
 }

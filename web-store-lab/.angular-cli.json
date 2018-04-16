@@ -19,6 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "ws",
       "styles": [
+        "assets/css/bootstrap.css",
         "styles.css"
       ],
       "scripts": [],

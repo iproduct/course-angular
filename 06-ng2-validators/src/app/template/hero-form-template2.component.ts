@@ -25,7 +25,7 @@ export class HeroFormTemplate2Component implements AfterViewChecked {
   // to be removed/re-added in a tick via NgIf
   // TODO: Workaround until NgForm has a reset method (#6822)
   active = true;
-  forbName = 'bob';
+  forbName = 'root';
 
   addHero() {
     this.hero = new Hero(42, '', '');

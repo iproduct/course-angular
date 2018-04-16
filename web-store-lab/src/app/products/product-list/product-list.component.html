@@ -1,0 +1,14 @@
+<h2>Products Available</h2>
+<button class="btn btn-primary" (click)="onAddProduct()">Add New Product</button>
+<div class="alert alert-danger" role="alert" *ngIf="errors">{{errors}}</div>
+<ul class="items">
+  <li *ngFor="let product of products; let i=index;" class="product-item"
+    (click)="selectProduct(product)" [class.selected]="product.id === selectedId">
+    <span class="badge">{{i+1}}</span>
+    {{product.name}} - {{product.price | currency:'USD':'symbol':'1.2-2'}}
+    {{product.description}}
+    <span class="remove-item glyphicon glyphicon-remove-circle text-danger pull-right"
+      (click)="deleteItem(product.id)" title="Click to delete this product"></span>
+</li>
+</ul>
+<ws-product-detail *ngIf="selectedProduct" [product]=selectedProduct></ws-product-detail>

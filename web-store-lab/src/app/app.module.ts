@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { ProductsModule } from './products/products.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { ProductsModule } from './products/products.module';
   imports: [
     BrowserModule,
     SharedModule,
+    CoreModule,
     ProductsModule
   ],
   providers: [],

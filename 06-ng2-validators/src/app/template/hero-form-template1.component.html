@@ -1,7 +1,7 @@
 <div class="container">
   <div [hidden]="submitted">
     <h1>Hero Form 1 (Template)</h1>
-    <form #heroForm="ngForm"  *ngIf="active"  (ngSubmit)="onSubmit()">
+    <form #formElem #heroForm="ngForm"  *ngIf="active"  (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="name">Name</label>
 
@@ -20,10 +20,11 @@
               Name must be at least 4 characters long.
             </div>
             <div [hidden]="!name.errors.maxlength">
-              Name cannot be more than 24 characters long.
+              It is {{name.errors['maxlength'].actualLength}}. Name cannot be more than 24 characters long.
             </div>
         </div>
       </div>
+      {{formElem.className}}
 
       <div class="form-group">
         <label for="alterEgo">Alter Ego</label>
