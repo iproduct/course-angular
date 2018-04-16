@@ -12,5 +12,6 @@
       (click)="deleteItem(product.id)" title="Click to delete this product"></span>
 </li>
 </ul>
-<ws-product-detail-reactive *ngIf="selectedProduct" [product]=selectedProduct>
+<ws-product-detail-reactive *ngIf="selectedProduct" [product]=selectedProduct
+ (submittedProduct)="onSubmittedProduct()" >
 </ws-product-detail-reactive>

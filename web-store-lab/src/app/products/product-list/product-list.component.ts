@@ -14,6 +14,8 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   selectedId: IdType;
   selectedProduct: Product;
+  newProduct = false;
+
   constructor(private productService: ProductsService) { }
 
   ngOnInit() {
@@ -25,12 +27,13 @@ export class ProductListComponent implements OnInit {
   }
 
   onAddProduct() {
-
+    this.newProduct = true;
   }
 
   selectProduct(product: Product) {
     this.selectedId = product.id;
     this.selectedProduct = product;
+    this.newProduct = false;
   }
 
   deleteItem(id: IdType) {
@@ -43,4 +46,13 @@ export class ProductListComponent implements OnInit {
       });
   }
 
+  onSubmittedProduct(product: Product) {
+    if (this.newProduct) {
+      this.products.push(product);
+    } else {
+      const ind = this.products.findIndex(p => p.id === product.id);
+      this.products[ind] = product;
+    }
+    this.selectedId = undefined;
+  }
 }
