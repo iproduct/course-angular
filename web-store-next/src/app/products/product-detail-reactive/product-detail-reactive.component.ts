@@ -17,7 +17,7 @@ import { CanComponentDeactivate } from '../../core/can-deactivate-guard.service'
 export class ProductDetailReactiveComponent implements OnInit,  OnChanges, CanComponentDeactivate {
   private subscription: Subscription;
 
-  @Input() product: Product = new Product(null, null, null);;
+  @Input() product: Product = new Product(null, null, null);
   @Output() submittedProduct = new EventEmitter<Product>();
 
   title: string;

@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./product-detail-reactive.component.css']
 })
 export class ProductDetailReactiveComponent implements OnInit, OnChanges {
-  @Input() product: Product;
+  @Input() product: Product = new Product(undefined, undefined, undefined, undefined);
   @Output() submittedProduct = new EventEmitter<Product>();
 
   isNewProduct = true;
@@ -58,7 +58,11 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
     }
   }
 
-  onSubmit() {
+  cancelForm() {
+    this.submittedProduct.emit(null);
+  }
+
+  submitForm() {
     this.product = this.productForm.getRawValue();
     if (!this.productForm.valid) {
       return;

@@ -28,6 +28,7 @@ export class ProductListComponent implements OnInit {
 
   onAddProduct() {
     this.newProduct = true;
+    this.selectedProduct = new Product(undefined, undefined, undefined, undefined);
   }
 
   selectProduct(product: Product) {
@@ -47,12 +48,14 @@ export class ProductListComponent implements OnInit {
   }
 
   onSubmittedProduct(product: Product) {
-    if (this.newProduct) {
-      this.products.push(product);
-    } else {
-      const ind = this.products.findIndex(p => p.id === product.id);
-      this.products[ind] = product;
+    if (product) {
+      if (this.newProduct) {
+        this.products.push(product);
+      } else {
+        const ind = this.products.findIndex(p => p.id === product.id);
+        this.products[ind] = product;
+      }
     }
-    this.selectedId = undefined;
+    this.selectedProduct = undefined;
   }
 }
