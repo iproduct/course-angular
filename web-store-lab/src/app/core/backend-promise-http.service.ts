@@ -19,6 +19,7 @@ export class BackendPromiseHttpService implements BackendPromiseService {
       tap(products => this.logger.log(products))
     ).toPromise<T[]>();
   }
+
   create<T extends Identifiable>(type: Type<T>, item: T): Promise<T> {
     throw new Error('Method not implemented.');
   }

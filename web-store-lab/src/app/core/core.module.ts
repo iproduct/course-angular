@@ -14,7 +14,7 @@ export let BACKEND_SERVICE = new InjectionToken<BackendPromiseService>('backend.
     HttpClientModule
   ],
   providers: [
-    { provide: BACKEND_SERVICE, useClass: BackendMockService },
+    { provide: BACKEND_SERVICE, useClass: BackendPromiseHttpService },
     LoggerService,
     BackendPromiseHttpService,
   ]
