@@ -2,9 +2,10 @@ import { Injectable, Type } from '@angular/core';
 import { Identifiable, IdType } from '../shared/shared-types';
 import { PRODUCTS } from './products-mock-data';
 import { COLLECTION_TYPES } from './collection-types';
+import { BackendPromiseService } from './backend-promise.service';
 
 @Injectable()
-export class BackendMockService {
+export class BackendMockService implements BackendPromiseService {
 
   constructor() { }
 

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { ProductsModule } from './products/products.module';
 import { CoreModule } from './core/core.module';
+import { WikiModule } from './wiki/wiki.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     SharedModule,
     CoreModule,
-    ProductsModule
+    ProductsModule,
+    WikiModule
   ],
   providers: [],
   bootstrap: [AppComponent]

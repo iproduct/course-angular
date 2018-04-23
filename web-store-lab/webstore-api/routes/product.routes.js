@@ -49,13 +49,14 @@ router.post('/', function (req, res) {
     const db = req.app.locals.db;
     const product = req.body;
     indicative.validate(product, {
-      id: 'regex:^[0-9a-fA-F]{24}$',
-      name: 'required|string|min:2',
-      price: 'required|regex:^\\d+(\\.\\d+)?$',
-      description: 'string'
+        id: 'regex:^[0-9a-fA-F]{24}$',
+        name: 'required|string|min:2',
+        price: 'required|regex:^\\d+(\\.\\d+)?$',
+        description: 'string'
     }).then(() => {
         const collection = db.collection('products');
         console.log('Inserting product:', product);
+        if(product.id) delete (product.id);
         collection.insertOne(product).then((result) => {
             if (result.result.ok && result.insertedCount === 1) {
                 replaceId(product);
@@ -78,10 +79,10 @@ router.put('/:productId', function (req, res) {
     const db = req.app.locals.db;
     const product = req.body;
     indicative.validate(product, {
-      id: 'required|regex:^[0-9a-fA-F]{24}$',
-      name: 'required|string|min:2',
-      price: 'required|regex:^\\d+(\\.\\d+)?$',
-      description: 'string'
+        id: 'required|regex:^[0-9a-fA-F]{24}$',
+        name: 'required|string|min:2',
+        price: 'required|regex:^\\d+(\\.\\d+)?$',
+        description: 'string'
     }).then(() => {
         if (product.id !== req.params.productId) {
             error(req, res, 400, `Invalid product data - id in url doesn't match: ${product}`);
@@ -111,7 +112,7 @@ router.put('/:productId', function (req, res) {
 router.delete('/:productId', function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
-    indicative.validate(params, { productId: 'required|regex:^[0-9a-f]{24}$' })
+    indicative.validate(params, { productId: 'required|regex:^[0-9a-fA-F]{24}$' })
         .then(() => {
             db.collection('products', function (err, products_collection) {
                 if (err) throw err;
