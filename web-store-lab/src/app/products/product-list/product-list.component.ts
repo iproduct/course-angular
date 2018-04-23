@@ -33,11 +33,12 @@ export class ProductListComponent implements OnInit {
     this.newProduct = false;
   }
 
-  deleteItem(id: IdType) {
+  deleteItem(id: IdType, event: MouseEvent) {
+    event.stopPropagation();
     this.productService.remove(id)
       .subscribe( product => {
         this.messages = `Successfully deleted product '${product.name}.'`;
-        setTimeout(() => { this.messages = ''; }, 10000);
+        setTimeout(() => { this.messages = ''; }, 5000);
         // this.refresh();
         const index = this.products.findIndex(p => p.id === id);
         this.products.splice(index, 1);

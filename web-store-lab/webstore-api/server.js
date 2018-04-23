@@ -71,7 +71,8 @@ if (app.get('env') === 'development') {
 const url = 'mongodb://localhost:27017/webstore';
 
 //Use connect to connect to db
-MongoClient.connect(url, { db: { w: 1 } }).then((db) => {
+setTimeout(() => {
+  MongoClient.connect(url, { db: { w: 1 } }).then((db) => {
   // assert.equal(null, err);
   console.log(`Successfully connected to MongoDB server at: ${url}`);
 
@@ -86,4 +87,5 @@ MongoClient.connect(url, { db: { w: 1 } }).then((db) => {
     console.log('WebStore Service API listening on port 9000.')
   })
 
-}).catch((err) => { throw err; });
+  }).catch((err) => { throw err; });
+}, 3500);
