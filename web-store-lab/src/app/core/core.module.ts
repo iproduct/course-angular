@@ -3,10 +3,12 @@ import { NgModule, InjectionToken } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BackendMockService } from './backend-mock.service';
 import { LoggerService } from './logger.service';
-import { BackendPromiseHttpService } from './backend-promise-http.service';
 import { BackendPromiseService } from './backend-promise.service';
+import { BackendService } from './backend.service';
+import { BackendHttpService } from './backend-http.service';
 
-export let BACKEND_SERVICE = new InjectionToken<BackendPromiseService>('backend.service');
+export let BACKEND_PROMISE_SERVICE = new InjectionToken<BackendPromiseService>('backend.service');
+export let BACKEND_SERVICE = new InjectionToken<BackendService>('backend.service');
 
 @NgModule({
   imports: [
@@ -14,9 +16,8 @@ export let BACKEND_SERVICE = new InjectionToken<BackendPromiseService>('backend.
     HttpClientModule
   ],
   providers: [
-    { provide: BACKEND_SERVICE, useClass: BackendPromiseHttpService },
-    LoggerService,
-    BackendPromiseHttpService,
+    { provide: BACKEND_SERVICE, useClass: BackendHttpService },
+    LoggerService
   ]
 })
 export class CoreModule { }

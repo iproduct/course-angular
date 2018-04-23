@@ -69,18 +69,18 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
     }
     if (this.isNewProduct) {
       this.productService.create(this.product)
-      .then( product => {
+      .subscribe( product => {
         this.submittedProduct.emit(product);
         this.errors = undefined;
-      }).catch(err => {
+      }, err => {
         this.errors = err;
       });
     } else {
       this.productService.update(this.product)
-      .then( product => {
+      .subscribe( product => {
         this.submittedProduct.emit(product);
         this.errors = undefined;
-      }).catch(err => {
+      }, err => {
         this.errors = err;
       });
     }

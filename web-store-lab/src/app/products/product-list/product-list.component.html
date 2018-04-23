@@ -13,5 +13,5 @@
 </li>
 </ul>
 <ws-product-detail-reactive *ngIf="selectedProduct" [product]=selectedProduct
- (submittedProduct)="onSubmittedProduct()" >
+ (submittedProduct)="onSubmittedProduct($event)" >
 </ws-product-detail-reactive>

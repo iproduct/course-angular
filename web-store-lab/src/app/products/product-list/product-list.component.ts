@@ -19,11 +19,7 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductsService) { }
 
   ngOnInit() {
-    this.productService.findAll().then( products => {
-      this.products = products;
-    }).catch (errors => {
-      this.errors = errors;
-    });
+    this.refresh();
   }
 
   onAddProduct() {
@@ -39,13 +35,26 @@ export class ProductListComponent implements OnInit {
 
   deleteItem(id: IdType) {
     this.productService.remove(id)
-      .then( product => {
+      .subscribe( product => {
         this.messages = `Successfully deleted product '${product.name}.'`;
         setTimeout(() => { this.messages = ''; }, 10000);
-      }).catch(err => {
+        // this.refresh();
+        const index = this.products.findIndex(p => p.id === id);
+        this.products.splice(index, 1);
+      },
+      err => {
         this.errors = err;
       });
   }
+
+   private refresh() {
+    this.productService.findAll().subscribe( products => {
+      this.products = products;
+    }, errors => {
+      this.errors = errors;
+    });
+
+   }
 
   onSubmittedProduct(product: Product) {
     if (product) {
