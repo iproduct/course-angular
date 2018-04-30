@@ -1,6 +1,5 @@
-import { AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Component }                from '@angular/core';
-import { CountdownTimerComponent }  from './countdown-timer.component';
+import { AfterViewInit, ViewChild, ViewEncapsulation, Component } from '@angular/core';
+import { CountdownTimerComponent } from './countdown-timer.component';
 @Component({
   selector: 'countdown-parent-vc',
   template: `
@@ -36,7 +35,7 @@ export class CountdownViewChildParentComponent implements AfterViewInit {
     // Redefine `seconds()` to get from the `CountdownTimerComponent.seconds` ...
     // but wait a tick first to avoid one-time devMode
     // unidirectional-data-flow-violation error
-   this.seconds = () => this.timerComponent.seconds;
+    setTimeout(() => this.seconds = () => this.timerComponent.seconds, 0);
   }
   start() { this.timerComponent.start(); }
   stop() { this.timerComponent.stop(); }

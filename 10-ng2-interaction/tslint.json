@@ -10,6 +10,7 @@
         "object-literal-sort-keys": false,
         "ordered-imports": false,
         "trailing-comma": false,
+        "member-access": false,
         "member-ordering": false,
         "arrow-parens": false,
         "no-angle-bracket-type-assertion": false,
