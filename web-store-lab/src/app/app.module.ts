@@ -6,6 +6,7 @@ import { SharedModule } from './shared/shared.module';
 import { ProductsModule } from './products/products.module';
 import { CoreModule } from './core/core.module';
 import { WikiModule } from './wiki/wiki.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -13,10 +14,11 @@ import { WikiModule } from './wiki/wiki.module';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     SharedModule,
     CoreModule,
     ProductsModule,
-    WikiModule
+    WikiModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
