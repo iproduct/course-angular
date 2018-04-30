@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   <div class="seconds">{{timer.seconds}}</div>
   <countdown-timer #timer>
     <header>Countdown Timer Header</header>
-    <timer-name></timer-name>
+    <timer-name>AAA</timer-name>
     <div class="footer"> Countdown Template Variable Timer Footer </div>
   </countdown-timer>
   `,

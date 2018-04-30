@@ -14,11 +14,12 @@ export class VersionChildComponent implements OnChanges {
     @Input() public minor: number;
     public changeLog: string[] = [];
     public ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-        let log: string[] = [];
-        for (let propName in changes) {
-            let changedProp = changes[propName];
-            let from = JSON.stringify(changedProp.previousValue);
-            let to = JSON.stringify(changedProp.currentValue);
+        const log: string[] = [];
+        // tslint:disable-next-line:forin
+        for (const propName in changes) {
+            const changedProp = changes[propName];
+            const from = JSON.stringify(changedProp.previousValue);
+            const to = JSON.stringify(changedProp.currentValue);
             log.push(`${propName} changed from ${from} to ${to}`);
         }
         this.changeLog.push(log.join(', '));
