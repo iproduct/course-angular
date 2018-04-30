@@ -5,12 +5,14 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductsService } from './products.service';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductDetailReactiveComponent } from './product-detail-reactive/product-detail-reactive.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   declarations: [
     ProductListComponent,

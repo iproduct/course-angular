@@ -4,7 +4,7 @@
 <div class="alert alert-success" role="alert" *ngIf="messages">{{messages}}</div>
 <ul class="items">
   <li *ngFor="let product of products; let i=index;" class="product-item"
-    (click)="selectProduct(product)" [class.selected]="product.id === selectedId">
+    (click)="selectProduct(product.id)" [class.selected]="product.id === selectedId">
     <span class="badge">{{i+1}}</span>
     {{product.name}} - {{product.price | currency:'USD':'symbol':'1.2-2'}}
     {{product.description}}
@@ -12,6 +12,6 @@
       (click)="deleteItem(product.id, $event)" title="Click to delete this product"></span>
 </li>
 </ul>
-<ws-product-detail-reactive *ngIf="selectedProduct" [product]=selectedProduct
+<!--<ws-product-detail-reactive *ngIf="selectedProduct" [product]=selectedProduct
  (submittedProduct)="onSubmittedProduct($event)" >
-</ws-product-detail-reactive>
+</ws-product-detail-reactive>-->

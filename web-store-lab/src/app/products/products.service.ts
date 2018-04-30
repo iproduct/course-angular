@@ -14,6 +14,10 @@ export class ProductsService {
     return this.backend.findAll<Product>(Product);
   }
 
+  find(id: IdType): Observable<Product> {
+    return this.backend.find<Product>(Product, id);
+  }
+
   create(product: Product): Observable<Product> {
     return this.backend.create<Product>(Product, product);
   }

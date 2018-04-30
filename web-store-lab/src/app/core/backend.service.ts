@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 export interface BackendService  {
   findAll<T extends Identifiable> (type: Type<T>): Observable<T[]> ;
+  find<T extends Identifiable> (type: Type<T>, id: IdType): Observable<T> ;
   create<T extends Identifiable> (type: Type<T>, item: T): Observable<T>;
   update<T extends Identifiable> (type: Type<T>, item: T): Observable<T>;
   remove<T extends Identifiable> (type: Type<T>, id: IdType): Observable<T>;

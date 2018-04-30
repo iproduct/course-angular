@@ -30,7 +30,7 @@ export class BackendHttpService implements BackendService {
   }
 
  /** GET: find an item by id*/
- find <T extends Identifiable> (type: Type<T>, id: KeyType): Observable<T> {
+ find <T extends Identifiable> (type: Type<T>, id: IdType): Observable<T> {
   return ArrayObservable.of(COLLECTION_TYPES[type.name]).pipe(
     switchMap(collection =>
       this.http.get<IndividualResponse<T>>(`${API_URL}${collection}/${id}`)

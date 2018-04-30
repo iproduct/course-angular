@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { IdType } from '../../shared/shared-types';
 
 @Component({
   selector: 'ws-product-detail-reactive',
@@ -15,6 +17,7 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
   isNewProduct = true;
   productForm: FormGroup;
   errors: string;
+  selectedId: IdType;
 
   formErrors = {
     name: '',
@@ -35,10 +38,21 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
 
   constructor(
     private productService: ProductsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.route.params
+      .do((params: Params) => this.selectedId = params['selectedId'])
+      .switchMap((params: Params) => this.productService.find(params['productId']))
+      .subscribe((product: Product) => {
+        this.product = product;
+        this.isNewProduct = false;
+        this.resetForm();
+      });
+    this.isNewProduct = true;
     this.buildForm();
   }
 
@@ -60,6 +74,7 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
 
   cancelForm() {
     this.submittedProduct.emit(null);
+    this.goBack();
   }
 
   submitForm() {
@@ -72,6 +87,7 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
       .subscribe( product => {
         this.submittedProduct.emit(product);
         this.errors = undefined;
+        this.goBack();
       }, err => {
         this.errors = err;
       });
@@ -80,6 +96,7 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
       .subscribe( product => {
         this.submittedProduct.emit(product);
         this.errors = undefined;
+        this.goBack();
       }, err => {
         this.errors = err;
       });
@@ -97,6 +114,10 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
         this.product.price,
         [Validators.required, Validators.min(0)]]
     });
+  }
+
+  private goBack() {
+    this.router.navigate(['/products', {selectedId: this.selectedId}]);
   }
 
 }

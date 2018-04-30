@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../product.model';
 import { IdType } from '../../shared/shared-types';
 import { ProductsService } from '../products.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'ws-product-list',
@@ -16,7 +17,10 @@ export class ProductListComponent implements OnInit {
   selectedProduct: Product;
   newProduct = false;
 
-  constructor(private productService: ProductsService) { }
+  constructor(
+    private productService: ProductsService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     this.refresh();
@@ -27,10 +31,10 @@ export class ProductListComponent implements OnInit {
     this.selectedProduct = new Product(undefined, undefined, undefined, undefined);
   }
 
-  selectProduct(product: Product) {
-    this.selectedId = product.id;
-    this.selectedProduct = product;
+  selectProduct(productId: IdType) {
+    this.selectedId = productId;
     this.newProduct = false;
+    this.router.navigate(['products', productId, { selectedId: productId }]);
   }
 
   deleteItem(id: IdType, event: MouseEvent) {
