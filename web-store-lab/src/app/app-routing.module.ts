@@ -11,7 +11,7 @@ const routes = [
     { path: 'products', component: ProductListComponent, pathMatch: 'full' },
     { path: 'products/new', component: ProductDetailReactiveComponent},
     {
-        path: 'products/:productId', 
+        path: 'products/:productId',
         component: ProductDetailReactiveComponent,
         data: {
             title: 'Product Details'

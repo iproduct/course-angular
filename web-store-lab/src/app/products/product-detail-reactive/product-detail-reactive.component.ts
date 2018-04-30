@@ -18,6 +18,7 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
   productForm: FormGroup;
   errors: string;
   selectedId: IdType;
+  title = 'Add Product';
 
   formErrors = {
     name: '',
@@ -44,16 +45,25 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
+    this.buildForm();
+    this.isNewProduct = true;
     this.route.params
-      .do((params: Params) => this.selectedId = params['selectedId'])
-      .switchMap((params: Params) => this.productService.find(params['productId']))
-      .subscribe((product: Product) => {
-        this.product = product;
+      .subscribe((params: Params) => this.selectedId = params['selectedId']);
+      // .switchMap((params: Params) => this.productService.find(params['productId']))
+      // .subscribe((product: Product) => {
+      //   this.product = product;
+      //   this.isNewProduct = false;
+      //   this.resetForm();
+      // });
+    this.route.data
+    .subscribe(data => {
+      this.title = data['title'] || this.title;
+      this.product = data['product'] || this.product;
+      if (this.product && this.product.id) {
         this.isNewProduct = false;
         this.resetForm();
-      });
-    this.isNewProduct = true;
-    this.buildForm();
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
