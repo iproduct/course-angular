@@ -29,8 +29,7 @@ import { map, distinct, filter, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'ws-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
   @Input() inToolbar = false;
