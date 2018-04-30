@@ -14,7 +14,6 @@ import { AppNavComponent } from './app-nav.component';
 import { SmallDemosModule } from './small-demos/small-demos.module';
 import { LoginModule } from './login/login.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ObservableTest.component.tsComponent } from './observable-test.component.ts/observable-test.component.ts.component';
 
 @NgModule({
   imports: [
@@ -32,8 +31,7 @@ import { ObservableTest.component.tsComponent } from './observable-test.componen
   providers: [],
   declarations: [
     AppComponent,
-    AppNavComponent,
-    ObservableTest.component.tsComponent
+    AppNavComponent
 ],
   bootstrap: [AppComponent]
 })

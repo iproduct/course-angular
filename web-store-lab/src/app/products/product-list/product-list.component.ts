@@ -24,6 +24,8 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.refresh();
+    this.route.params
+      .subscribe((params: Params) => this.selectedId = params['selectedId']);
   }
 
   onAddProduct() {

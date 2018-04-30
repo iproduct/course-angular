@@ -6,6 +6,7 @@ import { ProductsService } from './products.service';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductDetailReactiveComponent } from './product-detail-reactive/product-detail-reactive.component';
 import { RouterModule } from '@angular/router';
+import { ProductResolver } from './product-resolver';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { RouterModule } from '@angular/router';
     ProductDetailComponent,
     ProductDetailReactiveComponent
   ],
-  providers: [ProductsService],
+  providers: [ProductsService, ProductResolver],
   exports: [ProductListComponent]
 })
 export class ProductsModule { }
