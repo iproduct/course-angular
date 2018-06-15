@@ -9,4 +9,6 @@
     {{ product.description }}
   </li>
 </ul>
-<ws-product-detail *ngIf="selected" [product]="selected"></ws-product-detail>
+<ws-product-detail-reactive *ngIf="selected" [product]="selected" 
+  (submittedProduct)="submitProduct($event)">
+</ws-product-detail-reactive>

@@ -116,7 +116,7 @@ export class HeroFormReactiveComponent implements OnInit {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
           const error = control.errors[key];
-          if (key === 'nameTaken') {
+          if (key === 'nameTaken' || key === 'forbiddenName') {
             const message = (messages[key] as string).replace(
               '$',
               error.invalidValue
@@ -141,7 +141,7 @@ export class HeroFormReactiveComponent implements OnInit {
       required: 'Name is required.',
       minlength: 'Name must be at least 4 characters long.',
       maxlength: 'Name cannot be more than 24 characters long.',
-      forbiddenName: 'Someone named "Bob" cannot be a hero.',
+      forbiddenName: "Someone named '$' cannot be a hero.",
       nameTaken: "Username '$' is alrady taken."
     },
     alterEgo: {
