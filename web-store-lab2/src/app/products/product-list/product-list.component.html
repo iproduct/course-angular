@@ -1,0 +1,12 @@
+<h1>Products Available</h1>
+<button class="btn btn-primary" (click)="addProduct()">Add New Product</button>
+<div class="alert alert-danger" role="alert" *ngIf="errors">{{ errors }}</div>
+<ul class="items">
+  <li *ngFor="let product of products; let i=index;" class="product-item"
+    (click)="selectProduct(product)" [class.selected]="product.id === selected?.id">
+    <span class="badge">{{i+1}}</span>
+    {{ product.name }} - {{ product.price | currency:'USD':'symbol':'0.2-2' }} - 
+    {{ product.description }}
+  </li>
+</ul>
+<ws-product-detail *ngIf="selected" [product]="selected"></ws-product-detail>

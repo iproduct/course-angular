@@ -1,0 +1,6 @@
+<h1>
+  Welcome to
+  <span [textContent]="title"></span>!
+</h1>
+<td-todo-input (nextTodo)="repo.addTodo($event)"></td-todo-input>
+<td-todo-list [todos]="repo.find()" (completionChanged)="repo.removeTodo($event)"></td-todo-list>

@@ -7,5 +7,6 @@ msgAfterTimeout("", "Foo", 1000).then((msg) => {
     console.log(`done after 1000ms:${msg}`);
     return msgAfterTimeout(msg, "Bar", 2000);
 }).then((msg) => {
-    console.log(`done after 3000ms:${msg}`)
-})
+    console.log(`done after 3000ms:${msg}`);
+    return "Demo finished"
+}).then(msg => console.log(msg));

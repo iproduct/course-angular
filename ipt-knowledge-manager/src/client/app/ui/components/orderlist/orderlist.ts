@@ -358,7 +358,7 @@ export class OrderListComponent implements  AfterViewInit, AfterViewChecked, Aft
 }
 
 @NgModule({
-    imports: [CommonModule, ButtonModule, SharedModule, MdButtonModule, MdIconModule],
+    imports: [CommonModule, ButtonModule, SharedModule, MdButtonModule, MdIconModule, Prime],
     exports: [OrderListComponent, SharedModule],
     declarations: [OrderListComponent]
 })

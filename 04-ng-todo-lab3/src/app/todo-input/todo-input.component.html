@@ -1,0 +1,3 @@
+<input #todoInput type="text" placeholder="What todo?" [(ngModel)]="todoText"
+    (blur)="addTodo()" (keyup.enter)="addTodo()">
+<button (click)="addTodo()">Add Todo</button>

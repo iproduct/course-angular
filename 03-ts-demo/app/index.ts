@@ -23,16 +23,27 @@ const loginComponent = new LoginComponent('#content', loginController);
 
 console.log(new PhysicalPerson('Ivan', 'Donchev', 'Petrov').salutation);
 
-interface Repository<T> {
-  add(key: number, value: T): void;
+interface Identifiable {
+  id: number;
+} 
+
+interface Repository<T extends Identifiable> {
+  add(id: number, value: T): void;
+  update(value: T): T;
   findById: (id: number) => T;
   findAll(): Array<T>;
 }
-export class RepositoryImpl<T> implements Repository<T> {
+export class RepositoryImpl<T extends Identifiable> implements Repository<T> {
   private data = new Map<number, T>();
 
-  public add(key: number, value: T): void {
-    this.data.set(key, value);
+  public add(id: number, value: T): void {
+    this.data.set(id, value);
+  }
+
+  update(value: T): T {
+    // const old = this.data.get(value.id);
+    this.data.set(value.id, value);
+    return value;
   }
 
   public findById(id: number): T {

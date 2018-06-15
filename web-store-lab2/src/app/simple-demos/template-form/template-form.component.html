@@ -1,0 +1,12 @@
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+  <p *ngIf="nameCtrl.invalid">Name is invalid.</p>
+  <div ngModelGroup="name" #nameCtrl="ngModelGroup">
+    <input name="first" [ngModel]="name.first" minlength="2">
+    <input name="last" [ngModel]="name.last" required>
+  </div>
+  <input name="email" ngModel>
+  <button>Submit</button>
+</form>
+<button (click)="setValue()">Set value</button>
+<div>{{ name | json }}</div>
+<div>{{ f.value | json }}</div>
