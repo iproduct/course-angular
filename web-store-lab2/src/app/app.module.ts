@@ -4,15 +4,17 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SimpleDemosModule } from './simple-demos/simple-demos.module';
 import { ProductsModule } from './products/products.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     SimpleDemosModule,
-    ProductsModule
+    CoreModule,
+    ProductsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

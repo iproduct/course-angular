@@ -30,7 +30,7 @@ import { URLSearchParams } from '@angular/http';
     <p><i>Fetches after each keystroke</i></p>
     <input #term (keyup)="search(term.value)"/>
     <ul>
-      <li *ngFor="let item of items | async">{{item}}</li>
+      <li *ngFor="let item of items$ | async">{{item}}</li>
     </ul>
     </div>
   `,
@@ -38,9 +38,10 @@ import { URLSearchParams } from '@angular/http';
 })
 export class WikiComponent {
   private searchTermStream = new Subject<string>();
-  public items: Observable<string[]> = this.searchTermStream
+  public items$: Observable<string[]> = this.searchTermStream
     .debounceTime(1000)
     .map(search => search.trim())
+    .filter(search => search.length > 2)
     .distinctUntilChanged()
     .switchMap((term: string) => this.wikipediaService.search(term));
 

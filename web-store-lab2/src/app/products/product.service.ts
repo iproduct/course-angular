@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core';
 import { PRODUCTS } from './products-mock-data';
 import { KeyType } from '../shared/common-types';
 import { Product } from './product.model';
+import { BackendService } from '../core/backend.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor() { }
+  constructor(private backend: BackendService) { }
 
   findAll() {
-    return Promise.resolve(PRODUCTS);
+    return this.backend.findAll(Product);
   }
 
   find(id: KeyType) {

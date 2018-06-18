@@ -19,11 +19,12 @@ async function showGithubData() {
     await new Promise((resolve, reject) => setTimeout(resolve, 5000));
 
     img.remove();
-    console.log("Demo finished.");
     return githubData;
 
   } catch(err) {
     console.log('ERROR: '  + err)
+  } finally {
+    console.log("Demo finished finally.");
   }
 }
 

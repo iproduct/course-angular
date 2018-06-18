@@ -47,7 +47,7 @@ export class ProductListComponent implements OnInit {
 
   refresh() {
     this.productService.findAll()
-      .then(products => this.products = products);
+      .subscribe(products => this.products = products);
   }
 
 }
