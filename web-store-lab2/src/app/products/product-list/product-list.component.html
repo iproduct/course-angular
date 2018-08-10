@@ -7,8 +7,16 @@
     <span class="badge">{{i+1}}</span>
     {{ product.name }} - {{ product.price | currency:'USD':'symbol':'0.2-2' }} - 
     {{ product.description }}
+    <span class="remove-item glyphicon glyphicon-remove-circle text-danger pull-right" 
+      (click)="deleteProduct(product.id); $event.stopPropagation()"
+      aria-hidden="true" title="Click to delete this product.">
+    </span>
   </li>
 </ul>
-<ws-product-detail-reactive *ngIf="selected" [product]="selected" 
+
+<!-- Here are displayed all routed views -->
+<router-outlet></router-outlet>
+
+<!-- <ws-product-detail-reactive *ngIf="selected" [product]="selected" 
   (submittedProduct)="submitProduct($event)">
-</ws-product-detail-reactive>
+</ws-product-detail-reactive> -->

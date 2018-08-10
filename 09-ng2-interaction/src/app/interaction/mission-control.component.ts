@@ -23,10 +23,13 @@ export class MissionControlComponent {
         'Fly to Vegas!'];
     nextMission = 0;
     constructor(private missionService: MissionService) {
-        missionService.missionConfirmed.map(message => message.toUpperCase()).subscribe(
-            astronaut => {
-                this.history.push(`${astronaut} confirmed the mission`);
-            });
+        missionService.missionConfirmed
+            .map(message => message.toUpperCase())
+            .subscribe(
+                astronaut => {
+                    this.history.push(`${astronaut} confirmed the mission`);
+                }
+            );
     }
     announce() {
         let mission = this.missions[this.nextMission++];

@@ -28,7 +28,7 @@ import { CountdownTimerComponent } from './countdown-timer.component';
   encapsulation: ViewEncapsulation.Native
 })
 export class CountdownViewChildParentComponent implements AfterViewInit {
-  @ViewChild('timer')
+  @ViewChild(CountdownTimerComponent)
   private timerComponent: CountdownTimerComponent;
   seconds() { return 0; }
   ngAfterViewInit() {

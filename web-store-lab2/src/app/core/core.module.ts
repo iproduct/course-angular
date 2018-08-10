@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { BackendHttpService } from './backend-http.service';
 import { BackendService } from './backend.service';
+import { DialogService } from './dialog.service';
+import { CanDeactivateGuard } from './can-deactivate-guard.service';
+import { UserService } from './user.service';
 
 @NgModule({
   imports: [
@@ -11,8 +14,11 @@ import { BackendService } from './backend.service';
   ],
   declarations: [],
   providers: [
-    { provide: 'API_URL', useValue: 'http://localhost:4200/api/' },
-    { provide: BackendService, useClass: BackendHttpService}
+    { provide: 'API_URL', useValue: 'http://localhost:4200/api' },
+    { provide: BackendService, useClass: BackendHttpService},
+    UserService,
+    DialogService,
+    CanDeactivateGuard,
   ]
 })
 export class CoreModule { }

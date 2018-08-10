@@ -1,0 +1,19 @@
+.user-icon {
+  display: block;
+  float: right;
+}
+
+.user-info {
+  padding: 12px;
+}
+
+.user {
+  height: 3.5em;
+}
+
+:host {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+

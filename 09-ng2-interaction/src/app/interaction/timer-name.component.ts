@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   `
 })
 export class TimerNameComponent {
-  name = '';
+  name = 'Timer Name Comp';
 }
