@@ -1,4 +1,4 @@
-import { LoginController } from './login-controller';
+import { LoginController } from './controller';
 import $ from 'jquery';
 
 export class LoginComponent {

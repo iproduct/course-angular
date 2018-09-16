@@ -24,13 +24,13 @@
   },
   "homepage": "https://github.com/iproduct/course-angular2#readme",
   "dependencies": {
-    "core-js": "2.4.1",
-    "jquery": "^3.2.1",
-    "systemjs": "^0.19.47"
+    "core-js": "^2.5.7",
+    "jquery": "^3.3.1",
+    "systemjs": "^0.21.4"
   },
   "devDependencies": {
-    "@types/jquery": "^2.0.41",
-    "lite-server": "^2.3.0",
-    "concurrently": "^3.4.0"
+    "@types/jquery": "^3.3.6",
+    "lite-server": "^2.4.0",
+    "concurrently": "^4.0.1"
   }
 }

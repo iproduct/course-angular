@@ -13,14 +13,14 @@
     setTimeout(resolve, 4000, 'four');
   });
   var p5 = new Promise((resolve, reject) => {
-    setTimeout(reject, 1000, 'reject for reason');
+    setTimeout(reject, 950, 'reject for reason');
   });
 
-  Promise.all([p1, p2, p3, p4, p5]).then(values => { 
-    console.log(values);
-  }, reason => {
-    console.log(reason)
-  });
+  // Promise.all([p1, p2, p3, p4, p5]).then(values => { 
+  //   console.log(values);
+  // }, reason => {
+  //   console.log(`Resolved in second then clause: ${reason}`)
+  // });
 
 
   // You can also use .catch
@@ -30,11 +30,10 @@
   }).catch(reason => {
     console.log(reason);
     return `Retrown from catch: ${reason}`;
+  }).then(v => {
+    console.log(`Resolved in second then clause: ${v}`);
+  }, r => {
+    console.log(`Rejected in second then clause: ${r}`);
   });
-  // .then(v => {
-  //   console.log(`Resolved in second then clause: ${v}`);
-  // }, r => {
-  //   console.log(`Rejected in second then clause: ${r}`);
-  // });
 
 }) ();

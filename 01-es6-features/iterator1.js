@@ -4,7 +4,7 @@ let fibonacci = {
     return {
       next() {
         [pre, cur] = [cur, pre + cur];
-        return { done: false, value: cur }
+        return { done: cur > 1000, value: cur }
       }
     }
   }
@@ -12,7 +12,7 @@ let fibonacci = {
 
 for (var n of fibonacci) {
   // truncate the sequence at 1000
-  if (n > 1000)
-    break;
+  // if (n > 1000)
+  //   break;
   console.log(n);
 }
