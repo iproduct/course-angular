@@ -1,5 +1,7 @@
+import { IdType } from "./index";
+
 export interface Person {
-    id: number;
+    id: IdType;
     firstName: string;
     lastName: string;
     email: string;
@@ -23,30 +25,30 @@ export enum Role {
 }
 
 export class Customer implements User {
-    static nextId = 0;
-    id = Customer.nextId++;
+    // static nextId = 0;
+    // id = Customer.nextId++;
+    id: IdType;
     constructor(public firstName: string, public lastName: string, public email: string,
         public password: string, public contacts?: Contact, 
         public roles: Array<Role> = [Role.CUSTOMER] ) {}
     public get salutation() {
-        return `${this.firstName} ${this.lastName} in role ${Role[this.roles[0]]}`;
+        return `${this.id}: ${this.firstName} ${this.lastName} in role ${Role[this.roles[0]]}`;
     }
 }
 
 export class Admin implements User {
-    static nextId = 0;
-    id = Customer.nextId++;
+    id: IdType;
     constructor(public firstName: string, public lastName: string, public email: string,
         public password: string, public contacts?: Contact, 
         public roles: Array<Role> = [Role.ADMIN] ) {}
     public get salutation() {
-        return `${this.firstName} ${this.lastName} in role ${Role[this.roles[0]]}`;
+        return `${this.id}: ${this.firstName} ${this.lastName} in role ${Role[this.roles[0]]}`;
     }
 }
 
 
 export class PhysicalPerson implements Person {
-    id: number;
+    id: IdType;
     email: string;
     public restNames: string[];
 

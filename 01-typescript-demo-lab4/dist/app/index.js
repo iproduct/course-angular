@@ -1,4 +1,4 @@
-System.register(["./repository", "./controller", "./users", "./login-component", "./decorators02"], function (exports_1, context_1) {
+System.register(["./repository", "./controller", "./users", "./login-component"], function (exports_1, context_1) {
     "use strict";
     var repository_1, controller_1, users_1, login_component_1, userRepo, loginController, loginComponent, RepositoryImpl, userRepoGeneric, mockData;
     var __moduleName = context_1 && context_1.id;
@@ -15,8 +15,6 @@ System.register(["./repository", "./controller", "./users", "./login-component",
             },
             function (login_component_1_1) {
                 login_component_1 = login_component_1_1;
-            },
-            function (_1) {
             }
         ],
         execute: function () {
@@ -36,6 +34,7 @@ System.register(["./repository", "./controller", "./users", "./login-component",
                     this.data = new Map();
                 }
                 RepositoryImpl.prototype.add = function (id, value) {
+                    value.id = id;
                     this.data.set(id, value);
                 };
                 RepositoryImpl.prototype.update = function (value) {
@@ -55,11 +54,12 @@ System.register(["./repository", "./controller", "./users", "./login-component",
             exports_1("RepositoryImpl", RepositoryImpl);
             userRepoGeneric = new RepositoryImpl();
             mockData = [
-                [1, new users_1.Customer('John', 'Smith', 'john@abv.bg', 'john')],
-                [2, new users_1.Customer('Sara', 'Smith', 'sara@abv.bg', 'sara')]
+                ["123456789abcdefghijklmn", new users_1.Customer('John', 'Smith', 'john@abv.bg', 'john')],
+                ["223456789abcdefghijklmn", new users_1.Customer('Sara', 'Smith', 'sara@abv.bg', 'sara')],
+                ["323456789abcdefghijklmn", new users_1.Admin('Brian', 'Harisson', 'brian@gmail.com', 'brian')]
             ];
             mockData.forEach(function (entry) { return userRepoGeneric.add(entry[0], entry[1]); });
-            console.log(userRepoGeneric.findAll().map(function (u) { return u.salutation; }));
+            userRepoGeneric.findAll().map(function (u) { return u.salutation; }).forEach(function (msg) { return console.log(msg); });
         }
     };
 });

@@ -1,0 +1,8 @@
+<h3>TODO List:</h3>
+<ul>
+  <li *ngFor="let todo of todos; let i = index; let odd=odd" class="todo-item">
+    {{i+1}}.
+    <td-todo-item [todo]="todo" (completionChanged)="changeCompletion($event)">
+    </td-todo-item>
+  </li>
+</ul>

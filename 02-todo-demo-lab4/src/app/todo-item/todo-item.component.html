@@ -1,0 +1,4 @@
+<input type="checkbox" class="completion" [ngModel]="todo.completed"
+  (ngModelChange)="changeCompletion($event)">
+<span class="todo-title" [textContent]="todo.title"></span>
+<span *ngIf="todo.completed"> - COMPLETED</span>

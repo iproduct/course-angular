@@ -3,7 +3,7 @@ import { UserRepository, DemoUserRepository } from './repository';
 import { DemoLoginController, LoginController } from './controller';
 import { Customer, Admin, User, PhysicalPerson } from './users';
 import { LoginComponent } from './login-component';
-import './decorators02';
+// import './decorators02';
 
 const userRepo: UserRepository = new DemoUserRepository();
 userRepo.addUser(new Customer('John', 'Smith', 'john@abv.bg', 'john'));
@@ -24,20 +24,23 @@ const loginComponent = new LoginComponent('#content', loginController);
 
 console.log(new PhysicalPerson('Ivan', 'Donchev', 'Petrov').salutation);
 
-interface Identifiable {
-  id: number;
+export type IdType = string;
+
+export interface Identifiable {
+  id: IdType;
 } 
 
 interface Repository<T extends Identifiable> {
-  add(id: number, value: T): void;
+  add(id: IdType, value: T): void;
   update(value: T): T;
-  findById: (id: number) => T;
+  findById: (id: IdType) => T;
   findAll(): Array<T>;
 }
 export class RepositoryImpl<T extends Identifiable> implements Repository<T> {
-  private data = new Map<number, T>();
+  private data = new Map<IdType, T>();
 
-  public add(id: number, value: T): void {
+  public add(id: IdType, value: T): void {
+    value.id = id;
     this.data.set(id, value);
   }
 
@@ -47,7 +50,7 @@ export class RepositoryImpl<T extends Identifiable> implements Repository<T> {
     return value;
   }
 
-  public findById(id: number): T {
+  public findById(id: IdType): T {
     return this.data.get(id);
   }
   public findAll(): T[] {
@@ -58,10 +61,11 @@ export class RepositoryImpl<T extends Identifiable> implements Repository<T> {
 }
 
 const userRepoGeneric: Repository<User> = new RepositoryImpl<User>();
-const mockData: Array<[number, User]> = [
-  [1, new Customer('John', 'Smith', 'john@abv.bg', 'john')],
-  [2, new Customer('Sara', 'Smith', 'sara@abv.bg', 'sara')]
+const mockData: Array<[IdType, User]> = [
+  ["123456789abcdefghijklmn", new Customer('John', 'Smith', 'john@abv.bg', 'john')],
+  ["223456789abcdefghijklmn", new Customer('Sara', 'Smith', 'sara@abv.bg', 'sara')],
+  ["323456789abcdefghijklmn", new Admin('Brian', 'Harisson', 'brian@gmail.com', 'brian')]
 ];
 
 mockData.forEach(entry => userRepoGeneric.add(entry[0], entry[1]));
-console.log(userRepoGeneric.findAll().map(u => u.salutation));
+userRepoGeneric.findAll().map(u => u.salutation).forEach(msg => console.log(msg));

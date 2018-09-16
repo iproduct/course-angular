@@ -19,16 +19,14 @@ System.register([], function (exports_1, context_1) {
                     this.password = password;
                     this.contacts = contacts;
                     this.roles = roles;
-                    this.id = Customer.nextId++;
                 }
                 Object.defineProperty(Customer.prototype, "salutation", {
                     get: function () {
-                        return this.firstName + " " + this.lastName + " in role " + Role[this.roles[0]];
+                        return this.id + ": " + this.firstName + " " + this.lastName + " in role " + Role[this.roles[0]];
                     },
                     enumerable: true,
                     configurable: true
                 });
-                Customer.nextId = 0;
                 return Customer;
             }());
             exports_1("Customer", Customer);
@@ -41,16 +39,14 @@ System.register([], function (exports_1, context_1) {
                     this.password = password;
                     this.contacts = contacts;
                     this.roles = roles;
-                    this.id = Customer.nextId++;
                 }
                 Object.defineProperty(Admin.prototype, "salutation", {
                     get: function () {
-                        return this.firstName + " " + this.lastName + " in role " + Role[this.roles[0]];
+                        return this.id + ": " + this.firstName + " " + this.lastName + " in role " + Role[this.roles[0]];
                     },
                     enumerable: true,
                     configurable: true
                 });
-                Admin.nextId = 0;
                 return Admin;
             }());
             exports_1("Admin", Admin);
