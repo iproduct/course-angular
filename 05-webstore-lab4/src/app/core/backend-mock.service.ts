@@ -20,13 +20,16 @@ export class BackendMockService {
     if (kind.name === 'Product') {
       entity.id = BackendMockService.nextId++ + '';
       PRODUCTS.push(entity);
-      return Promise.resolve(entity as T);
+      return Promise.resolve(entity);
     }
   }
 
-  remove<T extends Identifiable>(kind: Type<T>, id: IdType): T[] {
+  remove<T extends Identifiable>(kind: Type<T>, id: IdType): Promise<T> {
     if (kind.name === 'Product') {
-      return PRODUCTS as T[];
+      const index = PRODUCTS.findIndex(entity => entity.id === id);
+      const removed = PRODUCTS[index];
+      PRODUCTS.splice(index, 1);
+      return Promise.resolve(removed as T);
     }
   }
 }

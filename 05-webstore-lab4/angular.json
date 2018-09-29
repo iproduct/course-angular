@@ -7,7 +7,7 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "ws",
       "schematics": {},
       "architect": {
         "build": {
@@ -23,7 +23,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/bootstrap.min.css"
             ],
             "scripts": []
           },
