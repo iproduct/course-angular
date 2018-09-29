@@ -1,18 +1,25 @@
-import { Component } from '@angular/core';
-import TODOS from './shared/todo-mock-data';
+import { Component, OnInit } from '@angular/core';
+
 import { Todo } from './shared/todo.model';
+import { TodoRepoService } from './todo-repo.service';
 
 @Component({
   selector: 'td-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'TODO Manager Demo';
-  todos = TODOS;
+export class AppComponent implements OnInit{
 
-  deleteTodo(deleted: Todo) {
-    const index =  TODOS.findIndex(todo => todo.title === deleted.title);
-    TODOS.splice(index, 1);
+  title = 'TODO Manager Demo';
+  todos;
+
+  constructor(private service: TodoRepoService) {}
+
+  ngOnInit(): void {
+    this.todos = this.service.find();
+  }
+
+  deleteTodo(todo: Todo) {
+    this.service.deleteTodo(todo);
   }
 }

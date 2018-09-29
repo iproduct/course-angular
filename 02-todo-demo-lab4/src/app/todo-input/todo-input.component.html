@@ -1,0 +1,5 @@
+<input #todoInput type="text" placeholder="What todo?"
+  (keyup.enter)="addTodo(todoInput.value); todoInput.value = ''"
+  (blur)="addTodo(todoInput.value); todoInput.value = ''" >
+<button (click)="addTodo(todoInput.value); todoInput.value = ''">Add Todo</button>
+

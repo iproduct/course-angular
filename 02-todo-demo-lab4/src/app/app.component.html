@@ -3,6 +3,7 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
+  <td-todo-input></td-todo-input>
   <td-todo-list [todos]="todos" (completionChanged)="deleteTodo($event)" ></td-todo-list>
 </div>
 
