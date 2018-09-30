@@ -6,4 +6,4 @@
     {{product.name}} - {{product.price | currency:'USD':'symbol':'1.2-2'}} - {{product.description}}
   </li>
 </ul>
-<ws-product-detail *ngIf="selected" [product]="selected" (productChange)="editProduct($event)"></ws-product-detail>
+<ws-product-detail-reactive *ngIf="selected" [product]="selected" (productChange)="editProduct($event)"></ws-product-detail-reactive>

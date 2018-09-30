@@ -47,7 +47,7 @@ export class HeroFormTemplate2Component implements AfterViewChecked {
     if (this.currentForm === this.heroForm) { return; }
     this.heroForm = this.currentForm;
     if (this.heroForm) {
-      this.heroForm.valueChanges
+      this.heroForm.statusChanges
         .subscribe((data) => this.onValueChanged(data));
     }
   }
@@ -80,7 +80,7 @@ export class HeroFormTemplate2Component implements AfterViewChecked {
       'required':      'Name is required.',
       'minlength':     'Name must be at least 4 characters long.',
       'maxlength':     'Name cannot be more than 24 characters long.',
-      'forbiddenName': 'Someone named "Bob" cannot be a hero.'
+      'forbiddenName': 'Name "root" is forbidden.'
     },
     'power': {
       'required': 'Power is required.'
