@@ -10,7 +10,7 @@ import { IdType } from '../../shared/shared-types';
 })
 export class ProductsListComponent implements OnInit {
   products: Product[] = [];
-  selectedId: IdType;
+  selected: Product;
 
   constructor(private service: ProductsService) { }
 
@@ -19,7 +19,15 @@ export class ProductsListComponent implements OnInit {
   }
 
   selectProduct(product) {
-    this.selectedId = product.id;
+    this.selected = product;
+  }
+
+  editProduct(product: Product) {
+    if (product) {
+      this.service.edit(product);
+    } else {
+      this.selected = undefined;
+    }
   }
 
 }

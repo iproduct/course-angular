@@ -17,6 +17,10 @@ export class ProductsService {
     return this.backend.add(Product, p);
   }
 
+  edit(p: Product): Promise<Product> {
+    return this.backend.edit(Product, p);
+  }
+
   remove(id: IdType): Promise<Product> {
     return this.backend.remove(Product, id);
   }

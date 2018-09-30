@@ -24,6 +24,14 @@ export class BackendMockService {
     }
   }
 
+  edit<T extends Identifiable>(kind: Type<T>, entity: T): Promise<T> {
+    if (kind.name === 'Product') {
+      const index = PRODUCTS.findIndex(e => e.id === entity.id);
+      PRODUCTS[index] = entity;
+      return Promise.resolve(entity);
+    }
+  }
+
   remove<T extends Identifiable>(kind: Type<T>, id: IdType): Promise<T> {
     if (kind.name === 'Product') {
       const index = PRODUCTS.findIndex(entity => entity.id === id);

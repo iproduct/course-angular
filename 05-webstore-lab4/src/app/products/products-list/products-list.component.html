@@ -1,8 +1,9 @@
 <h2>Products Available</h2>
 <ul class="items">
   <li *ngFor="let product of products; let i = index" class="products-item"
-    (click)="selectProduct(product)" [class.selected]="product.id === selectedId">
+    (click)="selectProduct(product)" [class.selected]="product === selected">
     <span class="badge">{{i}}</span>
     {{product.name}} - {{product.price | currency:'USD':'symbol':'1.2-2'}} - {{product.description}}
   </li>
 </ul>
+<ws-product-detail *ngIf="selected" [product]="selected" (productChange)="editProduct($event)"></ws-product-detail>
