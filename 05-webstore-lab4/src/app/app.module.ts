@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ProductsModule } from './products/products.module';
 import { CoreModule } from './core/core.module';
+import { SimpleFormModule } from './simple-form/simple-form.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { CoreModule } from './core/core.module';
   imports: [
     BrowserModule,
     CoreModule,
-    ProductsModule
+    ProductsModule,
+    SimpleFormModule
   ],
   providers: [],
   bootstrap: [AppComponent]
