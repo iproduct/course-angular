@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Product } from '../product.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoggerService } from '../../core/logger.service';
@@ -8,7 +8,7 @@ import { LoggerService } from '../../core/logger.service';
   templateUrl: './product-detail-reactive.component.html',
   styleUrls: ['./product-detail-reactive.component.css']
 })
-export class ProductDetailReactiveComponent implements OnInit {
+export class ProductDetailReactiveComponent implements OnInit, OnChanges {
   @Input() product: Product;
   @Output() productChange = new EventEmitter<Product>();
   form: FormGroup;
@@ -20,6 +20,12 @@ export class ProductDetailReactiveComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.product && changes.product.previousValue !== changes.product.currentValue) {
+      this.resetForm();
+    }
   }
 
   buildForm() {
@@ -65,13 +71,15 @@ export class ProductDetailReactiveComponent implements OnInit {
   }
 
   submitForm() {
-    this.logger.log(this.form.value);
+    this.logger.log(this.form.getRawValue());
     this.logger.log(this.form.valid);
-    this.productChange.emit(this.form.value);
+    this.productChange.emit(this.form.getRawValue());
   }
 
   resetForm() {
-    this.form.reset(this.product);
+    if  (this.form) {
+      this.form.reset(this.product);
+    }
   }
 
   cancelForm() {

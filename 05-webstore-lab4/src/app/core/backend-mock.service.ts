@@ -8,11 +8,13 @@ import { Identifiable, IdType } from '../shared/shared-types';
 export class BackendMockService {
   private static nextId = 1;
 
-  constructor() { }
+  constructor() {
+    PRODUCTS.forEach(p => p.id = BackendMockService.nextId++ + '');
+   }
 
   find<T extends Identifiable>(kind: Type<T>): Promise<T[]> {
     if (kind.name === 'Product') {
-      return Promise.resolve(PRODUCTS as T[]);
+      return Promise.resolve([...PRODUCTS] as T[]);
     }
   }
 

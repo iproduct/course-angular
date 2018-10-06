@@ -1,4 +1,5 @@
 <h2>Products Available</h2>
+<button class="btn btn-primary" (click)="addNewProduct()">Add New Product</button>
 <ul class="items">
   <li *ngFor="let product of products; let i = index" class="products-item"
     (click)="selectProduct(product)" [class.selected]="product === selected">

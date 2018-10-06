@@ -117,6 +117,7 @@ button:disabled {
   background-color: #607D8B;
   line-height: 1em;
   position: relative;
+  height: 2.4em;
   left: -1px;
   top: -4px;
   margin-right: .8em;
