@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "ngserve": "ng serve --aot --proxy-config proxy.conf.json --port 4200",
+    "ngserve": "ng serve --proxy-config proxy.conf.json --port 4200",
     "server": "nodemon -w ./webstore-api ./webstore-api/server.js",
     "mongo": "mongod --dbpath=c:/mongo-data --port 27017",
     "services": "concurrently --kill-others \"npm run mongo\" \"npm run server\"",

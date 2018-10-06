@@ -3,11 +3,12 @@ import { BackendMockService } from '../core/backend-mock.service';
 import { Product } from './product.model';
 import { IdType } from '../shared/shared-types';
 import { ProductsModule } from './products.module';
+import { BackendPromiseService } from '../core/backend-promise.service';
 
 @Injectable()
 export class ProductsService {
 
-  constructor(private backend: BackendMockService) { }
+  constructor(private backend: BackendPromiseService) { }
 
   find(): Promise<Product[]> {
     return this.backend.find(Product);
