@@ -4,25 +4,27 @@ import { Product } from './product.model';
 import { IdType } from '../shared/shared-types';
 import { ProductsModule } from './products.module';
 import { BackendPromiseService } from '../core/backend-promise.service';
+import { BackendService } from '../core/backend.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ProductsService {
 
-  constructor(private backend: BackendPromiseService) { }
+  constructor(private backend: BackendService) { }
 
-  find(): Promise<Product[]> {
-    return this.backend.find(Product);
+  find(): Observable<Product[]> {
+    return this.backend.findAll(Product);
   }
 
-  add(p: Product): Promise<Product> {
-    return this.backend.add(Product, p);
+  add(p: Product): Observable<Product> {
+    return this.backend.create(Product, p);
   }
 
-  edit(p: Product): Promise<Product> {
-    return this.backend.edit(Product, p);
+  edit(p: Product): Observable<Product> {
+    return this.backend.update(Product, p);
   }
 
-  remove(id: IdType): Promise<Product> {
+  remove(id: IdType): Observable<Product> {
     return this.backend.remove(Product, id);
   }
 }

@@ -15,12 +15,7 @@ export class ProductsListComponent implements OnInit {
   constructor(private service: ProductsService) {}
 
   ngOnInit() {
-    this.service
-      .find()
-      .then(
-        products => this.products = products,
-        error => this.errors = error
-      );
+    this.refreshProducts();
   }
 
   selectProduct(product) {
@@ -34,7 +29,7 @@ export class ProductsListComponent implements OnInit {
   editProduct(product: Product) {
     if (product) {
       if (product.id) {
-        this.service.edit(product).then(
+        this.service.edit(product).subscribe(
           editedProduct => {
             const index = this.products.findIndex(
               p => p.id === editedProduct.id
@@ -45,7 +40,7 @@ export class ProductsListComponent implements OnInit {
           error => this.errors = error
         );
       } else {
-        this.service.add(product).then(
+        this.service.add(product).subscribe(
           addedProduct => {
             this.products.push(addedProduct);
             this.selected = addedProduct;
@@ -56,5 +51,27 @@ export class ProductsListComponent implements OnInit {
     } else {
       this.selected = undefined;
     }
+  }
+
+  deleteProduct(product) {
+    this.service.remove(product.id).subscribe(
+      removedProduct => {
+        const index = this.products.findIndex(
+          p => p.id === removedProduct.id
+        );
+        this.products.splice(index, 1);
+        this.selected = undefined;
+      },
+      error => this.errors = error
+    );
+  }
+
+  refreshProducts() {
+    this.service
+    .find()
+    .subscribe(
+      products => this.products = products,
+      error => this.errors = error
+    );
   }
 }

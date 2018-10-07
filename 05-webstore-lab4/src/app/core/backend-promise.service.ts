@@ -2,8 +2,7 @@ import { Injectable, Type, Inject } from '@angular/core';
 import { PRODUCTS } from './mock-data';
 import { Identifiable, IdType } from '../shared/shared-types';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BASE_API_URI } from './core.module';
-import { API_ENDPOINTS } from './api-endpoints-map';
+import { API_ENDPOINTS, BASE_API_URI } from './api-endpoints-map';
 import { CustomResponse } from './common-types';
 import { map, tap, catchError } from 'rxjs/operators';
 import { LoggerService } from './logger.service';
@@ -18,14 +17,13 @@ export class BackendPromiseService {
 
   constructor(
     private http: HttpClient,
-    @Inject(BASE_API_URI) private uri: string,
     private logger: LoggerService
   ) {
     PRODUCTS.forEach(p => (p.id = BackendPromiseService.nextId++ + ''));
   }
 
   find<T extends Identifiable>(kind: Type<T>): Promise<T[]> {
-    const uri = this.uri + API_ENDPOINTS[kind.name];
+    const uri = BASE_API_URI + API_ENDPOINTS[kind.name];
     return this.http
       .get<CustomResponse<T[]>>(uri)
       .pipe(

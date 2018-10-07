@@ -6,6 +6,7 @@ import { ProductsModule } from './products/products.module';
 import { CoreModule } from './core/core.module';
 import { SimpleFormModule } from './simple-form/simple-form.module';
 import { RxDemoModule } from './rx-demo/rx-demo.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RxDemoModule } from './rx-demo/rx-demo.module';
     CoreModule,
     ProductsModule,
     SimpleFormModule,
-    RxDemoModule
+    RxDemoModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
