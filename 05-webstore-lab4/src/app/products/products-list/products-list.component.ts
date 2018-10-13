@@ -1,29 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
+import { animate } from '@angular/animations';
+import { slideInDownAnimation } from '../../shared/animations';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IdType } from '../../shared/shared-types';
 
 @Component({
   selector: 'ws-products-list',
   templateUrl: './products-list.component.html',
+  animations: [ slideInDownAnimation ],
   styleUrls: ['./products-list.component.css']
 })
 export class ProductsListComponent implements OnInit {
+  @HostBinding('@routeAnimation') routeAnimation = true;
+
   products: Product[] = [];
-  selected: Product;
+  selectedId: IdType;
   errors: string;
 
-  constructor(private service: ProductsService) {}
+  constructor(private service: ProductsService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.refreshProducts();
   }
 
   selectProduct(product) {
-    this.selected = product;
+    this.selectedId = product.id;
+    this.router.navigate(['products', product.id]);
   }
 
   addNewProduct() {
-    this.selected = new Product(undefined, undefined);
+    // this.selected = new Product(undefined, undefined);
   }
 
   editProduct(product: Product) {
@@ -35,7 +43,7 @@ export class ProductsListComponent implements OnInit {
               p => p.id === editedProduct.id
             );
             this.products[index] = editedProduct;
-            this.selected = editedProduct;
+            this.selectedId = editedProduct.id;
           },
           error => this.errors = error
         );
@@ -43,13 +51,13 @@ export class ProductsListComponent implements OnInit {
         this.service.add(product).subscribe(
           addedProduct => {
             this.products.push(addedProduct);
-            this.selected = addedProduct;
+            this.selectedId = addedProduct.id;
           },
           error => this.errors = error
         );
       }
     } else {
-      this.selected = undefined;
+      this.selectedId = undefined;
     }
   }
 
@@ -60,7 +68,7 @@ export class ProductsListComponent implements OnInit {
           p => p.id === removedProduct.id
         );
         this.products.splice(index, 1);
-        this.selected = undefined;
+        this.selectedId = undefined;
       },
       error => this.errors = error
     );

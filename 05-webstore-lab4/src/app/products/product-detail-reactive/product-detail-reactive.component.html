@@ -1,4 +1,5 @@
 <h3>{{product.name}}</h3>
+<div class="alert alert-danger" *ngIf="errors">{{errors}}</div>
 <form [formGroup]="form" (submit)="submitForm()" class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4">
   <div class="form-group">
     <label class="control-label hidden-xs col-sm-3" for="id">ID:</label>
@@ -35,7 +36,7 @@
   </div>
 
   <button type="submit" class="btn btn-primary" [disabled]="form.pristine || form.invalid">Submit</button>
-  <button type="buton" class="btn btn-danger" [disabled]="form.pristine" (click)="resetForm()">Reset</button>
-  <button type="buton" class="btn btn-default" (click)="cancelForm()">Cancel</button>
-
+  <button type="buton" class="btn btn-danger" [disabled]="form.pristine" (click)="resetForm(); $event.preventDefault()">Reset</button>
+  <button type="buton" class="btn btn-default" (click)="cancelForm(); $event.preventDefault()">Cancel</button>
 </form>
+

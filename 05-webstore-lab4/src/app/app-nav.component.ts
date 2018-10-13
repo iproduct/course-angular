@@ -21,17 +21,13 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { NgModule } from '@angular/core';
-import { HomeComponent } from './home.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Component } from '@angular/core';
 
-@NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule
-  ],
-  declarations: [HomeComponent],
-  exports: [HomeComponent]
+@Component({
+  selector: 'ws-app-nav',
+  templateUrl: './app-nav.component.html',
+  styleUrls: ['./app-nav.component.css']
 })
-export class HomeModule { }
+export class AppNavComponent {
+  public imageLogo = '../assets/img/ipt-logo.png';
+}

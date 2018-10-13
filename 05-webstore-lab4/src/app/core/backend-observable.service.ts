@@ -30,7 +30,7 @@ export class BackendObservableService implements BackendService {
   findById<T extends Identifiable>(kind: Type<T>, id: IdType): Observable<T> {
     const uri = `${BASE_API_URI}${API_ENDPOINTS[kind.name]}/${id}`;
     return this.http
-      .get<CustomResponse<T>>(uri)
+      .get<CustomResponse<T>>(uri, {headers:  new HttpHeaders({'x-refresh':  'true'})})
       .pipe(
         map(productResponse => productResponse.data),
         tap(entity => this.logger.log(`Entity: ${JSON.stringify(entity)}.`)),
@@ -55,6 +55,7 @@ export class BackendObservableService implements BackendService {
     return this.http
       .put<CustomResponse<T>>(uri, item)
       .pipe(
+        tap(entity => this.logger.log(`Response: ${JSON.stringify(entity)}.`)),
         map(productResponse => productResponse.data),
         tap(entity => this.logger.log(`Updated: ${JSON.stringify(entity)}.`)),
         retryAfter(3, 1000),

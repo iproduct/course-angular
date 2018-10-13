@@ -20,7 +20,7 @@ export const BASE_API_URI = new InjectionToken<string>('BASE_API_URI');
     MessageService,
     { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true },
-    {provide: BackendService, useClass: BackendObservableService},
+    { provide: BackendService, useClass: BackendObservableService },
     { provide: RequestCache, useClass: RequestCacheWithMap },
   ],
 })

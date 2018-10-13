@@ -6,6 +6,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductsService } from './products.service';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductDetailReactiveComponent } from './product-detail-reactive/product-detail-reactive.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [

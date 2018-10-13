@@ -1,24 +1,56 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, HostBinding } from '@angular/core';
 import { Product } from '../product.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoggerService } from '../../core/logger.service';
+import { slideInDownAnimation } from '../../shared/animations';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap, filter } from 'rxjs/operators';
+import { ProductsService } from '../products.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ws-product-detail-reactive',
   templateUrl: './product-detail-reactive.component.html',
-  styleUrls: ['./product-detail-reactive.component.css']
+  styleUrls: ['./product-detail-reactive.component.css'],
+  animations: [ slideInDownAnimation ]
 })
 export class ProductDetailReactiveComponent implements OnInit, OnChanges {
-  @Input() product: Product;
+  @Input() product: Product = new Product(undefined, undefined);
   @Output() productChange = new EventEmitter<Product>();
+  @HostBinding('@routeAnimation') routeAnimation = true;
   form: FormGroup;
+  errors: string;
 
   constructor(
     private logger: LoggerService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private service: ProductsService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location
     ) { }
 
   ngOnInit() {
+    this.route.params.pipe(
+      filter(params => {
+        if (!!params['productId']) {
+          return true;
+        } else {
+          this.product = new Product(undefined, undefined);
+          return false;
+        }
+      }),
+      switchMap(params => {
+        return this.service.findById(params['productId']);
+      })
+    ).subscribe(
+      product => {
+        this.product = product;
+        this.resetForm();
+        this.errors = undefined;
+      },
+      error => this.errors = error
+    );
     this.buildForm();
   }
 
@@ -74,6 +106,25 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
     this.logger.log(this.form.getRawValue());
     this.logger.log(this.form.valid);
     this.productChange.emit(this.form.getRawValue());
+    if (this.form.getRawValue().id) {
+      this.service.edit(this.form.getRawValue())
+      .subscribe(
+        product => {
+          this.product = product;
+          this.router.navigate(['..'], { relativeTo: this.route });
+        },
+        error => this.errors = error
+      );
+    } else {
+      this.service.add(this.form.getRawValue())
+      .subscribe(
+        product => {
+          this.product = product;
+          this.router.navigate(['..'], { relativeTo: this.route });
+        },
+        error => this.errors = error
+      );
+    }
   }
 
   resetForm() {
@@ -84,6 +135,12 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
 
   cancelForm() {
     this.productChange.emit(null);
+    this.goBack();
+    return false;
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   formErrors = {
