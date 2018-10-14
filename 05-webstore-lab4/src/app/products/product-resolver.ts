@@ -21,43 +21,34 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { UserListComponent } from './user-list.component';
-import { UserDetailComponent } from './user-detail.component';
-import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
+import { Injectable } from '@angular/core';
+import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { Product } from './product.model';
+import { ProductsService } from './products.service';
+import { take, map } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
-@NgModule({
-  imports: [
-    RouterModule.forChild([
-      {
-        path: 'users',
-        // canActivate: [AuthGuardService],
-        component: UserListComponent
-      },
-      {
-        path: 'users/new',
-        // canActivate: [AuthGuardService],
-        canDeactivate: [CanDeactivateGuard],
-        pathMatch: 'full',
-        component: UserDetailComponent,
-        data: {
-          title: 'Add New User'
+@Injectable()
+export class ProductResolver implements Resolve<Product> {
+  constructor(private service: ProductsService, private router: Router) { }
+
+  public resolve(route: ActivatedRouteSnapshot) {
+    const id = route.params['productId'];
+    return this.service.findById(id).pipe(
+      take(1),
+      map(product => {
+        if (product) {
+          return product;
+        } else { // id not found
+            this.router.navigate(['/products']);
+            return null;
         }
-      },
-      {
-        path: 'users/:id',
-        component: UserDetailComponent,
-        // canActivate: [AuthGuardService],
-        canDeactivate: [CanDeactivateGuard],
-        data: {
-          title: 'Edit User'
-        }
-      }
-    ])
-  ],
-  exports: [
-    RouterModule
-  ]
-})
-export class UsersRoutingModule { }
+      }),
+      catchError(err => {
+        this.router.navigate(['/products']);
+        return throwError(`Product with ID:${id} not found.`);
+      })
+    );
+  }
+}

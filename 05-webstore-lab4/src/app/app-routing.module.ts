@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ProductsListComponent } from './products/products-list/products-list.component';
-import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { RouteNotFoundComponent } from './shared/route-not-found/route-not-found.component';
 import { HomeComponent } from './home/home.component';
-import { ProductDetailReactiveComponent } from './products/product-detail-reactive/product-detail-reactive.component';
+import { SelectivePreloadingStrategy } from './core/selective-preloading-strategy';
 
 @NgModule({
   imports: [
     RouterModule.forRoot([
       {path: '', redirectTo: '/home', pathMatch: 'full'},
       {path: 'home', component: HomeComponent},
-      {path: 'products', component: ProductsListComponent},
-      {path: 'products/new', component: ProductDetailReactiveComponent},
-      {path: 'products/:productId', component: ProductDetailReactiveComponent},
-      {path: '**', component: RouteNotFoundComponent}
-    ])
+      {path: 'products', data: { preload: true }, loadChildren: './products/products.module#ProductsModule'}
+    ], {
+      enableTracing: true, // <-- debugging purposes only
+      preloadingStrategy:  SelectivePreloadingStrategy // or PreloadAllModules
+    })
   ],
   declarations: [],
   exports: [RouterModule]

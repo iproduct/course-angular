@@ -21,43 +21,24 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { UserListComponent } from './user-list.component';
-import { UserDetailComponent } from './user-detail.component';
-import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
+import { Injectable } from '@angular/core';
+import { PreloadingStrategy, Route } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { LoggerService } from './logger.service';
 
-@NgModule({
-  imports: [
-    RouterModule.forChild([
-      {
-        path: 'users',
-        // canActivate: [AuthGuardService],
-        component: UserListComponent
-      },
-      {
-        path: 'users/new',
-        // canActivate: [AuthGuardService],
-        canDeactivate: [CanDeactivateGuard],
-        pathMatch: 'full',
-        component: UserDetailComponent,
-        data: {
-          title: 'Add New User'
-        }
-      },
-      {
-        path: 'users/:id',
-        component: UserDetailComponent,
-        // canActivate: [AuthGuardService],
-        canDeactivate: [CanDeactivateGuard],
-        data: {
-          title: 'Edit User'
-        }
-      }
-    ])
-  ],
-  exports: [
-    RouterModule
-  ]
-})
-export class UsersRoutingModule { }
+@Injectable()
+export class SelectivePreloadingStrategy implements PreloadingStrategy {
+  preloadedMods: string[] = [];
+
+  constructor(private logger: LoggerService) {}
+
+  preload(route: Route, load: () => Observable<any>): Observable<any> {
+    if (route.data && route.data['preload']) {
+      this.preloadedMods.push(route.path);
+      this.logger.log('Preloaded: ' + route.path);
+      return load();
+    } else {
+      return of(null);
+    }
+  }
+}

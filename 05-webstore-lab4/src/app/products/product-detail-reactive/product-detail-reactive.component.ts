@@ -31,27 +31,37 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
     ) { }
 
   ngOnInit() {
-    this.route.params.pipe(
-      filter(params => {
-        if (!!params['productId']) {
-          return true;
-        } else {
-          this.product = new Product(undefined, undefined);
-          return false;
-        }
-      }),
-      switchMap(params => {
-        return this.service.findById(params['productId']);
-      })
-    ).subscribe(
-      product => {
-        this.product = product;
+    // this.route.params.pipe(
+    //   filter(params => {
+    //     if (!!params['productId']) {
+    //       return true;
+    //     } else {
+    //       this.product = new Product(undefined, undefined);
+    //       return false;
+    //     }
+    //   }),
+    //   switchMap(params => {
+    //     return this.service.findById(params['productId']);
+    //   })
+    // ).subscribe(
+    //   product => {
+    //     this.product = product;
+    //     this.resetForm();
+    //     this.errors = undefined;
+    //   }
+    // );
+
+    this.buildForm();
+
+    this.route.data.subscribe(
+      data => {
+        console.log('Data:', data);
+        this.product = data['product'] || this.product; // resolved product using ProductResolver
         this.resetForm();
-        this.errors = undefined;
       },
       error => this.errors = error
     );
-    this.buildForm();
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -109,19 +119,13 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
     if (this.form.getRawValue().id) {
       this.service.edit(this.form.getRawValue())
       .subscribe(
-        product => {
-          this.product = product;
-          this.router.navigate(['..'], { relativeTo: this.route });
-        },
+        product => this.gotoList(product),
         error => this.errors = error
       );
     } else {
       this.service.add(this.form.getRawValue())
       .subscribe(
-        product => {
-          this.product = product;
-          this.router.navigate(['..'], { relativeTo: this.route });
-        },
+        product => this.gotoList(product),
         error => this.errors = error
       );
     }
@@ -136,11 +140,14 @@ export class ProductDetailReactiveComponent implements OnInit, OnChanges {
   cancelForm() {
     this.productChange.emit(null);
     this.goBack();
-    return false;
   }
 
   goBack() {
     this.location.back();
+  }
+
+  gotoList(product: Product) {
+    this.router.navigate(['..', { selectedId: product.id }], { relativeTo: this.route });
   }
 
   formErrors = {

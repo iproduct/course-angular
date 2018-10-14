@@ -29,6 +29,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { shallowEquals } from '../shared/utils';
 import { DialogService } from '../core/dialog.service';
+import { CanComponentDeactivate } from '../core/can-deactivate-guard.service';
 
 @Component({
   // moduleId: module.id,
@@ -45,7 +46,7 @@ import { DialogService } from '../core/dialog.service';
   }`
   ]
 })
-export class UserDetailComponent implements OnInit, OnChanges {
+export class UserDetailComponent implements OnInit, OnChanges, CanComponentDeactivate {
   @Input('user') public userMaster: User = { id: undefined } as User;
   public user: User;
   public title: string;

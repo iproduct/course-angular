@@ -1,10 +1,12 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 import { animate } from '@angular/animations';
 import { slideInDownAnimation } from '../../shared/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IdType } from '../../shared/shared-types';
+import { filter, switchMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ws-products-list',
@@ -12,17 +14,34 @@ import { IdType } from '../../shared/shared-types';
   animations: [ slideInDownAnimation ],
   styleUrls: ['./products-list.component.css']
 })
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent implements OnInit, OnDestroy {
   @HostBinding('@routeAnimation') routeAnimation = true;
 
   products: Product[] = [];
   selectedId: IdType;
   errors: string;
+  subscription: Subscription;
 
   constructor(private service: ProductsService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
+    this.route.params.pipe(
+      filter(params => !!params['selectedId'])
+    ).subscribe(
+      params => this.selectedId = params['selectedId'],
+      error => this.errors = error
+    );
+    this.subscription = this.service
+      .find()
+      .subscribe(
+        products => this.products = products,
+        error => this.errors = error
+      );
     this.refreshProducts();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   selectProduct(product) {
@@ -31,7 +50,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   addNewProduct() {
-    // this.selected = new Product(undefined, undefined);
+    this.router.navigate(['products', 'new']);
   }
 
   editProduct(product: Product) {
@@ -75,11 +94,6 @@ export class ProductsListComponent implements OnInit {
   }
 
   refreshProducts() {
-    this.service
-    .find()
-    .subscribe(
-      products => this.products = products,
-      error => this.errors = error
-    );
+   this.service.refresh();
   }
 }
