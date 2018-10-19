@@ -5,7 +5,7 @@ import { TimerNameComponent } from './timer-name.component';
   template: `
   <h3>Name: {{name}}</h3>
   <p>{{message}}</p>
-  <ng-content select="header"></ng-content>
+  <ng-content select="header"></ng-content>  
   <ng-content select="timer-name"></ng-content>
   <div [style.color]="'red'" >
     <ng-content select=".footer"></ng-content>
