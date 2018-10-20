@@ -9,30 +9,30 @@
 
 	<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="ui-g-12 ui-mat-8 ui-lg-6">
 		<div *ngIf="user?.id">
-			<mat-input-container>
+			<mat-form-field>
 				<input matInput type="text" id="id" name="id" formControlName="id" placeholder="ID" />
-			</mat-input-container>
+			</mat-form-field>
 		</div>
 
-		<mat-input-container>
+		<mat-form-field>
 			<input matInput type="text" id="fname" name="fname" formControlName="fname" placeholder="First name" required>
 			<mat-error *ngIf="formErrors.fname">{{ formErrors.fname }}</mat-error>
-		</mat-input-container>
+		</mat-form-field>
 
-		<mat-input-container>
+		<mat-form-field>
 			<input matInput type="text" id="lname" name="lname" formControlName="lname" placeholder="Last name" required>
 			<mat-error *ngIf="formErrors.lname">{{ formErrors.lname }}</mat-error>
-		</mat-input-container>
+		</mat-form-field>
 
-		<mat-input-container>
+		<mat-form-field>
 			<input matInput type="email" id="email" name="email" formControlName="email" placeholder="E-mail" required>
 			<mat-error *ngIf="formErrors.email">{{ formErrors.email }}</mat-error>
-		</mat-input-container>
+		</mat-form-field>
 
-		<mat-input-container>
+		<mat-form-field>
 			<input matInput type="password" id="password" name="password" formControlName="password" placeholder="Password" required>
 			<mat-error *ngIf="formErrors.password">{{ formErrors.password }}</mat-error>
-		</mat-input-container>
+		</mat-form-field>
 
     <mat-form-field>
       <mat-select placeholder="Role" id="role" name="role" formControlName="role" required>

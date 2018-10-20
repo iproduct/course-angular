@@ -1,90 +1,90 @@
 <div class="test-list-conatainer ui-g-12">
 	<div class="test-list-header ui-g-11">
-		<h2 *ngIf="isNewUser">Add New Test</h2>
-		<h2 *ngIf="!isNewUser">Edit Test: {{test?.title}} </h2>
+		<h2 *ngIf="isNewTest">Add New Test</h2>
+		<h2 *ngIf="!isNewTest">Edit Test: {{test?.title}} </h2>
 	</div>
 
-	<form [formGroup]="testForm" (ngSubmit)="onSubmit()" class="ui-g-12 ui-md-8 ui-lg-6">
+	<form [formGroup]="testForm" (ngSubmit)="onSubmit()" class="ui-g-12 ui-mat-8 ui-lg-6">
 		<div class="test-dates ui-g-12">
-			<div class="ui-g-12 ui-md-6">
+			<div class="ui-g-12 ui-mat-6">
 				<div class="dates-legend">Created:</div><div class="dates">{{test.dateCreated | date:'HH:mm - dd.MM.yyyy'}}</div>
 			</div>
-			<div class="ui-g-12 ui-md-6">
+			<div class="ui-g-12 ui-mat-6">
 				<div class="dates-legend">Modified:</div><div class="dates">{{test.dateModified | date:'HH:mm - dd.MM.yyyy'}}</div>
 			</div>
 		</div>
 
 		<div *ngIf="test?.id">
-			<md-input-container>
-				<input mdInput type="text" id="id" name="id" formControlName="id" placeholder="ID" />
-			</md-input-container>
+			<mat-input-container>
+				<input matInput type="text" id="id" name="id" formControlName="id" placeholder="ID" />
+			</mat-input-container>
 		</div>
 
-		<md-input-container>
-			<input mdInput type="text" id="title" name="title" formControlName="title" placeholder="Test title" required>
-			<md-error *ngIf="formErrors.title">{{ formErrors.title }}</md-error>
-		</md-input-container>
+		<mat-input-container>
+			<input matInput type="text" id="title" name="title" formControlName="title" placeholder="Test title" required>
+			<mat-error *ngIf="formErrors.title">{{ formErrors.title }}</mat-error>
+		</mat-input-container>
 
-		<md-input-container>
-			<input mdInput type="text" id="description" name="description" formControlName="description" placeholder="Description">
-		</md-input-container>
+		<mat-input-container>
+			<input matInput type="text" id="description" name="description" formControlName="description" placeholder="Description">
+		</mat-input-container>
 
-		<md-input-container>
-			<input mdInput type="author" id="author" name="email" formControlName="author" placeholder="Author" required>
-			<md-error *ngIf="formErrors.author">{{ formErrors.author }}</md-error>
-		</md-input-container>
+		<mat-input-container>
+			<input matInput type="author" id="author" name="email" formControlName="author" placeholder="Author" required>
+			<mat-error *ngIf="formErrors.author">{{ formErrors.author }}</mat-error>
+		</mat-input-container>
 
-		<md-select mdInput placeholder="Difficulty" id="difficulty" name="difficulty" formControlName="difficulty" required>
-			<md-option *ngFor="let difficulty of difficulties" [value]="difficulty.key">{{difficulty.value }}</md-option>
-			<md-error *ngIf="formErrors.difficulty">{{ formErrors.difficulty }}</md-error>
-		</md-select>
+		<mat-select matInput placeholder="Difficulty" id="difficulty" name="difficulty" formControlName="difficulty" required>
+			<mat-option *ngFor="let difficulty of difficulties" [value]="difficulty.key">{{difficulty.value }}</mat-option>
+			<mat-error *ngIf="formErrors.difficulty">{{ formErrors.difficulty }}</mat-error>
+		</mat-select>
 
-		<md-select mdInput placeholder="License" id="license" name="license" formControlName="license" required>
-			<md-option *ngFor="let license of licenses" [value]="license.key">{{license.value }}</md-option>
-			<md-error *ngIf="formErrors.license">{{ formErrors.license }}</md-error>
-		</md-select>
+		<mat-select matInput placeholder="License" id="license" name="license" formControlName="license" required>
+			<mat-option *ngFor="let license of licenses" [value]="license.key">{{license.value }}</mat-option>
+			<mat-error *ngIf="formErrors.license">{{ formErrors.license }}</mat-error>
+		</mat-select>
 
 		<ipt-order-list [value]="questions" [responsive]="true" class="question-container" formArrayName="questions" (onAddItem)="addQuestion()"
 		 (onReorder)="refreshForm()">
 			<ng-template let-question let-i="index" pTemplate="item">
 				<!--{{i}}. {{question.get('text').value}} -->
-				<md-card [formGroupName]="i">
+				<mat-card [formGroupName]="i">
 					<div class="question-controls">
 						<div class="question-control delete-question" (click)="deleteQuestion(i)" title="Delete Question">Q-</div>
 						<div class="question-control add-answer" (click)="addAnswer(i)" title="Add Answer">A+</div>
 					</div>
-					<md-input-container>
-						<input mdInput type="text" id="text" name="text" formControlName="text" placeholder="Question {{i + 1}}">
-					</md-input-container>
-					<md-input-container>
-						<input mdInput type="text" id="hint" name="hint" formControlName="hint" placeholder="Hint">
-					</md-input-container>
-					<md-input-container>
-						<input mdInput type="number" id="weight" name="weight" formControlName="weight" placeholder="Weight">
-					</md-input-container>
+					<mat-input-container>
+						<input matInput type="text" id="text" name="text" formControlName="text" placeholder="Question {{i + 1}}">
+					</mat-input-container>
+					<mat-input-container>
+						<input matInput type="text" id="hint" name="hint" formControlName="hint" placeholder="Hint">
+					</mat-input-container>
+					<mat-input-container>
+						<input matInput type="number" id="weight" name="weight" formControlName="weight" placeholder="Weight">
+					</mat-input-container>
 
 					<div formArrayName="answers" class="answer-container">
-						<md-card *ngFor="let answer of questionAnswers(i).controls; let j=index" [formGroupName]="j">
+						<mat-card *ngFor="let answer of questionAnswers(i).controls; let j=index" [formGroupName]="j">
 							<div class="answer-controls">
 								<div class="question-control delete-answer" (click)="deleteAnswer(i, j)" title="Delete Answer">A-</div>
 							</div>
-							<md-input-container>
-								<input mdInput type="text" id="text" name="text" formControlName="text" placeholder="Answer {{j + 1}}">
-							</md-input-container>
-							<md-input-container>
-								<input mdInput type="number" id="weight" name="weight" formControlName="weight" placeholder="Weight">
-							</md-input-container>
-						</md-card>
+							<mat-input-container>
+								<input matInput type="text" id="text" name="text" formControlName="text" placeholder="Answer {{j + 1}}">
+							</mat-input-container>
+							<mat-input-container>
+								<input matInput type="number" id="weight" name="weight" formControlName="weight" placeholder="Weight">
+							</mat-input-container>
+						</mat-card>
 					</div>
 
-				</md-card>
+				</mat-card>
 			</ng-template>
 		</ipt-order-list>
 
 		<div class="buttons">
-			<button type="submit" md-raised-button color="primary" [disabled]="testForm.pristine || !testForm.valid">Submit</button>
-			<button type="button" md-raised-button color="warn" (click)="resetForm()">Reset</button>
-			<button type="button" md-raised-button (click)="goBack()">Cancel</button>
+			<button type="submit" mat-raised-button color="primary" [disabled]="testForm.pristine || !testForm.valid">Submit</button>
+			<button type="button" mat-raised-button color="warn" (click)="resetForm()">Reset</button>
+			<button type="button" mat-raised-button (click)="goBack()">Cancel</button>
 		</div>
 	</form>
 </div>

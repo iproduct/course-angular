@@ -19,6 +19,7 @@ import { slideInDownAnimation } from '../../shared/animations';
 import { LoggerService } from '../../core/logger.service';
 import { shallowEquals } from '../../shared/utils';
 import { DialogService } from '../../core/dialog.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'kt-user-detail',
@@ -110,6 +111,7 @@ export class UserDetailComponent implements OnInit, OnChanges, CanDeactivate<Use
     //   );
 
     this.route.data
+      .pipe(tap(data => this.logger.log(JSON.stringify(data))))
       .subscribe(({ title, user }) => {
         this.title = title;
         if (user) {
@@ -119,11 +121,6 @@ export class UserDetailComponent implements OnInit, OnChanges, CanDeactivate<Use
       },
       error => this.errorMessage = error.toString()
     );
-
-    this.route.data.do(data => this.logger.log(JSON.stringify(data)))
-      .forEach((data: Params) => {
-        this.title = data['title'];
-      });
   }
 
   public ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {

@@ -13,11 +13,11 @@
   margin: 20px;
 }
 
-mat-input-container, mat-select, .buttons {
+mat-form-field, mat-select, .buttons {
   width: 90%;
 }
 
-mat-input-container {
+mat-form-field {
   margin: 0 0 10px;
 }
 

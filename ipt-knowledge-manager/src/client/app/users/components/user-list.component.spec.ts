@@ -16,7 +16,7 @@ import { DebugElement } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserListComponent } from './user-list.component';
 import { UserService } from '../user.service';
-import { Logger } from '../../core/logger.service';
+import { LoggerService } from '../../core/logger.service';
 import { User } from '../user.model';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRouteStub } from '../../../testing/router-stubs';
@@ -24,10 +24,22 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Http, HttpModule } from '@angular/http';
+import { DataListModule } from 'primeng/primeng';
+import { StoreModule } from '@ngrx/store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { EffectsModule } from '@ngrx/effects';
+import { RoutingEffects } from '../../shared/routing.effects';
+import { reducers } from '../../root.reducer';
+import { usersReducer } from '../user.reducer';
+import { UserEffects } from '../user.effects';
+import { LoginService } from '../login.service';
+import { UserActions } from '../user.actions';
+import { UserResolver } from '../user-resolver';
 
 let comp: UserListComponent;
 let fixture: ComponentFixture<UserListComponent>;
-let spy1: jasmine.Spy;
+// let spy1: jasmine.Spy;
+let spyUserService: jasmine.SpyObj<any>;
 let de: DebugElement;
 let el: HTMLElement;
 let userService: UserService;
@@ -59,15 +71,44 @@ export class UserServiceStub extends UserService {
   }
 }
 
+// spyUserService = {
+//   findAllUsers: jasmine.createSpy('findAllUsers').and.returnValue(new BehaviorSubject(testUsers))
+// }
+
+spyUserService = jasmine.createSpyObj('UserService', {'findAllUsers': new BehaviorSubject(testUsers)});
+
+
+export class LoginServiceStub extends LoginService {
+  logout(): Observable<string> {
+    return Observable.empty();
+  }
+}
+
 
 describe('users-list', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, RouterTestingModule, HttpModule, NoopAnimationsModule],
-      providers: [ Logger,
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule,
+        HttpModule,
+        NoopAnimationsModule,
+        DataListModule,
+        StoreModule.forRoot(reducers),
+        StoreRouterConnectingModule.forRoot({
+          stateKey: 'router'
+        }),
+        EffectsModule.forRoot([RoutingEffects]),
+        StoreModule.forFeature('users', usersReducer),
+        EffectsModule.forFeature([UserEffects])
+      ],
+      providers: [ LoggerService,
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
-        { provide: UserService, useClass: UserServiceStub },
-        { provide: API_BASE_URL, useValue: '/api' }
+        { provide: UserService, useValue: spyUserService },
+        { provide: LoginService, useClass: LoginServiceStub },
+        { provide: API_BASE_URL, useValue: '/api' },
+        UserActions,
+        UserResolver,
       ],
       declarations: [UserListComponent]
     });
@@ -80,11 +121,10 @@ describe('users-list', () => {
     userService = fixture.debugElement.injector.get(UserService);
 
     // Setup spy on the `getQuote` method
-    spy1 = spyOn(userService, 'findAllUsers')
-      .and.returnValue(new BehaviorSubject(testUsers));
+    // spy1 = spyOn(userService, 'findAllUsers').and.returnValue(new BehaviorSubject(testUsers));
 
     // Get the tested element by CSS selector (e.g., by class name)
-    de = fixture.debugElement.query(By.css('.items'));
+    de = fixture.debugElement.query(By.css('ul'));
     el = de.nativeElement;
   });
 
@@ -93,21 +133,25 @@ describe('users-list', () => {
     fixture.detectChanges();
   });
 
-  it('should call getAll() users', () => {
+  it('should call findAllUsers()', () => {
     expect(de.children.length).toBe(0, 'should be no users yet');
     fixture.detectChanges();
-    // getAll service is async => still has not returned with userss
+    // getAll service is async => still has not returned with users
     expect(de.children.length).toBe(1, 'should be shown one user');
-    expect(de.children[0].nativeElement.textContent).toContain('Test User', 'should contain "Test User"');
-    expect(spy1.calls.any()).toBe(true, 'getUsersObservable called');
-  });
+    expect(de.children[0].nativeElement.textContent).toContain(
+      `${testUsers[0].fname} ${testUsers[0].lname}`, 'should contain test user name');
+      expect(spyUserService.findAllUsers.calls.any()).toBe(true, 'getUsersObservable called');
+      // expect(spy1.calls.any()).toBe(true, 'getUsersObservable called');
+    });
 
   it('should show one user after getAll promise (fakeAsync)', fakeAsync(() => {
     fixture.detectChanges();
-    tick();                  // wait for async getQuote
-    fixture.detectChanges(); // update view with quote
+    tick();                  // wait for async findAllUsers
+    fixture.detectChanges(); // update view with users
     expect(de.children.length).toBe(1, 'should be shown one user');
-    expect(de.children[0].nativeElement.textContent).toContain('Test User', 'should contain "Test User"');
-    expect(spy1.calls.any()).toBe(true, 'getUsersObservable called');
+    expect(de.children[0].nativeElement.textContent).toContain(
+      `${testUsers[0].fname} ${testUsers[0].lname}`, 'should contain test user name');
+    expect(spyUserService.findAllUsers.calls.any()).toBe(true, 'getUsersObservable called');
+    // expect(spy1.calls.any()).toBe(true, 'getUsersObservable called');
 }));
 });

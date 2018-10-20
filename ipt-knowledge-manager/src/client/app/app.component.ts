@@ -30,6 +30,7 @@ import { getShowSidenav } from './ui/ui.selectors';
 })
 export class AppComponent {
   showSidenav$: Observable<boolean>;
+  title = 'Personal Knowledge Manager';
 
   constructor(private store: Store<RootState>, private uiActions: UiActions) {
     this.showSidenav$

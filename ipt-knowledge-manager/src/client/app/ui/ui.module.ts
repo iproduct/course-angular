@@ -20,10 +20,10 @@ import { ToolbarComponent } from './components/toolbar';
 import { NavItemComponent } from './components/nav-item';
 import { NotFoundComponent } from './components/not-found';
 import { SidenavComponent } from './components/sidenav';
-import { MdSidenavModule } from '@angular/material';
-import { MdListModule } from '@angular/material';
-import { MdButtonModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
+import { MatSidenavModule, MatCardModule, MatToolbarModule } from '@angular/material';
+import { MatListModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
 import { ToolbarModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
 import { OrderListModule } from './components/orderlist/orderlist';
@@ -34,10 +34,12 @@ import { OrderListModule } from './components/orderlist/orderlist';
     ReactiveFormsModule,
     RouterModule,
     SharedModule,
-    MdSidenavModule,
-    MdListModule,
-    MdButtonModule,
-    MdIconModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
     ToolbarModule,
     ButtonModule,
   ],

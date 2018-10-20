@@ -5,6 +5,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserDetailResolver } from './user-detail-resolver.service';
 import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
 import { AuthGuard } from '../login/auth-guard.service';
+import { RouteNotFoundComponent } from '../ui/route-not-found/route-not-found.component';
 
 /*
  * Copyright (c) 2015-2017 IPT-Intellectual Products & Technologies (IPT).
@@ -43,8 +44,9 @@ import { AuthGuard } from '../login/auth-guard.service';
             resolve: {
               user: UserDetailResolver
             }
-          }]
-      }
+          }],
+      },
+      { path: '**', component: RouteNotFoundComponent }
     ])
   ],
   exports: [

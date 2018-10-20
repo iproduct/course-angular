@@ -20,7 +20,7 @@ export class ComponentSeventeen {
   ngOnInit() {
     this.model.subscribe(() => {
       this.cd.markForCheck();
-      this.toggleClassService.toggleElementClass(this.el,'checked-observable');
+      this.toggleClassService.toggleElementClass(this.el, 'checked-observable');
       this.counter ++;
     })
   }

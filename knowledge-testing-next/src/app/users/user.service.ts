@@ -3,7 +3,8 @@ import { LoggerService } from '../core/logger.service';
 import { User } from './user.model';
 import { IdentityType } from '../shared/shared-types';
 import { BackendService } from '../core/backend.service';
-import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable()
 /*
@@ -34,7 +35,8 @@ export class UserService {
   }
 
   findUserByEmail(email: string): Observable<User> {
-    return this.backend.findAll(User).map(users => users.find(user => user.email === email));
+    return this.backend.findAll(User).pipe(
+      map(users => users.find(user => user.email === email)));
   }
 
   addUser(user: User) {

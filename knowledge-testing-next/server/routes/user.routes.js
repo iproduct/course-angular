@@ -49,7 +49,7 @@ router.get('/:userId', function (req, res) {
                             error(req, res, 404, `User with Id=${params.userId} not found.`, err);
                         } else {
                             replaceId(user);
-                            res.json(user);
+                            res.json({ data: user});
                         }
 
                     });

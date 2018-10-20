@@ -46,14 +46,14 @@ export class TestDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
   public errorMessage: string;
   private subscription: Subscription;
 
-  private formErrors = {
+ formErrors = {
     'title': '',
     'author': '',
     'difficulty': '',
     'license': ''
   };
 
-  private validationMessages = {
+  validationMessages = {
     'title': {
       'required': 'First name is required.',
       'minlength': 'Name must be at least 2 characters long.',

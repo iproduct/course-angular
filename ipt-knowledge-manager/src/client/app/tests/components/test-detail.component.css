@@ -1,4 +1,4 @@
-md-input-container, md-select, .question-container, .buttons {
+mat-input-container, mat-select, .question-container, .buttons {
   width: 90%;
 }
 
@@ -22,11 +22,11 @@ md-input-container, md-select, .question-container, .buttons {
   padding-left: 7%;
 }
 
-md-input-container, .question-container {
+mat-input-container, .question-container {
   margin: 0 0 10px;
 }
 
-md-select {
+mat-select {
   margin: 10px 0 30px;
 }
 
@@ -34,20 +34,20 @@ md-select {
   margin: 20px 0;
 }
 
-.question-container md-card {
+.question-container mat-card {
   margin: 0 0 5px;
 }
 
-.question-container md-card {
+.question-container mat-card {
   background: #ffffcc;
 }
 
-.question-container md-input-container {
+.question-container mat-input-container {
   margin: 0;
   width: 90%;
 }
 
-.question-container md-card md-card {
+.question-container mat-card mat-card {
   background: #ffffff;
   padding: 5px;
 }

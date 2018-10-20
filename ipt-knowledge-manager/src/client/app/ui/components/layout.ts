@@ -4,12 +4,12 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'ipt-layout',
   template: `
-    <md-sidenav-container fullscreen>
+    <mat-sidenav-container fullscreen>
       <ng-content></ng-content>
-    </md-sidenav-container>
+    </mat-sidenav-container>
   `,
   styles: [`
-    md-sidenav-container {
+    mat-sidenav-container {
       background: rgba(0, 0, 0, 0.03);
     }
 

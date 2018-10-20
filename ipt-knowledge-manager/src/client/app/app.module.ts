@@ -23,7 +23,7 @@ import { DBModule } from '@ngrx/db';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UiModule } from './ui/ui.module';
-import { MdIconModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
 import { routes } from './routes';
 import { UserEffects } from './users/user.effects';
 import { SharedModule } from './shared/shared.module';

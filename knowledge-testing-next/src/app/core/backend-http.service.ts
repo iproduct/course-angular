@@ -14,11 +14,10 @@ import { HttpClient } from '@angular/common/http';
 import { LoggerService } from './logger.service';
 import { Identifiable, IdentityType, ApplicationError } from '../shared/shared-types';
 import { HttpErrorResponse } from '@angular/common/http';
-// import 'rxjs/operator/map';
-import 'rxjs/Rx';
-import { Observable } from 'rxjs/Observable';
 import { BackendService } from './backend.service';
-import { Subject } from 'rxjs/Rx';
+import { catchError, tap, startWith, switchMap, map } from 'rxjs/operators';
+// tslint:disable-next-line:import-blacklist
+import { throwError, Subject, Observable } from 'rxjs';
 
 
 @Injectable()
@@ -32,22 +31,29 @@ export class BackendHttpService implements BackendService {
   ) { }
 
   find <T extends Identifiable>(type: Type<T>, id: IdentityType): Observable<T> {
-    return this.http.get<T>(this.baseUrl + '/' + this.getCollectionName(type) + '/' + id)
-      .catch(error => {
-        return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type, id));
-      });
+    return this.http.get<{data: T}>(this.baseUrl + '/' + this.getCollectionName(type) + '/' + id)
+      .pipe(
+        map( json => json.data ),
+        catchError(error => {
+        return throwError(new  ApplicationError<T>(this.getErrorMessage(error), type, id));
+      }));
   }
 
   findAll<T extends Identifiable>(type: Type<T>): Observable<T[]> {
     return this.http.get<{ data: T[] }>(this.baseUrl + '/' + this.getCollectionName(type))
-      .map( json => json.data)
-      .catch(error => {
-        return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type));
-      });
+      .pipe(
+        map( json => json.data ),
+        catchError(error => {
+          return throwError(new  ApplicationError<T>(this.getErrorMessage(error), type));
+        })
+      );
   }
 
   findAllWithRefresh<T extends Identifiable>(type: Type<T>): Observable<T[]> {
-    return this.refreshes.startWith(null).switchMap(() => this.findAll(type));
+    return this.refreshes.pipe(
+      startWith(null),
+      switchMap(() => this.findAll(type))
+    );
   }
 
   refresh<T extends Identifiable>(type: Type<T>): void {
@@ -56,24 +62,29 @@ export class BackendHttpService implements BackendService {
 
   add<T extends Identifiable>(type: Type<T>, item: T): Observable<T> {
     return this.http.post<T>(this.baseUrl + '/' + this.getCollectionName(type), item)
-    .do(user => this.refresh(type))
-    .catch(error => {
-      return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type, item.id, item));
-    });
+    .pipe(
+      tap(user => this.refresh(type)),
+      catchError(error => {
+        return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type, item.id, item));
+      })
+    );
   }
   edit<T extends Identifiable>(type: Type<T>, item: T): Observable<T> {
     return this.http.put<T>(this.baseUrl + '/' + this.getCollectionName(type) + '/' + item.id, item)
-    .do(user => this.refresh(type))
-    .catch(error => {
-      return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type, item.id, item));
-    });
+    .pipe(
+      tap(user => this.refresh(type)),
+      catchError(error => {
+        return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type, item.id, item));
+    }));
   }
   delete<T extends Identifiable>(type: Type<T>, id: IdentityType): Observable<T> {
     return this.http.delete<T>(this.baseUrl + '/' + this.getCollectionName(type) + '/' + id)
-    .do(user => this.refresh(type))
-    .catch(error => {
-      return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type, id));
-    });
+    .pipe(
+      tap(user => this.refresh(type)),
+      catchError(error => {
+        return Observable.throw(new  ApplicationError<T>(this.getErrorMessage(error), type, id));
+      })
+    );
 }
 
   private getCollectionName<T>(type: Type<T>) {

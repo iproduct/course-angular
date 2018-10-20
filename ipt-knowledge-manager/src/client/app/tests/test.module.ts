@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { DataListModule } from 'primeng/primeng';
-import { MdSelectModule, MdInputModule, MdIconModule, MdButtonModule, MdCardModule } from '@angular/material';
+import { MatSelectModule, MatInputModule, MatIconModule, MatButtonModule, MatCardModule } from '@angular/material';
 
 import { TestDetailComponent } from './components/test-detail.component';
 import { TestListComponent } from './components/test-list.component';
@@ -38,11 +38,11 @@ import { UiModule } from '../ui/ui.module';
     SharedModule,
     TestRoutingModule,
     DataListModule,
-    MdSelectModule,
-    MdInputModule,
-    MdIconModule,
-    MdButtonModule,
-    MdCardModule,
+    MatSelectModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
     UiModule,
     StoreModule.forFeature('tests', testsReducer),
     EffectsModule.forFeature([TestEffects])

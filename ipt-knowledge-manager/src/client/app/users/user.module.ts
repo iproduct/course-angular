@@ -13,8 +13,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { DataListModule } from 'primeng/primeng';
-import { MdSelectModule, MdInputModule } from '@angular/material';
-import { MdButtonModule } from '@angular/material';
+import {MatSelectModule} from '@angular/material/select';
+
+import { MatButtonModule, MatInputModule } from '@angular/material';
 
 import { UserDetailComponent } from './components/user-detail.component';
 import { UserListComponent } from './components/user-list.component';
@@ -40,9 +41,9 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     UserRoutingModule,
     DataListModule,
-    MdSelectModule,
-    MdInputModule,
-    MdButtonModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
     StoreModule.forFeature('users', usersReducer),
     EffectsModule.forFeature([UserEffects])
   ],

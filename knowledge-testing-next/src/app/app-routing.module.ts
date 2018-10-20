@@ -45,7 +45,6 @@ const APP_ROUTES: Route[] = [
   { path: 'tests', component: TestListComponent },
   { path: 'reactive-demo', component: Demo01Component },
   { path: 'wiki-demo', component: WikiComponent },
-  { path: '**', component: RouteNotFoundComponent }
 ];
 
 @NgModule({

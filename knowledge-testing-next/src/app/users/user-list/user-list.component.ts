@@ -16,6 +16,7 @@ import { slideInDownAnimation } from '../../shared/animations';
 import { Subscription } from 'rxjs/Subscription';
 import { LoggerService } from '../../core/logger.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'kt-user-list',
@@ -46,7 +47,7 @@ export class UserListComponent implements OnInit, OnDestroy {
         users => this.users = users,
         error => { this.errorMessage = error.toString(); }
       );
-    this.route.paramMap.do(paramMap => console.log(paramMap))
+    this.route.paramMap.pipe(tap(paramMap => console.log(paramMap)))
       .subscribe(paramMap => {
         this.selectedId = paramMap.get('selectedId');
       });

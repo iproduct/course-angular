@@ -5,15 +5,15 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   selector: 'ipt-not-found',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <md-card>
-      <md-card-title>404: Not Found</md-card-title>
-      <md-card-content>
+    <mat-card>
+      <mat-card-title>404: Not Found</mat-card-title>
+      <mat-card-content>
         <p>The page does not exist yet!</p>
-      </md-card-content>
-      <md-card-actions>
-        <button md-raised-button color="primary" routerLink="/">Go Home</button>
-      </md-card-actions>
-    </md-card>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/">Go Home</button>
+      </mat-card-actions>
+    </mat-card>
   `,
   styles: [`
     :host {

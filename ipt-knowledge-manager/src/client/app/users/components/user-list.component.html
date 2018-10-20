@@ -1,10 +1,10 @@
-<div class="user-list-conatainer ui-g-12 ui-md-8 ui-lg-6">
+<div class="user-list-conatainer ui-g-12 ui-mat-8 ui-lg-6">
   <div class="user-list-header ui-g-12">
     <h2>User List</h2>
   </div>
   <div class="ui-g-7">Pick user to edit:</div>
   <div class="user-list-top-control ui-g-5">
-    <button type="button" md-raised-button color="primary" (click)="addNewUser()">Add New User</button>
+    <button type="button" mat-raised-button color="primary" (click)="addNewUser()">Add New User</button>
   </div>
 
   <p-dataList [value]="users$ | async" [paginator]="true" [rows]="10" class="user-list ui-g-12" (onPage)="paginate($event)">
@@ -15,16 +15,16 @@
           title="Click to delete this user."></i>
       </div>
     </ng-template>
-    <!--<md-list-item *ngFor="let user of users; let i = index" class="user" [class.selected]="user.id === selectedId" (click)="selectItem(user)"
+    <!--<mat-list-item *ngFor="let user of users; let i = index" class="user" [class.selected]="user.id === selectedId" (click)="selectItem(user)"
       [title]="user.fname">
       <span class="item-badge">{{i + 1}}</span> {{user.fname}} {{user.lname}}
-    </md-list-item>
-  </md-list>-->
+    </mat-list-item>
+  </mat-list>-->
   </p-dataList>
   <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
 </div>
 
-<div class="router-outlet ui-g-12 ui-md-8 ui-lg-6">
+<div class="router-outlet ui-g-12 ui-mat-8 ui-lg-6">
   <router-outlet></router-outlet>
 </div>
 

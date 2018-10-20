@@ -3,12 +3,12 @@ import { Component, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'ipt-toolbar',
   template: `
-    <p-toolbar class="toolbar">
-      <button md-icon-button (click)="openSidenav.emit()">
-        <md-icon >menu</md-icon>
+    <mat-toolbar color="primary" class="toolbar">
+      <button mat-icon-button (click)="openSidenav.emit()">
+      <mat-icon>menu</mat-icon>
       </button>
         <ng-content></ng-content>
-    </p-toolbar>
+    </mat-toolbar>
   `,
   styles: [`
     .toolbar div{

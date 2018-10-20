@@ -30,7 +30,7 @@ import { DomHandler } from 'primeng/components/common/api';
 import { ObjectUtils } from 'primeng/components/utils/objectutils';
 import { PrimeTemplate, SharedModule } from 'primeng/components/common/shared';
 import { ButtonModule } from 'primeng/primeng';
-import { MdIconModule, MdButtonModule } from '@angular/material';
+import { MatIconModule, MatButtonModule } from '@angular/material';
 
 
 @Component({
@@ -207,7 +207,7 @@ export class OrderListComponent implements  AfterViewInit, AfterViewChecked, Aft
     }
 
     findIndexInList(item: any, list: any): number {
-        let index: number = -1;
+        let index = -1;
 
         if (list) {
             for (let i = 0; i < list.length; i++) {
@@ -358,7 +358,7 @@ export class OrderListComponent implements  AfterViewInit, AfterViewChecked, Aft
 }
 
 @NgModule({
-    imports: [CommonModule, ButtonModule, SharedModule, MdButtonModule, MdIconModule, Prime],
+    imports: [CommonModule, ButtonModule, SharedModule, MatButtonModule, MatIconModule],
     exports: [OrderListComponent, SharedModule],
     declarations: [OrderListComponent]
 })

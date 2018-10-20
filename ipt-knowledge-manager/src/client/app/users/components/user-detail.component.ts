@@ -46,7 +46,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
   public errorMessage: string;
   private subscription: Subscription;
 
-  private formErrors = {
+  formErrors = {
     'fname': '',
     'lname': '',
     'email': '',
@@ -54,7 +54,7 @@ export class UserDetailComponent implements OnInit, OnDestroy, OnChanges, CanCom
     'role': ''
   };
 
-  private validationMessages = {
+  validationMessages = {
     'fname': {
       'required': 'First name is required.',
       'minlength': 'Name must be at least 2 characters long.',

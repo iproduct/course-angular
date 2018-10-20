@@ -15,24 +15,23 @@ import { DebugElement } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TestListComponent } from './test-list.component';
 import { TestService } from '../test.service';
-import { Logger } from '../../common/logger.service';
 import { Test } from '../test.model';
-import { Observable } from 'rxjs/Rx';
-import { ActivatedRouteStub } from '../../../testing/router-stubs';
-import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { BackendObservableService } from '../../common/backend-observable.service';
-import { BackendHttpObservableService } from '../../common/backend-http-observable.service';
-import { Http, HttpModule } from '@angular/http';
-import { API_BASE_URL } from '../../common/common-types';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpModule } from '@angular/http';
+import { LoggerService } from '../../core/logger.service';
+import { BackendService } from '../../core/backend.service';
+import { BackendHttpService } from '../../core/backend-http.service';
+import { ActivatedRoute } from '@angular/router';
+import { ActivatedRouteStub } from '../../../testing/router-stubs';
+import { API_BASE_URL } from '../../shared/shared-types';
 
 let comp: TestListComponent;
 let fixture: ComponentFixture<TestListComponent>;
 let spy1: jasmine.Spy;
 let de: DebugElement;
 let el: HTMLElement;
-let testService: TestService;
 
 const testTests = [new Test('11111111111111111111111', 'test@gmail.com', 'Ivan', 2, 'ivan')];
 
@@ -66,8 +65,8 @@ describe('tests-list', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, RouterTestingModule, HttpModule, NoopAnimationsModule],
-      providers: [ Logger,
-        { provide: BackendObservableService, useClass: BackendHttpObservableService},
+      providers: [ LoggerService,
+        { provide: BackendService, useClass: BackendHttpService},
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
         { provide: TestService, useClass: TestServiceStub },
         { provide: API_BASE_URL, useValue: '/api' }
@@ -80,7 +79,7 @@ describe('tests-list', () => {
     comp = fixture.componentInstance;
 
     // Get BackendService actually injected into the component
-    testService = fixture.debugElement.injector.get(TestService);
+    const testService = fixture.debugElement.injector.get(TestService);
 
     // Setup spy on the `getQuote` method
     spy1 = spyOn(testService, 'findAllTests')

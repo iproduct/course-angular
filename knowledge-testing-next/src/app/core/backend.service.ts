@@ -10,7 +10,8 @@
 
 import { IdentityType, Identifiable } from '../shared/shared-types';
 import { Type } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+// tslint:disable-next-line:import-blacklist
+import { Observable } from 'rxjs';
 
 export abstract class BackendService {
   abstract find: <T extends Identifiable> (type: Type<T>, id: IdentityType) => Observable<T>;
