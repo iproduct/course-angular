@@ -38,7 +38,7 @@ import { UserResolver } from '../user-resolver';
 
 let comp: UserListComponent;
 let fixture: ComponentFixture<UserListComponent>;
-// let spy1: jasmine.Spy;
+let spy1: jasmine.Spy;
 let spyUserService: jasmine.SpyObj<any>;
 let de: DebugElement;
 let el: HTMLElement;
@@ -72,10 +72,12 @@ export class UserServiceStub extends UserService {
 }
 
 // spyUserService = {
-//   findAllUsers: jasmine.createSpy('findAllUsers').and.returnValue(new BehaviorSubject(testUsers))
+//   findAllUsers: jasmine.createSpy('findAllUsers').and.returnValue(Observable.of(testUsers))
 // }
 
-spyUserService = jasmine.createSpyObj('UserService', {'findAllUsers': new BehaviorSubject(testUsers)});
+// spyUserService = jasmine.createSpyObj('UserService', {'findAllUsers': Observable.of(testUsers)});
+spyUserService = jasmine.createSpyObj('UserService', ['findAllUsers']);
+spyUserService.findAllUsers.and.returnValue(Observable.of(testUsers));
 
 
 export class LoginServiceStub extends LoginService {
@@ -118,10 +120,11 @@ describe('users-list', () => {
     comp = fixture.componentInstance;
 
     // Get BackendService actually injected into the component
+    // userService = TestBed.get(UserService);
     userService = fixture.debugElement.injector.get(UserService);
 
     // Setup spy on the `getQuote` method
-    // spy1 = spyOn(userService, 'findAllUsers').and.returnValue(new BehaviorSubject(testUsers));
+    // spy1 = spyOn(userService, 'findAllUsers').and.returnValue(Observable.of(testUsers));
 
     // Get the tested element by CSS selector (e.g., by class name)
     de = fixture.debugElement.query(By.css('ul'));
@@ -141,7 +144,7 @@ describe('users-list', () => {
     expect(de.children[0].nativeElement.textContent).toContain(
       `${testUsers[0].fname} ${testUsers[0].lname}`, 'should contain test user name');
       expect(spyUserService.findAllUsers.calls.any()).toBe(true, 'getUsersObservable called');
-      // expect(spy1.calls.any()).toBe(true, 'getUsersObservable called');
+      // expect(spy1.calls.count()).toBe(1, 'getUsersObservable called');
     });
 
   it('should show one user after getAll promise (fakeAsync)', fakeAsync(() => {
