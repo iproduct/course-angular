@@ -31,7 +31,7 @@ console.log(clone2 === obj);
 var a = [[1], [2], [3]];
 var b = [ ...a, [4]];
 var [, c] = a;
-c.shift();
+console.log(c.shift());
 
 // b.shift().shift();
 

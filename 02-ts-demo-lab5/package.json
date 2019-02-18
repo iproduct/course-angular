@@ -1,0 +1,33 @@
+{
+  "name": "02-ts-demo-lab5",
+  "version": "1.0.0",
+  "description": "First TS project",
+  "main": "index.js",
+  "scripts": {
+    "start": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukehoban/es6features.git"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "Trayan Iliev",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/lukehoban/es6features/issues"
+  },
+  "homepage": "https://github.com/lukehoban/es6features#readme",
+  "devDependencies": {
+    "lite-server": "^2.4.0"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.3.29",
+    "core-js": "^2.6.5",
+    "jquery": "^3.3.1",
+    "reflect-metadata": "^0.1.13",
+    "systemjs": "^3.0.0"
+  }
+}

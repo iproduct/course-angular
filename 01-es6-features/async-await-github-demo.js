@@ -16,7 +16,9 @@ async function showGithubData() {
     document.body.append(img);
 
     // // hide it after 5 seconds
-    await new Promise((resolve, reject) => {reject('Rejected for reason.')});
+    await new Promise((resolve, reject) => {
+      setTimeout(resolve, 6000);
+    });
 
     img.remove();
     return githubData;

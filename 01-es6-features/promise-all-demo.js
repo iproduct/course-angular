@@ -12,24 +12,24 @@
   var p4 = new Promise((resolve, reject) => {
     setTimeout(resolve, 4000, 'four');
   });
-  var p5 = new Promise((resolve, reject) => {
-    setTimeout(reject, 950, 'reject for reason');
-  });
+  // var p5 = new Promise((resolve, reject) => {
+  //   setTimeout(reject, 950, 'reject for reason');
+  // });
 
   // Promise.all([p1, p2, p3, p4, p5]).then(values => { 
   //   console.log(values);
-  // }, reason => {
-  //   console.log(`Resolved in second then clause: ${reason}`)
+  // }).catch( reason => {
+  //   console.log(`Rejected in second then clause: ${reason}`)
   // });
 
 
   // You can also use .catch
-  Promise.race([p1, p2, p3, p4, p5]).then(value => {
+  Promise.race([p1, p2, p3, p4]).then(value => {
     console.log(value);
     return value;
   }).catch(reason => {
     console.log(reason);
-    return `Retrown from catch: ${reason}`;
+    throw `Retrown from catch: ${reason}`;
   }).then(v => {
     console.log(`Resolved in second then clause: ${v}`);
   }, r => {

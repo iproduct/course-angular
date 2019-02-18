@@ -38,7 +38,7 @@ import { UserResolver } from '../user-resolver';
 
 let comp: UserListComponent;
 let fixture: ComponentFixture<UserListComponent>;
-let spy1: jasmine.Spy;
+// let spy1: jasmine.Spy;
 let spyUserService: jasmine.SpyObj<any>;
 let de: DebugElement;
 let el: HTMLElement;
