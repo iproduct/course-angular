@@ -1,8 +1,23 @@
 <html>
  <head>
     <title>ES6 Simple Demo 01</title>
- </head>
+    <link rel="stylesheet" href="src/assets/css/main.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/systemjs/dist/system.js"></script>
+
+    <!-- 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+    <script>
+        System.import('app').catch(function(err){
+            console.err(err);
+        })
+    </script>
+</head>
  <body>
-    <script src="dist/greeter.js"></script>
+    <h1>TypeScript Demo</h1>
+    <div id="content"></div>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
  </body>
  </html>
