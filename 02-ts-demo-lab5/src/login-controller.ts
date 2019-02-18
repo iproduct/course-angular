@@ -1,4 +1,5 @@
 import { User } from "./users";
+import { UserRepository } from './user-dao';
 
 export interface LoginController {
     login(user: User): Promise<User>;
@@ -10,6 +11,7 @@ export interface LoginController {
 export class LoginControllerImpl implements LoginController {
     private loggedUser: User = undefined;
 
+    constructor(private repo: UserRepository ) {}
 
     login(principal: User | string, credentials? : string): Promise<User>{
         let email: string;
@@ -24,7 +26,7 @@ export class LoginControllerImpl implements LoginController {
 
         let promise = new Promise<User>((resolve, reject) => {
             setTimeout(() => {
-                let user = this.repository.findUserByEmail(email);
+                let user = this.repo.findUserByEmail(email);
                 if(!user || password !== user.password) {
                     reject('Invalid username or password');
                 } else {
@@ -36,12 +38,14 @@ export class LoginControllerImpl implements LoginController {
             
         return promise;
     }
-    
+
     logout(): Promise<User> {
-        throw new Error("Method not implemented.");
+        const oldUser = this.loggedUser;
+        this.loggedUser = undefined;
+        return Promise.resolve(oldUser);
     }
     getCurrentUser(): User {
-        throw new Error("Method not implemented.");
+        return this.loggedUser;
     }
     
 }

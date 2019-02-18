@@ -6,7 +6,8 @@ System.register([], function (exports_1, context_1) {
         setters: [],
         execute: function () {
             LoginControllerImpl = (function () {
-                function LoginControllerImpl() {
+                function LoginControllerImpl(repo) {
+                    this.repo = repo;
                     this.loggedUser = undefined;
                 }
                 LoginControllerImpl.prototype.login = function (principal, credentials) {
@@ -23,7 +24,7 @@ System.register([], function (exports_1, context_1) {
                     }
                     var promise = new Promise(function (resolve, reject) {
                         setTimeout(function () {
-                            var user = _this.repository.findUserByEmail(email);
+                            var user = _this.repo.findUserByEmail(email);
                             if (!user || password !== user.password) {
                                 reject('Invalid username or password');
                             }
@@ -36,10 +37,12 @@ System.register([], function (exports_1, context_1) {
                     return promise;
                 };
                 LoginControllerImpl.prototype.logout = function () {
-                    throw new Error("Method not implemented.");
+                    var oldUser = this.loggedUser;
+                    this.loggedUser = undefined;
+                    return Promise.resolve(oldUser);
                 };
                 LoginControllerImpl.prototype.getCurrentUser = function () {
-                    throw new Error("Method not implemented.");
+                    return this.loggedUser;
                 };
                 return LoginControllerImpl;
             }());

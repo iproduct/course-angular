@@ -42,8 +42,8 @@ export class UserImpl implements User {
 
 export class Customer extends UserImpl {
     constructor(
-       firstName: string, 
-       lastName: string,
+        firstName: string, 
+        lastName: string,
         email: string,
         password: string,
         roles?: Role[],
