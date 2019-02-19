@@ -1,7 +1,7 @@
 'use strict';
 
 // var i;
-var callbacks = [];
+const callbacks = [];
 for (let i = 0; i < 10; i++) {
   setTimeout(function() {
     console.log(i);
