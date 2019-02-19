@@ -7,7 +7,7 @@ import { Todo } from '../shared/todo.model';
   styleUrls: ['./todo-input.component.css']
 })
 export class TodoInputComponent implements OnInit {
-  text = '';
+  log = '';
   @Output() created = new EventEmitter<Todo>();
 
   constructor() { }
@@ -15,8 +15,15 @@ export class TodoInputComponent implements OnInit {
   ngOnInit() {
   }
 
-  addTodo() {
-    this.created.emit(new Todo(this.text) );
-    this.text = '';
+  addTodo(text) {
+    text = text.trim();
+    if (text.length > 0) {
+      this.created.emit(new Todo(text) );
+    }
+    // this.text = '';
   }
+
+  // onKey(event: KeyboardEvent) {
+  //   this.log += (event.target as HTMLInputElement).value + ' | ';
+  // }
 }
