@@ -1,2 +1,4 @@
+<input type="checkbox" class="completion" [ngModel]="todo.completed" 
+(ngModelChange)="changeCompletion($event)">
 {{todo.title}} - {{todo.completed ? 'COMPLETED' : 'ACTIVE'}} 
 
