@@ -1,3 +1,7 @@
 li {
     list-style-type: none;
 }
+
+.odd {
+    background-color: aliceblue;
+}
