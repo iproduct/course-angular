@@ -28,6 +28,8 @@
     "lite-server": "^2.4.0"
   },
   "dependencies": {
-    "core-js": "^2.6.5"
+    "@types/jquery": "^3.3.29",
+    "core-js": "^2.6.5",
+    "jquery": "^3.3.1"
   }
 }

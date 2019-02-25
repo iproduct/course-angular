@@ -7,7 +7,7 @@ export interface User extends Person {
 }
 
 export enum Role {
-    USER = 1, MANAGER, ADMIN
+    CUSTOMER = 1, MANAGER, ADMIN
 }
 
 export class UserBase implements User{
@@ -21,11 +21,11 @@ export class UserBase implements User{
         public contact?: Contact) {}
 
         public get salutation(): string {
-            return `${this.firstName} ${this.lastName} in role: ${this.roles.join(', ')}`
+            return `${this.firstName} ${this.lastName} in role: ${this.roles.map(role => Role[role]).join(', ')}`
         }
 }
 
-export class User extends UserBase implements User {
+export class Customer extends UserBase implements User {
     constructor(
         public id: number,
         public email: string,
@@ -33,7 +33,7 @@ export class User extends UserBase implements User {
         public firstName: string,
         public lastName: string,
         public contact?: Contact) {
-            super( id, email, password, firstName, lastName, [Role.USER], contact);
+            super( id, email, password, firstName, lastName, [Role.CUSTOMER], contact);
         }
 }
 

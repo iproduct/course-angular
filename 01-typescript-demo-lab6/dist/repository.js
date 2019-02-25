@@ -8,7 +8,7 @@ var RepositoryImpl = (function () {
     RepositoryImpl.prototype.findById = function (id) {
         return this.entities.find(function (e) { return e.id === id; });
     };
-    RepositoryImpl.prototype.ctreate = function (entity) {
+    RepositoryImpl.prototype.create = function (entity) {
         entity.id = RepositoryImpl.nextId++;
         this.entities.push(entity);
         return entity;

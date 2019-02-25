@@ -3,21 +3,21 @@ import { Identifiable, IdType } from "./shared-types";
 export interface Repository<T extends Identifiable> {
   findAll(): T[];
   findById(id: IdType): T | undefined;
-  ctreate(entity: T): T;
+  create(entity: T): T;
   update(entity: T): T | undefined;
   delete(id: IdType): T | undefined;
 }
 
 export class RepositoryImpl<T extends Identifiable> implements Repository<T> {
   static nextId = 0;
-  private entities: T[] = [];
+  protected entities: T[] = [];
   findAll(): T[] {
     return this.entities;
   }
   findById(id: IdType) {
     return this.entities.find(e => e.id === id);
   }
-  ctreate(entity: T) {
+  create(entity: T) {
     entity.id = RepositoryImpl.nextId++;
     this.entities.push(entity);
     return entity;

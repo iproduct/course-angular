@@ -2,8 +2,7 @@
 import { UserRepository, DemoUserRepository } from './repository';
 import { DemoLoginController, LoginController } from './controller';
 import { Customer, Admin, User, PhysicalPerson } from './users';
-import { LoginComponent } from './login-component';
-// import './decorators02';
+import { LoginComponent } from './login-component.js';
 
 const userRepo: UserRepository = new DemoUserRepository();
 userRepo.addUser(new Customer('John', 'Smith', 'john@abv.bg', 'john'));

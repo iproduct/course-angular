@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 export var Role;
 (function (Role) {
-    Role[Role["USER"] = 1] = "USER";
+    Role[Role["CUSTOMER"] = 1] = "CUSTOMER";
     Role[Role["MANAGER"] = 2] = "MANAGER";
     Role[Role["ADMIN"] = 3] = "ADMIN";
 })(Role || (Role = {}));
@@ -29,7 +29,7 @@ var UserBase = (function () {
     }
     Object.defineProperty(UserBase.prototype, "salutation", {
         get: function () {
-            return this.firstName + " " + this.lastName + " in role: " + this.roles.join(', ');
+            return this.firstName + " " + this.lastName + " in role: " + this.roles.map(function (role) { return Role[role]; }).join(', ');
         },
         enumerable: true,
         configurable: true
@@ -37,10 +37,10 @@ var UserBase = (function () {
     return UserBase;
 }());
 export { UserBase };
-var User = (function (_super) {
-    __extends(User, _super);
-    function User(id, email, password, firstName, lastName, contact) {
-        var _this = _super.call(this, id, email, password, firstName, lastName, [Role.USER], contact) || this;
+var Customer = (function (_super) {
+    __extends(Customer, _super);
+    function Customer(id, email, password, firstName, lastName, contact) {
+        var _this = _super.call(this, id, email, password, firstName, lastName, [Role.CUSTOMER], contact) || this;
         _this.id = id;
         _this.email = email;
         _this.password = password;
@@ -49,9 +49,9 @@ var User = (function (_super) {
         _this.contact = contact;
         return _this;
     }
-    return User;
+    return Customer;
 }(UserBase));
-export { User };
+export { Customer };
 var Manager = (function (_super) {
     __extends(Manager, _super);
     function Manager(id, email, password, firstName, lastName, contact) {
