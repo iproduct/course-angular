@@ -48,11 +48,11 @@ export class HeroFormTemplate2Component implements AfterViewChecked {
     this.heroForm = this.currentForm;
     if (this.heroForm) {
       this.heroForm.statusChanges
-        .subscribe((data) => this.onValueChanged(data));
+        .subscribe((data) => this.onStatusChanged(data));
     }
   }
 
-  onValueChanged(data?: any) {
+  onStatusChanged(data?: any) {
     if (!this.heroForm) { return; }
     const form = this.heroForm.form;
 
@@ -61,7 +61,7 @@ export class HeroFormTemplate2Component implements AfterViewChecked {
       this.formErrors[field] = '';
       const control = form.get(field);
 
-      if (control && control.dirty && !control.valid) {
+      if (control && control.dirty && control.invalid) {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
           this.formErrors[field] += messages[key] + ' ';

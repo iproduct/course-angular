@@ -1,0 +1,13 @@
+<h3>Products Available:</h3>
+<mat-card *ngFor="let product of products" class="example-card"
+(click)="selectProduct(product)" [class.selected]="product.id === selectedProduct?.id">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image" ></div>
+    <mat-card-title>{{product.name}}</mat-card-title>
+    <mat-card-subtitle>{{product.description}}</mat-card-subtitle>
+    <button mat-button>EDIT</button>
+    <button mat-button>DELETE</button>
+  </mat-card-header>
+  <mat-card-actions></mat-card-actions>
+</mat-card>
+<ws-product-detail *ngIf="selectedProduct" mode="present" [product]="selectedProduct"></ws-product-detail>

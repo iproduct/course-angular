@@ -37,7 +37,7 @@ export function nameTakenValidator(name: string): AsyncValidatorFn {
 }
 
 @Directive({
-  selector: '[forbiddenName][',
+  selector: '[forbiddenName]',
   providers: [{ provide: NG_VALIDATORS, useExisting: ForbiddenValidatorDirective, multi: true }]
 })
 export class ForbiddenValidatorDirective implements Validator, OnChanges {
@@ -46,7 +46,7 @@ export class ForbiddenValidatorDirective implements Validator, OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     const change = changes['forbiddenName'];
-    if (change) {
+    if (change.previousValue !== change.currentValue) {
       const val: string | RegExp = change.currentValue;
       const re = val instanceof RegExp ? val : new RegExp(val, 'i');
       this.valFn = forbiddenNameValidator(re);
