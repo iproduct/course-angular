@@ -1,21 +1,14 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "module": "system",
-        "alwaysStrict": true,
+        "module": "es6",
         "noImplicitAny": true,
-        "strictNullChecks": true,
         "removeComments": true,
         "preserveConstEnums": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
+        "strict": true,
         "outDir": "dist",
-        "rootDir": "src",
         "sourceMap": true,
-        "lib": [
-            "dom",
-            "es7"
-        ]
+        "lib": ["dom", "es7"]
     },
     "include": [
         "src/**/*"
