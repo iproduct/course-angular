@@ -20,9 +20,13 @@
     <img mat-card-image [src]="product.imageUrl" [alt]="product.name">
     <mat-card-content>
         <form class="example-form">
+            <mat-form-field>
+                <input matInput type="text" id="name" name="name" [(ngModel)]="product.name placeholder="Product name" required>
+                <mat-error *ngIf="formErrors.username">{{ formErrors.username }}</mat-error>
+              </mat-form-field>
             <mat-form-field class="example-full-width">
               <input #nameControl="ngModel" required matInput placeholder="Product name"
-                [(ngModel)]="product.name">
+                [(ngModel)]="product.name" [errorStateMatcher]="matcher">
               <mat-hint>Errors appear instantly!</mat-hint>
               <mat-error *ngIf="!nameControl.hasError('required')">
                 Please enter a valid email address

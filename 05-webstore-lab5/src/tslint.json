@@ -12,6 +12,7 @@
             "element",
             "ws",
             "kebab-case"
-        ]
+        ],
+        "forin": false
     }
 }
