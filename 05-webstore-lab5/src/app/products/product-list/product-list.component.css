@@ -1,8 +1,23 @@
-.example-card {
-  max-width: 400px;
+.product-card-container {
+  width: 500px;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+.product-card {
+  width: 500px;
+  padding: 10px;
+}
+
+.product-header {
+  width: 390px;
+}
+
+.product-header-image:first-child {
+  margin: auto 20px auto 10px;
+  background: transparent;
+  border-radius: 10px;
+}
+
+.icon-button {
+  min-width: 3em;
+  padding: 0px;
 }

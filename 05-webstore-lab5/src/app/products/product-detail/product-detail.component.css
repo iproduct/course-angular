@@ -1,9 +1,9 @@
-.example-card-detail {
+.product-card-detail {
   max-width: 400px;
-  margin-top: 20px;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+.product-header-image:first-child {
+  margin: auto 20px auto 10px;
+  background: transparent;
+  border-radius: 10px;
 }

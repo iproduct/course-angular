@@ -1,13 +1,13 @@
-<mat-card *ngIf="mode === 'present'" class="example-card-detail">
+<mat-card *ngIf="mode === 'present'" class="product-card-detail">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
+      <div mat-card-avatar class="product-header-image" ><img mat-card-image [src]="product.imageUrl" [alt]="product.name"></div>
     <mat-card-title>{{product.name}}</mat-card-title>
   </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <img mat-card-image [src]="product.imageUrl" [alt]="product.name">
   <mat-card-content>
     {{product.description}}
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions fxFlexAlign="end">
     <button mat-button>LIKE</button>
     <button mat-button>SHARE</button>
   </mat-card-actions>

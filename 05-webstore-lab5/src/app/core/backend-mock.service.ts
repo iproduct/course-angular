@@ -1,7 +1,6 @@
 import { Injectable, Type } from '@angular/core';
 import { PRODUCTS } from './mock-data';
 import { Identifiable, ResourseType, IdType } from '../shared/shared-types';
-import { P } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root'
