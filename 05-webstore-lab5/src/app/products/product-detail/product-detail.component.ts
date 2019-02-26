@@ -1,39 +1,43 @@
-import { Component, OnInit, Input, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewChecked, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Product } from '../product.model';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormControl, NgForm, AbstractControl } from '@angular/forms';
 import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
-
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: AbstractControl | null, form: NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
 
 @Component({
   selector: 'ws-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
-export class ProductDetailComponent implements OnInit, AfterViewChecked {
+export class ProductDetailComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() mode = 'present';
-  @Input() product: Product = new Product('', 0, '');
+  @Input('product') productMaster: Product = new Product('', 0, '');
+  @Output() productChange = new EventEmitter<Product>();
   @ViewChild(NgForm) form: NgForm;
   productForm: NgForm;
-
-  matcher = new MyErrorStateMatcher();
+  product: Product;
 
   formErrors = {
-    name: ''
+    name: '',
+    price: '',
+    description: '',
+    imageUrl: ''
   };
 
   validationMessages = {
     name: {
       required: 'Product name is required.',
-      // 'minlength': 'Username must be at least 2 characters long.',
-      // 'maxlength': 'Username cannot be more than 24 characters long.'
+      minlength: 'Username must be at least 2 characters long.',
+      maxlength: 'Username cannot be more than 24 characters long.'
+    },
+    price: {
+      required: 'Price is required.'
+    },
+    description: {
+      required: 'Description is required.'
+    },
+    imageUrl: {
+      pattern: 'Image URL should be valid (ex. http://example.com/image/path.jpeg).'
     }
   };
 
@@ -46,8 +50,23 @@ export class ProductDetailComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.productMaster.currentValue !== changes.productMaster.previousValue) {
+      this.resetProduct();
+    }
+  }
+
   ngAfterViewChecked() {
     this.formChanged();
+  }
+
+  resetProduct() {
+    this.product = { ...this.productMaster };
+  }
+
+  submitProduct() {
+    this.productMaster = this.product;
+    this.productChange.emit({...this.product});
   }
 
   formChanged() {
@@ -68,7 +87,7 @@ export class ProductDetailComponent implements OnInit, AfterViewChecked {
       this.formErrors[field] = '';
       const control = form.get(field);
 
-      if (control && control.dirty && !control.valid) {
+      if (control && (control.dirty || control.touched) && control.invalid) {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
           this.formErrors[field] += messages[key] + ' ';

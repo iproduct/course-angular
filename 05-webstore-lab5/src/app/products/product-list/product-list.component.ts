@@ -26,4 +26,9 @@ export class ProductListComponent implements OnInit {
     this.selectedMode = mode;
   }
 
+  handleProductChange(product: Product) {
+    this.service.update(product);
+    this.service.find().then(products => this.products = products);
+  }
+
 }
