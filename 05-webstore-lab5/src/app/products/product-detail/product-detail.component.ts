@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewChecked } from '@angular/core';
 import { Product } from '../product.model';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormControl, NgForm, AbstractControl } from '@angular/forms';
@@ -17,10 +17,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, AfterViewChecked {
   @Input() mode = 'present';
   @Input() product: Product = new Product('', 0, '');
   @ViewChild(NgForm) form: NgForm;
+  productForm: NgForm;
 
   matcher = new MyErrorStateMatcher();
 
@@ -39,11 +40,28 @@ export class ProductDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (this.form) {
+      this.form.statusChanges
+        .subscribe(data => this.onStatusChanged(data));
+    }
+  }
+
+  ngAfterViewChecked() {
+    this.formChanged();
+  }
+
+  formChanged() {
+    if (this.form === this.productForm) { return; }
+    this.productForm = this.form;
+    if (this.productForm) {
+      this.productForm.statusChanges
+        .subscribe((data) => this.onStatusChanged(data));
+    }
   }
 
   private onStatusChanged(data?: any) {
-    if (!this.form) { return; }
-    const form = this.form.form;
+    if (!this.productForm) { return; }
+    const form = this.productForm.form;
 
     for (const field in this.formErrors) {
       // clear previous error message (if any)
