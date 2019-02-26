@@ -14,7 +14,7 @@
   </mat-card>
   <mat-card *ngIf="mode === 'edit'" class="product-card-detail">
       <mat-card-header>
-          <div mat-card-avatar class="product-header-image" ><img mat-card-image [src]="product.imageUrl" [alt]="product.name"></div>
+          <div mat-card-avatar class="product-header-image" ><img mat-card-image [src]="productForm.value.imageUrl" [alt]="product.name"></div>
         <mat-card-title>{{product.name}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>

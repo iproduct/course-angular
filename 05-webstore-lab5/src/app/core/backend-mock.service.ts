@@ -7,37 +7,38 @@ import { Identifiable, ResourseType, IdType } from '../shared/shared-types';
 })
 export class BackendMockService {
   private static nextId = 1;
+  private products = [...PRODUCTS];
 
   constructor() {
-    PRODUCTS.forEach(p => p.id = BackendMockService.nextId++ + '');
+    this.products.forEach(p => p.id = BackendMockService.nextId++ + '');
   }
 
   find<T extends Identifiable> (kind: ResourseType<T>): Promise<T[]> {
     if (kind.typeId === 'Product') {
-      return Promise.resolve([...PRODUCTS] as T[]);
+      return Promise.resolve([...this.products] as T[]);
     }
   }
 
   add<T extends Identifiable> (kind: ResourseType<T>, entity: T): Promise<T> {
     entity.id = BackendMockService.nextId++ + '';
     if (kind.typeId === 'Product') {
-      PRODUCTS.push(entity);
+      this.products.push(entity);
       return Promise.resolve(entity as T);
     }
   }
 
   update<T extends Identifiable> (kind: ResourseType<T>, entity: T): Promise<T> {
     if (kind.typeId === 'Product') {
-      const index = PRODUCTS.findIndex(e => e.id === entity.id);
-      PRODUCTS[index] = entity;
+      const index = this.products.findIndex(e => e.id === entity.id);
+      this.products[index] = entity;
       return Promise.resolve(entity as T);
     }
   }
 
   delete<T extends Identifiable> (kind: ResourseType<T>, id: IdType): Promise<T> {
     if (kind.typeId === 'Product') {
-      const index = PRODUCTS.findIndex(e => e.id === entity.id);
-      const entity = PRODUCTS.splice(index, 1)[0];
+      const index = this.products.findIndex(e => e.id === entity.id);
+      const entity = this.products.splice(index, 1)[0];
       return Promise.resolve(entity as T);
     }
   }

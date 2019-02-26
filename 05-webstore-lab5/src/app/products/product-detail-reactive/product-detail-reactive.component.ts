@@ -52,7 +52,7 @@
 
     buildForm(): void {
       this.productForm = this.fb.group({
-        id: {value: this.product.price, disabled: true},
+        id: {value: this.product.id, disabled: true},
         name: [
           this.product.name,
           [
@@ -71,7 +71,7 @@
         imageUrl: [
           this.product.imageUrl,
           [
-            Validators.pattern(/^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm)
+            Validators.pattern(/^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)
           ]
         ],
       });
