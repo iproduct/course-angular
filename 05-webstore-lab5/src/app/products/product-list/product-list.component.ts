@@ -10,6 +10,7 @@ import { Product } from '../product.model';
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
   selectedProduct: Product;
+  selectedMode: string;
 
   constructor(private service: ProductService) { }
 
@@ -17,8 +18,12 @@ export class ProductListComponent implements OnInit {
     this.service.find().then(products => this.products = products);
   }
 
-  selectProduct(product) {
+  selectProduct(product: Product) {
     this.selectedProduct = product;
+  }
+
+  selectMode(mode: string) {
+    this.selectedMode = mode;
   }
 
 }

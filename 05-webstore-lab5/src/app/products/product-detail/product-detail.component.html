@@ -12,3 +12,26 @@
     <button mat-button>SHARE</button>
   </mat-card-actions>
 </mat-card>
+<mat-card *ngIf="mode === 'edit'" class="product-card-detail">
+    <mat-card-header>
+        <div mat-card-avatar class="product-header-image" ><img mat-card-image [src]="product.imageUrl" [alt]="product.name"></div>
+      <mat-card-title>{{product.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="product.imageUrl" [alt]="product.name">
+    <mat-card-content>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <input #nameControl="ngModel" required matInput placeholder="Product name"
+                [(ngModel)]="product.name">
+              <mat-hint>Errors appear instantly!</mat-hint>
+              <mat-error *ngIf="!nameControl.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
+          </form>
+    </mat-card-content>
+    <mat-card-actions fxFlexAlign="end">
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+</mat-card>
