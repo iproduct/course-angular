@@ -43,7 +43,7 @@ export class BackendMockService {
     switch (collectionName) {
       case 'Product': return this.products;
       // case 'User': return this.users;
+    }
   }
-
 
 }
