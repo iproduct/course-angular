@@ -14,33 +14,36 @@ export class BackendMockService {
   }
 
   find<T extends Identifiable> (kind: ResourseType<T>): Promise<T[]> {
-    if (kind.typeId === 'Product') {
-      return Promise.resolve([...this.products] as T[]);
-    }
+    const collection = this.getCollection(kind.typeId);
+    return Promise.resolve([...collection] as T[]);
   }
 
   add<T extends Identifiable> (kind: ResourseType<T>, entity: T): Promise<T> {
     entity.id = BackendMockService.nextId++ + '';
-    if (kind.typeId === 'Product') {
-      this.products.push(entity);
-      return Promise.resolve(entity as T);
-    }
+    const collection = this.getCollection(kind.typeId);
+    collection.push(entity);
+    return Promise.resolve(entity as T);
   }
 
   update<T extends Identifiable> (kind: ResourseType<T>, entity: T): Promise<T> {
-    if (kind.typeId === 'Product') {
-      const index = this.products.findIndex(e => e.id === entity.id);
-      this.products[index] = entity;
-      return Promise.resolve(entity as T);
-    }
+    const collection = this.getCollection(kind.typeId);
+    const index = collection.findIndex(e => e.id === entity.id);
+    collection[index] = entity;
+    return Promise.resolve(entity as T);
   }
 
   delete<T extends Identifiable> (kind: ResourseType<T>, id: IdType): Promise<T> {
-    if (kind.typeId === 'Product') {
-      const index = this.products.findIndex(e => e.id === id);
-      const entity = this.products.splice(index, 1)[0];
-      return Promise.resolve(entity as T);
-    }
+    const collection = this.getCollection(kind.typeId);
+    const index = collection.findIndex(e => e.id === id);
+    const entity = collection.splice(index, 1)[0];
+    return Promise.resolve(entity as T);
   }
+
+  getCollection(collectionName): Identifiable[] {
+    switch (collectionName) {
+      case 'Product': return this.products;
+      // case 'User': return this.users;
+  }
+
 
 }
