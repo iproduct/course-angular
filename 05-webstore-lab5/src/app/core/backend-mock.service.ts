@@ -37,7 +37,7 @@ export class BackendMockService {
 
   delete<T extends Identifiable> (kind: ResourseType<T>, id: IdType): Promise<T> {
     if (kind.typeId === 'Product') {
-      const index = this.products.findIndex(e => e.id === entity.id);
+      const index = this.products.findIndex(e => e.id === id);
       const entity = this.products.splice(index, 1)[0];
       return Promise.resolve(entity as T);
     }

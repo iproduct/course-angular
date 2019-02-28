@@ -11,6 +11,7 @@
     @Input() mode = 'present';
     @Input() product: Product = new Product('', 0, '');
     @Output() productChange = new EventEmitter<Product>();
+    @Output() cancel = new EventEmitter<void>();
 
     productForm: FormGroup;
 
@@ -107,5 +108,7 @@
       }
     }
 
-
+    cancelProduct() {
+      this.cancel.emit();
+    }
   }

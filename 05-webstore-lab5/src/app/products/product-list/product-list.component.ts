@@ -32,12 +32,22 @@ export class ProductListComponent implements OnInit {
     } else {
       this.service.add(product);
     }
+    this.selectedProduct = undefined;
     this.service.find().then(products => this.products = products);
   }
 
   addProduct() {
     this.selectedProduct = new Product(undefined, undefined);
     this.selectedMode = 'create';
+  }
+
+  productCanceled() {
+    this.selectedProduct = undefined;
+  }
+
+  deleteProduct(product: Product) {
+    this.service.delete(product.id);
+    this.service.find().then(products => this.products = products);
   }
 
 }

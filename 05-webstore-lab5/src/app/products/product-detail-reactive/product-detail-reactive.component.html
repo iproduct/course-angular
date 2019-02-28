@@ -50,7 +50,8 @@
             </form>
       </mat-card-content>
       <mat-card-actions fxFlexAlign="end">
-        <button mat-button (click)="submitProduct()">Submit</button>
-        <button mat-button (click)="resetProduct()">Reset</button>
+        <button mat-raised-button color="primary" (click)="submitProduct()">Submit</button>
+        <button mat-raised-button color="warn" (click)="resetProduct()">Reset</button>
+        <button mat-raised-button (click)="cancelProduct()">Cancel</button>
       </mat-card-actions>
   </mat-card>
