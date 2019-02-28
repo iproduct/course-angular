@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
+import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'ws-product-list',
@@ -15,7 +16,11 @@ export class ProductListComponent implements OnInit {
   constructor(private service: ProductService) { }
 
   ngOnInit() {
-    this.service.find().then(products => this.products = products);
+    this.refresh();
+  }
+
+  async refresh() {
+    this.products = await this.service.find();
   }
 
   selectProduct(product: Product) {
@@ -33,7 +38,7 @@ export class ProductListComponent implements OnInit {
       this.service.add(product);
     }
     this.selectedProduct = undefined;
-    this.service.find().then(products => this.products = products);
+    this.refresh();
   }
 
   addProduct() {

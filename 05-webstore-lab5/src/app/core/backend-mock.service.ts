@@ -13,9 +13,9 @@ export class BackendMockService {
     this.products.forEach(p => p.id = BackendMockService.nextId++ + '');
   }
 
-  find<T extends Identifiable> (kind: ResourseType<T>): Promise<T[]> {
+  async find<T extends Identifiable> (kind: ResourseType<T>): Promise<T[]> {
     const collection = this.getCollection(kind.typeId);
-    return Promise.resolve([...collection] as T[]);
+    return [...collection] as T[];
   }
 
   add<T extends Identifiable> (kind: ResourseType<T>, entity: T): Promise<T> {
