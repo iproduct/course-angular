@@ -27,8 +27,17 @@ export class ProductListComponent implements OnInit {
   }
 
   handleProductChange(product: Product) {
-    this.service.update(product);
+    if (product.id) {
+      this.service.update(product);
+    } else {
+      this.service.add(product);
+    }
     this.service.find().then(products => this.products = products);
+  }
+
+  addProduct() {
+    this.selectedProduct = new Product(undefined, undefined);
+    this.selectedMode = 'create';
   }
 
 }

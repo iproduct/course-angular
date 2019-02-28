@@ -12,9 +12,13 @@
       <button mat-button>SHARE</button>
     </mat-card-actions>
   </mat-card>
-  <mat-card *ngIf="mode === 'edit'" class="product-card-detail">
+  <mat-card *ngIf="mode === 'edit' || mode === 'create'" class="product-card-detail">
       <mat-card-header>
-          <div mat-card-avatar class="product-header-image" ><img mat-card-image [src]="productForm.value.imageUrl" [alt]="product.name"></div>
+          <div mat-card-avatar class="product-header-image" >
+            <img mat-card-image
+            [src]="productForm.value.imageUrl ? productForm.value.imageUrl : 'assets/img/product.png'"
+            [alt]="product.name ? product.name : ''">
+          </div>
         <mat-card-title>{{product.name}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>

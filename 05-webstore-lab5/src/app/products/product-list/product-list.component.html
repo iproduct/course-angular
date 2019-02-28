@@ -1,4 +1,10 @@
-<h3>Products Available:</h3>
+<div fxLayout.sm="row wrap" fxLayoutAlign="start center" fxLayoutGap="30px">
+    <h3>Products Available:</h3>
+    <button mat-raised-button color="primary" (click)="addProduct()">
+        <mat-icon mat-button>add_to_photos</mat-icon> Add Product
+    </button>
+</div>
+
 <div fxLayout.sm="row wrap" fxLayoutAlign="start start" fxLayoutGap="30px">
   <div fxLayout="column" class="product-card-container" fxLayoutGap="5px">
     <mat-card *ngFor="let product of products" class="product-card" (click)=selectProduct(product)
