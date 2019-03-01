@@ -1,14 +1,18 @@
+.product-list-header {
+  width: 500px;
+}
+
 .product-card-container {
   width: 500px;
 }
 
 .product-card {
-  width: 500px;
+  width: 100%;
   padding: 10px;
 }
 
 .product-header {
-  width: 390px;
+  width: 70%;
 }
 
 .product-header-image:first-child {
