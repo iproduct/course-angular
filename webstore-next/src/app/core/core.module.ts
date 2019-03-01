@@ -6,6 +6,8 @@ import { BackendMockService } from './backend-mock.service';
 import { PRODUCTS_TOKEN } from './injection-tokens';
 import { BackendHtpPromiseService } from './backend-http-promise.service';
 import { HttpClientModule } from '@angular/common/http';
+import { BackendObservableService } from './backend-observable.service';
+import { BackendService } from './backend.service';
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [],
   providers: [
     { provide: BackendMockService, useClass: BackendHtpPromiseService },
+    { provide: BackendService, useClass: BackendObservableService },
     { provide: PRODUCTS_TOKEN, useValue: PRODUCTS }
   ]
 })

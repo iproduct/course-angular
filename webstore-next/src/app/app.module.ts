@@ -7,6 +7,7 @@ import { ProductsModule } from './products/products.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { RxDemoModule } from './rx-demo/rx-demo.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { RxDemoModule } from './rx-demo/rx-demo.module';
     CoreModule,
     SimpleFormModule,
     ProductsModule,
+    UsersModule,
     BrowserAnimationsModule,
     RxDemoModule
   ],

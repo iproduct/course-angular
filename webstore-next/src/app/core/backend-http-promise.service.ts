@@ -1,14 +1,12 @@
 import { Injectable, Inject, forwardRef } from '@angular/core';
-import { Identifiable, ResourseType, IdType } from '../shared/shared-types';
+import { Identifiable, ResourceType, IdType } from '../shared/shared-types';
 import { environment } from '../../environments/environment';
-import { map, tap, catchError, retry } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { retryAfter } from '../shared/rx-operators';
 import { throwError } from 'rxjs';
+import { ServiceResponse, getCollectionPath } from './http-utils';
 
-export interface ServiceResponse<T> {
-  data: T;
-}
 
 @Injectable()
 export class BackendHtpPromiseService {
@@ -17,8 +15,8 @@ export class BackendHtpPromiseService {
 
   constructor(private http: HttpClient) {}
 
-  find<T extends Identifiable> (kind: ResourseType<T>): Promise<T[]> {
-    const collectionPath = this.getCollectionPath(kind.typeId);
+  find<T extends Identifiable> (kind: ResourceType<T>): Promise<T[]> {
+    const collectionPath = getCollectionPath(kind.typeId);
     return this.http.get<ServiceResponse<T[]>>(`${this.apiBaseUrl}/${collectionPath}`)
       .pipe(
         map(resp => resp.data),
@@ -28,8 +26,8 @@ export class BackendHtpPromiseService {
       ).toPromise();
   }
 
-  add<T extends Identifiable> (kind: ResourseType<T>, entity: T): Promise<T> {
-    const collectionPath = this.getCollectionPath(kind.typeId);
+  add<T extends Identifiable> (kind: ResourceType<T>, entity: T): Promise<T> {
+    const collectionPath = getCollectionPath(kind.typeId);
     return this.http.post<ServiceResponse<T>>(`${this.apiBaseUrl}/${collectionPath}`, entity)
       .pipe(
         map(resp => resp.data),
@@ -38,8 +36,8 @@ export class BackendHtpPromiseService {
       ).toPromise();
   }
 
-  update<T extends Identifiable> (kind: ResourseType<T>, entity: T): Promise<T> {
-    const collectionPath = this.getCollectionPath(kind.typeId);
+  update<T extends Identifiable> (kind: ResourceType<T>, entity: T): Promise<T> {
+    const collectionPath = getCollectionPath(kind.typeId);
     return this.http.put<ServiceResponse<T>>(`${this.apiBaseUrl}/${collectionPath}/${entity.id}`, entity)
     .pipe(
       map(resp => resp.data),
@@ -49,8 +47,8 @@ export class BackendHtpPromiseService {
     ).toPromise();
   }
 
-  delete<T extends Identifiable> (kind: ResourseType<T>, id: IdType): Promise<T> {
-    const collectionPath = this.getCollectionPath(kind.typeId);
+  delete<T extends Identifiable> (kind: ResourceType<T>, id: IdType): Promise<T> {
+    const collectionPath = getCollectionPath(kind.typeId);
     return this.http.delete<ServiceResponse<T>>(`${this.apiBaseUrl}/${collectionPath}/${id}`)
     .pipe(
       map(resp => resp.data),
@@ -58,13 +56,6 @@ export class BackendHtpPromiseService {
       retryAfter(2, 1000),
       catchError(this.handleError)
     ).toPromise();
-  }
-
-  private getCollectionPath(collectionName): string {
-    switch (collectionName) {
-      case 'Product': return 'products';
-      case 'User': return 'users';
-    }
   }
 
   private handleError(error: HttpErrorResponse) {

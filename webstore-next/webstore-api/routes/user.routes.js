@@ -1,18 +1,18 @@
 /*
  * Copyright (c) 2015-2018 IPT-Intellectual Products & Technologies (IPT).
  * All rights reserved.
- * 
- * This software provided by IPT-Intellectual Products & Technologies (IPT) is for 
- * non-commercial illustartive and evaluation purposes only. 
+ *
+ * This software provided by IPT-Intellectual Products & Technologies (IPT) is for
+ * non-commercial illustartive and evaluation purposes only.
  * It is NOT SUITABLE FOR PRODUCTION purposes because it is not finished,
- * and contains security flаws and weaknesses (like sending the passwords and 
+ * and contains security flаws and weaknesses (like sending the passwords and
  * emails of users to the browser client, wich YOU SHOULD NEVER DO with real user
  * data). You should NEVER USE THIS SOFTWARE with real user data.
- * 
+ *
  * This file is licensed under terms of GNU GENERAL PUBLIC LICENSE Version 3
  * (GPL v3). The full text of GPL v3 license is providded in file named LICENSE,
  * residing in the root folder of this repository.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
@@ -30,7 +30,7 @@ const util = require('util');
 const indicative = require('indicative');
 
 
-// GET users list 
+// GET users list
 router.get('/', function (req, res) {
     const db = req.app.locals.db;
     db.collection('users').find().toArray(
@@ -42,7 +42,7 @@ router.get('/', function (req, res) {
     );
 });
 
-// GET users list 
+// GET users list
 router.get('/:userId', function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
@@ -73,10 +73,11 @@ router.post('/', function (req, res) {
     const user = req.body;
     indicative.validate(user, {
         id: 'regex:^[0-9a-f]{24}$',
+        username: 'required|min:3|max:24|regex:^\\w+$',
         email: 'required|email',
         firstName: 'required|string|min:2',
         lastName: 'required|string|min:2',
-        password: 'required|string|min:8',
+        password: 'required|string|min:6',
         role: 'required|regex:^\\d+$',
         gender: 'regex:^\\d*$'
     }).then(() => {
@@ -99,16 +100,17 @@ router.post('/', function (req, res) {
     });
 });
 
-// PUT (edit) user by id 
+// PUT (edit) user by id
 router.put('/:userId', function (req, res) {
     const db = req.app.locals.db;
     const user = req.body;
     indicative.validate(user, {
-         id: 'regex:^[0-9a-f]{24}$',
+        id: 'regex:^[0-9a-f]{24}$',
+        username: 'required|min:3|max:24|regex:^\\w+$',
         email: 'required|email',
         firstName: 'required|string|min:2',
         lastName: 'required|string|min:2',
-        password: 'required|string|min:8',
+        password: 'required|string|min:6',
         role: 'required|regex:^\\d+$',
         gender: 'regex:^\\d*$'
     }).then(() => {
@@ -136,7 +138,7 @@ router.put('/:userId', function (req, res) {
     })
 });
 
-// DELETE users list 
+// DELETE users list
 router.delete('/:userId', function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;

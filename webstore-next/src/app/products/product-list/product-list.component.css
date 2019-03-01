@@ -15,6 +15,10 @@
   width: 70%;
 }
 
+.product-header-image {
+  overflow: hidden;
+}
+
 .product-header-image:first-child {
   margin: auto 20px auto 10px;
   background: transparent;

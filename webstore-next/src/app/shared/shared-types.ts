@@ -5,7 +5,7 @@ export interface Identifiable {
   id: IdType;
 }
 
-export interface ResourseType<T> extends Function {
+export interface ResourceType<T> extends Function {
   typeId: string;
   new (...args: any[]): T;
 }
