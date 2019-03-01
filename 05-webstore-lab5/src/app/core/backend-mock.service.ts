@@ -1,15 +1,12 @@
-import { Injectable, Type } from '@angular/core';
-import { PRODUCTS } from './mock-data';
+import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Identifiable, ResourseType, IdType } from '../shared/shared-types';
+import { PRODUCTS_TOKEN } from './injection-tokens';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BackendMockService {
   private static nextId = 1;
-  private products = [...PRODUCTS];
 
-  constructor() {
+  constructor(@Inject(PRODUCTS_TOKEN) private products: Identifiable[]) {
     this.products.forEach(p => p.id = BackendMockService.nextId++ + '');
   }
 
