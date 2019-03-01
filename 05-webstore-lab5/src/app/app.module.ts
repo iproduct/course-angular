@@ -6,6 +6,7 @@ import { SimpleFormModule } from './simple-form/simple-form.module';
 import { ProductsModule } from './products/products.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
+import { RxDemoModule } from './rx-demo/rx-demo.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     SimpleFormModule,
     ProductsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RxDemoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
