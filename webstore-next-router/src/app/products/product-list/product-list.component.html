@@ -1,0 +1,31 @@
+<div fxLayout.sm="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="30px" class="product-list-header">
+    <h3>Products Available:</h3>
+    <button mat-raised-button color="primary" (click)="addProduct()">
+        <mat-icon mat-button>add_to_photos</mat-icon> Add Product
+    </button>
+</div>
+
+<div fxLayout.sm="row wrap" fxLayoutAlign="start start" fxLayoutGap="30px">
+  <div fxLayout="column" class="product-card-container" fxLayoutGap="5px">
+    <mat-card *ngFor="let product of products" class="product-card" (click)=selectProduct(product)
+    [class.selected]="product.id === selectedProduct?.id" fxLayout="row" fxLayoutAlign="center right">
+      <mat-card-header class="product-header" (click)="selectMode('present')">
+        <div mat-card-avatar class="product-header-image" >
+          <img mat-card-image [src]="product.imageUrl" [alt]="product.name">
+        </div>
+        <mat-card-title>{{product.name}}</mat-card-title>
+        <mat-card-subtitle>{{product.description}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" class="icon-button" (click)="selectMode('edit')">
+          <mat-icon mat-button>edit</mat-icon>
+        </button>
+        <button mat-raised-button color="warn" class="icon-button" (click)="deleteProduct(product)">
+          <mat-icon mat-button>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <ws-product-detail-reactive *ngIf="selectedProduct" [mode]="selectedMode" [product]="selectedProduct"
+    (productChange)="handleProductChange($event)" (cancel)="productCanceled()"></ws-product-detail-reactive>
+</div>

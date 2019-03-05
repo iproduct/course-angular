@@ -1,0 +1,50 @@
+<mat-sidenav-container fullscreen (backdropClick)="closeSidenav()">
+  <mat-sidenav [opened]="showSidenav" (keydown.esc)="closeSidenav()">
+    <mat-nav-list>
+      <ws-nav-item (navigate)="closeSidenav()" *ngIf="!(loggedIn)" routerLink="/login" icon="face"
+        hint="Login with username & password" tabindex="-1">
+        Login
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" *ngIf="!(loggedIn)" routerLink="/users/register" icon="perm_identity"
+        hint="Register as new user" tabindex="-1">
+        Register
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" routerLink="/products" icon="art_track"
+        hint="Manage Products" tabindex="-1" >
+        Products
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" routerLink="/users" icon="assessment"
+        hint="Manage Users" tabindex="-1" >
+        Users
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" *ngIf="loggedIn" routerLink="/challenges" icon="view_list"
+        hint="Manage challenges" tabindex="-1">
+        Challenges
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" *ngIf="loggedIn" routerLink="/users" icon="people"
+        hint="Manage users" tabindex="-1">
+        Users
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" routerLink="/logging" icon="art_track"
+        hint="Video and accelerometer demo" tabindex="-1" >
+        Video Demo
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" routerLink="/hammer" icon="gavel"
+        hint="HammerJS Demo" tabindex="-1" >
+        Hammer
+      </ws-nav-item>
+      <mat-divider *ngIf="loggedIn"></mat-divider>
+      <ws-nav-item (navigate)="closeSidenav()" *ngIf="loggedIn" routerLink="/logout" icon="exit_to_app"
+        hint="Logout currently logged user" tabindex="-1">
+        Logout
+      </ws-nav-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <ws-toolbar (openMenu)="openSidenav()">
+    IPT WebStore Demo
+  </ws-toolbar>
+
+  <router-outlet></router-outlet>
+
+</mat-sidenav-container>

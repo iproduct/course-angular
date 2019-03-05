@@ -1,0 +1,35 @@
+.product-list-header {
+  width: 500px;
+}
+
+.product-card-container {
+  width: 500px;
+}
+
+.product-card {
+  width: 100%;
+  padding: 10px;
+}
+
+.product-header {
+  width: 70%;
+}
+
+.product-header-image.mat-card-avatar img {
+  width:60px;
+}
+
+.mat-card-image:first-child {
+  overflow: hidden;
+  border-radius: 5px;
+  margin-left: -15px;
+  margin-top:  0;
+  background: transparent;
+}
+
+.icon-button {
+  min-width: 3em;
+  padding: 0px;
+}
+
+

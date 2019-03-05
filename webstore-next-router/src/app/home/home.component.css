@@ -1,0 +1,18 @@
+:host {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+.home-card {
+  max-width: 650px;
+}
+
+.home-header-image {
+  width: 100px;
+  height: 55px;
+  border-radius: 0;
+  background-image: url('../../assets/img/ipt-logo.png');
+  background-size: auto;
+  background-repeat: no-repeat;
+}
