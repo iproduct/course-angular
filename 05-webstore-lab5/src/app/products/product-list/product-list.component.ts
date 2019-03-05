@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
 import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MessageComponent } from '../../shared/message/message.component';
 
 @Component({
   selector: 'ws-product-list',
@@ -15,7 +17,7 @@ export class ProductListComponent implements OnInit {
   errors: String | undefined = undefined;
   messages: String | undefined = undefined;
 
-  constructor(private service: ProductService) { }
+  constructor(private service: ProductService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.refresh();
@@ -79,19 +81,28 @@ export class ProductListComponent implements OnInit {
     );
   }
 
+  openSnackBar(message: string, type: string) {
+    this.snackBar.openFromComponent(MessageComponent, {
+      duration: 50000,
+      data: { message, type, hasAction: true}
+    });
+  }
+
   private showErrors(err) {
     this.errors = err;
     this.messages = undefined;
     this.clearMessagesAfterTimeout(5000);
+    this.openSnackBar(err, 'error');
   }
 
   private showMessages(msg) {
     this.errors = undefined;
     this.messages = msg;
     this.clearMessagesAfterTimeout(5000);
+    this.openSnackBar(msg, 'success');
   }
 
-  private clearMessagesAfterTimeout(timeout){
+  private clearMessagesAfterTimeout(timeout) {
     setTimeout(() => {
       this.messages = undefined;
       this.errors = undefined;
