@@ -22,4 +22,12 @@
   padding: 0px;
 }
 
+.errors {
+  color: red;
+}
+
+.messages {
+  color: green;
+}
+
 

@@ -12,6 +12,8 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   selectedProduct: Product;
   selectedMode: string;
+  errors: String | undefined = undefined;
+  messages: String | undefined = undefined;
 
   constructor(private service: ProductService) { }
 
@@ -33,12 +35,27 @@ export class ProductListComponent implements OnInit {
 
   handleProductChange(product: Product) {
     if (product.id) {
-      this.service.update(product);
+      this.service.update(product)
+      .then(
+        p => {
+          const index = this.products.findIndex(pr => pr.id === p.id);
+          this.products[index] = p;
+          this.showMessages(`Successfully updated product: ${p.name}`);
+        },
+        err => this.showErrors(err)
+      );
     } else {
-      this.service.add(product);
+      this.service.add(product)
+      .then(
+        p => {
+          this.products.push(p);
+          this.showMessages(`Successfully added product: ${p.name}`);
+        },
+        err => this.showErrors(err)
+      );
     }
     this.selectedProduct = undefined;
-    this.refresh();
+    // this.refresh();
   }
 
   addProduct() {
@@ -51,8 +68,34 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(product: Product) {
-    this.service.delete(product.id);
-    this.service.find().then(products => this.products = products);
+    this.service.delete(product.id)
+    .then(
+      p => {
+        const index = this.products.findIndex(pr => pr.id === p.id);
+        this.products.splice(index, 1);
+        this.showMessages(`Successfully deleted product: ${p.name}`);
+      },
+      err => this.showErrors(err)
+    );
+  }
+
+  private showErrors(err) {
+    this.errors = err;
+    this.messages = undefined;
+    this.clearMessagesAfterTimeout(5000);
+  }
+
+  private showMessages(msg) {
+    this.errors = undefined;
+    this.messages = msg;
+    this.clearMessagesAfterTimeout(5000);
+  }
+
+  private clearMessagesAfterTimeout(timeout){
+    setTimeout(() => {
+      this.messages = undefined;
+      this.errors = undefined;
+    }, timeout);
   }
 
 }
