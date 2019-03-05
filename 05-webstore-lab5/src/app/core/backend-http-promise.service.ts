@@ -4,11 +4,7 @@ import { environment } from '../../environments/environment';
 import { map, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
-export interface CollectionResponse<T> {
-  data: T[];
-}
-
-export interface IndividualResponse<T> {
+export interface RestResponse<T> {
   data: T;
 }
 
@@ -21,19 +17,21 @@ export class BackendHtpPromiseService {
 
   find<T extends Identifiable> (kind: ResourseType<T>): Promise<T[]> {
     const collectionPath = this.getCollectionPath(kind.typeId);
-    return this.http.get<CollectionResponse<T>>(`${this.apiBaseUrl}/${collectionPath}`)
+    return this.http.get<RestResponse<T[]>>(`${this.apiBaseUrl}/${collectionPath}`)
       .pipe(
         map(resp => resp.data),
         tap(data => console.log(data))
       ).toPromise();
   }
 
-  // add<T extends Identifiable> (kind: ResourseType<T>, entity: T): Promise<T> {
-  //   entity.id = BackendHtpPromiseService.nextId++ + '';
-  //   const collection = this.getCollection(kind.typeId);
-  //   collection.push(entity);
-  //   return Promise.resolve(entity as T);
-  // }
+  add<T extends Identifiable> (kind: ResourseType<T>, entity: T): Promise<T> {
+    const collectionPath = this.getCollectionPath(kind.typeId);
+    return this.http.post<RestResponse<T>>(`${this.apiBaseUrl}/${collectionPath}`, entity)
+      .pipe(
+        map(resp => resp.data),
+        tap(data => console.log(`Created ${kind.typeId}: ${JSON.stringify(data)}`))
+      ).toPromise();
+  }
 
   // update<T extends Identifiable> (kind: ResourseType<T>, entity: T): Promise<T> {
   //   const collection = this.getCollection(kind.typeId);
