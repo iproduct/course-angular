@@ -1,3 +1,4 @@
-<p>
-  {{ data| json }}
-</p>
+<h3>{{ data?.type | titlecase }}</h3>
+<div [ngClass]="getCssClasses()">
+  {{ data?.message }}
+</div>

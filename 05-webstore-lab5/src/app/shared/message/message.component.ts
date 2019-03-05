@@ -14,4 +14,11 @@ export class MessageComponent implements OnInit {
   ngOnInit() {
   }
 
+  getCssClasses() {
+    return {
+      errors: this.data.type === 'error',
+      success: this.data.type === 'success',
+    };
+  }
+
 }

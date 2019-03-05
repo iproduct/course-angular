@@ -1,0 +1,42 @@
+.user-list-header {
+  width: 500px;
+}
+
+.user-card-container {
+  width: 500px;
+}
+
+.user-card {
+  width: 100%;
+  padding: 10px;
+}
+
+.user-header {
+  width: 70%;
+}
+
+.user-header-image {
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  background: transparent;
+  border-radius: 5px;
+}
+
+.mat-card-image:first-child {
+  margin: 0;
+  width: 80px;
+}
+
+.mat-card-image:first-child>img {
+  margin: 0;
+  width: 80px;
+}
+
+
+.icon-button {
+  min-width: 3em;
+  padding: 0px;
+}
+
+

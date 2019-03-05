@@ -2,27 +2,33 @@ import { Injectable } from '@angular/core';
 import { BackendMockService } from '../core/backend-mock.service';
 import { Product } from './product.model';
 import { IdType } from '../shared/shared-types';
+import { BackendService } from '../core/backend.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private backend: BackendMockService) { }
+  constructor(private backend: BackendService) { }
 
-  find(): Promise<Product[]> {
-    return this.backend.find(Product);
+  findAll(): Observable<Product[]> {
+    return this.backend.findAll(Product);
   }
 
-  add (entity: Product): Promise<Product> {
+  findById(id: IdType): Observable<Product> {
+    return this.backend.findById(Product, id);
+  }
+
+  add (entity: Product): Observable<Product> {
     return this.backend.add(Product, entity);
   }
 
-  update(entity: Product): Promise<Product> {
+  update(entity: Product): Observable<Product> {
     return this.backend.update(Product, entity);
   }
 
-  delete(id: IdType): Promise<Product> {
+  delete(id: IdType): Observable<Product> {
     return this.backend.delete(Product, id);
   }
 

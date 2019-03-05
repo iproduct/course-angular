@@ -23,8 +23,11 @@ export class ProductListComponent implements OnInit {
     this.refresh();
   }
 
-  async refresh() {
-    this.products = await this.service.find();
+  refresh() {
+    this.service.findAll().subscribe(
+      products => this.products = products,
+      err => this.showErrors(err)
+    );
   }
 
   selectProduct(product: Product) {
@@ -38,7 +41,7 @@ export class ProductListComponent implements OnInit {
   handleProductChange(product: Product) {
     if (product.id) {
       this.service.update(product)
-      .then(
+      .subscribe(
         p => {
           const index = this.products.findIndex(pr => pr.id === p.id);
           this.products[index] = p;
@@ -48,7 +51,7 @@ export class ProductListComponent implements OnInit {
       );
     } else {
       this.service.add(product)
-      .then(
+      .subscribe(
         p => {
           this.products.push(p);
           this.showMessages(`Successfully added product: ${p.name}`);
@@ -57,7 +60,6 @@ export class ProductListComponent implements OnInit {
       );
     }
     this.selectedProduct = undefined;
-    // this.refresh();
   }
 
   addProduct() {
@@ -71,7 +73,7 @@ export class ProductListComponent implements OnInit {
 
   deleteProduct(product: Product) {
     this.service.delete(product.id)
-    .then(
+    .subscribe(
       p => {
         const index = this.products.findIndex(pr => pr.id === p.id);
         this.products.splice(index, 1);
@@ -83,7 +85,7 @@ export class ProductListComponent implements OnInit {
 
   openSnackBar(message: string, type: string) {
     this.snackBar.openFromComponent(MessageComponent, {
-      duration: 50000,
+      duration: 5000,
       data: { message, type, hasAction: true}
     });
   }
