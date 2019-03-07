@@ -16,6 +16,7 @@ import { AuthGuardService } from '../auth/auth-guard.service';
 import { Role } from './user.model';
 import { UserResolver } from './user-resolver';
 import { EmptyComponent } from '../shared/empty.component';
+import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { EmptyComponent } from '../shared/empty.component';
             path: 'create',
             pathMatch: 'full',
             component: UserDetailReactiveComponent,
+            canDeactivate: [CanDeactivateGuard],
             data: {
               title: 'Add New User',
               mode: 'create'
@@ -65,6 +67,7 @@ import { EmptyComponent } from '../shared/empty.component';
           {
             path: 'edit/:userId',
             component: UserDetailReactiveComponent,
+            canDeactivate: [CanDeactivateGuard],
             data: {
               title: 'Edit User',
               mode: 'edit'

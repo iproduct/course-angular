@@ -9,7 +9,8 @@ import { RouteNotFoundComponent } from './shared/route-not-found/route-not-found
 const appRoutes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'products', component: ProductListComponent },
+  // { path: 'products', component: ProductListComponent },
+  { path: 'products', loadChildren: './products/products.module#ProductsModule'}
   // { path: 'users', component: UserListComponent },
 ];
 

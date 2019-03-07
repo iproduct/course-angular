@@ -9,12 +9,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { ProductDetailReactiveComponent } from './product-detail-reactive/product-detail-reactive.component';
+import { ProductsRoutingModule } from './products-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ProductsRoutingModule,
     FlexLayoutModule,
     MatCardModule,
     MatButtonModule,

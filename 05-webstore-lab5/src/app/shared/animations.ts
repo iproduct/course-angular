@@ -40,7 +40,7 @@ export const slideInDownAnimation: AnimationTriggerMetadata =
       animate('0.6s ease-in')
     ]),
     transition(':leave', [
-      animate('0.6s ease-out', style({
+      animate('1.6s ease-out', style({
         opacity: 0,
         transform: 'translateY(100%)'
       }))
