@@ -16,7 +16,7 @@ import { UserService } from './user.service';
 import { User } from './user.model';
 
 @Injectable()
-export class UserResolver implements Resolve<User | {}> {
+export class UserResolver implements Resolve<User | undefined> {
   constructor(private service: UserService, private router: Router) { }
 
   public resolve(route: ActivatedRouteSnapshot) {
@@ -28,7 +28,7 @@ export class UserResolver implements Resolve<User | {}> {
           return user;
         } else { // id not found
             this.router.navigate(['/users']);
-            return null;
+            return undefined;
         }
       }),
       catchError(() => {

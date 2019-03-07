@@ -1,4 +1,7 @@
-<h3>{{ data?.type | titlecase }}</h3>
-<div [ngClass]="getCssClasses()">
-  {{ data?.message }}
+<div fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <div class="snackbar-tiltle">{{ getTypeAsString(data?.type) | titlecase }}</div>
+  <button type="button" mat-mini-fab (click)="close()"><mat-icon>close</mat-icon></button>
+  <div>
+    {{ data?.message }}
+  </div>
 </div>

@@ -4,6 +4,7 @@
 import { UserService } from '../user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { switchMap, filter } from 'rxjs/operators';
+import { MessageService } from 'src/app/core/message.service';
 
   @Component({
     selector: 'ws-user-detail-reactive',
@@ -73,7 +74,8 @@ import { switchMap, filter } from 'rxjs/operators';
       private fb: FormBuilder,
       private service: UserService,
       private router: Router,
-      private route: ActivatedRoute
+      private route: ActivatedRoute,
+      private messageService: MessageService,
     ) {
       for (const role in Role) {
         if (typeof Role[role] === 'number') {
@@ -177,6 +179,24 @@ import { switchMap, filter } from 'rxjs/operators';
     submitUser() {
       this.user = this.userForm.getRawValue();
       this.userChange.emit(this.user);
+      if (this.mode === 'create') {
+          this.service.create(this.user).subscribe(
+            u => {
+              this.messageService.success(`Successfully added user: ${u.username}`);
+              this.router.navigate(['/users'], {queryParams: {refresh: true}});
+            },
+            err => this.messageService.error(err)
+          );
+      } else {
+        this.service.update(this.user).subscribe(
+          u => {
+            this.messageService.success(`Successfully updated user: ${u.username}`);
+            this.router.navigate(['/users'], {queryParams: {refresh: true}});
+          },
+          err => this.messageService.error(err)
+        );
+      }
+
     }
 
     private onStatusChanged(data?: any) {
@@ -199,6 +219,7 @@ import { switchMap, filter } from 'rxjs/operators';
 
     cancelUser() {
       this.cancel.emit();
+      this.router.navigate(['/users']);
     }
 
     getAvatarUrl() {

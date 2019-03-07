@@ -10,7 +10,11 @@ export interface ResourseType<T> extends Function {
   new (...args: any[]): T;
 }
 
+export enum MessageType {
+  ERROR, WARNING, SUCCESS, INFO, DEBUG
+}
+
 export interface MessageData {
   message: string;
-  type: string;
+  type: MessageType;
 }

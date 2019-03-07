@@ -20,6 +20,11 @@ export class UserListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(qparams => {
+      if (qparams['refresh']) {
+        this.refresh();
+      }
+    });
     this.refresh();
   }
 
