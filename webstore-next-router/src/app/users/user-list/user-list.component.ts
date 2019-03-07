@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User, Gender, Role } from '../user.model';
 import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
+import { MessageService } from '../../core/message.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ws-user-list',
@@ -13,20 +15,31 @@ export class UserListComponent implements OnInit {
   selectedUser: User;
   selectedMode: string;
 
-  constructor(private service: UserService) { }
+  constructor(private router: Router, private route: ActivatedRoute,
+    private service: UserService, private messageService: MessageService) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(qparams => {
+      if (qparams['refresh']) {
+        this.refresh();
+      }
+    });
     this.refresh();
   }
 
   async refresh() {
     this.service.findAll().subscribe(
-      users => this.users = users
+      users => {
+        this.users = users;
+        this.selectedUser = undefined;
+      },
+      err => this.messageService.error(err)
     );
   }
 
   selectUser(user: User) {
     this.selectedUser = user;
+    this.router.navigate(['users', this.selectedMode, user.id]);
   }
 
   selectMode(mode: string) {
@@ -35,9 +48,21 @@ export class UserListComponent implements OnInit {
 
   handleUserChange(user: User) {
     if (user.id) {
-      this.service.update(user).subscribe(u => this.upsertUser(u));
+      this.service.update(user).subscribe(
+        u => {
+          this.upsertUser(u);
+          this.messageService.success(`Successfully updated user: ${u.username}`);
+        },
+        err => this.messageService.error(err)
+      );
     } else {
-      this.service.create(user).subscribe(u => this.upsertUser(u));
+      this.service.create(user).subscribe(
+        u => {
+          this.upsertUser(u);
+          this.messageService.success(`Successfully added user: ${u.username}`);
+        },
+        err => this.messageService.error(err)
+      );
     }
     this.selectedUser = undefined;
     // this.refresh();
@@ -46,6 +71,7 @@ export class UserListComponent implements OnInit {
   addUser() {
     this.selectedUser = new User(undefined, undefined, undefined);
     this.selectedMode = 'create';
+    this.router.navigate(['users', this.selectedMode]);
   }
 
   userCanceled() {
@@ -53,7 +79,15 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    this.service.delete(user.id).subscribe(u => this.removeUser(u));
+    this.service.delete(user.id).subscribe(
+      u => {
+          this.removeUser(u);
+          this.selectedUser = undefined;
+          this.messageService.success(`Successfully deleted user: ${u.username}`);
+        },
+        err => this.messageService.error(err)
+    );
+    this.refresh();
   }
 
   getAvatarUrl(user) {

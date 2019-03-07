@@ -24,7 +24,7 @@ const config = require('../config/config');
 router.post('/login', function (req, res) {
     const db = req.app.locals.db;
     const params = req.body;
-    indicative.validate(params, { 
+    indicative.validate(params, {
         username: 'required|string|min:2',
         password: 'required|string|min:6|max:20'
     }).then(() => {
@@ -47,7 +47,7 @@ router.post('/login', function (req, res) {
         }).catch(errors => {
             error(req, res, 400, 'Invalid username or password: ' + util.inspect(errors))
         });
-    
+
 });
 
 // self register as user in student role
@@ -56,12 +56,13 @@ router.post('/register', function (req, res) {
     const user = req.body;
     indicative.validate(user, {
         id: 'regex:^[0-9a-f]{24}$',
-        username: 'required|string|min:2',
-        // email: 'required|email',
-        // fname: 'required|string|min:2',
-        // lname: 'required|string|min:2',
-        password: 'required|string|min:6|max:20',
-        role: 'required|integer|above:0|under:2' // should be in student role
+        username: 'required|min:3|max:24|regex:^\\w+$',
+        email: 'required|email',
+        firstName: 'required|string|min:2',
+        lastName: 'required|string|min:2',
+        password: 'required|string|min:6',
+        gender: 'regex:^\\d*$',
+        role: 'required|integer|above:0|under:2' // should be in customer role
     }).then(() => {
         user.role = 1;  //Student role is enforced
         user.password = bcrypt.hashSync(user.password, 8);

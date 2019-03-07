@@ -5,7 +5,7 @@
         hint="Login with username & password" tabindex="-1">
         Login
       </ws-nav-item>
-      <ws-nav-item (navigate)="closeSidenav()" *ngIf="!(loggedIn)" routerLink="/users/register" icon="perm_identity"
+      <ws-nav-item (navigate)="closeSidenav()" *ngIf="!(loggedIn)" routerLink="/register" icon="perm_identity"
         hint="Register as new user" tabindex="-1">
         Register
       </ws-nav-item>
@@ -45,6 +45,10 @@
     IPT WebStore Demo
   </ws-toolbar>
 
-  <router-outlet></router-outlet>
+  <div class="container">
+    <router-outlet></router-outlet>
+    <ws-messages level="INFO"></ws-messages>
+  </div>
+
 
 </mat-sidenav-container>

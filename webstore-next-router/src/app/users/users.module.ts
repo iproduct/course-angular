@@ -9,20 +9,26 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { UserDetailReactiveComponent } from './user-detail-reactive/user-detail-reactive.component';
 import { MatSelectModule } from '@angular/material';
+import { UsersRoutingModule } from './users-routing.module';
+import { SharedModule } from '../shared/shared.module';
+import { UserResolver } from './user-resolver';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     FlexLayoutModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    UsersRoutingModule,
   ],
-  declarations: [UserListComponent, UserDetailReactiveComponent],
-  exports: [UserListComponent, UserDetailReactiveComponent]
+  declarations: [ UserListComponent, UserDetailReactiveComponent ],
+  exports: [ UserListComponent, UserDetailReactiveComponent ],
+  providers: [ UserResolver ],
 })
 export class UsersModule { }

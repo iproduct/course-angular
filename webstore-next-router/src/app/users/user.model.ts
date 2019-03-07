@@ -16,7 +16,7 @@ export enum Gender {
 }
 
 export enum Role {
-    CUSTOMER = 2, OPERATOR= 4, ADMIN = 6
+    CUSTOMER = 1, OPERATOR, ADMIN
 }
 
 export class User implements IUser {

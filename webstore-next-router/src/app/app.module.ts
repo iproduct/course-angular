@@ -13,10 +13,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { MatSidenavModule, MatListModule, MatToolbarModule } from '@angular/material';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,6 +25,7 @@ import { MatSidenavModule, MatListModule, MatToolbarModule } from '@angular/mate
     SharedModule,
     AppRoutingModule,
     NavigationModule,
+    AuthModule,
     HomeModule,
     SimpleFormModule,
     ProductsModule,

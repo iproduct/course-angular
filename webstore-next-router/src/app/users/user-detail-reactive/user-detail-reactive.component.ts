@@ -1,6 +1,11 @@
   import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
   import { User, Role, Gender } from '../user.model';
   import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
+import { UserService } from '../user.service';
+import { MessageService } from '../../core/message.service';
 
   @Component({
     selector: 'ws-user-detail-reactive',
@@ -13,8 +18,14 @@
     @Output() userChange = new EventEmitter<User>();
     @Output() cancel = new EventEmitter<void>();
 
+    title = 'Register as New User';
+
     userForm: FormGroup;
-    isAdmin = true;
+    isNewUser = true; // new user by default
+    isAdmin = false;
+    errorMessage: string;
+    private subscription: Subscription;
+
     roles: { key: Role, value: string }[] = [];
     genders: { key: Gender, value: string }[] = [];
 
@@ -65,7 +76,9 @@
       }
     };
 
-    constructor(private fb: FormBuilder) {
+    constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
+      private authService: AuthService, private userService: UserService,
+      private messageService: MessageService) {
       for (const role in Role) {
         if (typeof Role[role] === 'number') {
           this.roles.push({ key: +Role[role], value: role });
@@ -79,6 +92,18 @@
     }
 
     ngOnInit() {
+      this.route.data
+      .subscribe((data: { user: User, title?: string, mode?: string }) => {
+        this.title = data.title || this.title;
+        this.mode = data.mode || this.mode;
+        const user = data.user;
+        if (user) {
+          this.user = user;
+          this.isNewUser = false;
+          this.resetUser();
+        }
+      });
+
       this.buildForm();
     }
 
@@ -157,6 +182,34 @@
     submitUser() {
       this.user = this.userForm.getRawValue();
       this.userChange.emit(this.user);
+      if (this.isNewUser) {
+        if (this.mode === 'register') {
+          this.authService.register(this.user).subscribe(
+            u => {
+              this.messageService.success(`Successfully registered user: ${u.username}`);
+              this.router.navigate(['/login']);
+            },
+            err => this.messageService.error(err)
+          );
+        } else {
+          this.userService.create(this.user).subscribe(
+            u => {
+              this.messageService.success(`Successfully added user: ${u.username}`);
+              this.router.navigate(['/users'], {queryParams: {refresh: true}});
+            },
+            err => this.messageService.error(err)
+          );
+        }
+      } else {
+        this.userService.update(this.user).subscribe(
+          u => {
+            this.messageService.success(`Successfully updated user: ${u.username}`);
+            this.router.navigate(['/users'], {queryParams: {refresh: true}});
+          },
+          err => this.messageService.error(err)
+        );
+      }
+      // this.goBack();
     }
 
     private onStatusChanged(data?: any) {
@@ -179,6 +232,7 @@
 
     cancelUser() {
       this.cancel.emit();
+      this.router.navigate(['/users']);
     }
 
     getAvatarUrl() {

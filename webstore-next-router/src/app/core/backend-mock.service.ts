@@ -1,6 +1,6 @@
 import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Identifiable, ResourceType, IdType } from '../shared/shared-types';
-import { PRODUCTS_TOKEN } from './injection-tokens';
+import { PRODUCTS_TOKEN } from './constants';
 
 @Injectable()
 export class BackendMockService {

@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Authenticate } from '../auth.model';
 
 @Component({
-  selector: 'uni-login-form',
+  selector: 'ws-login-form',
   template: `
     <mat-card>
       <mat-card-title>Login</mat-card-title>

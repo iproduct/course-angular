@@ -14,40 +14,53 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { Injectable, Inject, Type } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { UsersService } from '../../core/services/users.service';
-import { LoggerService } from '../../core/services/logger.service';
-import { User, Role } from '../../core/users.model';
-import { tap, map, catchError } from 'rxjs/operators';
-import { Authenticate, AuthenticationResult } from '../auth.model';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import { API_BASE_URL, Identifiable, IdentityType } from '../../shared/shared-types';
+import { Injectable, Inject } from '@angular/core';
+import { tap, catchError } from 'rxjs/operators';
+import { Authenticate, AuthenticationResult } from './auth.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { COLLECTION_TYPES } from '../../constants';
-import { throwError } from 'rxjs';
+import { throwError, Observable, Subject } from 'rxjs';
+import { API_BASE_URL } from '../core/constants';
+import { MessageService } from '../core/message.service';
+import { User } from '../users/user.model';
+import { LoggerService } from '../core/logger.service';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    @Inject(API_BASE_URL) private baseUrl: string, private http: HttpClient, private logger: LoggerService) {}
+  private _loggedIn$ = new Subject<AuthenticationResult>();
+  get loggedIn() {
+    return this._loggedIn$.asObservable();
+  }
+  redirectUrl: string;
+
+  constructor(private http: HttpClient, private logger: LoggerService, private messages: MessageService) {}
 
   /** POST: login with username and  password */
   login(credentials: Authenticate): Observable<AuthenticationResult> {
-    this.logger.log(credentials);
-    const url = `${this.baseUrl}/auth/login`;
+    this.logger.log(JSON.stringify(credentials));
+    const url = `${API_BASE_URL}/auth/login`;
     return this.http.post<AuthenticationResult>(url, credentials).pipe(
-      tap((result: AuthenticationResult) => this.logger.log(`Auth result: ${JSON.stringify(result)}.`)),
+      tap((result: AuthenticationResult) => {
+        this.logger.log(`Auth result: ${JSON.stringify(result)}.`);
+        this._loggedIn$.next(result);
+      }),
       catchError(this.handleError)
     );
   }
 
+  logout(): void {
+    this.logger.log(`Logout.`);
+    this._loggedIn$.next(undefined);
+  }
+
   /** POST: register with username and  password */
   register(user: User): Observable<User> {
-    this.logger.log(user);
-    const url = `${this.baseUrl}/auth/register`;
+    this.logger.log(JSON.stringify(user));
+    const url = `${API_BASE_URL}/auth/register`;
     return this.http.post<User>(url, user).pipe(
-      tap((created: User) => this.logger.log(`Successfully registered user: ${JSON.stringify(created)} }.`)),
+      tap((created: User) => {
+        this.logger.log(`Successfully registered user: ${JSON.stringify(created)}.`);
+        this.messages.success(`Successfully registered user: ${JSON.stringify(created)}.`);
+      }),
       catchError(this.handleError)
     );
   }
@@ -66,8 +79,5 @@ export class AuthService {
     // return ErrorObservable with a user-facing error message
     return throwError('Invalid user credentials. Try again.');
   }
-  
-  // getSalutation() {
-  //   return this.loggedUser ? `Welcome ${this.loggedUser.fname} ${this.loggedUser.lname}!` : '';
-  // }
+
 }

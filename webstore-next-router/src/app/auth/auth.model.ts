@@ -1,4 +1,4 @@
-import { User } from '../core/users.model';
+import { User } from '../users/user.model';
 
 export interface Authenticate {
     username: string;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
 import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
+import { MessageService } from 'src/app/core/message.service';
 
 @Component({
   selector: 'ws-product-list',
@@ -13,7 +14,7 @@ export class ProductListComponent implements OnInit {
   selectedProduct: Product;
   selectedMode: string;
 
-  constructor(private service: ProductService) { }
+  constructor(private service: ProductService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.refresh();
@@ -31,14 +32,25 @@ export class ProductListComponent implements OnInit {
     this.selectedMode = mode;
   }
 
-  async handleProductChange(product: Product) {
+  handleProductChange(product: Product) {
     if (product.id) {
-      await this.service.update(product).toPromise();
+       this.service.update(product).subscribe(
+        p => {
+          this.upsertProduct(p);
+          this.messageService.success(`Successfully updated product: ${p.name}`);
+        },
+        err => this.messageService.error(err)
+      );
     } else {
-      await this.service.add(product).toPromise();
+      this.service.create(product).subscribe(
+        p => {
+          this.upsertProduct(p);
+          this.messageService.success(`Successfully added product: ${p.name}`);
+        },
+        err => this.messageService.error(err)
+      );
     }
     this.selectedProduct = undefined;
-    this.refresh();
   }
 
   addProduct() {
@@ -51,8 +63,31 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(product: Product) {
-    this.service.delete(product.id);
-    this.refresh();
+    this.service.delete(product.id).subscribe(
+      p => {
+          this.removeProduct(p);
+          this.messageService.success(`Successfully deleted user: ${p.name}`);
+        },
+        err => this.messageService.error(err)
+    );
+  }
+
+  private upsertProduct(product: Product): void {
+    if (!product) return;
+    const index = this.products.findIndex(u => u.id === product.id);
+    if (index >= 0) {
+      this.products[index] = product;
+    } else {
+      this.products.push(product);
+    }
+  }
+
+  private removeProduct(product: Product): void {
+    if (!product) return;
+    const index = this.products.findIndex(u => u.id === product.id);
+    if (index >= 0) {
+      this.products.splice(index, 1);
+    }
   }
 
 }

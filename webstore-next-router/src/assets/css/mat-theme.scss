@@ -1,0 +1,78 @@
+@import '../../../node_modules/@angular/material/theming';
+    @include mat-core();
+
+    $background-primary: #232323;
+    $background-accent: #353535;
+    $background-error: #fde8e8ca;
+    $background-warn: #ffe0c4ca;
+    $background-success: #daffdfca;
+    $background-info: #e3e7ffca;
+
+    $font-color-error: rgb(194, 0, 0);
+    $font-color-warn: rgb(250, 143, 3);
+    $font-color-success: green;
+    $font-color-info: blue;
+    $font-color-default: silver;
+
+    $my-app-primary: mat-palette($mat-light-green, 700);
+    $my-app-accent: mat-palette($mat-cyan, 800 );
+    $my-app-warn: mat-palette($mat-red, 400);
+
+    $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+    @mixin snack-theme($theme) {
+        // Extract whichever individual palettes you need from the theme.
+        $primary: map-get($theme, primary);
+        $accent: map-get($theme, accent);
+        $warn: map-get($theme, warn);
+
+        .mat-snack-bar-container {
+          background-color: $background-accent;
+          color: $font-color-default;
+          border: 1px solid;
+        }
+        .mat-snack-bar-container.snack-error {
+          background-color: $background-error;
+          color: $font-color-error;
+        }
+        .mat-snack-bar-container.snack-warning {
+          background-color: $background-warn;
+          color: $font-color-warn;
+        }
+        .mat-snack-bar-container.snack-success {
+          background-color: $background-success;
+          color: $font-color-success;
+        }
+        .mat-snack-bar-container.snack-info {
+          background-color: $background-info;
+          color: $font-color-info;
+        }
+
+        // Added with panelClass property
+        .snack-error {
+          button.mat-mini-fab.mat-accent {
+              background-color: $font-color-error;
+              color: white;
+          }
+      }
+      .snack-warning {
+        button.mat-mini-fab.mat-accent {
+            background-color: $font-color-warn;
+            color: white;
+        }
+      }
+      .snack-success {
+        button.mat-mini-fab.mat-accent {
+            background-color: $font-color-success;
+            color: white;
+        }
+    }
+    .snack-info {
+      button.mat-mini-fab.mat-accent {
+          background-color: $font-color-info;
+          color: white;
+      }
+  }
+}
+
+    @include snack-theme($my-app-theme);

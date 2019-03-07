@@ -15,7 +15,7 @@ export class ProductService {
     return this.backend.findAll(Product);
   }
 
-  add (entity: Product): Observable<Product> {
+  create (entity: Product): Observable<Product> {
     return this.backend.create(Product, entity);
   }
 

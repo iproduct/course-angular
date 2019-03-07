@@ -26,7 +26,8 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  <ws-user-detail-reactive *ngIf="selectedUser" [mode]="selectedMode" [user]="selectedUser"
-  (userChange)="handleUserChange($event)" (cancel)="userCanceled()"></ws-user-detail-reactive>
+  <router-outlet></router-outlet>
+  <!-- <ws-user-detail-reactive *ngIf="selectedUser" [mode]="selectedMode" [user]="selectedUser"
+  (userChange)="handleUserChange($event)" (cancel)="userCanceled()"></ws-user-detail-reactive> -->
 </div>
 
