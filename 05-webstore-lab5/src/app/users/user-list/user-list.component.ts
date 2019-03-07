@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User, Gender, Role } from '../user.model';
 import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ws-user-list',
@@ -13,7 +14,10 @@ export class UserListComponent implements OnInit {
   selectedUser: User;
   selectedMode: string;
 
-  constructor(private service: UserService) { }
+  constructor(
+    private service: UserService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.refresh();
@@ -27,6 +31,7 @@ export class UserListComponent implements OnInit {
 
   selectUser(user: User) {
     this.selectedUser = user;
+    this.router.navigate(['/users', this.selectedMode, user.id]);
   }
 
   selectMode(mode: string) {
@@ -46,6 +51,7 @@ export class UserListComponent implements OnInit {
   addUser() {
     this.selectedUser = new User(undefined, undefined, undefined);
     this.selectedMode = 'create';
+    this.router.navigate(['/users', 'create']);
   }
 
   userCanceled() {

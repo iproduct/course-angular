@@ -9,12 +9,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { UserDetailReactiveComponent } from './user-detail-reactive/user-detail-reactive.component';
 import { MatSelectModule } from '@angular/material';
+import { UsersRoutingModule } from './users-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    UsersRoutingModule,
     FlexLayoutModule,
     MatCardModule,
     MatButtonModule,

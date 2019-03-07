@@ -1,6 +1,9 @@
   import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
   import { User, Role, Gender } from '../user.model';
   import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { switchMap, filter } from 'rxjs/operators';
 
   @Component({
     selector: 'ws-user-detail-reactive',
@@ -13,6 +16,7 @@
     @Output() userChange = new EventEmitter<User>();
     @Output() cancel = new EventEmitter<void>();
 
+    title = 'User Details';
     userForm: FormGroup;
     isAdmin = true;
     roles: { key: Role, value: string }[] = [];
@@ -65,7 +69,12 @@
       }
     };
 
-    constructor(private fb: FormBuilder) {
+    constructor(
+      private fb: FormBuilder,
+      private service: UserService,
+      private router: Router,
+      private route: ActivatedRoute
+    ) {
       for (const role in Role) {
         if (typeof Role[role] === 'number') {
           this.roles.push({ key: +Role[role], value: role });
@@ -79,6 +88,17 @@
     }
 
     ngOnInit() {
+      this.route.params.pipe(
+        filter(params => !!params['userId']),
+        switchMap(params => this.service.findById(params['userId']))
+      ).subscribe( user => {
+        this.user = user;
+        this.resetUser();
+      });
+      this.route.data.subscribe(({title, mode}) => {
+        this.title = title;
+        this.mode = mode;
+      });
       this.buildForm();
     }
 
