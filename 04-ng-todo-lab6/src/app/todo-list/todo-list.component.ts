@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import MOCK_TODOS from '../mock-data';
 import { Todo } from '../todo.model';
+import { TodoRepoService } from '../todo-repo.service';
 
 @Component({
   selector: 'td-todo-list',
@@ -9,16 +9,21 @@ import { Todo } from '../todo.model';
 })
 export class TodoListComponent implements OnInit {
 
-  todos = MOCK_TODOS;
+  todos: Todo[];
 
-  constructor() { }
+  constructor(private todoRepo: TodoRepoService) { }
 
   ngOnInit() {
+    this.todos = this.todoRepo.findAll();
   }
 
   changeStatus(todo: Todo) {
-    const index = this.todos.findIndex(td => td.title === todo.title);
-    this.todos.splice(index, 1);
+    todo.completed = !todo.completed;
+    this.todoRepo.update(todo);
+  }
+
+  addTodo(todo: Todo) {
+    this.todoRepo.addTodo(todo);
   }
 
 }

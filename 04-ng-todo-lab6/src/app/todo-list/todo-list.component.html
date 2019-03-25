@@ -1,5 +1,6 @@
 <h2>Angular TODOs:</h2>
 <ul class="todos items">
+  <td-todo-input (nextTodo)="addTodo($event)"></td-todo-input>
   <li *ngFor="let todo of todos; let i=index" class="todo-item">
     <span class="badge">{{i + 1}}</span>
     <td-todo-item [todo]="todo" (statusChanged)="changeStatus($event)"></td-todo-item>
