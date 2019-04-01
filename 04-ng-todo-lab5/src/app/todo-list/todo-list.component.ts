@@ -24,4 +24,8 @@ export class TodoListComponent implements OnInit {
     this.repo.addTodo(todo);
   }
 
+  trackId(index: number, todo: Todo): string {
+    return todo.title;
+  }
+
 }

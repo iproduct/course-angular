@@ -1,2 +1,4 @@
-<input type="text" #todo placeholder="What's todo next?">
-<button (click)="addTodo(todo.value); todo.value=''">Add Todo</button>
+<input type="text" [(ngModel)]="value" placeholder="What's todo next?"
+  (keyup.enter)="addTodo()" (blur)="addTodo()">
+<button (click)="addTodo()">Add Todo</button>
+{{ value }}

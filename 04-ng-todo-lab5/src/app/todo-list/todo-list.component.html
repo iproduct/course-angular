@@ -1,7 +1,7 @@
 <h3>Todo List</h3>
 <td-todo-input (created)="todoCreated($event)"></td-todo-input>
 <ul class="items">
-  <li *ngFor="let todo of todos; let i=index; let odd=odd" [class.odd]="odd">
+  <li *ngFor="let todo of todos; let i=index; let odd=odd; trackBy: trackId" [class.odd]="odd"> 
     <span class="badge">{{ i + 1 }}</span>
     <td-todo-item [todo]="todo" (completed)="removeTodo($event)"></td-todo-item>
   </li>

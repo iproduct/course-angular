@@ -1,2 +1,3 @@
-<input type="text" #todo (change)="addTodo(todo.value); todo.value=''" (keyup.enter)="addTodo(todo.value); todo.value=''">
-<button (click)="addTodo(todo.value); todo.value=''">Add Todo</button>
+<input type="text" #todo (change)="addTodo(todo.value); todo.value=''"
+  (keyup.enter)="addTodo(todo.value); todo.value=''">
+<button class="btn btn-primary" (click)="addTodo(todo.value); todo.value=''">Add Todo</button>

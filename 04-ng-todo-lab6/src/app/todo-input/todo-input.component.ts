@@ -9,13 +9,22 @@ import { Todo } from '../todo.model';
 export class TodoInputComponent implements OnInit {
   @Output() nextTodo = new EventEmitter<Todo>();
 
+  value = '';
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  addTodo(todoText: string) {
-    this.nextTodo.emit(new Todo(todoText));
+  addTodo() {
+    if (this.value) {
+      this.nextTodo.emit(new Todo(this.value));
+      this.value = '';
+    }
+  }
+
+  onKey(keyEvent: KeyboardEvent) {
+    this.value = (keyEvent.target as HTMLInputElement).value;
   }
 
 }
