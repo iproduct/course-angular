@@ -1,2 +1,46 @@
-<h1>{{ title }}</h1>
-<ws-product-list></ws-product-list>
+<mat-sidenav-container fullscreen (backdropClick)="closeSidenav()">
+  <mat-sidenav [opened]="showSidenav" (keydown.esc)="closeSidenav()">
+    <mat-nav-list>
+      <ws-nav-item (navigate)="closeSidenav()" *ngIf="!(loggedIn)" routerLink="/login" icon="face"
+        hint="Login with username & password" tabindex="-1">
+        Login
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" *ngIf="!(loggedIn)" routerLink="/register" icon="perm_identity"
+        hint="Register as new user" tabindex="-1">
+        Register
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" routerLink="/home" icon="home" hint="Project home" tabindex="-1">
+        Home
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" routerLink="/products" icon="view_list"
+        hint="Manage Products" tabindex="-1" >
+        Products
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" routerLink="/users" icon="group" hint="Manage Users" tabindex="-1" >
+        Users
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" *ngIf="loggedIn" routerLink="/challenges" icon="view_list"
+        hint="Manage challenges" tabindex="-1">
+        Challenges
+      </ws-nav-item>
+      <ws-nav-item (navigate)="closeSidenav()" *ngIf="loggedIn" routerLink="/users" icon="people"
+        hint="Manage users" tabindex="-1">
+        Users
+      </ws-nav-item>
+      <mat-divider *ngIf="loggedIn"></mat-divider>
+      <ws-nav-item (navigate)="closeSidenav()" *ngIf="loggedIn" routerLink="/logout" icon="exit_to_app"
+        hint="Logout currently logged user" tabindex="-1">
+        Logout
+      </ws-nav-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <ws-toolbar (openMenu)="openSidenav()">
+    IPT WebStore Demo
+  </ws-toolbar>
+
+  <div class="container">
+      <ws-product-list></ws-product-list>
+  </div>
+</mat-sidenav-container>
+

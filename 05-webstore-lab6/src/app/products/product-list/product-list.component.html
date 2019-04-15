@@ -1,5 +1,29 @@
-<ul>
-  <li *ngFor="let product of products">
-    {{product.name}} - {{product.price}} - {{product.description}}
-  </li>
-</ul>
+<div fxLayout.sm="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="30px" class="product-list-header">
+    <h3>Products Available:</h3>
+    <button mat-raised-button color="primary" (click)="addProduct()">
+        <mat-icon mat-button>add_to_photos</mat-icon> Add Product
+    </button>
+</div>
+
+<div fxLayout.sm="row wrap" fxLayoutAlign="start start" fxLayoutGap="30px">
+  <div fxLayout="column" fxLayoutGap="30px" class="product-card-container">
+    <mat-card *ngFor="let product of products" class="product-card">
+      <mat-card-header>
+        <div mat-card-avatar class="product-header-image">
+          <img [src]="product.imageUrl" [alt]="'Photo of' + product.name">
+        </div>
+        <mat-card-title>{{product.name}}</mat-card-title>
+        <mat-card-subtitle>{{product.price | currency:'USD':'symbol':'1.2-2' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{product.description}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ws-product-detail *ngIf="selectedProduct" [product]="selectedProduct" [isNew]="isNewProduct" ></ws-product-detail>
+</div>

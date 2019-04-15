@@ -1,0 +1,57 @@
+<mat-card *ngIf="mode === 'present'" class="product-card-detail">
+    <mat-card-header>
+        <div mat-card-avatar class="product-header-image" ><img mat-card-image [src]="product.imageUrl" [alt]="product.name"></div>
+      <mat-card-title>{{product.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="product.imageUrl" [alt]="product.name">
+    <mat-card-content>
+      {{product.description}}
+    </mat-card-content>
+    <mat-card-actions fxFlexAlign="end">
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card *ngIf="mode === 'edit'" class="product-card-detail">
+      <mat-card-header>
+          <div mat-card-avatar class="product-header-image" >
+            <img mat-card-image
+              [src]="getImageUrl()"
+              [alt]="product.name ? product.name : ''">
+          </div>
+        <mat-card-title>{{product.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form class="example-form">
+              <mat-form-field>
+                  <input readonly matInput type="text" id="id" name="id" [ngModel]="product.id" placeholder="Product Id">
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput type="text" id="name" name="name"
+                    [(ngModel)]="product.name" placeholder="Product name" required minlength="2" maxlength="24">
+                  <mat-error *ngIf="formErrors.name">{{ formErrors.name }}</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput type="number" id="price" name="price"
+                    [(ngModel)]="product.price" placeholder="Product price" required>
+                  <mat-error *ngIf="formErrors.price">{{ formErrors.price }}</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput type="text" id="description" name="description"
+                    [(ngModel)]="product.description" placeholder="Product description" required>
+                  <mat-error *ngIf="formErrors.description">{{ formErrors.description }}</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput type="url" id="imageUrl" name="imageUrl"
+                    [(ngModel)]="product.imageUrl" placeholder="Product image URL"
+                      pattern="^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
+                  <mat-error *ngIf="formErrors.imageUrl">{{ formErrors.imageUrl }}</mat-error>
+              </mat-form-field>
+
+            </form>
+      </mat-card-content>
+      <mat-card-actions fxFlexAlign="end">
+        <button mat-button (click)="submitProduct()">Submit</button>
+        <button mat-button (click)="resetProduct()">Reset</button>
+      </mat-card-actions>
+  </mat-card>
