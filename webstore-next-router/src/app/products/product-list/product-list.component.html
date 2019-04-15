@@ -5,7 +5,7 @@
     </button>
 </div>
 
-<div fxLayout.sm="row wrap" fxLayoutAlign="start start" fxLayoutGap="30px">
+<div fxLayout.sm="row wrap" fxLayoutAlign="start start" fxLayoutGap="30px" >
   <div fxLayout="column" class="product-card-container" fxLayoutGap="5px">
     <mat-card *ngFor="let product of products" class="product-card" (click)=selectProduct(product)
     [class.selected]="product.id === selectedProduct?.id" fxLayout="row" fxLayoutAlign="center right">
