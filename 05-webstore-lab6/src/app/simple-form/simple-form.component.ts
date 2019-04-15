@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'ws-simple-form',
   template: `
-    <form #f="ngForm" #fElem (ngSubmit)="onSubmit(f)">
+    <form #f="ngForm" #fElem (ngSubmit)="onSubmit()">
       <p *ngIf="nameCtrl.invalid">Name is invalid.</p>
       <div ngModelGroup="name" #nameCtrl="ngModelGroup">
         <input name="first" [ngModel]="name.first" required minlength="2" />
@@ -26,14 +26,15 @@ import { NgForm } from '@angular/forms';
   `]
 })
 export class SimpleFormComponent implements OnInit {
+  @ViewChild('f') form: NgForm;
   public name = { first: 'John', last: 'Smith' };
   constructor() {}
 
   ngOnInit() {}
 
-  public onSubmit(f: NgForm) {
-    console.log(f.value);
-    console.log(f.valid);
+  public onSubmit() {
+    console.log(this.form.value);
+    console.log(this.form.valid);
   }
   public setValue() {
     this.name = { first: 'Brian', last: 'Adams' };
