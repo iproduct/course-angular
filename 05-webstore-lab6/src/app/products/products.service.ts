@@ -23,7 +23,7 @@ export class ProductsService {
     return Promise.resolve(this.products);
   }
 
-  update(p: Product): Promise<Product>{
+  update(p: Product): Promise<Product> {
     const index = this.products.findIndex(pr => pr.id === p.id);
     if (index < 0) {
       return Promise.reject(new Error(`Product not found Id: ${p.id}`));
@@ -40,4 +40,5 @@ export class ProductsService {
     const p = this.products.splice(index, 1);
     return Promise.resolve(p[0]);
   }
+
 }

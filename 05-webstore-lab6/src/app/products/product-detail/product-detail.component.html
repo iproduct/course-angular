@@ -22,7 +22,7 @@
         <mat-card-title>{{product.name}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-          <form class="example-form">
+          <form #form class="example-form" (submit)="submitProduct()">
               <mat-form-field>
                   <input readonly matInput type="text" id="id" name="id" [ngModel]="product.id" placeholder="Product Id">
               </mat-form-field>
@@ -51,7 +51,8 @@
             </form>
       </mat-card-content>
       <mat-card-actions fxFlexAlign="end">
-        <button mat-button (click)="submitProduct()">Submit</button>
-        <button mat-button (click)="resetProduct()">Reset</button>
+        <button mat-raised-button color="primary" (click)="submitProduct()">Submit</button>
+        <button mat-raised-button color="warn" (click)="resetProduct()">Reset</button>
+        <button mat-raised-button (click)="cancelProduct()">Cancel</button>
       </mat-card-actions>
   </mat-card>

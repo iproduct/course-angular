@@ -26,5 +26,7 @@
     </mat-card>
   </div>
 
-  <ws-product-detail *ngIf="selectedProduct" [product]="selectedProduct" [isNew]="isNewProduct" ></ws-product-detail>
+  <ws-product-detail *ngIf="selectedProduct" [product]="selectedProduct" [isNew]="isNewProduct"
+    (productUpdated)="editProduct($event)" >
+  </ws-product-detail>
 </div>

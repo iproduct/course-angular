@@ -20,11 +20,26 @@ export class ProductListComponent implements OnInit {
 
   selectProduct(p: Product) {
     this.selectedProduct = p;
+    this.isNewProduct = false;
   }
 
   addProduct() {
-    this.selectedProduct = new Product(undefined, undefined);
+    this.selectedProduct = new Product(undefined, undefined, undefined);
     this.isNewProduct = true;
+  }
+
+  editProduct(p: Product) {
+    if (!p) {
+      this.selectedProduct = undefined;
+    } else {
+      if (this.isNewProduct) {
+        this.productService.add(p);
+      } else {
+        this.productService.update(p);
+      }
+
+    }
+
   }
 
 }
