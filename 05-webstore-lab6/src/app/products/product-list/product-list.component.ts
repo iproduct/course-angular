@@ -34,6 +34,7 @@ export class ProductListComponent implements OnInit {
     } else {
       if (this.isNewProduct) {
         this.productService.add(p);
+        this.selectedProduct = undefined;
       } else {
         this.productService.update(p);
       }
