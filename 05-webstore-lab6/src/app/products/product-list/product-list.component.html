@@ -7,7 +7,8 @@
 
 <div fxLayout.sm="row wrap" fxLayoutAlign="start start" fxLayoutGap="30px">
   <div fxLayout="column" fxLayoutGap="30px" class="product-card-container">
-    <mat-card *ngFor="let product of products" class="product-card">
+    <mat-card *ngFor="let product of products" class="product-card" (click)="selectProduct(product)"
+      [class.active]="selectedProduct === product">
       <mat-card-header>
         <div mat-card-avatar class="product-header-image">
           <img [src]="product.imageUrl" [alt]="'Photo of' + product.name">

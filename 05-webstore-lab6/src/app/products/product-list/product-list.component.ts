@@ -18,6 +18,10 @@ export class ProductListComponent implements OnInit {
     this.productService.findAll().then(products => this.products = products);
   }
 
+  selectProduct(p: Product) {
+    this.selectedProduct = p;
+  }
+
   addProduct() {
     this.selectedProduct = new Product(undefined, undefined);
     this.isNewProduct = true;

@@ -12,6 +12,14 @@
   padding: 10px;
 }
 
+.product-card:hover {
+  background-color: lightgoldenrodyellow;
+}
+
+.product-card.active {
+  background-color: blanchedalmond;
+}
+
 .product-header {
   width: 70%;
 }
