@@ -118,10 +118,15 @@ router.put('/:userId', verifyToken, verifyRoleOrSelf(3, true), function (req, re
             error(req, res, 400, `Invalid user data - id in url doesn't match: ${user}`);
             return;
         }
+        if(req.user.role !== 3 && user.role !== req.user.role) {
+          error(req, res, 400, `Invalid user data - role can not be changed.`);
+          return;
+        }
         const collection = db.collection('users');
         user._id = new mongodb.ObjectID(user.id);
         delete (user.id);
         console.log('Updating user:', user);
+
         collection.updateOne({ _id: new mongodb.ObjectID(user._id) }, { "$set": user })
             .then(result => {
                 const resultUser = replaceId(user);
