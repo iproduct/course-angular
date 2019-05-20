@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationModule } from './navigation/navigation.module';
 import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     HttpClientModule,
     NavigationModule,
     SimpleFormModule,
@@ -22,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
