@@ -20,8 +20,9 @@
         <p>{{product.description}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
+        <button mat-raised-button color="primary">LIKE</button>
+        <button mat-raised-button color="accent">SHARE</button>
+        <button mat-raised-button color="warn" (click)="deleteProduct(product)">DELETE</button>
       </mat-card-actions>
     </mat-card>
   </div>
