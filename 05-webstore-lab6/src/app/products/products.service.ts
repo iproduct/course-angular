@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from './product.model';
 import { PRODUCTS } from './products-mock-data';
 import { Identifiable, IdType } from '../shared/common-types';
+import { BackendHttpService } from '../core/backend-http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,34 +12,26 @@ export class ProductsService {
 
   private products = PRODUCTS as Product[];
 
-  constructor() {}
-
-  add(p: Product): Promise<Product> {
-    p.id = '' + ProductsService.nextId++;
-    this.products.push(p);
-    return Promise.resolve(p);
-  }
+  constructor(private backend: BackendHttpService) {}
 
   findAll() {
-    return Promise.resolve(this.products);
+    return this.backend.findAll(Product);
   }
 
-  update(p: Product): Promise<Product> {
-    const index = this.products.findIndex(pr => pr.id === p.id);
-    if (index < 0) {
-      return Promise.reject(new Error(`Product not found Id: ${p.id}`));
-    }
-    this.products[index] = p;
-    return Promise.resolve(p);
+  findById(id: IdType) {
+    return this.backend.findById(Product, id);
   }
 
-  remove(productId: IdType): Promise<Product>{
-    const index = this.products.findIndex(pr => pr.id === productId);
-    if (index < 0) {
-      return Promise.reject(new Error(`Product not found Id: ${productId}`));
-    }
-    const p = this.products.splice(index, 1);
-    return Promise.resolve(p[0]);
+  create(product: Product) {
+    return this.backend.create(Product, product);
+  }
+
+  update(product: Product) {
+    return this.backend.update(Product, product);
+  }
+
+  delete(id: IdType) {
+    return this.backend.delete(Product, id);
   }
 
 }

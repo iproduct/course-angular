@@ -7,6 +7,7 @@ import { ProductsModule } from './products/products.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationModule } from './navigation/navigation.module';
 import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/mate
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     NavigationModule,
     SimpleFormModule,
     ProductsModule,

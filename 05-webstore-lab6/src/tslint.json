@@ -14,6 +14,7 @@
             "element",
             "ws",
             "kebab-case"
-        ]
+        ],
+        "object-literal-key-quotes": false
     }
 }

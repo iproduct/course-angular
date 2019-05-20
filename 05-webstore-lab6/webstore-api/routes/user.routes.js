@@ -21,7 +21,7 @@ const verifyRoleOrSelf = require('./verify-role');
 
 
 // GET users list
-router.get('/', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
+router.get('/', /*verifyToken, verifyRoleOrSelf(3, false),*/ function (req, res) {
     const db = req.app.locals.db;
     db.collection('users').find().toArray(
         function (err, docs) {
@@ -65,7 +65,7 @@ router.get('/:userId', verifyToken, verifyRoleOrSelf(3, true), function (req, re
 });
 
 // Create new user
-router.post('/', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
+router.post('/', /*verifyToken, verifyRoleOrSelf(3, false),*/ function (req, res) {
     const db = req.app.locals.db;
     const user = req.body;
     indicative.validate(user, {

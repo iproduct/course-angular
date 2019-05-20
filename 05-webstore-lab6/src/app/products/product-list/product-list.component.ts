@@ -11,11 +11,15 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   selectedProduct: Product;
   isNewProduct = false;
+  errors: string;
 
   constructor(private productService: ProductsService) { }
 
   ngOnInit() {
-    this.productService.findAll().then(products => this.products = products);
+    this.productService.findAll().subscribe(
+      products => this.products = products,
+      error => this.errors = error
+    );
   }
 
   selectProduct(p: Product) {
@@ -33,14 +37,31 @@ export class ProductListComponent implements OnInit {
       this.selectedProduct = undefined;
     } else {
       if (this.isNewProduct) {
-        this.productService.add(p);
+        this.productService.create(p).subscribe(
+          product => this.products.push(product),
+          error => this.errors = error
+        );
         this.selectedProduct = undefined;
       } else {
-        this.productService.update(p);
+        this.productService.update(p).subscribe(
+          product => {
+            const index = this.products.findIndex(prod => prod.id === product.id);
+            this.products[index] = product;
+          },
+          error => this.errors = error
+        );
       }
-
     }
+  }
 
+  deleteProduct(p: Product) {
+    this.productService.delete(p.id).subscribe(
+      product => {
+        const index = this.products.findIndex(prod => prod.id === product.id);
+        this.products.splice(index, 1);
+      },
+      error => this.errors = error
+    );
   }
 
 }
