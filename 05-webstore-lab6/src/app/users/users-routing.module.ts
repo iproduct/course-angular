@@ -12,13 +12,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UserDetailReactiveComponent } from './user-detail-reactive/user-detail-reactive.component';
 import { UserListComponent } from './user-list/user-list.component';
-// import { AuthGuardService } from '../auth/auth-guard.service';
 import { Role } from './user.model';
-// import { UserResolver } from './user-resolver';
 import { EmptyComponent } from '../shared/empty.component';
 import { UserResolver } from './user-resolver';
 import { AuthGuardService } from '../auth/auth-guard.service';
-// import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
+import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
+
 
 @NgModule({
   imports: [
@@ -49,7 +48,7 @@ import { AuthGuardService } from '../auth/auth-guard.service';
             path: 'create',
             pathMatch: 'full',
             component: UserDetailReactiveComponent,
-            // canDeactivate: [CanDeactivateGuard],
+            canDeactivate: [CanDeactivateGuard],
             data: {
               title: 'Add New User',
               mode: 'create'
@@ -69,7 +68,7 @@ import { AuthGuardService } from '../auth/auth-guard.service';
           {
             path: 'edit/:userId',
             component: UserDetailReactiveComponent,
-            // canDeactivate: [CanDeactivateGuard],
+            canDeactivate: [CanDeactivateGuard],
             data: {
               title: 'Edit User',
               mode: 'edit'

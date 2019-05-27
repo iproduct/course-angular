@@ -8,6 +8,8 @@ import { UserService } from '../user.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MessageService } from 'src/app/core/message.service';
 import { DialogService } from 'src/app/core/dialog.service';
+import { CanComponentDeactivate } from 'src/app/core/can-deactivate-guard.service';
+import { shallowEquals } from 'src/app/shared/utils';
 // import { MessageService } from '../../core/message.service';
 // import { CanComponentDeactivate } from 'src/app/core/can-deactivate-guard.service';
 // import { shallowEquals } from 'src/app/shared/utils';
@@ -18,7 +20,7 @@ import { DialogService } from 'src/app/core/dialog.service';
   templateUrl: './user-detail-reactive.component.html',
   styleUrls: ['./user-detail-reactive.component.css']
 })
-export class UserDetailReactiveComponent implements OnInit, OnChanges /*, CanComponentDeactivate*/ {
+export class UserDetailReactiveComponent implements OnInit, OnChanges, CanComponentDeactivate {
   @Input() mode = 'present';
   @Input() user: User = new User(undefined, undefined, undefined);
   @Output() userChange = new EventEmitter<User>();
@@ -251,14 +253,14 @@ export class UserDetailReactiveComponent implements OnInit, OnChanges /*, CanCom
     this.userForm.value.gender === Gender.FEMALE ? 'assets/img/female-avatar.jpg' : 'assets/img/male-avatar.png';
   }
 
-  // public canDeactivate(): Observable<boolean> | boolean {
-  //   // Allow navigation if no user or the user data is not changed
-  //   if (this.isCanceled || shallowEquals(this.user, this.userForm.getRawValue())) {
-  //     return true;
-  //   }
-  //   // Otherwise ask the user to confirm loosing changes using the dialog service
-  //   return this.dialogService.confirm('Discard changes?');
-  // }
+  public canDeactivate(): Observable<boolean> | boolean {
+    // Allow navigation if no user or the user data is not changed
+    if (this.isCanceled || shallowEquals(this.user, this.userForm.getRawValue())) {
+      return true;
+    }
+    // Otherwise ask the user to confirm loosing changes using the dialog service
+    return this.dialogService.confirm('Discard changes?');
+  }
 
 
   getRoleName(role: Role) {

@@ -21,7 +21,7 @@ const verifyRoleOrSelf = require('./verify-role');
 
 
 // GET users list
-router.get('/', /*verifyToken, verifyRoleOrSelf(3, false),*/ function (req, res) {
+router.get('/', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
     const db = req.app.locals.db;
     db.collection('users').find().toArray(
         function (err, docs) {
@@ -39,7 +39,7 @@ router.get('/', /*verifyToken, verifyRoleOrSelf(3, false),*/ function (req, res)
 });
 
 // GET users details
-router.get('/:userId', /*verifyToken, verifyRoleOrSelf(3, true),*/ function (req, res) {
+router.get('/:userId', verifyToken, verifyRoleOrSelf(3, true), function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
     indicative.validate(params, { userId: 'required|regex:^[0-9a-f]{24}$' })
@@ -65,7 +65,7 @@ router.get('/:userId', /*verifyToken, verifyRoleOrSelf(3, true),*/ function (req
 });
 
 // Create new user
-router.post('/', /*verifyToken, verifyRoleOrSelf(3, false),*/ function (req, res) {
+router.post('/', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
     const db = req.app.locals.db;
     const user = req.body;
     indicative.validate(user, {
@@ -100,7 +100,7 @@ router.post('/', /*verifyToken, verifyRoleOrSelf(3, false),*/ function (req, res
 });
 
 // PUT (edit) user by id
-router.put('/:userId', /*verifyToken, verifyRoleOrSelf(3, true),*/ function (req, res) {
+router.put('/:userId', verifyToken, verifyRoleOrSelf(3, true), function (req, res) {
     const db = req.app.locals.db;
     const user = req.body;
     indicative.validate(user, {
@@ -145,7 +145,7 @@ router.put('/:userId', /*verifyToken, verifyRoleOrSelf(3, true),*/ function (req
 });
 
 // DELETE users list
-router.delete('/:userId', /*verifyToken, verifyRoleOrSelf(3, false), */function (req, res) {
+router.delete('/:userId', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
     indicative.validate(params, { userId: 'required|regex:^[0-9a-f]{24}$' })
