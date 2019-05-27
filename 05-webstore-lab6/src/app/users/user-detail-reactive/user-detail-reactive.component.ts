@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 // import { AuthService } from '../../auth/auth.service';
 import { UserService } from '../user.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { MessageService } from 'src/app/core/message.service';
+import { DialogService } from 'src/app/core/dialog.service';
 // import { MessageService } from '../../core/message.service';
 // import { CanComponentDeactivate } from 'src/app/core/can-deactivate-guard.service';
 // import { shallowEquals } from 'src/app/shared/utils';
@@ -81,9 +84,10 @@ export class UserDetailReactiveComponent implements OnInit, OnChanges /*, CanCom
   };
 
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
-    private userService: UserService,
-    // private authService: AuthService,
-    // private messageService: MessageService, private dialogService: DialogService
+              private userService: UserService,
+              private authService: AuthService,
+              private messageService: MessageService,
+              private dialogService: DialogService
     ) {
     for (const role in Role) {
       if (typeof Role[role] === 'number') {
@@ -185,38 +189,38 @@ export class UserDetailReactiveComponent implements OnInit, OnChanges /*, CanCom
     }
   }
 
-  // submitUser() {
-  //   this.user = this.userForm.getRawValue();
-  //   this.userChange.emit(this.user);
-  //   if (this.isNewUser) {
-  //     if (this.mode === 'register') {
-  //       this.authService.register(this.user).subscribe(
-  //         u => {
-  //           this.messageService.success(`Successfully registered user: ${u.username}`);
-  //           this.router.navigate(['/login']);
-  //         },
-  //         err => this.messageService.error(err)
-  //       );
-  //     } else {
-  //       this.userService.create(this.user).subscribe(
-  //         u => {
-  //           this.messageService.success(`Successfully added user: ${u.username}`);
-  //           this.router.navigate(['/users'], {queryParams: {refresh: true}});
-  //         },
-  //         err => this.messageService.error(err)
-  //       );
-  //     }
-  //   } else {
-  //     this.userService.update(this.user).subscribe(
-  //       u => {
-  //         this.messageService.success(`Successfully updated user: ${u.username}`);
-  //         this.router.navigate(['/users'], {queryParams: {refresh: true}});
-  //       },
-  //       err => this.messageService.error(err)
-  //     );
-  //   }
-  //   // this.goBack();
-  // }
+  submitUser() {
+    this.user = this.userForm.getRawValue();
+    this.userChange.emit(this.user);
+    if (this.isNewUser) {
+      if (this.mode === 'register') {
+        this.authService.register(this.user).subscribe(
+          u => {
+            this.messageService.success(`Successfully registered user: ${u.username}`);
+            this.router.navigate(['/login']);
+          },
+          err => this.messageService.error(err)
+        );
+      } else {
+        this.userService.create(this.user).subscribe(
+          u => {
+            this.messageService.success(`Successfully added user: ${u.username}`);
+            this.router.navigate(['/users'], {queryParams: {refresh: true}});
+          },
+          err => this.messageService.error(err)
+        );
+      }
+    } else {
+      this.userService.update(this.user).subscribe(
+        u => {
+          this.messageService.success(`Successfully updated user: ${u.username}`);
+          this.router.navigate(['/users'], {queryParams: {refresh: true}});
+        },
+        err => this.messageService.error(err)
+      );
+    }
+    // this.goBack();
+  }
 
   private onStatusChanged(data?: any) {
     if (!this.userForm) { return; }

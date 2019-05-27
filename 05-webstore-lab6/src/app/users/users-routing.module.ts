@@ -16,6 +16,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { Role } from './user.model';
 // import { UserResolver } from './user-resolver';
 import { EmptyComponent } from '../shared/empty.component';
+import { UserResolver } from './user-resolver';
+import { AuthGuardService } from '../auth/auth-guard.service';
 // import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
 
 @NgModule({
@@ -32,8 +34,8 @@ import { EmptyComponent } from '../shared/empty.component';
       {
         path: 'users',
         component: UserListComponent,
-        // canActivate: [AuthGuardService],
-        // canActivateChild: [AuthGuardService],
+        canActivate: [AuthGuardService],
+        canActivateChild: [AuthGuardService],
         data: {
           rolesAllowed: [Role.ADMIN],
         },
@@ -60,9 +62,9 @@ import { EmptyComponent } from '../shared/empty.component';
               title: 'User Data',
               mode: 'present'
             },
-            // resolve: {
-            //   user: UserResolver
-            // }
+            resolve: {
+              user: UserResolver
+            }
           },
           {
             path: 'edit/:userId',
@@ -72,9 +74,9 @@ import { EmptyComponent } from '../shared/empty.component';
               title: 'Edit User',
               mode: 'edit'
             },
-            // resolve: {
-            //   user: UserResolver
-            // }
+            resolve: {
+              user: UserResolver
+            }
           }
         ]
       }

@@ -64,7 +64,7 @@ router.post('/register', function (req, res) {
         gender: 'regex:^\\d*$',
         role: 'required|integer|above:0|under:2' // should be in customer role
     }).then(() => {
-        user.role = 1;  //Student role is enforced
+        user.role = 1;  //Customer role is enforced
         user.password = bcrypt.hashSync(user.password, 8);
         const collection = db.collection('users');
         console.log('Inserting user:', user);

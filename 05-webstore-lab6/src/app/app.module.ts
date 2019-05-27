@@ -10,6 +10,7 @@ import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/mate
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { UsersModule } from './users/users.module';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    UsersModule
+    UsersModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,6 +4,7 @@ import { User, Gender, Role } from '../user.model';
 import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
 // import { MessageService } from '../../core/message.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MessageService } from 'src/app/core/message.service';
 
 @Component({
   selector: 'ws-user-list',
@@ -16,8 +17,8 @@ export class UserListComponent implements OnInit {
   selectedMode: string;
 
   constructor(private router: Router, private route: ActivatedRoute,
-    private service: UserService
-    //,  private messageService: MessageService
+              private service: UserService,
+              private messageService: MessageService
      ) { }
 
   ngOnInit() {
@@ -102,7 +103,7 @@ export class UserListComponent implements OnInit {
   }
 
   private upsertUser(user: User): void {
-    if (!user) return;
+    if (!user) { return; }
     const index = this.users.findIndex(u => u.id === user.id);
     if (index >= 0) {
       this.users[index] = user;
@@ -112,7 +113,7 @@ export class UserListComponent implements OnInit {
   }
 
   private removeUser(user: User): void {
-    if (!user) return;
+    if (!user) { return; }
     const index = this.users.findIndex(u => u.id === user.id);
     if (index >= 0) {
       this.users.splice(index, 1);
