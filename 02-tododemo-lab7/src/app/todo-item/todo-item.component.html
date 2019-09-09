@@ -1,0 +1,4 @@
+{{todo.title}} -
+<span *ngIf="todo.completed; else elseBlock">COMPLETED</span>
+<ng-template #elseBlock><span>ACTIVE</span></ng-template>
+<button (click)="onComplete()">Complete</button>
