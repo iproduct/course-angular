@@ -8,9 +8,11 @@ function ColoredTriangle() {
 ColoredTriangle.prototype = triangle;
 
 var obj = new ColoredTriangle();
+var arr = ['abcd', 42, /.+a/];
 
 for (var prop in obj) {
   if (obj.hasOwnProperty(prop)) {
     console.log('obj.' + prop + ' = ' + obj[prop]);
   }
 }
+ 

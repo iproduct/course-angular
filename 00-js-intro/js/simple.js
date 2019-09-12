@@ -1,3 +1,5 @@
+'use strict';
+
 function test() {
   var employees = [
     { name: 'John', age: 35 },
@@ -14,7 +16,7 @@ function test() {
   person1.qualifications = ['javascript', 'react', 'TDD'];
 
   var person2 = new Object();
-  person2.name = 'Dimitar';
+  person2['name'] = 'Dimitar';
   person2.age = 40;
   person2.qualifications = ['C++', '.NET'];
 
@@ -54,6 +56,7 @@ function test() {
   };
 
   var e1 = new Employee('Ivan');
+  console.log(e1)
   var e2 = new Employee('Petar', 5);
   element.innerHTML += '<p>' + e1 + '</p><p>' + e2 + '</p>';
 
