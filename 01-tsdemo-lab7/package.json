@@ -23,5 +23,9 @@
   "homepage": "https://github.com/iproduct/course-angular#readme",
   "devDependencies": {
     "lite-server": "^2.5.4"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.3.31",
+    "jquery": "^3.4.1"
   }
 }

@@ -1,4 +1,6 @@
-{{todo.title}} -
-<span *ngIf="todo.completed; else elseBlock">COMPLETED</span>
-<ng-template #elseBlock><span>ACTIVE</span></ng-template>
-<button (click)="onComplete()">Complete</button>
+{{todo.title}} - {{getStatusText(todo.status)}}
+<!-- <span *ngIf="todo.completed; else elseBlock">COMPLETED</span>
+<ng-template #elseBlock><span>ACTIVE</span></ng-template> -->
+<button id="cancelBtn" (click)="onCancel()">Cancel</button>
+<button id="completeBtn" (click)="onComplete()">Complete</button>
+

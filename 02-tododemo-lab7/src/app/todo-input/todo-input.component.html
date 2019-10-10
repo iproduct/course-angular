@@ -1,0 +1,6 @@
+<!-- <input type="text" (keyup)="keyPressed($event)" placeholder="What to do next?"> -->
+<input #inputElem type="text" placeholder="What to do next?"
+(keyup.enter)="addTodo()" (blur)="addTodo()">
+<button (click)="addTodo()">Add Todo</button>
+<p>{{history}}</p>
+<p>{{inputElem.value}}</p>

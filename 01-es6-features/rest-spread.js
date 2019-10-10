@@ -3,15 +3,15 @@
 // console.log(a); // 1
 // console.log(b); // 2
 
-// [a, b, , , ...rest] = [1, 2, 3, 4, 5, 6, 7, 8];
+// const [a, b, , , ...rest] = [1, 2, 3, 4, 5, 6, 7, 8];
 // console.log(a); // 1
 // console.log(b); // 2
 // console.log(rest); // [5, 6, 7, 8]
 
 // const obj1 = {a:1, b:2, c:3};
-// const {c, a} = obj1;
-// console.log(a); // 1
-// console.log(c); // 2
+// const {c, a } = obj1;
+// console.log(c); // 1
+// console.log(a); // 2
 // console.log(obj1);
 
 // ES7 - not implemented in Firefox 47a01
@@ -20,9 +20,9 @@
 // console.log(b); // 2
 // console.log(rest); // {c: 3, d: 4}
 
-const obj = {a:1, b:2, c:3, d:4};
+// const obj = {a:1, b:2, c:3, d:4};
 
-// const clone = {...obj, c:18};
+// const clone = {...obj, c:18 };
 // console.log(obj);
 // console.log(clone);
 // console.log(clone === obj);
@@ -34,7 +34,7 @@ const obj = {a:1, b:2, c:3, d:4};
 
 var a = [[1], [2], [3]];
 var b = [ ...a, [4]];
-var [, c] = a;
+var [, c] = b;
 console.log(c.shift());
 
 // console.log(b.shift().shift());

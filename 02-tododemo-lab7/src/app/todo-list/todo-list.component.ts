@@ -1,23 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo } from '../todo.model';
-import TODOS from '../mock-todos';
+import { Todo, TodoStatus } from '../todo.model';
+import { TodoRepositoryService } from '../todo-repository.service';
 
 @Component({
   selector: 'td-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
 
-  todos: Todo[] = TODOS;
+  todos: Todo[];
 
-  constructor() { }
+  constructor(private repo: TodoRepositoryService) { }
 
   ngOnInit() {
+    this.todos = this.repo.findAll();
   }
 
   changeStatus(todo: Todo) {
-    todo.completed = !todo.completed;
+    this.repo.update(todo);
+    if (todo.status === TodoStatus.CANCELED) {
+      this.repo.remove(todo);
+    }
+    this.todos = this.repo.findAll();
+  }
+
+  todoAdded(todo: Todo) {
+    this.repo.create(todo);
+    this.todos = this.repo.findAll();
   }
 
 }

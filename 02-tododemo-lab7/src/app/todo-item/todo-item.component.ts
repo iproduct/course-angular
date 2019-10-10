@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Todo } from '../todo.model';
+import { Todo, TodoStatus } from '../todo.model';
 
 @Component({
   selector: 'td-todo-item',
@@ -16,7 +16,17 @@ export class TodoItemComponent implements OnInit {
   }
 
   onComplete() {
+    this.todo.status = TodoStatus.COMPLETED;
     this.statusChanged.emit(this.todo);
+  }
+
+  onCancel() {
+    this.todo.status = TodoStatus.CANCELED;
+    this.statusChanged.emit(this.todo);
+  }
+
+  getStatusText(status: TodoStatus): string {
+    return TodoStatus[status];
   }
 
 }

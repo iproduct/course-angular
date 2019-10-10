@@ -6,6 +6,7 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "strict": true,
+        "strictNullChecks": true,
         "outDir": "dist",
         "sourceMap": true,
         "lib": ["dom", "es7"]

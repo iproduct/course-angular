@@ -1,5 +1,13 @@
 button {
-  background-color: green;
   color: white;
   float: right;
+  margin: 0 5px;
+}
+
+button#completeBtn {
+  background-color: #369;
+}
+
+button#cancelBtn {
+  background-color: crimson;
 }
