@@ -2,4 +2,7 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+h1, h2 { color: navy}
+.selected {
+  background-color: rgb(255, 223, 163) !important;
+}
