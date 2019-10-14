@@ -138,5 +138,10 @@
       }
     }
   },
-  "defaultProject": "web-store-lab6"
+  "defaultProject": "web-store-lab6",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "css"
+    }
+  }
 }

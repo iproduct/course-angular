@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ProductsModule } from './products/products.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RxDemoModule } from './rx-demo/rx-demo.module';
+import { WikiModule } from './wiki/wiki.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     CoreModule,
     ProductsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RxDemoModule,
+    WikiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
