@@ -5,7 +5,7 @@ import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'ws-product-detail-reactive',
   templateUrl: './product-detail-reactive.component.html',
-  styleUrls: ['./product-detail-reactive.component.scss']
+  styleUrls: ['./product-detail-reactive.component.css']
 })
 export class ProductDetailReactiveComponent implements OnInit, OnChanges {
   @Input() product: Product;
