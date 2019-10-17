@@ -53,7 +53,7 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewChec
   }
 
   ngAfterViewChecked(): void {
-    if (this.form !== this.previousForm) {
+    if (this.form && this.form !== this.previousForm) {
       this.previousForm = this.form;
       this.form.statusChanges.subscribe(status => this.onStatusChanged());
     }

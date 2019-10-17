@@ -11,8 +11,8 @@ export const COLLECTION_TO_URL_MAP = {
   'User': 'users'
 };
 
-export interface RestResponse<T extends Identifiable> {
-  data: T[];
+export interface RestResponse<T> {
+  data: T;
 }
 
 @Injectable()
@@ -21,7 +21,7 @@ export class BackendHttpService implements BackendService {
 
   findAll<T extends Identifiable>(kind: ResourceType<T>): Observable<T[]> {
     const url = BASE_API_URL + this.getCollectionName(kind);
-    return this.http.get<RestResponse<T>>(url).pipe(
+    return this.http.get<RestResponse<T[]>>(url).pipe(
       map(resp => resp.data),
       tap(entities => console.log(entities))
     );
@@ -30,7 +30,11 @@ export class BackendHttpService implements BackendService {
     throw new Error('Method not implemented.');
   }
   add<T extends Identifiable>(kind: ResourceType<T>, entity: T): Observable<T> {
-    throw new Error('Method not implemented.');
+    const url = BASE_API_URL + this.getCollectionName(kind);
+    return this.http.post<RestResponse<T>>(url, entity).pipe(
+      map(resp => resp.data),
+      tap(created => console.log(created))
+    );
   }
   update<T extends Identifiable>(kind: ResourceType<T>, entity: T): Observable<T> {
     throw new Error('Method not implemented.');
