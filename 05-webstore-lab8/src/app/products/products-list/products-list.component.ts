@@ -47,8 +47,14 @@ export class ProductsListComponent implements OnInit {
   deleteProduct(product: Product) {
     this.service.delete(product.id)
     .subscribe(
-      deleted => this.showMessage(
-        `Product '${product.name}' was successfully deleted.`),
+      deleted => {
+        const index = this.products.findIndex(p => p.id === deleted.id);
+        if (index >= 0) {
+          this.products.splice(index, 1);
+        }
+        this.showMessage(
+        `Product '${product.name}' was successfully deleted.`)
+      },
       err => this.showError(
         `Error deleting product '${product.name}': ${err}`)
     );
