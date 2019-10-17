@@ -17,9 +17,17 @@ export class ProductsListComponent implements OnInit {
   constructor(private service: ProductsService) { }
 
   ngOnInit() {
-    this.service.find()
-      .then(prods => this.products = prods)
-      .catch(err => this.showError(err));
+    this.refresh();
+    // .then(prods => this.products = prods)
+    // .catch(err => this.showError(err));
+  }
+
+  private refresh() {
+    this.service.findAll()
+      .subscribe(
+        prods => this.products = prods,
+        err => this.showError(err)
+      );
   }
 
   addProduct() {
@@ -38,11 +46,17 @@ export class ProductsListComponent implements OnInit {
 
   deleteProduct(product: Product) {
     this.service.delete(product.id)
-    .then(deleted => this.showMessage(
-      `Product '${product.name}' was successfully deleted.`))
-    .catch(err => this.showError(
-      `Error deleting product '${product.name}'.`
-    ));
+    .subscribe(
+      deleted => this.showMessage(
+        `Product '${product.name}' was successfully deleted.`),
+      err => this.showError(
+        `Error deleting product '${product.name}': ${err}`)
+    );
+    // .then(deleted => this.showMessage(
+    //   `Product '${product.name}' was successfully deleted.`))
+    // .catch(err => this.showError(
+    //   `Error deleting product '${product.name}'.`
+    // ));
   }
 
   productChanged(product: Product) {
@@ -50,11 +64,26 @@ export class ProductsListComponent implements OnInit {
       return;
     }
     if (product.id) { // edit mode
-      this.service.update(product);
+      this.service.update(product)
+        .subscribe(
+          updated => {
+            const index = this.products.findIndex(p => p.id === updated.id);
+            if (index >= 0) {
+              this.products[index] = updated;
+            }
+          },
+          err => this.showError(
+            `Error updating product '${product.name}': ${err}`)
+        );
     } else { // new product mode
-      this.service.add(product);
+      this.service.add(product)
+        .subscribe(
+          created => this.products.push(created),
+          err => this.showError(
+            `Error updating product '${product.name}': ${err}`)
+        );
     }
-    this.service.find().then(prods => this.products = prods);
+    this.refresh();
   }
 
   productCanceled() {

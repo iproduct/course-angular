@@ -13,7 +13,7 @@ export class ProductsService {
   constructor(@Inject(BACKEND_SERVICE) private backend: BackendService) {
   }
 
-  find() {
+  findAll() {
     return this.backend.findAll(Product);
   }
 
