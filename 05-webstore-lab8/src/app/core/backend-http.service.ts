@@ -15,9 +15,7 @@ export interface RestResponse<T extends Identifiable> {
   data: T[];
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BackendHttpService implements BackendService {
   constructor(private http: HttpClient) { }
 
