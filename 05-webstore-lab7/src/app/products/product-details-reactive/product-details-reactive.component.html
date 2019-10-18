@@ -1,0 +1,65 @@
+<mat-card *ngIf="mode === 'present'" class="product-card-detail">
+  <mat-card-header>
+    <div mat-card-avatar class="product-header-image">
+      <img *ngIf="form.get('imageUrl')" mat-card-image
+        [src]="form.get('imageUrl').value" [alt]="form.get('name').value">
+    </div>
+    <mat-card-title>{{product.name}}</mat-card-title>
+    <mat-card-subtitle>{{product.price | currency:'USD':'symbol':'0.2-2'}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="form.get('imageUrl').value">
+  <mat-card-content>
+    {{product.description}}
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="mode === 'edit'" class="product-card-detail">
+  <mat-card-header>
+    <div mat-card-avatar class="product-header-image">
+      <img *ngIf="form.get('imageUrl').value && form.get('imageUrl').valid" mat-card-image
+      [src]="form.get('imageUrl').value" [alt]="form.get('name').value">
+    </div>
+    <mat-card-title>{{product.name}}</mat-card-title>
+    <mat-card-subtitle>{{product.price | currency:'USD':'symbol':'0.2-2'}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="form" class="product-form">
+      <mat-form-field *ngIf="product?.id">
+        <input name="id" matInput placeholder="ID" formControlName="id">
+      </mat-form-field>
+      <mat-form-field>
+        <input name="name" matInput placeholder="Product name" formControlName="name">
+        <mat-error *ngIf="formErrors.name">
+          {{formErrors.name}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input name="price" type="number" matInput placeholder="Product price" formControlName="price">
+        <mat-error *ngIf="formErrors.price">
+          {{formErrors.price}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input name="description" matInput placeholder="Product description" formControlName="description">
+        <mat-error *ngIf="formErrors.description">
+          {{formErrors.description}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input name="imageUrl" matInput placeholder="Product image URL" formControlName="imageUrl">
+        <mat-error *ngIf="formErrors.imageUrl">
+          {{formErrors.imageUrl}}
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="submitProduct()"
+      [disabled]="form.pristine || form.invalid">Submit</button>
+    <button mat-raised-button color="warn" (click)="reset()">Reset</button>
+    <button mat-raised-button (click)="cancelProduct()">Cancel</button>
+  </mat-card-actions>
+</mat-card>

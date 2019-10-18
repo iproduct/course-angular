@@ -65,15 +65,15 @@ export class HeroFormReactiveComponent implements OnInit {
 
   buildForm(): void {
     this.heroForm = this.fb.group({
-      name: [
-        this.hero.name,
-        [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(24),
-          forbiddenNameValidator(/root/i)
-        ],
-        nameTakenValidator('john')
+      name: [{value: this.hero.name, disabled: false}, {
+          validators: [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(24),
+            forbiddenNameValidator(/root/i)
+          ],
+          asyncValidators:[nameTakenValidator('john')],
+        }
       ],
       alterEgo: [
         this.hero.alterEgo,

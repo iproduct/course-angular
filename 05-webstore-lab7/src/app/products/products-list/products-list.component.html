@@ -32,9 +32,9 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  <ws-product-details *ngIf="selectedProduct"
+  <ws-product-details-reactive *ngIf="selectedProduct"
     [product]="selectedProduct" [mode]="currentMode"
     (productModified)="onProductModified($event)"
     (productModified)="onProductCanceled()">
-  </ws-product-details>
+  </ws-product-details-reactive>
 </div>

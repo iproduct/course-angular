@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsListComponent } from './products-list/products-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
@@ -10,13 +10,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductDetailsReactiveComponent } from './product-details-reactive/product-details-reactive.component';
 
 
 @NgModule({
-  declarations: [ProductsListComponent, ProductDetailsComponent],
+  declarations: [
+    ProductsListComponent,
+    ProductDetailsComponent,
+    ProductDetailsReactiveComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     FlexLayoutModule,
     MatCardModule,
@@ -25,6 +31,10 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     MatInputModule,
     MatSnackBarModule
   ],
-  exports: [ProductsListComponent, ProductDetailsComponent]
+  exports: [
+    ProductsListComponent,
+    ProductDetailsComponent,
+    ProductDetailsReactiveComponent
+  ]
 })
 export class ProductsModule { }

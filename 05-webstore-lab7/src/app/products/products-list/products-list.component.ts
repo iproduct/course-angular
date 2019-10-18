@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
+import { BACKEND_SERVICE, BackendService } from 'src/app/core/backend.service';
+import { ProductsObservableService } from '../products-observable.service';
 
 export type CurrentMode = 'present' | 'edit';
 
@@ -16,12 +18,17 @@ export class ProductsListComponent implements OnInit {
   messages: string | undefined;
   errors: string | undefined;
 
-  constructor(private service: ProductsService) { }
+  constructor(private service: ProductsObservableService) { }
 
   ngOnInit() {
-    this.service.find()
-      .then(products => this.products = products)
-      .catch(err => this.showError(err));
+    this.refresh();
+  }
+
+  private refresh() {
+    this.service.find().subscribe(
+      products => this.products = products,
+      err => this.showError(err)
+    );
   }
 
   selectProduct(product: Product) {
@@ -44,13 +51,22 @@ export class ProductsListComponent implements OnInit {
 
   onProductModified(product: Product) {
     if (product.id) {
-      this.service.update(product)
-        .then(p => this.showMessage(`Product '${p.name}' successfully updated.`))
-        .catch(err => this.showError(err));
+      this.service.update(product).subscribe(
+        prod => {
+          const index = this.products.findIndex(p => p.id === prod.id);
+          this.products[index] = prod;
+          this.showMessage(`Product '${prod.name}' successfully updated.`);
+        },
+        err => this.showError(err)
+      );
     } else {
-      this.service.add(product)
-      .then(p => this.showMessage(`Product '${p.name}' successfully added.`))
-      .catch(err => this.showError(err));
+      this.service.add(product).subscribe(
+        prod => {
+          this.products.push(prod);
+          this.showMessage(`Product '${prod.name}' successfully added.`);
+        },
+        err => this.showError(err)
+      );
     }
   }
 
@@ -64,8 +80,13 @@ export class ProductsListComponent implements OnInit {
   }
 
   onDeleteProduct(product: Product) {
-    this.service.delete(product.id)
-        .then(p => this.showMessage(`Product '${p.name}' successfully deleted.`))
-        .catch(err => this.showError(err));
+    this.service.delete(product.id).subscribe(
+      prod => {
+        const index = this.products.findIndex(p => p.id === prod.id);
+        this.products.splice(index, 1);
+        this.showMessage(`Product '${prod.name}' successfully deleted.`);
+      },
+      err => this.showError(err)
+    );
   }
 }

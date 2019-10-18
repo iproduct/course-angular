@@ -80,7 +80,7 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewChec
     this.productCanceled.emit();
   }
 
-  protected reset() {
+  reset() {
     this.product = { ...this.masterProduct };
   }
 
