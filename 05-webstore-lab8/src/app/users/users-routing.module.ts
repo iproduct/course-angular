@@ -12,37 +12,54 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailReactiveComponent } from './user-detail-reactive/user-detail-reactive.component';
+import { Role } from './user.model';
+import { EmptyComponent } from '../shared/empty.component';
 import { UserResolver } from './user-resolver';
-// import { UserDetailReactiveComponent } from './user-detail-reactive/user-detail-reactive.component';
-// import { UserListComponent } from './user-list/user-list.component';
-// import { Role } from './user.model';
-// import { EmptyComponent } from '../shared/empty.component';
-// import { UserResolver } from './user-resolver';
-// import { AuthGuardService } from '../auth/auth-guard.service';
-// import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
+import { AuthGuardService } from '../auth/auth-guard.service';
+import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
 
 
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
+        path: 'register',
+        component: UserDetailReactiveComponent,
+        data: {
+          title: 'User Registration',
+          mode: 'register'
+        }
+      },
+      {
         path: 'users',
         component: UserListComponent,
+        canActivate: [AuthGuardService],
+        canActivateChild: [AuthGuardService],
+        data: {
+          rolesAllowed: [Role.ADMIN],
+        },
         children: [
           {
+            path: '',
+            pathMatch: 'full',
+            component: EmptyComponent
+          },
+          {
             path: 'create',
+            pathMatch: 'full',
             component: UserDetailReactiveComponent,
+            canDeactivate: [CanDeactivateGuard],
             data: {
-              mode: 'create',
-              title: 'Create New User'
+              title: 'Add New User',
+              mode: 'create'
             }
           },
           {
             path: 'present/:userId',
             component: UserDetailReactiveComponent,
             data: {
-              mode: 'present',
-              title: 'User Details'
+              title: 'User Data',
+              mode: 'present'
             },
             resolve: {
               user: UserResolver
@@ -51,73 +68,17 @@ import { UserResolver } from './user-resolver';
           {
             path: 'edit/:userId',
             component: UserDetailReactiveComponent,
+            canDeactivate: [CanDeactivateGuard],
             data: {
-              mode: 'edit',
-              title: 'Edit User Data'
+              title: 'Edit User',
+              mode: 'edit'
             },
             resolve: {
               user: UserResolver
             }
-          },
-      ]
-      },
-      // {
-      //   path: 'register',
-      //   component: UserDetailReactiveComponent,
-      //   data: {
-      //     title: 'User Registration',
-      //     mode: 'register'
-      //   }
-      // },
-      // {
-      //   path: 'users',
-      //   component: UserListComponent,
-      //   canActivate: [AuthGuardService],
-      //   canActivateChild: [AuthGuardService],
-      //   data: {
-      //     rolesAllowed: [Role.ADMIN],
-      //   },
-      //   children: [
-      //     {
-      //       path: '',
-      //       pathMatch: 'full',
-      //       component: EmptyComponent
-      //     },
-      //     {
-      //       path: 'create',
-      //       pathMatch: 'full',
-      //       component: UserDetailReactiveComponent,
-      //       canDeactivate: [CanDeactivateGuard],
-      //       data: {
-      //         title: 'Add New User',
-      //         mode: 'create'
-      //       }
-      //     },
-      //     {
-      //       path: 'present/:userId',
-      //       component: UserDetailReactiveComponent,
-      //       data: {
-      //         title: 'User Data',
-      //         mode: 'present'
-      //       },
-      //       resolve: {
-      //         user: UserResolver
-      //       }
-      //     },
-      //     {
-      //       path: 'edit/:userId',
-      //       component: UserDetailReactiveComponent,
-      //       canDeactivate: [CanDeactivateGuard],
-      //       data: {
-      //         title: 'Edit User',
-      //         mode: 'edit'
-      //       },
-      //       resolve: {
-      //         user: UserResolver
-      //       }
-      //     }
-      //   ]
-      // }
+          }
+        ]
+      }
     ])
   ],
   exports: [

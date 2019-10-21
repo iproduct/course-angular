@@ -1,0 +1,33 @@
+<div fxLayout.sm="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="30px" class="user-list-header">
+  <h3>Users Available:</h3>
+  <button mat-raised-button color="primary" (click)="addUser()">
+      <mat-icon mat-button>add_to_photos</mat-icon> Add User
+  </button>
+</div>
+
+<div fxLayout.sm="row wrap" fxLayoutAlign="start start" fxLayoutGap="30px">
+    <div fxLayout="column" class="user-card-container" fxLayoutGap="5px">
+    <mat-card *ngFor="let user of users" class="user-card" (click)=selectUser(user)
+    [class.selected]="user.id === selectedUser?.id" fxLayout="row" fxLayoutAlign="center right">
+      <mat-card-header class="user-header" (click)="selectMode('present')">
+        <div mat-card-avatar class="user-header-image" >
+          <img mat-card-image [src]="getAvatarUrl(user)" [alt]="user.username">
+        </div>
+        <mat-card-title>{{user.username ? user.username : user.email}}</mat-card-title>
+        <mat-card-subtitle>{{user.firstName}} {{user.lastName}} [{{getRoleName(user.role)}}]</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" class="icon-button" (click)="selectMode('edit')">
+          <mat-icon mat-button>edit</mat-icon>
+        </button>
+        <button mat-raised-button color="warn" class="icon-button" (click)="deleteUser(user)">
+          <mat-icon mat-button>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <router-outlet></router-outlet>
+  <!-- <ws-user-detail-reactive *ngIf="selectedUser" [mode]="selectedMode" [user]="selectedUser"
+  (userChange)="handleUserChange($event)" (cancel)="userCanceled()"></ws-user-detail-reactive> -->
+</div>
+
