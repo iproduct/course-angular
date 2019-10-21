@@ -10,6 +10,8 @@ import { RxDemoModule } from './rx-demo/rx-demo.module';
 import { WikiModule } from './wiki/wiki.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
+import { HomeModule } from './home/home.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/mate
     ProductsModule,
     BrowserAnimationsModule,
     RxDemoModule,
-    WikiModule
+    WikiModule,
+    HomeModule,
+    UsersModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
