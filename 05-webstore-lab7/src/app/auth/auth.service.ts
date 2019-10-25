@@ -21,7 +21,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { MessageService } from '../core/message.service';
 import { User } from '../users/user.model';
-import { MyLoggerService } from '../core/logger.service';
 import { BASE_API_URL } from '../core/backend-http.service';
 
 @Injectable()
@@ -32,7 +31,7 @@ export class AuthService {
   }
   redirectUrl: string;
 
-  constructor(private http: HttpClient, private logger: MyLoggerService, private messages: MessageService) {}
+  constructor(private http: HttpClient, private messages: MessageService) {}
 
   /** POST: login with username and  password */
   login(credentials: Authenticate): Observable<AuthenticationResult> {
@@ -40,7 +39,7 @@ export class AuthService {
     const url = `${BASE_API_URL}/auth/login`;
     return this.http.post<AuthenticationResult>(url, credentials).pipe(
       tap((result: AuthenticationResult) => {
-        this.logger.log(`Auth result: ${JSON.stringify(result)}.`);
+        console.log(`Auth result: ${JSON.stringify(result)}.`);
         this._loggedIn$.next(result);
       }),
       catchError(this.handleError)
@@ -48,17 +47,17 @@ export class AuthService {
   }
 
   logout(): void {
-    this.logger.log(`Logout.`);
+    console.log(`Logout.`);
     this._loggedIn$.next(undefined);
   }
 
   /** POST: register with username and  password */
   register(user: User): Observable<User> {
-    this.logger.log(JSON.stringify(user));
+    console.log(JSON.stringify(user));
     const url = `${BASE_API_URL}/auth/register`;
     return this.http.post<User>(url, user).pipe(
       tap((created: User) => {
-        this.logger.log(`Successfully registered user: ${JSON.stringify(created)}.`);
+        console.log(`Successfully registered user: ${JSON.stringify(created)}.`);
         this.messages.success(`Successfully registered user: ${JSON.stringify(created)}.`);
       }),
       catchError(this.handleError)

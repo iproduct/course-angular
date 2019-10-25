@@ -6,10 +6,5 @@
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
   "include": ["src/**/*.ts"],
-  "exclude": ["src/test.ts", "src/**/*.spec.ts"],
-  "angularCompilerOptions": {
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,
-    "fullTemplateTypeCheck": true
-  }
+  "exclude": ["src/test.ts", "src/**/*.spec.ts"]
 }

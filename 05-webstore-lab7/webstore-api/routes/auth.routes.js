@@ -10,7 +10,6 @@
 
 const express = require('express');
 const router = express.Router();
-const mongodb = require('mongodb');
 const replaceId = require('./helpers').replaceId;
 const error = require('./helpers').sendErrorResponse;
 const util = require('util');
@@ -24,7 +23,7 @@ const config = require('../config/config');
 router.post('/login', function (req, res) {
     const db = req.app.locals.db;
     const params = req.body;
-    indicative.validate(params, {
+    indicative.validator.validate(params, {
         username: 'required|string|min:2',
         password: 'required|string|min:6|max:20'
     }).then(() => {
@@ -54,7 +53,7 @@ router.post('/login', function (req, res) {
 router.post('/register', function (req, res) {
     const db = req.app.locals.db;
     const user = req.body;
-    indicative.validate(user, {
+    indicative.validator.validate(user, {
         id: 'regex:^[0-9a-f]{24}$',
         username: 'required|min:3|max:24|regex:^\\w+$',
         email: 'required|email',

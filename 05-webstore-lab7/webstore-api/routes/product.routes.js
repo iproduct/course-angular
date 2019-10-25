@@ -46,7 +46,7 @@ router.get('/', function (req, res) {
 router.get('/:productId', function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
-    indicative.validate(params, { productId: 'required|regex:^[0-9a-f]{24}$' })
+    indicative.validator.validate(params, { productId: 'required|regex:^[0-9a-f]{24}$' })
         .then(() => {
             db.collection('products', function (err, products_collection) {
                 if (err) throw err;
@@ -71,7 +71,7 @@ router.get('/:productId', function (req, res) {
 router.post('/', function (req, res) {
     const db = req.app.locals.db;
     const product = req.body;
-    indicative.validate(product, {
+    indicative.validator.validate(product, {
       id: 'regex:^[0-9a-fA-F]{24}$',
       name: 'required|string|min:2',
       price: 'required|regex:^\\d+(\\.\\d+)?$',
@@ -100,7 +100,7 @@ router.post('/', function (req, res) {
 router.put('/:productId', function (req, res) {
     const db = req.app.locals.db;
     const product = req.body;
-    indicative.validate(product, {
+    indicative.validator.validate(product, {
       id: 'required|regex:^[0-9a-fA-F]{24}$',
       name: 'required|string|min:2',
       price: 'required|regex:^\\d+(\\.\\d+)?$',
@@ -134,7 +134,7 @@ router.put('/:productId', function (req, res) {
 router.delete('/:productId', function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
-    indicative.validate(params, { productId: 'required|regex:^[0-9a-f]{24}$' })
+    indicative.validator.validate(params, { productId: 'required|regex:^[0-9a-f]{24}$' })
         .then(() => {
             db.collection('products', function (err, products_collection) {
                 if (err) throw err;

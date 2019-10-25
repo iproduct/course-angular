@@ -9,6 +9,6 @@ import { EmptyComponent } from './empty.component';
   exports: [EmptyComponent],
   imports: [
     CommonModule
-  ]
+  ],
 })
 export class SharedModule { }

@@ -1,4 +1,4 @@
-import { Injectable, RootRenderer } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpEvent, HttpHeaders, HttpRequest, HttpResponse,
   HttpInterceptor, HttpHandler

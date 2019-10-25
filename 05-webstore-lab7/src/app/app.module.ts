@@ -15,6 +15,7 @@ import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/mate
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
+import { MessageComponent } from './shared/message/message.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { HomeModule } from './home/home.module';
     HomeModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // entryComponents: [MessageComponent]
 })
 export class AppModule { }

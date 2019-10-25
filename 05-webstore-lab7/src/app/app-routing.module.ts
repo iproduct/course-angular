@@ -21,10 +21,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    enableTracing: true, // <-- debugging purposes only
-    preloadingStrategy: SelectivePreloadingStrategy
-  })],
+  imports: [RouterModule.forRoot(routes
+  //   , {
+  //   enableTracing: true, // <-- debugging purposes only
+  //   preloadingStrategy: SelectivePreloadingStrategy
+  // }
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

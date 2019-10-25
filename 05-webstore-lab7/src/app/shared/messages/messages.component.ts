@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MessageService, MessageType, MessageData } from '../../core/message.service';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material';
-import { filter } from 'rxjs/operators';
 import { MessageComponent } from '../message/message.component';
+import { MessageService, MessageType, MessageData } from '../../core/message.service';
 
 @Component({
   selector: 'ws-messages',
@@ -37,7 +36,7 @@ export class MessagesComponent implements OnInit {
   private openSnackBar(messageData: MessageData): MatSnackBarRef<MessageComponent> {
     const cssClass = `snack-${MessageType[messageData.type].toString().toLowerCase()}`;
     return this.snackBar.openFromComponent(MessageComponent, {
-      duration: 50000,
+      duration: 20000,
       panelClass: cssClass,
       data: { ...messageData, hasAction: true}
     });

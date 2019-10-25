@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PreloadingStrategy, Route } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { LoggerService } from '../../../../webstore-next-router/src/app/core/logger.service';
+import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: 'root'

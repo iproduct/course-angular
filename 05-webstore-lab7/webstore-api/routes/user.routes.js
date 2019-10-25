@@ -42,7 +42,7 @@ router.get('/', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
 router.get('/:userId', verifyToken, verifyRoleOrSelf(3, true), function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
-    indicative.validate(params, { userId: 'required|regex:^[0-9a-f]{24}$' })
+    indicative.validator.validate(params, { userId: 'required|regex:^[0-9a-f]{24}$' })
         .then(() => {
             db.collection('users', function (err, users_collection) {
                 if (err) throw err;
@@ -68,7 +68,7 @@ router.get('/:userId', verifyToken, verifyRoleOrSelf(3, true), function (req, re
 router.post('/', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
     const db = req.app.locals.db;
     const user = req.body;
-    indicative.validate(user, {
+    indicative.validator.validate(user, {
       id: 'regex:^[0-9a-f]{24}$',
       username: 'required|min:3|max:24|regex:^\\w+$',
       email: 'required|email',
@@ -103,7 +103,7 @@ router.post('/', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
 router.put('/:userId', verifyToken, verifyRoleOrSelf(3, true), function (req, res) {
     const db = req.app.locals.db;
     const user = req.body;
-    indicative.validate(user, {
+    indicative.validator.validate(user, {
       id: 'regex:^[0-9a-f]{24}$',
       username: 'required|min:3|max:24|regex:^\\w+$',
       email: 'required|email',
@@ -148,7 +148,7 @@ router.put('/:userId', verifyToken, verifyRoleOrSelf(3, true), function (req, re
 router.delete('/:userId', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
-    indicative.validate(params, { userId: 'required|regex:^[0-9a-f]{24}$' })
+    indicative.validator.validate(params, { userId: 'required|regex:^[0-9a-f]{24}$' })
         .then(() => {
             db.collection('users', function (err, users_collection) {
                 if (err) throw err;

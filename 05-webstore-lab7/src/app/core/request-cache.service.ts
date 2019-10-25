@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse } from '@angular/common/http';
-import { MyLoggerService } from './logger.service';
 
 export interface RequestCacheEntry {
   url: string;
@@ -20,7 +19,7 @@ export class RequestCacheWithMap implements RequestCache {
 
   cache = new Map<string, RequestCacheEntry>();
 
-  constructor(private logger: MyLoggerService) { }
+  constructor() { }
 
   get(req: HttpRequest<any>): HttpResponse<any> | undefined {
     const url = req.urlWithParams;
@@ -32,14 +31,14 @@ export class RequestCacheWithMap implements RequestCache {
 
     const isExpired = cached.lastRead < (Date.now() - maxAge);
     const expired = isExpired ? 'expired ' : '';
-    this.logger.log(
+    console.log(
       `Found ${expired}cached response for "${url}".`);
     return isExpired ? undefined : cached.response;
   }
 
   put(req: HttpRequest<any>, response: HttpResponse<any>): void {
     const url = req.urlWithParams;
-    this.logger.log(`Caching response from "${url}".`);
+    console.log(`Caching response from "${url}".`);
 
     const entry = { url, response, lastRead: Date.now() };
     this.cache.set(url, entry);
@@ -59,6 +58,6 @@ export class RequestCacheWithMap implements RequestCache {
       }
     });
 
-    this.logger.log(`Request cache size: ${this.cache.size}.`);
+    console.log(`Request cache size: ${this.cache.size}.`);
   }
 }
