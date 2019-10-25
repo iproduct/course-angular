@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse } from '@angular/common/http';
 
-import { LoggerService } from './logger.service';
+import { LoggerService } from '../../../../webstore-next-router/src/app/core/logger.service';
 
 export interface RequestCacheEntry {
   url: string;

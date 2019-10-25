@@ -1,12 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MessageComponent } from './message/message.component';
+import { MessagesComponent } from './messages/messages.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSnackBarModule, MatButtonModule, MatIconModule } from '@angular/material';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [MessageComponent, MessagesComponent],
+  exports: [MessageComponent, MessagesComponent],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    FlexLayoutModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
+  entryComponents: [MessageComponent]
 })
 export class SharedModule { }

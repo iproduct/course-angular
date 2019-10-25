@@ -247,7 +247,10 @@ export class UserDetailReactiveComponent implements OnInit, OnChanges, CanCompon
 
   public canDeactivate(): Observable<boolean> | boolean {
     // Allow navigation if no user or the user data is not changed
-    if (this.isCanceled || shallowEquals(this.user, this.userForm.getRawValue())) {
+    // tslint:disable-next-line:prefer-const
+    let rawFormUser = this.userForm.getRawValue() as User;
+    delete rawFormUser.password;
+    if (this.isCanceled || shallowEquals(this.user, rawFormUser)) {
       return true;
     }
     // Otherwise ask the user to confirm loosing changes using the dialog service

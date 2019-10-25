@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Webstore Lab';
+  showSidenav = false;
+  loggedIn = false;
+
+  openSidenav() {
+    this.showSidenav = true;
+  }
+  closeSidenav() {
+    this.showSidenav = false;
+  }
 }

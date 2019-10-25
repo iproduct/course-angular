@@ -18,7 +18,7 @@ import { Injectable, Inject } from '@angular/core';
 import { tap, catchError } from 'rxjs/operators';
 import { Authenticate, AuthenticationResult } from './auth.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError, Observable, Subject } from 'rxjs';
+import { throwError, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { API_BASE_URL } from '../core/constants';
 import { MessageService } from '../core/message.service';
 import { User } from '../users/user.model';
@@ -26,7 +26,7 @@ import { LoggerService } from '../core/logger.service';
 
 @Injectable()
 export class AuthService {
-  private _loggedIn$ = new Subject<AuthenticationResult>();
+  private _loggedIn$ = new BehaviorSubject<AuthenticationResult>(undefined);
   get loggedIn() {
     return this._loggedIn$.asObservable();
   }

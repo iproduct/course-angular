@@ -1,0 +1,86 @@
+<mat-card *ngIf="mode === 'present'" class="user-card-detail">
+  <mat-card-header>
+    <mat-card-title>{{user.username}}: {{user.email}}</mat-card-title>
+  </mat-card-header>
+  <div class="user-image-container">
+    <img mat-card-image [src]="getAvatarUrl()" [alt]="user.username ? user.username : ''" class="user-image">
+  </div>
+  <mat-card-content>
+      {{user.firstName}} {{user.lastName}} in role: [{{getRoleName(user.role)}}]
+  </mat-card-content>
+  <mat-card-actions fxFlexAlign="end">
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card *ngIf="mode === 'register' || mode === 'edit' || mode === 'create'" class="user-card-detail">
+  <mat-card-header>
+      <div mat-card-avatar class="user-header-image" >
+        <img mat-card-image
+        [src]="getAvatarUrl()"
+        [alt]="user.username ? user.username : ''">
+      </div>
+      <mat-card-title>{{title}}</mat-card-title>
+      <mat-card-title>{{user.username}}</mat-card-title>
+    </mat-card-header>
+
+  <form [formGroup]="userForm" class="example-form" (ngSubmit)="submitUser()">
+    <mat-card-content>
+      <mat-form-field>
+          <input readonly matInput type="text" id="id" name="id" placeholder="User Id"
+            formControlName="id" >
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput type="text" id="username" name="username" placeholder="Username"
+          formControlName="username" >
+          <mat-error *ngIf="formErrors.username">{{ formErrors.username }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" id="firstName" name="firstName" formControlName="firstName" placeholder="First name" required>
+        <mat-error *ngIf="formErrors.firstName">{{ formErrors.firstName }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" id="lastName" name="lastName" formControlName="lastName" placeholder="Last name" required>
+        <mat-error *ngIf="formErrors.lastName">{{ formErrors.lastName }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="email" id="email" name="email" formControlName="email" placeholder="E-mail" required>
+        <mat-error *ngIf="formErrors.email">{{ formErrors.email }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="password" id="password" name="password" formControlName="password" placeholder="Password" required>
+        <mat-error *ngIf="formErrors.password">{{ formErrors.password }}</mat-error>
+      </mat-form-field>
+
+      <mat-select matInput placeholder="Gender" id="gender" name="gender" formControlName="gender" required>
+        <mat-option *ngFor="let gender of genders" [value]="gender.key">{{ gender.value }}</mat-option>
+        <mat-error *ngIf="formErrors.gender">{{ formErrors.gender }}</mat-error>
+      </mat-select>
+
+      <mat-select *ngIf="isAdmin" matInput placeholder="Role" id="role" name="role" formControlName="role" required>
+        <mat-option *ngFor="let role of roles" [value]="role.key">{{ role.value }}</mat-option>
+        <mat-error *ngIf="formErrors.role">{{ formErrors.role }}</mat-error>
+      </mat-select>
+
+      <mat-form-field>
+          <input matInput type="url" id="avatarUrl" name="avatarUrl" placeholder="User image URL"
+            formControlName="avatarUrl" >
+          <mat-error *ngIf="formErrors.avatarUrl">{{ formErrors.avatarUrl }}</mat-error>
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions fxFlexAlign="end">
+      <button type="submit" mat-raised-button color="primary" [disabled]="userForm.pristine || !userForm.valid">
+        Submit
+      </button>
+      <button type="button" mat-raised-button color="warn" (click)="resetUser()">Reset</button>
+      <button type="button" mat-raised-button (click)="cancelUser()">Cancel</button>
+    </mat-card-actions>
+
+  </form>
+</mat-card>

@@ -31,6 +31,7 @@ const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 
 const rootPath = path.normalize(path.join(__dirname, '..'));
+const authRoutes = require("./routes/auth.routes");
 const productRoutes = require('./routes/product.routes');
 const userRoutes = require('./routes/user.routes');
 
@@ -39,13 +40,13 @@ const app = express();
 // view engine setup
 app.set('app', path.join(rootPath, 'app'));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(cookieParser());
 
 // Route to  REST API top-level resources
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 /// catch 404 and forwarding to error handler
 app.use(function (req, res, next) {
@@ -86,7 +87,7 @@ MongoClient.connect(url, { db: { w: 1 } }).then((db) => {
   console.log(`Successfully connected to MongoDB server at: ${url}`);
 
   //Add db as app local property
-  app.locals.db = db;
+  app.locals.db = db.db('webstore');
 
   // Starting the server
   app.listen(9000, (err) => {

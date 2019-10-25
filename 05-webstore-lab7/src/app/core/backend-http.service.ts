@@ -33,32 +33,32 @@ export class BackendHttpService implements BackendService {
   }
   findById<T extends Identifiable>(kind: ResourceType<T>, id: string): Observable<T> {
     const url = `${BASE_API_URL}/${this.getCollectionUrl(kind)}/${id}`;
-    return this.http.get<RestResponse<T>>(url).pipe(
-      map(resp => resp.data),
-      tap(e => console.log(`Product fetched: ${JSON.stringify(e)}`)),
+    return this.http.get<T>(url).pipe(
+      // map(resp => resp.data),
+      tap(e => console.log(`${kind.typeId} fetched: ${JSON.stringify(e)}`)),
       catchError(this.handleError)
     );
   }
   add<T extends Identifiable>(kind: ResourceType<T>, entity: T): Observable<T> {
     const url = `${BASE_API_URL}/${this.getCollectionUrl(kind)}`;
-    return this.http.post<RestResponse<T>>(url, entity).pipe(
-      map(resp => resp.data),
+    return this.http.post<T>(url, entity).pipe(
+      // map(resp => resp.data),
       tap(e => console.log(`Product created: ${JSON.stringify(e)}`)),
       catchError(this.handleError)
     );
   }
   update<T extends Identifiable>(kind: ResourceType<T>, entity: T): Observable<T> {
     const url = `${BASE_API_URL}/${this.getCollectionUrl(kind)}/${entity.id}`;
-    return this.http.put<RestResponse<T>>(url, entity).pipe(
-      map(resp => resp.data),
+    return this.http.put<T>(url, entity).pipe(
+      // map(resp => resp.data),
       tap(e => console.log(`Product updated: ${JSON.stringify(e)}`)),
       catchError(this.handleError)
     );
   }
   delete<T extends Identifiable>(kind: ResourceType<T>, id: string): Observable<T> {
     const url = `${BASE_API_URL}/${this.getCollectionUrl(kind)}/${id}`;
-    return this.http.delete<RestResponse<T>>(url).pipe(
-      map(resp => resp.data),
+    return this.http.delete<T>(url).pipe(
+      // map(resp => resp.data),
       tap(e => console.log(`Product deleted: ${JSON.stringify(e)}`)),
       catchError(this.handleError)
     );

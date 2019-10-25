@@ -1,17 +1,20 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, HostBinding } from '@angular/core';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
 import { BACKEND_SERVICE, BackendService } from 'src/app/core/backend.service';
 import { ProductsObservableService } from '../products-observable.service';
+import { slideInDownAnimation } from '../../shared/animations';
 
 export type CurrentMode = 'present' | 'edit';
 
 @Component({
   selector: 'ws-products-list',
   templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.scss']
+  styleUrls: ['./products-list.component.scss'],
+  animations: [ slideInDownAnimation ],
 })
 export class ProductsListComponent implements OnInit {
+  @HostBinding('@routeAnimation') routeAnimation = true;
   products: Product[] = [];
   selectedProduct: Product | undefined;
   currentMode: CurrentMode = 'present';

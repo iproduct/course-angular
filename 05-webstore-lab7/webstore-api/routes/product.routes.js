@@ -1,18 +1,18 @@
 /*
  * Copyright (c) 2015-2018 IPT-Intellectual Products & Technologies (IPT).
  * All rights reserved.
- * 
- * This software provided by IPT-Intellectual Products & Technologies (IPT) is for 
- * non-commercial illustartive and evaluation purposes only. 
+ *
+ * This software provided by IPT-Intellectual Products & Technologies (IPT) is for
+ * non-commercial illustartive and evaluation purposes only.
  * It is NOT SUITABLE FOR PRODUCTION purposes because it is not finished,
- * and contains security flаws and weaknesses (like sending the passwords and 
+ * and contains security flаws and weaknesses (like sending the passwords and
  * emails of users to the browser client, wich YOU SHOULD NEVER DO with real user
  * data). You should NEVER USE THIS SOFTWARE with real user data.
- * 
+ *
  * This file is licensed under terms of GNU GENERAL PUBLIC LICENSE Version 3
  * (GPL v3). The full text of GPL v3 license is providded in file named LICENSE,
  * residing in the root folder of this repository.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
@@ -57,7 +57,7 @@ router.get('/:productId', function (req, res) {
                             error(req, res, 404, `Product with Id=${params.productId} not found.`, err);
                         } else {
                             replaceId(product);
-                            res.json({ data: product });
+                            res.json(product);
                         }
 
                     });
@@ -84,7 +84,7 @@ router.post('/', function (req, res) {
                 replaceId(product);
                 const uri = req.baseUrl + '/' + product.id;
                 console.log('Created Product: ', uri);
-                res.location(uri).status(201).json({ data: product });
+                res.location(uri).status(201).json(product);
             } else {
                 error(req, res, 400, `Error creating new product: ${product}`);
             }
@@ -118,7 +118,7 @@ router.put('/:productId', function (req, res) {
             .then(result => {
                 const resultProduct = replaceId(product);
                 if (result.result.ok && result.modifiedCount === 1) {
-                    res.json({ data: resultProduct });
+                    res.json(resultProduct);
                 } else {
                     error(req, res, 400, `Data was NOT modified in database: ${JSON.stringify(product)}`);
                 }
@@ -143,7 +143,7 @@ router.delete('/:productId', function (req, res) {
                         if (err) throw err;
                         if (result.ok) {
                             replaceId(result.value);
-                            res.json({ data: result.value });
+                            res.json(result.value);
                         } else {
                             error(req, res, 404, `Product with Id=${params.productId} not found.`, err);
                         }

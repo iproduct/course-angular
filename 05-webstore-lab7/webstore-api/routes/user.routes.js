@@ -1,24 +1,11 @@
 /*
- * Copyright (c) 2015-2018 IPT-Intellectual Products & Technologies (IPT).
+ * Copyright (c) 2015-2017 IPT-Intellectual Products & Technologies (IPT).
  * All rights reserved.
- * 
- * This software provided by IPT-Intellectual Products & Technologies (IPT) is for 
- * non-commercial illustartive and evaluation purposes only. 
- * It is NOT SUITABLE FOR PRODUCTION purposes because it is not finished,
- * and contains security flаws and weaknesses (like sending the passwords and 
- * emails of users to the browser client, wich YOU SHOULD NEVER DO with real user
- * data). You should NEVER USE THIS SOFTWARE with real user data.
- * 
+ *
  * This file is licensed under terms of GNU GENERAL PUBLIC LICENSE Version 3
  * (GPL v3). The full text of GPL v3 license is providded in file named LICENSE,
- * residing in the root folder of this repository.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * IPT BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
- * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
- * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * residing in the root folder of this project.
+ *
  */
 
 const express = require('express');
@@ -28,22 +15,31 @@ const replaceId = require('./helpers').replaceId;
 const error = require('./helpers').sendErrorResponse;
 const util = require('util');
 const indicative = require('indicative');
+const bcrypt = require('bcryptjs');
+const verifyToken = require('./verify-token');
+const verifyRoleOrSelf = require('./verify-role');
 
 
-// GET users list 
-router.get('/', function (req, res) {
+// GET users list
+router.get('/', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
     const db = req.app.locals.db;
     db.collection('users').find().toArray(
-        function (err, users) {
+        function (err, docs) {
             if (err) throw err;
-            users.forEach( (user) => replaceId(user) );
-            res.json({ data: users });
+            res.json({
+                data: docs.map((user) => {
+                    user.id = user._id;
+                    delete user._id;
+                    delete user.password;
+                    return user;
+                })
+            });
         }
     );
 });
 
-// GET users list 
-router.get('/:userId', function (req, res) {
+// GET users details
+router.get('/:userId', verifyToken, verifyRoleOrSelf(3, true), function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
     indicative.validate(params, { userId: 'required|regex:^[0-9a-f]{24}$' })
@@ -56,8 +52,9 @@ router.get('/:userId', function (req, res) {
                         if (user === null) {
                             error(req, res, 404, `User with Id=${params.userId} not found.`, err);
                         } else {
+                            delete user.password;
                             replaceId(user);
-                            res.json({ data: user});
+                            res.json(user);
                         }
 
                     });
@@ -68,26 +65,29 @@ router.get('/:userId', function (req, res) {
 });
 
 // Create new user
-router.post('/', function (req, res) {
+router.post('/', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
     const db = req.app.locals.db;
     const user = req.body;
     indicative.validate(user, {
-        id: 'regex:^[0-9a-f]{24}$',
-        email: 'required|email',
-        firstName: 'required|string|min:2',
-        lastName: 'required|string|min:2',
-        password: 'required|string|min:8',
-        role: 'required|regex:^\\d+$',
-        gender: 'regex:^\\d*$'
+      id: 'regex:^[0-9a-f]{24}$',
+      username: 'required|min:3|max:24|regex:^\\w+$',
+      email: 'required|email',
+      firstName: 'required|string|min:2',
+      lastName: 'required|string|min:2',
+      password: 'required|string|min:6',
+      role: 'required|regex:^\\d+$',
+      gender: 'regex:^\\d*$'
     }).then(() => {
+        user.password = bcrypt.hashSync(user.password, 8);
         const collection = db.collection('users');
         console.log('Inserting user:', user);
         collection.insertOne(user).then((result) => {
             if (result.result.ok && result.insertedCount === 1) {
+                delete user.password;
                 replaceId(user);
                 const uri = req.baseUrl + '/' + user.id;
                 console.log('Created User: ', uri);
-                res.location(uri).json({ data: user });
+                res.location(uri).status(201).json(user);
             } else {
                 error(req, res, 400, `Error creating new user: ${user}`);
             }
@@ -99,32 +99,39 @@ router.post('/', function (req, res) {
     });
 });
 
-// PUT (edit) user by id 
-router.put('/:userId', function (req, res) {
+// PUT (edit) user by id
+router.put('/:userId', verifyToken, verifyRoleOrSelf(3, true), function (req, res) {
     const db = req.app.locals.db;
     const user = req.body;
     indicative.validate(user, {
-         id: 'regex:^[0-9a-f]{24}$',
-        email: 'required|email',
-        firstName: 'required|string|min:2',
-        lastName: 'required|string|min:2',
-        password: 'required|string|min:8',
-        role: 'required|regex:^\\d+$',
-        gender: 'regex:^\\d*$'
+      id: 'regex:^[0-9a-f]{24}$',
+      username: 'required|min:3|max:24|regex:^\\w+$',
+      email: 'required|email',
+      firstName: 'required|string|min:2',
+      lastName: 'required|string|min:2',
+      password: 'required|string|min:6',
+      role: 'required|regex:^\\d+$',
+      gender: 'regex:^\\d*$'
     }).then(() => {
+        user.password = bcrypt.hashSync(user.password, 8);
         if (user.id !== req.params.userId) {
             error(req, res, 400, `Invalid user data - id in url doesn't match: ${user}`);
             return;
+        }
+        if(req.user.role !== 3 && user.role !== req.user.role) {
+          error(req, res, 400, `Invalid user data - role can not be changed.`);
+          return;
         }
         const collection = db.collection('users');
         user._id = new mongodb.ObjectID(user.id);
         delete (user.id);
         console.log('Updating user:', user);
+
         collection.updateOne({ _id: new mongodb.ObjectID(user._id) }, { "$set": user })
             .then(result => {
                 const resultUser = replaceId(user);
                 if (result.result.ok && result.modifiedCount === 1) {
-                    res.json({ data: resultUser});
+                    res.json(resultUser);
                 } else {
                     error(req, res, 400, `Data was NOT modified in database: ${JSON.stringify(user)}`);
                 }
@@ -132,12 +139,13 @@ router.put('/:userId', function (req, res) {
                 error(req, res, 500, `Server error: ${err}`, err);
             })
     }).catch(errors => {
+        console.log(errors)
         error(req, res, 400, `Invalid user data: ${util.inspect(errors)}`);
     })
 });
 
-// DELETE users list 
-router.delete('/:userId', function (req, res) {
+// DELETE users list
+router.delete('/:userId', verifyToken, verifyRoleOrSelf(3, false), function (req, res) {
     const db = req.app.locals.db;
     const params = req.params;
     indicative.validate(params, { userId: 'required|regex:^[0-9a-f]{24}$' })
@@ -149,7 +157,7 @@ router.delete('/:userId', function (req, res) {
                         if (err) throw err;
                         if (result.ok) {
                             replaceId(result.value);
-                            res.json({ data: result.value });
+                            res.json(result.value);
                         } else {
                             error(req, res, 404, `User with Id=${params.userId} not found.`, err);
                         }
