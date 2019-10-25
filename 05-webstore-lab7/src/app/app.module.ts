@@ -40,7 +40,6 @@ import { MessageComponent } from './shared/message/message.component';
     HomeModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  // entryComponents: [MessageComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

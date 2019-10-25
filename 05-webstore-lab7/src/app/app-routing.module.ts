@@ -13,7 +13,13 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductsListComponent },
-  // { path: 'users', component: UserListComponent },
+  {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then(mod => mod.UsersModule),
+    data: {
+      preload: true
+    }
+  },
   { path: 'wiki', component: WikiComponent },
   { path: 'rx-demo', component: RxDemoComponent },
   { path: 'simple-form', component: SimpleFormComponent },
@@ -21,12 +27,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes
-  //   , {
-  //   enableTracing: true, // <-- debugging purposes only
-  //   preloadingStrategy: SelectivePreloadingStrategy
-  // }
-  )],
+  imports: [RouterModule.forRoot(routes, {
+    enableTracing: true, // <-- debugging purposes only
+    preloadingStrategy: SelectivePreloadingStrategy
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
