@@ -12,9 +12,7 @@ export interface MessageData {
 }
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MessageService {
 
   private _messages$ = new Subject<MessageData>();

@@ -6,6 +6,7 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { WikiComponent } from './wiki/wiki.component';
 import { RxDemoComponent } from './rx-demo/rx-demo/rx-demo.component';
 import { SimpleFormComponent } from './simple-form/simple-form.component';
+import { SelectivePreloadingStrategy } from './core/selective-preloading-strategy';
 
 
 const routes: Routes = [
@@ -20,7 +21,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    enableTracing: true, // <-- debugging purposes only
+    preloadingStrategy: SelectivePreloadingStrategy
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

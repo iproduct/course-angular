@@ -1,9 +1,7 @@
 import { Injectable, isDevMode } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class LoggerService {
+@Injectable()
+export class MyLoggerService {
 
   constructor() { }
 

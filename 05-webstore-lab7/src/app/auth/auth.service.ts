@@ -21,7 +21,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { MessageService } from '../core/message.service';
 import { User } from '../users/user.model';
-import { LoggerService } from '../core/logger.service';
+import { MyLoggerService } from '../core/logger.service';
 import { BASE_API_URL } from '../core/backend-http.service';
 
 @Injectable()
@@ -32,7 +32,7 @@ export class AuthService {
   }
   redirectUrl: string;
 
-  constructor(private http: HttpClient, private logger: LoggerService, private messages: MessageService) {}
+  constructor(private http: HttpClient, private logger: MyLoggerService, private messages: MessageService) {}
 
   /** POST: login with username and  password */
   login(credentials: Authenticate): Observable<AuthenticationResult> {

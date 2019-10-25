@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse } from '@angular/common/http';
-
-import { LoggerService } from '../../../../webstore-next-router/src/app/core/logger.service';
+import { MyLoggerService } from './logger.service';
 
 export interface RequestCacheEntry {
   url: string;
@@ -21,7 +20,7 @@ export class RequestCacheWithMap implements RequestCache {
 
   cache = new Map<string, RequestCacheEntry>();
 
-  constructor(private logger: LoggerService) { }
+  constructor(private logger: MyLoggerService) { }
 
   get(req: HttpRequest<any>): HttpResponse<any> | undefined {
     const url = req.urlWithParams;
