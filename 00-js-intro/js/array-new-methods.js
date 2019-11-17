@@ -4,9 +4,9 @@
  */
 
 var array = [3, 5, 7, 2, 7, 2, 9];
-var index = array.indexOf(2, -5); // index is assigned 0
+var index = array.indexOf(2, -5); // index is assigned 3
 console.log("index of 2 is ", index);
-index = array.lastIndexOf(2); // index is assigned -1
+index = array.lastIndexOf(2); // index is assigned 5
 console.log("index of 2 is ", index);
 
 //var array = [2, 2, 5, 9, 2];
