@@ -18,12 +18,12 @@ export var Role;
     Role[Role["ADMIN"] = 3] = "ADMIN";
 })(Role || (Role = {}));
 var UserImpl = (function () {
-    function UserImpl(id, email, password, firstName, lastName, role, contact) {
+    function UserImpl(id, firstName, lastName, email, password, role, contact) {
         this.id = id;
-        this.email = email;
-        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
+        this.password = password;
         this.role = role;
         this.contact = contact;
     }
@@ -39,14 +39,14 @@ var UserImpl = (function () {
 export { UserImpl };
 var Customer = (function (_super) {
     __extends(Customer, _super);
-    function Customer(id, email, password, firstName, lastName, contact, roles) {
+    function Customer(id, firstName, lastName, email, password, contact, roles) {
         if (roles === void 0) { roles = [Role.CUSTOMER]; }
         var _this = _super.call(this, id, email, password, firstName, lastName, roles, contact) || this;
         _this.id = id;
-        _this.email = email;
-        _this.password = password;
         _this.firstName = firstName;
         _this.lastName = lastName;
+        _this.email = email;
+        _this.password = password;
         _this.contact = contact;
         _this.roles = roles;
         return _this;
@@ -56,13 +56,13 @@ var Customer = (function (_super) {
 export { Customer };
 var Manager = (function (_super) {
     __extends(Manager, _super);
-    function Manager(id, email, password, firstName, lastName, contact) {
+    function Manager(id, firstName, lastName, email, password, contact) {
         var _this = _super.call(this, id, email, password, firstName, lastName, [Role.MANAGER], contact) || this;
         _this.id = id;
-        _this.email = email;
-        _this.password = password;
         _this.firstName = firstName;
         _this.lastName = lastName;
+        _this.email = email;
+        _this.password = password;
         _this.contact = contact;
         return _this;
     }
@@ -71,13 +71,13 @@ var Manager = (function (_super) {
 export { Manager };
 var Admin = (function (_super) {
     __extends(Admin, _super);
-    function Admin(id, email, password, firstName, lastName, contact) {
+    function Admin(id, firstName, lastName, email, password, contact) {
         var _this = _super.call(this, id, email, password, firstName, lastName, [Role.ADMIN], contact) || this;
         _this.id = id;
-        _this.email = email;
-        _this.password = password;
         _this.firstName = firstName;
         _this.lastName = lastName;
+        _this.email = email;
+        _this.password = password;
         _this.contact = contact;
         return _this;
     }

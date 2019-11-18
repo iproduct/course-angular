@@ -26,10 +26,10 @@ export enum Role {
 export class UserImpl implements User {
     constructor(
         public id: number,
-        public email: string,    
-        public password: string,
         public firstName: string,
         public lastName: string,
+        public email: string,    
+        public password: string,
         public role: Role[],
         public contact?: Contact) {}
     get salutation() {
@@ -40,11 +40,11 @@ export class UserImpl implements User {
 export class Customer extends UserImpl {
     constructor(
         public id: number,
-        public email: string,    
-        public password: string,
         public firstName: string,
         public lastName: string,
-        public contact?: Contact,
+        public email: string,    
+        public password: string,
+         public contact?: Contact,
         public roles = [Role.CUSTOMER]) {
             super(id, email, password, firstName, lastName, roles, contact);
         }
@@ -53,10 +53,10 @@ export class Customer extends UserImpl {
 export class Manager extends UserImpl {
     constructor(
         public id: number,
-        public email: string,    
-        public password: string,
         public firstName: string,
         public lastName: string,
+        public email: string,    
+        public password: string,
         public contact?: Contact) {
             super(id, email, password, firstName, lastName, [Role.MANAGER], contact);
         }
@@ -65,10 +65,10 @@ export class Manager extends UserImpl {
 export class Admin extends UserImpl {
     constructor(
         public id: number,
-        public email: string,    
-        public password: string,
         public firstName: string,
         public lastName: string,
+        public email: string,    
+        public password: string,
         public contact?: Contact) {
             super(id, email, password, firstName, lastName, [Role.ADMIN], contact);
         }
