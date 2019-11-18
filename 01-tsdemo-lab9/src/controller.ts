@@ -1,6 +1,7 @@
 import { User } from "./users.js";
 import { Repository, RepositoryImpl } from "./repository.js";
 import { resolvePromiseAfterTimeout } from "./utilities.js";
+import { validate, required, minLength } from "./decorators.js";
 
 export interface LoginController {
     login(user: User): Promise<User>;
@@ -29,7 +30,8 @@ export class DemoLoginController implements LoginController {
         }
     }
     
-    private loginImpl(principal: User | string, credentials?: string): Promise<User> {
+    @validate
+    private loginImpl(@required @minLength(3) principal: User | string, credentials?: string): Promise<User> {
         let email: string;
         let password: string | undefined;
         if (typeof principal === 'string') {

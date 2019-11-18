@@ -8,6 +8,8 @@
         "outDir": "dist",
         "sourceMap": true,
         "strictNullChecks": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "lib": ["dom", "es7"]
     },
     "include": [

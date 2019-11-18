@@ -39,7 +39,7 @@ export function validate(target: any, propertyName: string, descriptor: TypedPro
             }
         }
 
-        return method.apply(this, arguments as unknown as any[]);
+        return method!.apply(this, arguments as unknown as any[]);
     }
 }
 
