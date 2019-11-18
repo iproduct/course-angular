@@ -29,7 +29,7 @@ var UserImpl = (function () {
     }
     Object.defineProperty(UserImpl.prototype, "salutation", {
         get: function () {
-            return "Hello " + this.firstName + " " + this.lastName + ", in roles: " + this.role + ".";
+            return "Hello " + this.firstName + " " + this.lastName + ", in roles: " + this.role.map(function (role) { return Role[role]; });
         },
         enumerable: true,
         configurable: true

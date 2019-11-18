@@ -33,7 +33,7 @@ export class UserImpl implements User {
         public role: Role[],
         public contact?: Contact) {}
     get salutation() {
-        return `Hello ${this.firstName} ${this.lastName}, in roles: ${this.role}.`
+        return `Hello ${this.firstName} ${this.lastName}, in roles: ${this.role.map(role => Role[role])}`
     }
 }
 
