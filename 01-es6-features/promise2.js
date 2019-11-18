@@ -20,7 +20,7 @@ msgAfterTimeout("", "Foo", 1000).then(msg => {
 .then(msg => console.log(msg))
 .catch( err => {
     console.log('Error: ' + err);
-    throw 'After finish';
+    // throw 'After finish';
 })
 .then(      
     msg => console.log(msg), //Success 
