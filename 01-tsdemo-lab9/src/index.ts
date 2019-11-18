@@ -21,8 +21,11 @@ userRepo.create(
 
 // const intemsStr = userRepo.findAll().map(user => user.salutation)
 //     .reduce((acc, userStr) => acc += `<li>${userStr}</li>`, '');
-    
-// document.getElementById('content')!.innerHTML = `<ul>${intemsStr}</ul>`;
+
+// const elem = document.getElementById('content');
+// if(elem !== null) {
+//     elem.innerHTML = `<ul>${intemsStr}</ul>`;
+// }
 
 console.log(userRepo.findAll());
 

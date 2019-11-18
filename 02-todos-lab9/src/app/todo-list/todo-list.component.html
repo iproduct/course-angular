@@ -1,6 +1,6 @@
 <ul class="todos items">
   <li *ngFor="let todo of todos; let i = index">
-    <span class="badge">{{ i+1 }}</span> {{ todo.title }} : {{ getStatusText(todo.status) }}
+    <span class="badge" [innerHTML]="'<i>' + (i+1) + '</i>'"></span> {{ todo.title }} : {{ getStatusText(todo.status) }}
   </li>
 </ul>
 
