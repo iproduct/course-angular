@@ -18,7 +18,7 @@ export class PromiseBackendMockService implements PromiseBackendService {
   }
 
   findAll<T extends Identifiable>(kind: ResourceType<T>): Promise<T[]> {
-    return Promise.resolve(this.entityMap.get(kind.typeId) as T[]);
+    return Promise.resolve([...this.entityMap.get(kind.typeId)] as T[]);
   }
   findById<T extends Identifiable>(kind: ResourceType<T>, id: string): Promise<T> {
     const result = this.entityMap.get(kind.typeId).find(e => e.id === id);

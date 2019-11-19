@@ -29,6 +29,18 @@ export class ProductListComponent implements OnInit {
     this.currentMode = mode;
   }
 
+  onDeleteProduct(product: Product) {
+    this.service.deleteById(product.id)
+      .then(
+        deleted => {
+          const index = this.products.findIndex(p => p.id === deleted.id);
+          this.products.splice(index, 1);
+          this.showMessage(`Product ${deleted.name} was successfully deleted.`);
+        },
+        err => this.showError(err)
+      );
+  }
+
   private refresh() {
     this.service.findAll()
       .then(

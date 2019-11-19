@@ -1,0 +1,13 @@
+.product-card-detail {
+  max-width: 500px;
+}
+
+.product-header-image:first-child {
+  margin: auto 20px auto 10px;
+  background: transparent;
+  border-radius: 10px;
+}
+
+mat-form-field {
+  width:100%
+}
