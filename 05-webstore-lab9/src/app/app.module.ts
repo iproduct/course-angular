@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SimpleFormModule } from './simple-form/simple-form.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductsService } from './products/products.service';
+import { ProductsModule } from './products/products.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     SimpleFormModule,
+    ProductsModule,
     BrowserAnimationsModule
   ],
   providers: [],
