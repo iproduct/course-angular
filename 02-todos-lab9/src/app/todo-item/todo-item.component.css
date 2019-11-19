@@ -1,0 +1,14 @@
+button {
+  float: right;
+  vertical-align: middle;
+  color: white;
+  margin: 0 5px;
+}
+
+button.btn-complete {
+  background-color: cornflowerblue;
+}
+
+button.btn-cancel {
+  background-color: crimson;
+}

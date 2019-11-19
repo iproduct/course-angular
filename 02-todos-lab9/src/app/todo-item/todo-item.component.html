@@ -1,0 +1,4 @@
+<span class="badge" [innerHTML]="'<i>' + (index+1) + '</i>'"></span>
+{{ todo.title }} : {{ getStatusText(todo.status) }}
+<button (click)="onCancel()" class="btn-cancel">Cancel</button>
+<button (click)="onComplete()" class="btn-complete">Complete</button>

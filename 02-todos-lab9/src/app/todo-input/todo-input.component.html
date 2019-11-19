@@ -1,0 +1,5 @@
+<input #todoInput type="text" placeholder="What to do next?" (keyup)="onKeyUp($event)"
+  (keyup.enter)="addTodo(todoInput.value); todoInput.value=''"
+  (blur)="addTodo(todoInput.value); todoInput.value=''">
+<button (click)="addTodo(todoInput.value); todoInput.value=''" class="btn-complete">Add Todo</button>
+<p>{{ todoInput.value }}</p>

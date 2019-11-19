@@ -1,0 +1,6 @@
+<div class="app">
+  <df-dynamic-form [config]="config" #form="dynamicForm" (save)="submit($event)">
+  </df-dynamic-form>
+  {{ form.valid }}
+  {{ form.value | json }}
+</div>

@@ -1,6 +1,7 @@
+<td-todo-input (newTodo)="addTodo($event)"></td-todo-input>
 <ul class="todos items">
   <li *ngFor="let todo of todos; let i = index">
-    <span class="badge" [innerHTML]="'<i>' + (i+1) + '</i>'"></span> {{ todo.title }} : {{ getStatusText(todo.status) }}
+    <td-todo-item [todo]="todo" [index]="i" (statusChange)="statusChanged($event)">
+    </td-todo-item>
   </li>
 </ul>
-

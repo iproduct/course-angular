@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import TODOS from '../mock-todos';
-import { TodoStatus } from '../todo.model';
+import { TodoStatus, Todo } from '../todo.model';
+import { TodoRepoService } from '../todo-repo.service';
 
 @Component({
   selector: 'td-todo-list',
@@ -8,15 +8,30 @@ import { TodoStatus } from '../todo.model';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  todos = TODOS;
+  todos: Todo[] = [];
 
-  constructor() { }
+  constructor(private repo: TodoRepoService) { }
 
   ngOnInit() {
+    this.refresh();
   }
 
-  getStatusText(status: TodoStatus) {
-    return TodoStatus[status];
+  refresh() {
+    this.todos = this.repo.findAll();
+  }
+
+  statusChanged(todo: Todo) {
+    if (todo.status === TodoStatus.CANCELED) {
+      this.repo.deleteById(todo.id);
+    } else {
+      this.repo.update(todo);
+    }
+    this.refresh();
+  }
+
+  addTodo(todo: Todo) {
+    this.repo.create(todo);
+    this.refresh();
   }
 
 }
