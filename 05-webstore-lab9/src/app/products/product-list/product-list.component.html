@@ -25,10 +25,15 @@
             <button mat-raised-button color="primary" (click)="setMode('edit')">
               <mat-icon mat-button>edit</mat-icon>
             </button>
-            <button mat-raised-button color="warn" (click)="onDeleteProduct(product)">s
+            <button mat-raised-button color="warn" (click)="onDeleteProduct(product)">
               <mat-icon mat-button>delete</mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>
   </div>
+  <ws-product-detail *ngIf="selectedProduct"
+    [product]="selectedProduct" [mode]="currentMode"
+    (productModified)="onProductModified($event)"
+    (productCanceled)="onProductCanceled()">
+  </ws-product-detail>
 </div>

@@ -41,6 +41,12 @@ export class ProductListComponent implements OnInit {
       );
   }
 
+  onProductModified(product: Product) {
+
+  }
+
+  onProductCanceled() {}
+
   private refresh() {
     this.service.findAll()
       .then(
