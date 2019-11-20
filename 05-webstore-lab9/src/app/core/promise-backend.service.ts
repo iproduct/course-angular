@@ -1,4 +1,11 @@
 import { Identifiable, IdType, ResourceType } from '../shared/common-types';
+import { InjectionToken } from '@angular/core';
+import { PromiseBackendMockService } from './promise-backend-mock.service';
+
+export const PROMISE_BACKEND = new InjectionToken<PromiseBackendService>('PromiseBackendService');
+
+// export const PROMISE_BACKEND = new InjectionToken<PromiseBackendService>('PromiseBackendService',
+// {providedIn: 'root', factory: () => new PromiseBackendMockService()});
 
 export  interface PromiseBackendService {
   findAll<T extends Identifiable>(kind: ResourceType<T>): Promise<T[]>;

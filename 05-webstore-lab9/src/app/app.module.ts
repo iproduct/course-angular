@@ -7,6 +7,9 @@ import { SimpleFormModule } from './simple-form/simple-form.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductsService } from './products/products.service';
 import { ProductsModule } from './products/products.module';
+import { PROMISE_BACKEND } from './core/promise-backend.service';
+import { PromiseBackendMockService } from './core/promise-backend-mock.service';
+import { RxdemoModule } from './rxdemo/rxdemo.module';
 
 @NgModule({
   declarations: [
@@ -17,9 +20,10 @@ import { ProductsModule } from './products/products.module';
     AppRoutingModule,
     SimpleFormModule,
     ProductsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RxdemoModule,
   ],
-  providers: [],
+  providers: [{provide: PROMISE_BACKEND, useClass: PromiseBackendMockService}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { PromiseBackendMockService } from '../core/promise-backend-mock.service';
 import { Product } from './product.model';
 import { IdType } from '../shared/common-types';
+import { PROMISE_BACKEND, PromiseBackendService } from '../core/promise-backend.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  constructor(private backend: PromiseBackendMockService) { }
+  constructor(@Inject(PROMISE_BACKEND) private backend: PromiseBackendService) { }
 
   findAll(): Promise<Product[]> {
     return this.backend.findAll(Product);

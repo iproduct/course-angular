@@ -24,7 +24,7 @@ const componentMapper = {
   checkbox: CheckboxComponent
 };
 @Directive({
-  selector: "[dynamicField]"
+  selector: '[dynamicField]'
 })
 export class DynamicFieldDirective implements OnInit {
   @Input() field: FieldConfig;
