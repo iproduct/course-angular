@@ -16,11 +16,11 @@
             <div [hidden]="!name.errors.required">
               Name is required
             </div>
-            <div [hidden]="!name.errors.minlength">
+            <div [hidden]="!name.errors?.minlength">
               Name must be at least 4 characters long.
             </div>
-            <div [hidden]="!name.errors.maxlength">
-              It is {{name.errors['maxlength'].actualLength}}. Name cannot be more than 24 characters long.
+            <div [hidden]="!name.errors?.maxlength">
+              It is {{name.errors['maxlength']?.actualLength}}. Name cannot be more than 24 characters long.
             </div>
         </div>
       </div>
