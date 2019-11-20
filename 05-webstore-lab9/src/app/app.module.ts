@@ -10,6 +10,8 @@ import { ProductsModule } from './products/products.module';
 import { PROMISE_BACKEND } from './core/promise-backend.service';
 import { PromiseBackendMockService } from './core/promise-backend-mock.service';
 import { RxdemoModule } from './rxdemo/rxdemo.module';
+import { WikiModule } from './wiki/wiki.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { RxdemoModule } from './rxdemo/rxdemo.module';
     ProductsModule,
     BrowserAnimationsModule,
     RxdemoModule,
+    WikiModule,
+    SharedModule,
   ],
   providers: [{provide: PROMISE_BACKEND, useClass: PromiseBackendMockService}],
   bootstrap: [AppComponent]

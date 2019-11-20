@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { from, Observable, interval, zip, Subscription } from 'rxjs';
-import { map, endWith, startWith } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { from, Observable, interval, zip, Subscription, fromEvent } from 'rxjs';
+import { map, endWith, startWith, scan, debounceTime, buffer } from 'rxjs/operators';
 
 @Component({
   selector: 'ws-rx-demo',
@@ -12,10 +12,13 @@ export class RxDemoComponent implements OnInit, OnDestroy {
   names$: Observable<string>;
   interval$: Observable<number>;
   asyncNames$: Observable<string>;
+  clickCount$: Observable<number>;
+  nClicks$: Observable<string>;
   values = '';
   errors = '';
   number: number;
   subscription: Subscription;
+  @ViewChild('clickable', {static: true}) clickSource: ElementRef;
 
   constructor() { }
 
@@ -55,7 +58,18 @@ export class RxDemoComponent implements OnInit, OnDestroy {
       () => this.values += 'COMPLETED.'
     );
 
-    // const 
+    const clicks$ = fromEvent(this.clickSource.nativeElement, 'click');
+    this.clickCount$ = clicks$.pipe(
+      scan((acc, ev) => acc + 1, 0)
+    );
+
+    this.nClicks$ = clicks$.pipe(
+      buffer(clicks$.pipe(debounceTime(200))),
+      map(events => events.length + ''),
+      scan((acc, nClicks) => acc + ', ' + nClicks, '')
+    );
+
+
   }
   ngOnDestroy(): void {
     if (this.subscription) {
