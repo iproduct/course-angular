@@ -26,6 +26,7 @@
       "rxjs/Rx"
     ],
     "interface-name": false,
+    "forin": false,
     "max-classes-per-file": false,
     "max-line-length": [
       true,

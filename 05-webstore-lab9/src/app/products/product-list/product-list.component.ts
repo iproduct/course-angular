@@ -29,6 +29,11 @@ export class ProductListComponent implements OnInit {
     this.currentMode = mode;
   }
 
+  onAddProduct() {
+    this.setMode('edit');
+    this.selectProduct(new Product(undefined, undefined));
+  }
+
   onDeleteProduct(product: Product) {
     this.service.deleteById(product.id)
       .then(
@@ -42,10 +47,29 @@ export class ProductListComponent implements OnInit {
   }
 
   onProductModified(product: Product) {
-
+    if (product.id) { // edit mode
+      this.service.update(product).then(
+        updated => {
+          const index = this.products.findIndex(p => p.id === updated.id);
+          this.products[index] = updated;
+          this.showMessage(`Product '${updated.name}' updated successfully.`);
+        },
+        err => this.showError(err)
+      );
+    } else {
+      this.service.create(product).then(
+        created => {
+          this.products.push(created);
+          this.showMessage(`Product '${created.name}' created successfully.`);
+        },
+        err => this.showError(err)
+      );
+    }
   }
 
-  onProductCanceled() {}
+  onProductCanceled() {
+    this.selectProduct(undefined);
+  }
 
   private refresh() {
     this.service.findAll()

@@ -1,0 +1,7 @@
+<form #form="ngForm" (ngSubmit)="logForm(form.value)">
+  <state-selector name="state" ngModel #state="ngModel"></state-selector>
+  <button type="submit">Submit</button>
+</form>
+
+<h2>Current selection:</h2>
+<h3>{{state.value}}</h3>

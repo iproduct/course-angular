@@ -1,6 +1,8 @@
 import { Component, OnInit, Self, SkipSelf } from '@angular/core';
 import { BROWSER_STORAGE, BrowserStorageService } from './storage.service';
 
+export function getSessionStorage(){ return sessionStorage };
+
 @Component({
   selector: 'app-storage',
   template: `
@@ -14,7 +16,7 @@ import { BROWSER_STORAGE, BrowserStorageService } from './storage.service';
   `,
   providers: [
     BrowserStorageService,
-    { provide: BROWSER_STORAGE, useFactory: () => sessionStorage }
+    { provide: BROWSER_STORAGE, useFactory: getSessionStorage }
   ]
 })
 export class StorageComponent implements OnInit {

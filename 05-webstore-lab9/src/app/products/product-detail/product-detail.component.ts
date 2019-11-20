@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Product } from '../product.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -8,12 +8,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
-export class ProductDetailComponent implements OnInit, OnChanges {
-
+export class ProductDetailComponent implements OnInit, OnDestroy, OnChanges {
   @Input() mode = 'present';
   @Input() product: Product;
   @Output() productModified = new EventEmitter<Product>();
-  @Output() productCanceled = new EventEmitter<Product>();
+  @Output() productCanceled = new EventEmitter<void>();
   form: FormGroup;
   private statusSubscription: Subscription;
 
@@ -51,8 +50,14 @@ export class ProductDetailComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const prodChange = changes.product;
-    if (prodChange.currentValue !== prodChange.previousValue) {
+    if (prodChange && prodChange.currentValue !== prodChange.previousValue) {
       this.reset();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.statusSubscription) {
+      this.statusSubscription.unsubscribe();
     }
   }
 
@@ -74,20 +79,40 @@ export class ProductDetailComponent implements OnInit, OnChanges {
         ]
       ]
     });
+    this.statusSubscription = this.form.statusChanges.subscribe(() => this.onStatusChanged());
   }
 
   submitProduct() {
-
+    this.product = this.form.getRawValue();
+    this.productModified.emit(this.product);
+    this.reset();
   }
 
   reset() {
-    if (this.product) {
+    if ( this.form && this.product) {
       this.form.reset(this.product);
     }
   }
   cancelProduct() {
-
+    this.productCanceled.emit();
   }
 
+  protected onStatusChanged() {
+    if (!this.form) { return; }
+    const form = this.form;
+
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && (control.dirty || control.touched) && control.invalid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
 
 }
