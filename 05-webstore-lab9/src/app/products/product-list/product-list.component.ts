@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
+import { MessageService } from '../../core/message.service';
 
 @Component({
   selector: 'ws-product-list',
@@ -15,7 +16,7 @@ export class ProductListComponent implements OnInit {
   messages: string | undefined;
   errors: string | undefined;
 
-  constructor(private service: ProductsService) { }
+  constructor(private service: ProductsService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.refresh();
@@ -36,7 +37,7 @@ export class ProductListComponent implements OnInit {
 
   onDeleteProduct(product: Product) {
     this.service.deleteById(product.id)
-      .then(
+      .subscribe(
         deleted => {
           const index = this.products.findIndex(p => p.id === deleted.id);
           this.products.splice(index, 1);
@@ -48,7 +49,7 @@ export class ProductListComponent implements OnInit {
 
   onProductModified(product: Product) {
     if (product.id) { // edit mode
-      this.service.update(product).then(
+      this.service.update(product).subscribe(
         updated => {
           const index = this.products.findIndex(p => p.id === updated.id);
           this.products[index] = updated;
@@ -57,7 +58,7 @@ export class ProductListComponent implements OnInit {
         err => this.showError(err)
       );
     } else {
-      this.service.create(product).then(
+      this.service.create(product).subscribe(
         created => {
           this.products.push(created);
           this.showMessage(`Product '${created.name}' created successfully.`);
@@ -73,19 +74,17 @@ export class ProductListComponent implements OnInit {
 
   private refresh() {
     this.service.findAll()
-      .then(
+      .subscribe(
         products => this.products = products,
         err => this.showError(err));
   }
 
   private showMessage(msg) {
-    this.messages = msg;
-    this.errors = undefined;
+    this.messageService.success(msg);
   }
 
   private showError(err) {
-    this.messages = undefined;
-    this.errors = err;
+    this.messageService.error(err);
   }
 
 }
