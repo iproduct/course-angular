@@ -1,0 +1,7 @@
+<nav>
+  <button (click)="toggle()">Toggle Insert/Remove</button>
+</nav>
+
+<div @myInsertRemoveTrigger *ngIf="isShown" class="insert-remove-container">
+  <p>The box is inserted</p>
+</div>

@@ -62,7 +62,7 @@ export class BackendHttpService implements BackendService{
       );
   }
   deleteById<T extends Identifiable>(kind: ResourceType<T>, id: string): Observable<T> {
-    return this.http.put<T>(`${BASE_API_URL}/${this.getUrl(kind)}/${entity.id}`, entity)
+    return this.http.delete<T>(`${BASE_API_URL}/${this.getUrl(kind)}/${id}`)
       .pipe(
         tap(
           deleted => this.logger.log(`${kind.typeId} deleted: ${JSON.stringify(deleted)}`),

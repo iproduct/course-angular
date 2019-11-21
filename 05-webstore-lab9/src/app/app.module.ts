@@ -12,6 +12,9 @@ import { PromiseBackendMockService } from './core/promise-backend-mock.service';
 import { RxdemoModule } from './rxdemo/rxdemo.module';
 import { WikiModule } from './wiki/wiki.module';
 import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
+import { NavigationModule } from './navigation/navigation.module';
+import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,11 @@ import { SharedModule } from './shared/shared.module';
     RxdemoModule,
     WikiModule,
     SharedModule,
+    HomeModule,
+    NavigationModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   providers: [{provide: PROMISE_BACKEND, useClass: PromiseBackendMockService}],
   bootstrap: [AppComponent]

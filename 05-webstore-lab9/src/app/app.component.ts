@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'webstore-lab9';
+  title = 'Webstore Lab';
+  showSidenav = false;
+  loggedIn = false;
+
+  openSidenav() {
+    this.showSidenav = true;
+  }
+  closeSidenav() {
+    this.showSidenav = false;
+  }
 }

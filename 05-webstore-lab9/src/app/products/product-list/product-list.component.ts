@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 import { MessageService } from '../../core/message.service';
+import { slideInDownAnimation } from '../../shared/animations';
 
 @Component({
   selector: 'ws-product-list',
+  animations: [ slideInDownAnimation ],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  @HostBinding('@routeAnimation') routeAnimation = true;
 
   products: Product[] = [];
   selectedProduct: Product | undefined;
