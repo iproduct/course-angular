@@ -4,6 +4,7 @@ import { MatToolbarModule, MatIconModule, MatListModule } from '@angular/materia
 import { NavItemComponent } from './nav-item.component';
 import { ToolbarComponent } from './toolbar.component';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [ToolbarComponent, NavItemComponent],
@@ -13,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     MatListModule,
     MatToolbarModule,
+    RouterModule,
   ],
   exports: [ToolbarComponent, NavItemComponent]
 })
