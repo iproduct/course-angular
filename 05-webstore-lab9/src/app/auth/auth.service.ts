@@ -20,10 +20,12 @@ import { Authenticate, AuthenticationResult } from './auth.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { MessageService } from '../core/message.service';
-import { User } from './user.model';
+import { User } from '../users/user.model';
 import { BASE_API_URL } from '../core/backend-http.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   private _loggedIn$ = new BehaviorSubject<AuthenticationResult>(undefined);
   get loggedIn() {

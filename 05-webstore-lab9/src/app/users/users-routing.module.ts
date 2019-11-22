@@ -67,11 +67,11 @@ import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
       {
         path: 'users',
         component: UserListComponent,
-        // canActivate: [AuthGuardService],
-        // canActivateChild: [AuthGuardService],
-        // data: {
-        //   rolesAllowed: [Role.ADMIN],
-        // },
+        canActivate: [AuthGuardService],
+        canActivateChild: [AuthGuardService],
+        data: {
+          rolesAllowed: [Role.ADMIN],
+        },
         children: [
           {
             path: 'create',

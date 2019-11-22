@@ -5,12 +5,14 @@ import { AuthService } from './auth.service';
 import { of, Observable } from 'rxjs';
 import { take, flatMap, map } from 'rxjs/operators';
 import { DialogService } from '../core/dialog.service';
-import { Role } from './user.model';
+import { Role } from '../users/user.model';
 import { AuthenticationResult } from './auth.model';
 import { MessageService } from '../core/message.service';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {
   private authResult: AuthenticationResult | undefined = undefined;
 

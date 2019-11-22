@@ -16,6 +16,7 @@ import { HomeModule } from './home/home.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UsersModule } from './users/users.module';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    UsersModule
+    UsersModule,
+    AuthModule
   ],
   providers: [{provide: PROMISE_BACKEND, useClass: PromiseBackendMockService}],
   bootstrap: [AppComponent]

@@ -29,7 +29,7 @@ import { LoggingInterceptor } from '../core/logging-interceptor';
   ],
   declarations: [LoginFormComponent, LoginPageComponent],
   exports: [LoginPageComponent],
-  providers: [AuthGuardService, AuthService,
+  providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
 })
