@@ -10,6 +10,7 @@ import { CanComponentDeactivate } from 'src/app/core/can-deactivate-guard.servic
 import { DialogService } from 'src/app/core/dialog.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { filter, switchMap, tap } from 'rxjs/operators';
+import { LoggerService } from 'src/app/core/logger.service';
 
 @Component({
   selector: 'ws-user-detail-reactive',
@@ -88,7 +89,8 @@ export class UserDetailReactiveComponent implements OnInit, OnChanges, CanCompon
     private userService: UserService,
     private authService: AuthService,
     private messageService: MessageService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private logger: LoggerService
   ) {
     for (const role in Role) {
       if (typeof Role[role] === 'number') {
@@ -103,36 +105,38 @@ export class UserDetailReactiveComponent implements OnInit, OnChanges, CanCompon
   }
 
   ngOnInit() {
-    this.route.params.pipe(
-      filter(params => params['userId']),
-      switchMap(params => this.userService.findById(params['userId'])),
-      tap(user => console.log(user))
-    ).subscribe(
-      user => {
-        this.user = user;
-        this.isNewUser = false;
-        this.resetUser();
+    // this.route.params.pipe(
+    //   filter(params => params['userId']),
+    //   switchMap(params => this.userService.findById(params['userId'])),
+    //   tap(user => console.log(user))
+    // ).subscribe(
+    //   user => {
+    //     this.user = user;
+    //     this.isNewUser = false;
+    //     this.resetUser();
+    //   },
+    //   err => this.messageService.error(err)
+    // );
+
+    this.route.data
+    .subscribe(
+      (data: { user: User, title?: string, mode?: string }) => {
+        this.title = data.title || this.title;
+        this.mode = data.mode || this.mode;
+        const user = data.user;
+        if (user) {
+          this.user = user;
+          this.isNewUser = false;
+          this.resetUser();
+        }
       },
       err => this.messageService.error(err)
     );
 
-    this.route.data
-    .subscribe((data: { /*user: User, */title?: string, mode?: string }) => {
-      this.title = data.title || this.title;
-      this.mode = data.mode || this.mode;
-      // const user = data.user;
-      // if (user) {
-      //   this.user = user;
-      //   this.isNewUser = false;
-      //   this.resetUser();
-      // }
-    });
-
     this.authService.loggedIn.subscribe(
       authResult => {
-        console.log('!!!!!!!!!!!!!!!!');
-        console.log(authResult);
-        this.isAdmin = authResult.user.role === Role.ADMIN;
+        this.logger.log(authResult);
+        this.isAdmin = authResult && authResult.user.role === Role.ADMIN;
       });
 
     this.buildForm();

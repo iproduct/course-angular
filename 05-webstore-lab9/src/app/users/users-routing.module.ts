@@ -59,10 +59,11 @@ import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
       {
         path: 'register',
         component: UserDetailReactiveComponent,
+        canDeactivate: [CanDeactivateGuard],
         data: {
           title: 'User Registration',
           mode: 'register'
-        }
+        },
       },
       {
         path: 'users',
@@ -77,7 +78,7 @@ import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
             path: 'create',
             pathMatch: 'full',
             component: UserDetailReactiveComponent,
-            // canDeactivate: [CanDeactivateGuard],
+            canDeactivate: [CanDeactivateGuard],
             data: {
               title: 'Add New User',
               mode: 'create'
@@ -90,21 +91,21 @@ import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
               title: 'User Data',
               mode: 'present'
             },
-            // resolve: {
-            //   user: UserResolver
-            // }
+            resolve: {
+              user: UserResolver
+            }
           },
           {
             path: 'edit/:userId',
             component: UserDetailReactiveComponent,
-            // canDeactivate: [CanDeactivateGuard],
+            canDeactivate: [CanDeactivateGuard],
             data: {
               title: 'Edit User',
               mode: 'edit'
             },
-            // resolve: {
-            //   user: UserResolver
-            // }
+            resolve: {
+              user: UserResolver
+            }
           }
         ]
       }
