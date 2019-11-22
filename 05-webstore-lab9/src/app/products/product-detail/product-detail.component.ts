@@ -9,6 +9,7 @@ import { CanComponentDeactivate } from '../../core/can-deactivate-guard.service'
 import { DialogService } from '../../core/dialog.service';
 import { shallowEquals } from '../../shared/utils';
 import { PRODUCTS_ROUTE } from '../../app-routing.module';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ws-product-detail',

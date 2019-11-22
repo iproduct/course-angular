@@ -48,12 +48,6 @@ export class ProductListComponent implements OnInit {
     this.router.navigate(['products', 'create']);
   }
 
-  onEditProduct(product: Product) {
-    this.setMode('edit');
-    this.selectProduct(product);
-    this.router.navigate(['products', 'edit', product.id]);
-  }
-
   onDeleteProduct(product: Product) {
     this.service.deleteById(product.id)
       .subscribe(

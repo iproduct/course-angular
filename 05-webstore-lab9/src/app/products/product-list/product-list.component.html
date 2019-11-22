@@ -14,7 +14,7 @@
       <mat-card *ngFor="let product of products" class="product-card"
         [class.selected]="product.id === selectedProduct?.id"
         (click)="selectProduct(product)" fxLayout="row wrap" fxLayoutAlign="right center">
-          <mat-card-header class="product-header" (click)="selectProduct(product); setMode('present')">
+          <mat-card-header class="product-header" (click)="setMode('present')">
             <div mat-card-avatar class="product-header-image">
               <img [src]="product.imageUrl" [alt]="product.name">
             </div>
@@ -22,7 +22,7 @@
             <mat-card-subtitle>{{product.description}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="onEditProduct(product)">
+            <button mat-raised-button color="primary" (click)="setMode('edit')">
               <mat-icon mat-button>edit</mat-icon>
             </button>
             <button mat-raised-button color="warn" (click)="onDeleteProduct(product)">
