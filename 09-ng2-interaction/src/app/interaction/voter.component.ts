@@ -2,7 +2,7 @@
 @Component({
     selector: 'my-voter',
     template: `
-    <h4>{{name  | truncate:10: '...'}}</h4>
+    <h4>{{name  | truncate:'aaa': '...'}}</h4>
     <button (click)="vote(true)"  [disabled]="voted">Agree</button>
     <button (click)="vote(false)" [disabled]="voted">Disagree</button>
   `
