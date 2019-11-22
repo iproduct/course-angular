@@ -11,7 +11,7 @@ import { SimpleFormComponent } from './simple-form/simple-form.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'products', component: ProductListComponent },
+  // { path: 'products', component: ProductListComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'wiki', component: WikiComponent },
   { path: 'rx-demo', component: RxDemoComponent },

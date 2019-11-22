@@ -31,9 +31,11 @@
           </mat-card-actions>
         </mat-card>
   </div>
-  <ws-product-detail *ngIf="selectedProduct"
+  <router-outlet></router-outlet>
+
+  <!-- <ws-product-detail *ngIf="selectedProduct"
     [product]="selectedProduct" [mode]="currentMode"
     (productModified)="onProductModified($event)"
     (productCanceled)="onProductCanceled()">
-  </ws-product-detail>
+  </ws-product-detail> -->
 </div>

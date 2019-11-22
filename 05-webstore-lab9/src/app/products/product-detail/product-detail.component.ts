@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 import { Product } from '../product.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from '../../core/message.service';
 
 @Component({
   selector: 'ws-product-detail',
@@ -10,9 +12,13 @@ import { Subscription } from 'rxjs';
 })
 export class ProductDetailComponent implements OnInit, OnDestroy, OnChanges {
   @Input() mode = 'present';
-  @Input() product: Product;
+  @Input() product: Product = new Product(undefined, undefined);
   @Output() productModified = new EventEmitter<Product>();
   @Output() productCanceled = new EventEmitter<void>();
+  title = 'Product Details';
+  get isNewProduct() {
+    return this.product && this.product.id;
+  }
   form: FormGroup;
   private statusSubscription: Subscription;
 
@@ -26,8 +32,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy, OnChanges {
   validationMessages = {
     name: {
       required: 'Product name is required.',
-      minlength: 'Username must be at least 2 characters long.',
-      maxlength: 'Username cannot be more than 24 characters long.'
+      minlength: 'Productname must be at least 2 characters long.',
+      maxlength: 'Productname cannot be more than 24 characters long.'
     },
     price: {
       required: 'Price is required.',
@@ -42,9 +48,23 @@ export class ProductDetailComponent implements OnInit, OnDestroy, OnChanges {
     }
   };
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
+              private messageService: MessageService) { }
 
   ngOnInit() {
+    this.route.data
+    .subscribe(
+      (data: { product?: Product, title?: string, mode?: string }) => {
+        this.title = data.title || this.title;
+        this.mode = data.mode || this.mode;
+        const product = data.product;
+        if (product) {
+          this.product = product;
+          this.reset();
+        }
+      },
+      err => this.messageService.error(err)
+    );
     this.buildForm();
   }
 

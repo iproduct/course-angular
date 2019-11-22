@@ -3,6 +3,7 @@ import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
 import { MessageService } from '../../core/message.service';
 import { slideInDownAnimation } from '../../shared/animations';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ws-product-list',
@@ -19,7 +20,8 @@ export class ProductListComponent implements OnInit {
   messages: string | undefined;
   errors: string | undefined;
 
-  constructor(private service: ProductsService, private messageService: MessageService) { }
+  constructor(private service: ProductsService, private messageService: MessageService,
+              private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.refresh();
@@ -36,6 +38,7 @@ export class ProductListComponent implements OnInit {
   onAddProduct() {
     this.setMode('edit');
     this.selectProduct(new Product(undefined, undefined));
+    this.router.navigate(['products', 'create']);
   }
 
   onDeleteProduct(product: Product) {

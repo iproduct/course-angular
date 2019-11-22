@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { RouterModule } from '@angular/router';
+import { ProductsRoutingModule } from './product-routing.module';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     MatIconModule,
     MatInputModule,
     MatSnackBarModule,
+    RouterModule,
+    ProductsRoutingModule
   ]
 })
 export class ProductsModule { }
