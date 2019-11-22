@@ -26,7 +26,6 @@ import { AuthModule } from './auth/auth.module';
     BrowserModule,
     AppRoutingModule,
     SimpleFormModule,
-    ProductsModule,
     BrowserAnimationsModule,
     RxdemoModule,
     WikiModule,

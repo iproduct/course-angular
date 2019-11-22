@@ -16,19 +16,15 @@ import { AuthGuardService } from '../auth/auth-guard.service';
 import { CanDeactivateGuard } from '../core/can-deactivate-guard.service';
 import { Role } from '../users/user.model';
 import { ProductResolver } from './product-resolver';
+import { PRODUCTS_ROUTE } from '../app-routing.module';
 
 
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
-        path: 'products',
+        path: '',
         component: ProductListComponent,
-        // canActivate: [AuthGuardService],
-        // canActivateChild: [AuthGuardService],
-        // data: {
-        //   rolesAllowed: [Role.ADMIN],
-        // },
         children: [
           {
             path: 'create',

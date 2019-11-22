@@ -4,6 +4,7 @@ import { ProductsService } from '../products.service';
 import { MessageService } from '../../core/message.service';
 import { slideInDownAnimation } from '../../shared/animations';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PRODUCTS_ROUTE } from '../../app-routing.module';
 
 @Component({
   selector: 'ws-product-list',
@@ -24,11 +25,17 @@ export class ProductListComponent implements OnInit {
               private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(qparams => {
+      if (qparams['refresh']) {
+        this.refresh();
+      }
+    });
     this.refresh();
   }
 
   selectProduct(product: Product) {
     this.selectedProduct = product;
+    this.router.navigate([PRODUCTS_ROUTE, this.currentMode, product.id]);
   }
 
   setMode(mode: string) {
@@ -39,6 +46,12 @@ export class ProductListComponent implements OnInit {
     this.setMode('edit');
     this.selectProduct(new Product(undefined, undefined));
     this.router.navigate(['products', 'create']);
+  }
+
+  onEditProduct(product: Product) {
+    this.setMode('edit');
+    this.selectProduct(product);
+    this.router.navigate(['products', 'edit', product.id]);
   }
 
   onDeleteProduct(product: Product) {

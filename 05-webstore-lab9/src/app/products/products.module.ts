@@ -11,6 +11,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { RouterModule } from '@angular/router';
 import { ProductsRoutingModule } from './product-routing.module';
+import { ProductResolver } from './product-resolver';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ProductsRoutingModule } from './product-routing.module';
     MatSnackBarModule,
     RouterModule,
     ProductsRoutingModule
-  ]
+  ],
+  providers: [ProductResolver]
 })
 export class ProductsModule { }

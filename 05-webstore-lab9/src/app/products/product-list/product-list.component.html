@@ -22,7 +22,7 @@
             <mat-card-subtitle>{{product.description}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="selectProduct(product); setMode('edit')">
+            <button mat-raised-button color="primary" (click)="onEditProduct(product)">
               <mat-icon mat-button>edit</mat-icon>
             </button>
             <button mat-raised-button color="warn" (click)="onDeleteProduct(product)">

@@ -1,23 +1,30 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Product } from '../product.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from '../../core/message.service';
+import { ProductsService } from '../products.service';
+import { CanComponentDeactivate } from '../../core/can-deactivate-guard.service';
+import { DialogService } from '../../core/dialog.service';
+import { shallowEquals } from '../../shared/utils';
+import { PRODUCTS_ROUTE } from '../../app-routing.module';
 
 @Component({
   selector: 'ws-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
-export class ProductDetailComponent implements OnInit, OnDestroy, OnChanges {
+export class ProductDetailComponent implements OnInit, OnDestroy, OnChanges, CanComponentDeactivate {
   @Input() mode = 'present';
   @Input() product: Product = new Product(undefined, undefined);
   @Output() productModified = new EventEmitter<Product>();
   @Output() productCanceled = new EventEmitter<void>();
   title = 'Product Details';
+  isCanceled = false;
+
   get isNewProduct() {
-    return this.product && this.product.id;
+    return !this.product || !this.product.id;
   }
   form: FormGroup;
   private statusSubscription: Subscription;
@@ -49,7 +56,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy, OnChanges {
   };
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
-              private messageService: MessageService) { }
+              private messageService: MessageService, private productsService: ProductsService,
+              private dialogService: DialogService) { }
 
   ngOnInit() {
     this.route.data
@@ -106,6 +114,24 @@ export class ProductDetailComponent implements OnInit, OnDestroy, OnChanges {
     this.product = this.form.getRawValue();
     this.productModified.emit(this.product);
     this.reset();
+    if (this.isNewProduct) { // edit mode
+      this.productsService.create(this.product).subscribe(
+        created => {
+          this.messageService.success(`Product '${created.name}' created successfully.`);
+          // window.history.back();
+          this.router.navigate([PRODUCTS_ROUTE], { queryParams: {refresh: true} });
+        },
+        err => this.messageService.error(err)
+      );
+    } else {
+      this.productsService.update(this.product).subscribe(
+        updated => {
+          this.messageService.success(`Product '${updated.name}' updated successfully.`);
+          this.router.navigate([PRODUCTS_ROUTE], { queryParams: {refresh: true} });
+        },
+        err => this.messageService.error(err)
+      );
+    }
   }
 
   reset() {
@@ -115,6 +141,19 @@ export class ProductDetailComponent implements OnInit, OnDestroy, OnChanges {
   }
   cancelProduct() {
     this.productCanceled.emit();
+    this.isCanceled = true;
+    this.router.navigate([PRODUCTS_ROUTE]);
+  }
+
+  public canDeactivate(): Observable<boolean> | boolean {
+    // Allow navigation if no user or the user data is not changed
+    // tslint:disable-next-line:prefer-const
+    let rawFormProduct = this.form.getRawValue() as Product;
+    if (this.isCanceled || shallowEquals(this.product, rawFormProduct)) {
+      return true;
+    }
+    // Otherwise ask the user to confirm loosing changes using the dialog service
+    return this.dialogService.confirm('Discard changes?');
   }
 
   protected onStatusChanged() {
