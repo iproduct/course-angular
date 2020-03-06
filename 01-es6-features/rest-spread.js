@@ -1,4 +1,4 @@
-// var a, b, rest;
+var a, b, rest;
 // [b, a] = [1, 2];
 // console.log(a); 
 // console.log(b); 
@@ -11,7 +11,7 @@
 // const obj1 = {a:1, b:2, c:3};
 // const {c, a } = obj1;
 // console.log(c); // 3
-// console.log(a); // 2
+// console.log(a); // 1
 // console.log(obj1);
 
 // ES7 - not implemented in Firefox 47a01

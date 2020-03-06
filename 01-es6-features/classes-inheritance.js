@@ -18,7 +18,7 @@ class Shape {
 
 class Point extends Shape {
     constructor(x, y, color) {
-        super(x, y, x, y, color, color);
+        super(x, y, 0, 0, color, color);
     }
     toString() {
         return 'Point: ' + super.toString();

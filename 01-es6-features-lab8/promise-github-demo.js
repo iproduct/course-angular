@@ -11,9 +11,14 @@ function showGithubData() {
             const img = new Image();
             img.src = githubData.avatar_url;
             document.body.append(img);
-            return githubData;
+            return new Promise((resolve, reject) => {
+                setTimeout(resolve, 3000, githubData);
+            });
         }).catch(err => {
             document.getElementById('content').innerHTML = err;
+        }).then(gitdata => {
+            document.getElementsByTagName('img')[0].remove();
+            return Promise.resolve(gitdata);
         });
 }
 
