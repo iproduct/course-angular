@@ -27,7 +27,7 @@
   "dependencies": {
     "@types/jquery": "^3.3.6",
     "core-js": "^2.5.7",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "reflect-metadata": "^0.1.12",
     "systemjs": "^0.21.4"
   }
