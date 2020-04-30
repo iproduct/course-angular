@@ -30,6 +30,6 @@
   "dependencies": {
     "@types/jquery": "^3.3.29",
     "core-js": "^2.6.5",
-    "jquery": "^3.3.1"
+    "jquery": "^3.5.0"
   }
 }
